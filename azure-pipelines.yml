@@ -20,3 +20,4 @@ steps:
       dotnet build $d 
     done;
   displayName: 'dotnet build $(buildConfiguration)'
+  continueOnError: true
