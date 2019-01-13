@@ -14,11 +14,8 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- script: for /D %%d in (*) do (
-        cd %%d  
-        cd  
-        dotnet restore
-        dotnet build
-        cd ..
-    )
+- script: for d in */ ; do \
+      echo "Building directory $d"; \
+      dotnet build $d \
+    done;
   displayName: 'dotnet build $(buildConfiguration)'
