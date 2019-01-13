@@ -14,8 +14,9 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- script: for d in */ ; do \
-      echo "Building directory $d"; \
-      dotnet build $d \
+- bash: >
+    for d in */ ; do 
+      echo "Building directory $d"; 
+      dotnet build $d 
     done;
   displayName: 'dotnet build $(buildConfiguration)'
