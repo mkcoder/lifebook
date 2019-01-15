@@ -17,7 +17,7 @@ steps:
 - bash: >
     for d in */ ; do 
       echo "Building directory $d"; 
-      dotnet build $d 
+      dotnet build $d -c $(buildConfiguration)
     done;
   displayName: 'dotnet build $(buildConfiguration)'
   continueOnError: true
