@@ -6,10 +6,15 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\" />
+    <Folder Include="Config Constants\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="IdentityServer4" Version="2.3.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="InMemoryResources\InmemoryResources.cs" />
+  </ItemGroup>
 </Project>
