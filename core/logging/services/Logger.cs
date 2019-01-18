@@ -4,7 +4,7 @@ using Serilog.Sinks.Elasticsearch;
 
 namespace lifebook.core.logging
 {
-    public class Logger
+    public sealed class Logger : ILogger
     {
 
         protected Serilog.Core.Logger _logger;
