@@ -1,0 +1,29 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "logging", "logging\logging.csproj", "{4268A26D-2CEC-4213-9A89-863CDCF82555}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "logging.test", "logging.test\logging.test.csproj", "{9A63E1D3-85C7-40D5-B660-DEF5A8FEA876}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "logging", "logging", "{2C640930-CCB2-4F5B-AFCD-DEE94C861D5B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4268A26D-2CEC-4213-9A89-863CDCF82555}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4268A26D-2CEC-4213-9A89-863CDCF82555}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4268A26D-2CEC-4213-9A89-863CDCF82555}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4268A26D-2CEC-4213-9A89-863CDCF82555}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A63E1D3-85C7-40D5-B660-DEF5A8FEA876}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A63E1D3-85C7-40D5-B660-DEF5A8FEA876}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A63E1D3-85C7-40D5-B660-DEF5A8FEA876}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A63E1D3-85C7-40D5-B660-DEF5A8FEA876}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4268A26D-2CEC-4213-9A89-863CDCF82555} = {2C640930-CCB2-4F5B-AFCD-DEE94C861D5B}
+		{9A63E1D3-85C7-40D5-B660-DEF5A8FEA876} = {2C640930-CCB2-4F5B-AFCD-DEE94C861D5B}
+	EndGlobalSection
+EndGlobal
