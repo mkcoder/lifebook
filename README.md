@@ -4,3 +4,24 @@
 
 # lifebook
 web application to monitor and record the events of your life through: notes, calendar events, reminders, goal keeper, and other interesting features
+
+---
+
+# naming conventions followed throughout
+## namespaces
+lifebook.{solutionname}.{projectname}.{fodler}
+<pre>
+example:
+lifebook
+|_ core --- <b>* no namespace at this level ever [0] *</b>
+  |_ logging <b>* lifebook.core.logging [1] *</b>
+    |_ interface
+    |_ services <b>* lifebook.core.logging.services [2]*</b>
+    |_ ioc
+      |_ activators <b>* lifebook.core.ioc.activators [3] *</b> 
+<b>[0] we enforce/discourage the use of root level namespaces and restricted to very limited use</b>
+<b>[1] this is reserved for project wide classes </b>
+<b>[2|3] we prefix the namespace with folder </b>
+<pre>     
+
+lifebook.core.logging.interface
