@@ -1,4 +1,4 @@
-﻿namespace lifebook.core.logging
+﻿namespace lifebook.core.logging.interfaces
 {
     public interface ILogger
     {

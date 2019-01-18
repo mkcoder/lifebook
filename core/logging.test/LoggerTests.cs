@@ -1,5 +1,6 @@
 using System;
 using lifebook.core.logging;
+using lifebook.core.logging.services;
 using Xunit;
 
 namespace lifebook.core.logging.test

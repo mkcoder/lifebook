@@ -1,13 +1,14 @@
 ﻿using System;
 using Serilog;
 using Serilog.Sinks.Elasticsearch;
+using lifebook.core.logging.interfaces;
 
-namespace lifebook.core.logging
+namespace lifebook.core.logging.services
 {
-    public sealed class Logger : ILogger
+    public sealed class Logger : interfaces.ILogger
     {
 
-        protected Serilog.Core.Logger _logger;
+        private Serilog.Core.Logger _logger;
 
         public Logger()
         {
