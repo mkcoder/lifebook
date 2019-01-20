@@ -1,0 +1,139 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+    <Folder Include="wwwroot\semantic.ui\" />
+    <Folder Include="wwwroot\jquery\" />
+    <Folder Include="Controllers\" />
+    <Folder Include="Views\" />
+    <Folder Include="Views\Home\" />
+    <Folder Include="Views\Shared\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\semantic.ui\components\grid.min.css" />
+    <Content Remove="wwwroot\semantic.ui\components\modal.min.css" />
+    <Content Remove="wwwroot\semantic.ui\components\search.css" />
+    <Content Remove="wwwroot\semantic.ui\components\step.min.css" />
+    <Content Remove="wwwroot\semantic.ui\components\list.min.css" />
+    <Content Remove="wwwroot\semantic.ui\components\shape.css" />
+    <Content Remove="wwwroot\semantic.ui\components\grid.css" />
+    <Content Remove="wwwroot\semantic.ui\components\list.css" />
+    <Content Remove="wwwroot\semantic.ui\components\segment.min.css" />
+    <Content Remove="wwwroot\semantic.ui\components\site.min.css" />
+    <Content Remove="wwwroot\semantic.ui\components\card.css" />
+    <Content Remove="wwwroot\semantic.ui\components\search.min.js" />
+    <Content Remove="wwwroot\semantic.ui\components\sticky.min.css" />
+    <Content Remove="wwwroot\semantic.ui\components\nag.css" />
+    <Content Remove="wwwroot\semantic.ui\components\icon.min.css" />
+    <Content Remove="wwwroot\semantic.ui\components\loader.css" />
+    <Content Remove="wwwroot\semantic.ui\components\nag.js" />
+    <Content Remove="wwwroot\semantic.ui\components\sidebar.min.js" />
+    <Content Remove="wwwroot\semantic.ui\components\search.min.css" />
+    <Content Remove="wwwroot\semantic.ui\components\feed.css" />
+    <Content Remove="wwwroot\semantic.ui\components\flag.css" />
+    <Content Remove="wwwroot\semantic.ui\components\progress.min.js" />
+    <Content Remove="wwwroot\semantic.ui\components\icon.css" />
+    <Content Remove="wwwroot\semantic.ui\components\flag.min.css" />
+    <Content Remove="wwwroot\semantic.ui\components\segment.css" />
+    <Content Remove="wwwroot\semantic.ui\components\container.css" />
+    <Content Remove="wwwroot\semantic.ui\components\sidebar.js" />
+    <Content Remove="wwwroot\semantic.ui\components\visit.min.js" />
+    <Content Remove="wwwroot\semantic.ui\components\progress.css" />
+    <Content Remove="wwwroot\semantic.ui\components\ad.css" />
+    <Content Remove="wwwroot\semantic.ui\components\statistic.min.css" />
+    <Content Remove="wwwroot\semantic.ui\components\visit.js" />
+    <Content Remove="wwwroot\semantic.ui\components\image.min.css" />
+    <Content Remove="wwwroot\semantic.ui\components\feed.min.css" />
+    <Content Remove="wwwroot\semantic.ui\components\popup.min.js" />
+    <Content Remove="wwwroot\semantic.ui\components\embed.js" />
+    <Content Remove="wwwroot\semantic.ui\components\colorize.min.js" />
+    <Content Remove="wwwroot\semantic.ui\components\card.min.css" />
+    <Content Remove="wwwroot\semantic.ui\components\shape.min.js" />
+    <Content Remove="wwwroot\semantic.ui\components\menu.min.css" />
+    <Content Remove="wwwroot\semantic.ui\components\checkbox.min.js" />
+    <Content Remove="wwwroot\semantic.ui\components\transition.min.css" />
+    <Content Remove="wwwroot\semantic.ui\components\transition.css" />
+    <Content Remove="wwwroot\semantic.ui\components\item.min.css" />
+    <Content Remove="wwwroot\semantic.ui\components\input.css" />
+    <Content Remove="wwwroot\semantic.ui\components\dropdown.js" />
+    <Content Remove="wwwroot\semantic.ui\components\colorize.js" />
+    <Content Remove="wwwroot\semantic.ui\components\popup.min.css" />
+    <Content Remove="wwwroot\semantic.ui\components\checkbox.css" />
+    <Content Remove="wwwroot\semantic.ui\components\header.min.css" />
+    <Content Remove="wwwroot\semantic.ui\components\tab.js" />
+    <Content Remove="wwwroot\semantic.ui\components\button.min.css" />
+    <Content Remove="wwwroot\semantic.ui\components\video.min.js" />
+    <Content Remove="wwwroot\semantic.ui\components\label.min.css" />
+    <Content Remove="wwwroot\semantic.ui\components\form.min.css" />
+    <Content Remove="wwwroot\semantic.ui\components\reveal.css" />
+    <Content Remove="wwwroot\semantic.ui\components\embed.min.js" />
+    <Content Remove="wwwroot\semantic.ui\components\progress.js" />
+    <Content Remove="wwwroot\semantic.ui\components\checkbox.min.css" />
+    <Content Remove="wwwroot\semantic.ui\components\form.css" />
+    <Content Remove="wwwroot\semantic.ui\components\rail.css" />
+    <Content Remove="wwwroot\semantic.ui\components\table.css" />
+    <Content Remove="wwwroot\semantic.ui\components\tab.min.css" />
+    <Content Remove="wwwroot\semantic.ui\components\input.min.css" />
+    <Content Remove="wwwroot\semantic.ui\components\accordion.min.css" />
+    <Content Remove="wwwroot\semantic.ui\components\checkbox.js" />
+    <Content Remove="wwwroot\semantic.ui\components\state.js" />
+    <Content Remove="wwwroot\semantic.ui\components\dimmer.min.js" />
+    <Content Remove="wwwroot\semantic.ui\components\message.min.css" />
+    <Content Remove="wwwroot\semantic.ui\components\sidebar.css" />
+    <Content Remove="wwwroot\semantic.ui\components\message.css" />
+    <Content Remove="wwwroot\semantic.ui\components\rating.css" />
+    <Content Remove="wwwroot\semantic.ui\components\image.css" />
+    <Content Remove="wwwroot\semantic.ui\components\modal.css" />
+    <Content Remove="wwwroot\semantic.ui\components\form.min.js" />
+    <Content Remove="wwwroot\semantic.ui\components\site.css" />
+    <Content Remove="wwwroot\semantic.ui\components\button.css" />
+    <Content Remove="wwwroot\semantic.ui\components\video.js" />
+    <Content Remove="wwwroot\semantic.ui\components\sticky.min.js" />
+    <Content Remove="wwwroot\semantic.ui\components\accordion.min.js" />
+    <Content Remove="wwwroot\semantic.ui\components\placeholder.css" />
+    <Content Remove="wwwroot\semantic.ui\components\table.min.css" />
+    <Content Remove="wwwroot\semantic.ui\components\site.js" />
+    <Content Remove="wwwroot\semantic.ui\components\dimmer.js" />
+    <Content Remove="wwwroot\semantic.ui\components\nag.min.css" />
+    <Content Remove="wwwroot\semantic.ui\components\popup.css" />
+    <Content Remove="wwwroot\semantic.ui\components\tab.min.js" />
+    <Content Remove="wwwroot\semantic.ui\components\dropdown.min.js" />
+    <Content Remove="wwwroot\semantic.ui\components\form.js" />
+    <Content Remove="wwwroot\semantic.ui\components\api.js" />
+    <Content Remove="wwwroot\semantic.ui\components\header.css" />
+    <Content Remove="wwwroot\semantic.ui\components\comment.min.css" />
+    <Content Remove="wwwroot\semantic.ui\components\menu.css" />
+    <Content Remove="wwwroot\semantic.ui\components\embed.css" />
+    <Content Remove="wwwroot\semantic.ui\components\nag.min.js" />
+    <Content Remove="wwwroot\semantic.ui\components\dimmer.css" />
+    <Content Remove="wwwroot\semantic.ui\components\statistic.css" />
+    <Content Remove="wwwroot\semantic.ui\components\reset.min.css" />
+    <Content Remove="wwwroot\semantic.ui\components\search.js" />
+    <Content Remove="wwwroot\semantic.ui\components\progress.min.css" />
+    <Content Remove="wwwroot\semantic.ui\components\visibility.js" />
+    <Content Remove="wwwroot\semantic.ui\components\shape.js" />
+    <Content Remove="wwwroot\semantic.ui\components\breadcrumb.css" />
+    <Content Remove="wwwroot\semantic.ui\components\modal.js" />
+    <Content Remove="wwwroot\semantic.ui\components\video.css" />
+    <Content Remove="wwwroot\semantic.ui\components\sticky.css" />
+    <Content Remove="wwwroot\semantic.ui\components\comment.css" />
+    <Content Remove="wwwroot\semantic.ui\components\api.min.js" />
+    <Content Remove="wwwroot\semantic.ui\components\video.min.css" />
+    <Content Remove="wwwroot\semantic.ui\components\rail.min.css" />
+    <Content Remove="wwwroot\semantic.ui\components\visibility.min.js" />
+    <Content Remove="wwwroot\semantic.ui\components\dropdown.css" />
+    <Content Remove="wwwroot\semantic.ui\components\shape.min.css" />
+    <Content Remove="wwwroot\semantic.ui\components\container.min.css" />
+    <Content Remove="wwwroot\semantic.ui\components\item.css" />
+    <Content Remove="wwwroot\semantic.ui\components\placeholder.min.css" />
+  </ItemGroup>
+</Project>

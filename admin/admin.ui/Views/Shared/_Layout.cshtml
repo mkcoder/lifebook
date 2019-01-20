@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+
+<html>
+<meta name="viewport" content="width=device-width" />
+<head>
+    <title></title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.0/dist/semantic.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.0/dist/semantic.js"></script>
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+
+    <div class="ui two column doubling stackable grid">
+        <div class="ui vertical menu two wide column">
+            <div class="item">
+                <div class="ui input"><input type="text" placeholder="Search..."></div>
+            </div>
+            <div class="item">
+                Home
+            </div>
+            <a class="item">
+                <i class="id card layout large icon"></i> Admin
+                <div class="menu">
+                    @Html.ActionLink("User management portal", "Test", "HomeController", null, new { @class = "active item" })
+                    <a class="item" href=@Url.Action("client")>Clients portal</a>
+                    <a class="item" href=@Url.Action("resource")>Resource portal</a>
+                </div>
+            </a>
+            <a class="item">
+                Messages
+            </a>
+            <div class="ui dropdown item">
+                More
+                <i class="dropdown icon"></i>
+                <div class="menu">
+                    <a class="item"><i class="edit icon"></i> Edit Profile</a>
+                    <a class="item"><i class="globe icon"></i> Choose Language</a>
+                    <a class="item"><i class="settings icon"></i> Account Settings</a>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            @RenderBody()
+        </div>
+    </div>
+</body>
+
+<script>$(document)
+    .ready(function() {
+      $('.ui.menu .ui.dropdown').dropdown({
+        on: 'hover'
+      });
+      $('.ui.menu a.item')
+        .on('click', function() {
+          $(this)
+            .addClass('active')
+            .siblings()
+            .removeClass('active')
+          ;
+        })
+      ;
+    })
+  ;</script>
+</html>

@@ -8,9 +8,13 @@
     <PackageReference Include="Serilog" Version="2.8.0" />
     <PackageReference Include="Serilog.Extensions.Logging" Version="2.0.2" />
     <PackageReference Include="Serilog.Sinks.Elasticsearch" Version="6.5.0" />
+    <PackageReference Include="Castle.Windsor" Version="4.1.1" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="interfaces\" />
     <Folder Include="services\" />
+    <Folder Include="New Folder\" />
+    <Folder Include="ioc\" />
+    <Folder Include="ioc\installers\" />
   </ItemGroup>
 </Project>
