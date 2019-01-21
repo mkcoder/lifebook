@@ -1,6 +1,4 @@
-﻿<!DOCTYPE html>
-
-<html>
+﻿<html>
 <meta name="viewport" content="width=device-width" />
 <head>
     <title></title>
@@ -10,7 +8,20 @@
     <title>@ViewBag.Title</title>
 </head>
 <body>
-
+    <div class="ui menu">
+        <div class="right menu container">
+            <div class="ui pointing dropdown link item">
+                <span class="text">Login</span>
+                <i class="dropdown icon"></i>
+                <div class="menu">
+                    <div class="ui left icon input">
+                        <input type="text" placeholder="Search users...">
+                        <i class="users icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="ui two column doubling stackable grid">
         <div class="ui vertical menu two wide column">
             <div class="item">
@@ -22,7 +33,7 @@
             <a class="item">
                 <i class="id card layout large icon"></i> Admin
                 <div class="menu">
-                    @Html.ActionLink("User management portal", "Test", "HomeController", null, new { @class = "active item" })
+                    @Html.ActionLink("User management portal", "Account", "Home", null, new { @class = "active item" })
                     <a class="item" href=@Url.Action("client")>Clients portal</a>
                     <a class="item" href=@Url.Action("resource")>Resource portal</a>
                 </div>

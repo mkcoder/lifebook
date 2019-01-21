@@ -17,10 +17,10 @@ namespace admin.ui.Controllers
             return View();
         }
 
-        [HttpGet("/test")]
-        public string Test()
+        [HttpGet("/account")]
+        public IActionResult Account()
         {
-            return "user";
+            return View();
         }
     }
 }
