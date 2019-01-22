@@ -22,5 +22,14 @@ namespace admin.ui.Controllers
         {
             return View();
         }
+
+        [HttpPost("/account")]
+        public IActionResult Account(string username, string password, string claims)
+        {
+            // Get Authentication using consul
+            // post this data to the user end point
+            // once it is sent refresh the data on the front page by making another call to an end
+            return View();
+        }
     }
 }

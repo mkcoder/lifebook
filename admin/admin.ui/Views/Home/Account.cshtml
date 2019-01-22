@@ -4,46 +4,30 @@
 @{
     Layout = "_Layout";
 }
-<form class="ui form">
+<form method="post" class="ui form" action="@Url.Action("Account")">
     <div class="field">
-        <label>First Name</label>
-        <input type="text" name="first-name" placeholder="First Name">
+        <label>username</label>
+        <input type="text" name="username" placeholder="First Name">
     </div>
     <div class="field">
-        <label>Last Name</label>
-        <input type="text" name="last-name" placeholder="Last Name">
+        <label>password</label>
+        <input type="password" name="password" placeholder="Last Name">
     </div>
     <div class="field">
-        <div class="ui checkbox">
-            <input type="checkbox" tabindex="0" class="hidden">
-            <label>I agree to the Terms and Conditions</label>
-        </div>
+        <label>claims</label>
+        <input type="text" name="claims" placeholder="user claims">
     </div>
     <button class="ui button" type="submit">Submit</button>
 </form>
 <table class="ui celled table">
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Job</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Claims</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td data-label="Name">James</td>
-            <td data-label="Age">24</td>
-            <td data-label="Job">Engineer</td>
-        </tr>
-        <tr>
-            <td data-label="Name">Jill</td>
-            <td data-label="Age">26</td>
-            <td data-label="Job">Engineer</td>
-        </tr>
-        <tr>
-            <td data-label="Name">Elyse</td>
-            <td data-label="Age">24</td>
-            <td data-label="Job">Designer</td>
-        </tr>
+
     </tbody>
 </table>
