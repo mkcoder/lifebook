@@ -1,0 +1,55 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "logging", "lifebook.core.logging\logging\logging.csproj", "{425DF67D-9B45-4758-AC32-B0EB214308F7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lifebook.core.logging", "lifebook.core.logging", "{97773F37-71F7-4A0A-89E5-FF8FFA894CDA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "logging.test", "lifebook.core.logging\logging.test\logging.test.csproj", "{A085B9C4-FD73-4F9B-8B74-B59C65780B7C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lifebook.core.database", "lifebook.core.database", "{ED2E176A-08A2-4751-8D93-874666606669}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.database.databaseprovider", "lifebook.core.database\databaseprovider\lifebook.core.database.databaseprovider.csproj", "{B2A84B6B-3C7F-4870-8BCC-6D146B3B3F3F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.database.databaseprovider.test", "lifebook.core.database\lifebook.core.database.databaseprovider.test\lifebook.core.database.databaseprovider.test.csproj", "{BF610EFF-E8CE-43C5-8574-3C57F5E36428}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4268A26D-2CEC-4213-9A89-863CDCF82555}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4268A26D-2CEC-4213-9A89-863CDCF82555}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4268A26D-2CEC-4213-9A89-863CDCF82555}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4268A26D-2CEC-4213-9A89-863CDCF82555}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A63E1D3-85C7-40D5-B660-DEF5A8FEA876}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A63E1D3-85C7-40D5-B660-DEF5A8FEA876}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A63E1D3-85C7-40D5-B660-DEF5A8FEA876}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A63E1D3-85C7-40D5-B660-DEF5A8FEA876}.Release|Any CPU.Build.0 = Release|Any CPU
+		{425DF67D-9B45-4758-AC32-B0EB214308F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{425DF67D-9B45-4758-AC32-B0EB214308F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{425DF67D-9B45-4758-AC32-B0EB214308F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{425DF67D-9B45-4758-AC32-B0EB214308F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A085B9C4-FD73-4F9B-8B74-B59C65780B7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A085B9C4-FD73-4F9B-8B74-B59C65780B7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A085B9C4-FD73-4F9B-8B74-B59C65780B7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A085B9C4-FD73-4F9B-8B74-B59C65780B7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2A84B6B-3C7F-4870-8BCC-6D146B3B3F3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2A84B6B-3C7F-4870-8BCC-6D146B3B3F3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2A84B6B-3C7F-4870-8BCC-6D146B3B3F3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2A84B6B-3C7F-4870-8BCC-6D146B3B3F3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF610EFF-E8CE-43C5-8574-3C57F5E36428}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF610EFF-E8CE-43C5-8574-3C57F5E36428}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF610EFF-E8CE-43C5-8574-3C57F5E36428}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF610EFF-E8CE-43C5-8574-3C57F5E36428}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4268A26D-2CEC-4213-9A89-863CDCF82555} = {2C640930-CCB2-4F5B-AFCD-DEE94C861D5B}
+		{9A63E1D3-85C7-40D5-B660-DEF5A8FEA876} = {2C640930-CCB2-4F5B-AFCD-DEE94C861D5B}
+		{425DF67D-9B45-4758-AC32-B0EB214308F7} = {97773F37-71F7-4A0A-89E5-FF8FFA894CDA}
+		{A085B9C4-FD73-4F9B-8B74-B59C65780B7C} = {97773F37-71F7-4A0A-89E5-FF8FFA894CDA}
+		{B2A84B6B-3C7F-4870-8BCC-6D146B3B3F3F} = {ED2E176A-08A2-4751-8D93-874666606669}
+		{BF610EFF-E8CE-43C5-8574-3C57F5E36428} = {ED2E176A-08A2-4751-8D93-874666606669}
+	EndGlobalSection
+EndGlobal
