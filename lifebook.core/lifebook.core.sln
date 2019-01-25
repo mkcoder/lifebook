@@ -7,11 +7,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lifebook.core.logging", "li
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "logging.test", "lifebook.core.logging\logging.test\logging.test.csproj", "{A085B9C4-FD73-4F9B-8B74-B59C65780B7C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lifebook.core.database", "lifebook.core.database", "{ED2E176A-08A2-4751-8D93-874666606669}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lifebook.core.database", "lifebook.core.database", "{88C9B710-17B3-44B2-B9B9-5A1B4C1CBA7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.database.databaseprovider", "lifebook.core.database\databaseprovider\lifebook.core.database.databaseprovider.csproj", "{B2A84B6B-3C7F-4870-8BCC-6D146B3B3F3F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.database.databaseprovider", "lifebook.core.database\lifebook.core.database.databaseprovider\lifebook.core.databaseprovider\lifebook.core.database.databaseprovider.csproj", "{9B18D800-C306-4AFD-9F6D-553E62C69D12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.database.databaseprovider.test", "lifebook.core.database\lifebook.core.database.databaseprovider.test\lifebook.core.database.databaseprovider.test.csproj", "{BF610EFF-E8CE-43C5-8574-3C57F5E36428}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.database.databaseprovider.test", "lifebook.core.database\lifebook.core.database.databaseprovider\lifebook.core.database.databaseprovider.test\lifebook.core.database.databaseprovider.test.csproj", "{CF34DE56-303A-431D-A71F-BFA2E791F5F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,19 +27,19 @@ Global
 		{A085B9C4-FD73-4F9B-8B74-B59C65780B7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A085B9C4-FD73-4F9B-8B74-B59C65780B7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A085B9C4-FD73-4F9B-8B74-B59C65780B7C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B2A84B6B-3C7F-4870-8BCC-6D146B3B3F3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B2A84B6B-3C7F-4870-8BCC-6D146B3B3F3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B2A84B6B-3C7F-4870-8BCC-6D146B3B3F3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B2A84B6B-3C7F-4870-8BCC-6D146B3B3F3F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BF610EFF-E8CE-43C5-8574-3C57F5E36428}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BF610EFF-E8CE-43C5-8574-3C57F5E36428}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BF610EFF-E8CE-43C5-8574-3C57F5E36428}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BF610EFF-E8CE-43C5-8574-3C57F5E36428}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B18D800-C306-4AFD-9F6D-553E62C69D12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B18D800-C306-4AFD-9F6D-553E62C69D12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B18D800-C306-4AFD-9F6D-553E62C69D12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B18D800-C306-4AFD-9F6D-553E62C69D12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF34DE56-303A-431D-A71F-BFA2E791F5F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF34DE56-303A-431D-A71F-BFA2E791F5F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF34DE56-303A-431D-A71F-BFA2E791F5F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF34DE56-303A-431D-A71F-BFA2E791F5F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{425DF67D-9B45-4758-AC32-B0EB214308F7} = {97773F37-71F7-4A0A-89E5-FF8FFA894CDA}
 		{A085B9C4-FD73-4F9B-8B74-B59C65780B7C} = {97773F37-71F7-4A0A-89E5-FF8FFA894CDA}
-		{B2A84B6B-3C7F-4870-8BCC-6D146B3B3F3F} = {ED2E176A-08A2-4751-8D93-874666606669}
-		{BF610EFF-E8CE-43C5-8574-3C57F5E36428} = {ED2E176A-08A2-4751-8D93-874666606669}
+		{9B18D800-C306-4AFD-9F6D-553E62C69D12} = {88C9B710-17B3-44B2-B9B9-5A1B4C1CBA7B}
+		{CF34DE56-303A-431D-A71F-BFA2E791F5F6} = {88C9B710-17B3-44B2-B9B9-5A1B4C1CBA7B}
 	EndGlobalSection
 EndGlobal

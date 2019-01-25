@@ -15,6 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\databaseprovider\lifebook.core.database.databaseprovider.csproj" />
+    <ProjectReference Include="..\lifebook.core.databaseprovider\lifebook.core.database.databaseprovider.csproj" />
   </ItemGroup>
 </Project>
