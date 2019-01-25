@@ -17,9 +17,4 @@
   <ItemGroup>
     <ProjectReference Include="..\databaseprovider\lifebook.core.database.databaseprovider.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <None Update="appsettings.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
 </Project>

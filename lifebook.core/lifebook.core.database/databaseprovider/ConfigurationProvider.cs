@@ -22,6 +22,5 @@ namespace lifebook.core.database.databaseprovider
                 return config[key];
             }
         }
-
     }
 }

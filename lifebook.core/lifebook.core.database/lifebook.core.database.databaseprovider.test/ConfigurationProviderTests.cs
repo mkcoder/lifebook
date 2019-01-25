@@ -10,7 +10,7 @@ namespace lifebook.core.database.databaseprovider.test
         [Fact]
         public void Test1()
         {
-            Assert.Equal("Test", cp["Testing"]);
+            Assert.Equal("Warning", cp["Logging:LogLevel:Default"]);        
         }
     }
 }
