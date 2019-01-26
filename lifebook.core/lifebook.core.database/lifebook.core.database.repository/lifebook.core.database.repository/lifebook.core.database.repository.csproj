@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="interfaces\" />
+    <Folder Include="repositories\" />
+    <Folder Include="ioc\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\lifebook.core.database.databaseprovider\lifebook.core.databaseprovider\lifebook.core.database.databaseprovider.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.2.0" />
+    <PackageReference Include="Castle.Windsor" Version="4.1.1" />
+  </ItemGroup>
+</Project>

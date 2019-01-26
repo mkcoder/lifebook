@@ -5,14 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="lifebook.core.database.databaseprovider.interfaces\" />
-    <Folder Include="lifebook.core.database.dataprovider.services\" />
+    <Folder Include="interfaces\" />
+    <Folder Include="services\" />
+    <Folder Include="ioc\" />
+    <Folder Include="ioc\installers\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.2.0" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.2.0" />
+    <PackageReference Include="Castle.Windsor" Version="4.1.1" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="app.config" />

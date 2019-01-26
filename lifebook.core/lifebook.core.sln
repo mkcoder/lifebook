@@ -13,6 +13,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.database.data
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.database.databaseprovider.test", "lifebook.core.database\lifebook.core.database.databaseprovider\lifebook.core.database.databaseprovider.test\lifebook.core.database.databaseprovider.test.csproj", "{CF34DE56-303A-431D-A71F-BFA2E791F5F6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lifebook.core.database.databaseprovider", "lifebook.core.database.databaseprovider", "{F84881E3-99C8-4FB5-8AD5-24DF96723739}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lifebook.core.database.repository", "lifebook.core.database.repository", "{DE665787-18DF-4C97-A5DE-769DF939DF80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.database.repository", "lifebook.core.database\lifebook.core.database.repository\lifebook.core.database.repository\lifebook.core.database.repository.csproj", "{B91587A6-A99A-4981-89D2-32BA0E819A06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.database.repository.test", "lifebook.core.database\lifebook.core.database.repository\lifebook.core.database.repository.test\lifebook.core.database.repository.test\lifebook.core.database.repository.test.csproj", "{95B3FB4C-D508-4510-954D-0AC0992A6650}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,11 +43,23 @@ Global
 		{CF34DE56-303A-431D-A71F-BFA2E791F5F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF34DE56-303A-431D-A71F-BFA2E791F5F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF34DE56-303A-431D-A71F-BFA2E791F5F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B91587A6-A99A-4981-89D2-32BA0E819A06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B91587A6-A99A-4981-89D2-32BA0E819A06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B91587A6-A99A-4981-89D2-32BA0E819A06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B91587A6-A99A-4981-89D2-32BA0E819A06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95B3FB4C-D508-4510-954D-0AC0992A6650}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95B3FB4C-D508-4510-954D-0AC0992A6650}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95B3FB4C-D508-4510-954D-0AC0992A6650}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95B3FB4C-D508-4510-954D-0AC0992A6650}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{425DF67D-9B45-4758-AC32-B0EB214308F7} = {97773F37-71F7-4A0A-89E5-FF8FFA894CDA}
 		{A085B9C4-FD73-4F9B-8B74-B59C65780B7C} = {97773F37-71F7-4A0A-89E5-FF8FFA894CDA}
-		{9B18D800-C306-4AFD-9F6D-553E62C69D12} = {88C9B710-17B3-44B2-B9B9-5A1B4C1CBA7B}
-		{CF34DE56-303A-431D-A71F-BFA2E791F5F6} = {88C9B710-17B3-44B2-B9B9-5A1B4C1CBA7B}
+		{9B18D800-C306-4AFD-9F6D-553E62C69D12} = {F84881E3-99C8-4FB5-8AD5-24DF96723739}
+		{CF34DE56-303A-431D-A71F-BFA2E791F5F6} = {F84881E3-99C8-4FB5-8AD5-24DF96723739}
+		{F84881E3-99C8-4FB5-8AD5-24DF96723739} = {88C9B710-17B3-44B2-B9B9-5A1B4C1CBA7B}
+		{DE665787-18DF-4C97-A5DE-769DF939DF80} = {88C9B710-17B3-44B2-B9B9-5A1B4C1CBA7B}
+		{B91587A6-A99A-4981-89D2-32BA0E819A06} = {DE665787-18DF-4C97-A5DE-769DF939DF80}
+		{95B3FB4C-D508-4510-954D-0AC0992A6650} = {DE665787-18DF-4C97-A5DE-769DF939DF80}
 	EndGlobalSection
 EndGlobal
