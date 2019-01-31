@@ -15,7 +15,7 @@ variables:
 
 steps:
 - bash: >
-    find . -name "*.txt"|while read fname; do
+    find . -name "**/*.csproj"|while read fname; do
       echo "$fname"
     done
   displayName: 'dotnet build $(buildConfiguration)'
