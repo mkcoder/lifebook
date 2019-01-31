@@ -15,10 +15,10 @@ variables:
 
 steps:
 - bash: >
-    shopt -s globsta;
     for d in **/*.csproj; do
       echo "Building directory $d"; 
-      dotnet build $d -c $(buildConfiguration)
+      echo $d
+      # dotnet build $d -c $(buildConfiguration)
     done;
   displayName: 'dotnet build $(buildConfiguration)'
   continueOnError: true
