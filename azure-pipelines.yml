@@ -15,9 +15,10 @@ variables:
 
 steps:
 - bash: >
-    for d in */ ; do 
-      echo "Building directory $d"; 
-      dotnet build $d -c $(buildConfiguration)
-    done;
+    find . -name '*.csproj' -print0 | 
+    while IFS= read -r -d $'\0' line; do         
+        echo "Building directory $line"; 
+        dotnet build $line -c $(buildConfiguration)
+    done
   displayName: 'dotnet build $(buildConfiguration)'
   continueOnError: true
