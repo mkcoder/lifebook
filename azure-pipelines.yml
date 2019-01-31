@@ -15,7 +15,7 @@ variables:
 
 steps:
 - bash: >
-    find . -name '*.txt' -print0 | 
+    find . -name '*.csproj' -print0 | 
     while IFS= read -r -d $'\0' line; do 
         echo $line
     done
