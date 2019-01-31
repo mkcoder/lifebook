@@ -12,7 +12,9 @@ namespace authentication.server
                     .AddInMemoryIdentityResources(InMemoryResources.GetInMemoryIdentityResources())
                     .AddInMemoryClients(InMemoryResources.GetInmemoryClients())
                     .AddInMemoryApiResources(InMemoryResources.GetInMemoryApiResources())
-                    .AddTestUsers(InMemoryResources.GetTestUsers());
+                    .AddTestUsers(InMemoryResources.GetTestUsers())
+
+                    ;
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

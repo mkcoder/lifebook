@@ -2,6 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <PackOnBuild>true</PackOnBuild>
+    <Authors>mkcoder</Authors>
+    <NeutralLanguage>en</NeutralLanguage>
+    <PackageProjectUrl>https://github.com/mkcoder</PackageProjectUrl>
+    <Title>lifebook.core.database.repository</Title>
+    <Description>lifebook repository</Description>
+    <Owners>mkcoder</Owners>
+    <PackageId>lifebook.core.database.repository</PackageId>
+    <PackageVersion>1.0.0</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,5 +24,6 @@
   <ItemGroup>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.2.0" />
     <PackageReference Include="Castle.Windsor" Version="4.1.1" />
+    <PackageReference Include="NuGet.Build.Packaging" Version="0.2.0" />
   </ItemGroup>
 </Project>

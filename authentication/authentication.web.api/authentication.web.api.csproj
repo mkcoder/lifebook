@@ -2,14 +2,21 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <PackOnBuild>true</PackOnBuild>
+    <PackageId>lifebook.core.authentication.web.api</PackageId>
+    <Authors>mkcoder</Authors>
+    <Description>auth web api</Description>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' " />
   <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="lifebook.core.database.databaseprovider" Version="1.0.0" />
+    <PackageReference Include="lifebook.core.database.repository" Version="1.0.0" />
   </ItemGroup>
 
 </Project>

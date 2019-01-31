@@ -2,6 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <PackOnBuild>true</PackOnBuild>
+    <Authors>mkcoder</Authors>
+    <Description>databaseprovider for the lifebook app</Description>
+    <PackageId>lifebook.core.database.databaseprovider</PackageId>
+    <PackageVersion>1.0.1</PackageVersion>
+    <DevelopmentDependency>true</DevelopmentDependency>
+    <ReleaseVersion>0.2</ReleaseVersion>
+    <SynchReleaseVersion>false</SynchReleaseVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,9 +24,11 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.2.0" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.2.0" />
     <PackageReference Include="Castle.Windsor" Version="4.1.1" />
+    <PackageReference Include="NuGet.Build.Packaging" Version="0.2.0" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="app.config" />
+    <None Remove="lifebook.core.database.databaseprovider.1.0.0.nupkg" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="TestSource.cs" />
@@ -26,7 +36,7 @@
   <ItemGroup>
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <LogicalName>lifebook.core.database.databaseprovider.appsettings.json</LogicalName>
+      <IncludeInPackage>true</IncludeInPackage>
     </None>
   </ItemGroup>
 </Project>
