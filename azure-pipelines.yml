@@ -18,6 +18,6 @@ steps:
     for i in **/*.csproj; do
       echo "Building directory $d"; 
       dotnet build $d -c $(buildConfiguration)
-    done
+    done;
   displayName: 'dotnet build $(buildConfiguration)'
   continueOnError: true
