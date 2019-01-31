@@ -18,6 +18,6 @@ steps:
     find . -name "*.csproj" -print0 | while read -d $'\0' file
     do
         echo "$file"
-    done
+    done;
   displayName: 'dotnet build $(buildConfiguration)'
   continueOnError: true
