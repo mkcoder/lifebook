@@ -15,7 +15,7 @@ variables:
 
 steps:
 - bash: >
-    for i in **/*.csproj; do
+    for d in **/*.csproj; do
       echo "Building directory $d"; 
       dotnet build $d -c $(buildConfiguration)
     done;
