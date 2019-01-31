@@ -10,7 +10,8 @@ namespace lifebook.core.database.databaseprovider
 
         public ConfigurationProvider()
         {
-            var configuration = new ConfigurationBuilder();
+            var configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory());
             configuration.AddJsonFile("appsettings.json");
             config = configuration.Build();
         }
