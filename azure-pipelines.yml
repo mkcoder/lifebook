@@ -19,7 +19,7 @@ steps:
     while IFS= read -r -d $'\0' line; do
         echo "Building directory $line"; 
         echo $(Build.SourcesDirectory)
-        dotnet restore $line -s $(Build.SourcesDirectory)/lifebook/lifebook-nuget-feed -s https://api.nuget.org/v3/index.json
+        dotnet restore $line -s $(Build.SourcesDirectory)/lifebook-nuget-feed -s https://api.nuget.org/v3/index.json
         dotnet build $line -c $(buildConfiguration)
     done
   displayName: 'dotnet build $(buildConfiguration)'
