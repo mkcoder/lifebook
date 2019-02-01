@@ -1,26 +1,25 @@
 ﻿using System;
 using System.IO;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json.Linq;
 
 namespace lifebook.core.database.databaseprovider
 {
     public class ConfigurationProvider
     {
-        IConfigurationRoot config;
-
+        JObject config;
         public ConfigurationProvider()
         {
-            var configuration = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory());
-            configuration.AddJsonFile("appsettings.json");
-            config = configuration.Build();
+            var jsonText = GetType().Assembly.GetEmbededAssemblyResources("lifebook.core.database.databaseprovider.appsettings.json");
+            config = JObject.Parse(jsonText);
         }
 
         public virtual string this[string key]
         {
             get
             {
-                return config[key];
+                key = key.Replace(":", ".");
+                return config.SelectToken(key).ToString();
             }
         }
     }

@@ -6,8 +6,7 @@
     <Authors>mkcoder</Authors>
     <Description>databaseprovider for the lifebook app</Description>
     <PackageId>lifebook.core.database.databaseprovider</PackageId>
-    <PackageVersion>1.0.3</PackageVersion>
-    <DevelopmentDependency>true</DevelopmentDependency>
+    <PackageVersion>1.0.7</PackageVersion>
     <ReleaseVersion>0.2</ReleaseVersion>
     <SynchReleaseVersion>false</SynchReleaseVersion>
     <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
@@ -28,18 +27,20 @@
     <PackageReference Include="Castle.Windsor" Version="4.1.1" />
     <PackageReference Include="NuGet.Build.Packaging" Version="0.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="app.config" />
     <None Remove="lifebook.core.database.databaseprovider.1.0.0.nupkg" />
+    <None Remove="appsettings.json" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="TestSource.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Update="appsettings.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <EmbeddedResource Include="appsettings.json">
       <IncludeInPackage>true</IncludeInPackage>
-    </None>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

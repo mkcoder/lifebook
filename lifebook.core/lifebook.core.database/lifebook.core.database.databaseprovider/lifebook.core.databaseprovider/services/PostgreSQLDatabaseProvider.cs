@@ -12,10 +12,10 @@ namespace lifebook.core.database.databaseprovider.service
         public PostgreSQLDatabaseProvider(string database) : base(database)
         {
             var config = new ConfigurationProvider();
-            Username = config["PostgreSQLDatabaseProvider:username"];
-            Password = config["PostgreSQLDatabaseProvider:password"];
-            Host = config["PostgreSQLDatabaseProvider:host"];
-            Port = config["PostgreSQLDatabaseProvider:port"];
+            Username = config["PostgreSQLDatabaseProvider.username"];
+            Password = config["PostgreSQLDatabaseProvider.password"];
+            Host = config["PostgreSQLDatabaseProvider.host"];
+            Port = config["PostgreSQLDatabaseProvider.port"];
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
