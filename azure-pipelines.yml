@@ -15,11 +15,12 @@ variables:
 
 steps:
 - bash: >
+    pwd;
     find . -name '*.csproj' -print0 | 
     while IFS= read -r -d $'\0' line; do
-        pwd
         echo "Building directory $line"; 
         dotnet build $line -c $(buildConfiguration)
     done
   displayName: 'dotnet build $(buildConfiguration)'
+  workingDirectory: lifebook
   continueOnError: true
