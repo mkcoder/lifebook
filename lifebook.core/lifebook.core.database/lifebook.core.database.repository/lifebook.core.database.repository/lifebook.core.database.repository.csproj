@@ -10,7 +10,7 @@
     <Description>lifebook repository</Description>
     <Owners>mkcoder</Owners>
     <PackageId>lifebook.core.database.repository</PackageId>
-    <PackageVersion>1.0.1</PackageVersion>
+    <PackageVersion>1.0.3</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,7 +21,7 @@
   <ItemGroup>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.2.0" />
     <PackageReference Include="Castle.Windsor" Version="4.1.1" />
-    <PackageReference Include="NuGet.Build.Packaging" Version="0.2.0" />
-    <PackageReference Include="lifebook.core.database.databaseprovider" Version="1.0.7" />
+    <PackageReference Include="NuGet.Build.Packaging" Version="0.2.2" />
+    <PackageReference Include="lifebook.core.database.databaseprovider" Version="1.0.9" />
   </ItemGroup>
 </Project>

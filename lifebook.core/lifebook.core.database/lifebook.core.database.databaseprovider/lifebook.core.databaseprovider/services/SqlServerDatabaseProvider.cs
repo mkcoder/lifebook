@@ -8,13 +8,18 @@ namespace lifebook.core.database.databaseprovider.services
     {
         public SqlServerDatabaseProvider(string database) : base(database)
         {
+            var config = new ConfigurationProvider();
+            Username = config["SqlServerSQLDatabaseProvider.username"];
+            Password = config["SqlServerSQLDatabaseProvider.password"];
+            Host = config["SqlServerSQLDatabaseProvider.host"];
+            Port = config["SqlServerSQLDatabaseProvider.port"];
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // Data Source=190.190.200.100,1433;Network Library=DBMSSOCN;
             // Initial Catalog = myDataBase; User ID = myUsername; Password = myPassword;
-            optionsBuilder.UseSqlServer($@"Data Source={Host},{Port};Database={DatabaseName};User ID = {Username}; Password = {Password};Trusted_Connection=True;Network Library=DBMSSOCN;");
+            optionsBuilder.UseSqlServer($@"Server={Host},{Port};Database={DatabaseName};User={Username};Password={Password};");
         }
     }
 }

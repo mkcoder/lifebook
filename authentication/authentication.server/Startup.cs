@@ -1,6 +1,9 @@
 ﻿using System;
+using Castle.MicroKernel.Registration;
 using Castle.Windsor;
+using Castle.Windsor.Installer;
 using Castle.Windsor.MsDependencyInjection;
+using IdentityServer4.EntityFramework.DbContexts;
 using lifebook.core.database.databaseprovider.services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -15,26 +18,32 @@ namespace authentication.server
         {
             WindsorContainer container = new WindsorContainer();
             var currentAssembly = GetType().Assembly.GetName().Name;
-            container.Install();
-            var sqlServerProvider = container.Resolve<SqlServerDatabaseProvider>();
+            container.Install(FromAssembly.InThisApplication(GetType().Assembly));
+            container.Register(Component.For<IdentityServerDbContext>());
+            var sqlServerProvider = new IdentityServerDbContext();
             var dbConnection = sqlServerProvider.Database.GetDbConnection();
-
+            Console.WriteLine($"SQL SERVER CONNECT: {sqlServerProvider.Database.CanConnect()}");
             services.AddIdentityServer()
                 .AddInMemoryIdentityResources(InMemoryResources.GetInMemoryIdentityResources())
                 .AddInMemoryClients(InMemoryResources.GetInmemoryClients())
                 .AddInMemoryApiResources(InMemoryResources.GetInMemoryApiResources())
                 .AddTestUsers(InMemoryResources.GetTestUsers())
                 .AddConfigurationStore(options =>
-                    options.ConfigureDbContext = builder =>
-                    {
-                        builder.UseSqlServer(dbConnection.ConnectionString, sqlBuilder => sqlBuilder.MigrationsAssembly(currentAssembly));
+                    options.ResolveDbContextOptions = (provider, builder) => {
+                        builder.UseSqlServer(provider.GetRequiredService<IdentityServerDbContext>().ConnectionString,
+                            sql => sql.MigrationsAssembly(currentAssembly
+                        ));
+
                     }
                 )
                 .AddOperationalStore(options =>
                 {
-                    options.ConfigureDbContext = b =>
-                        b.UseSqlServer(dbConnection.ConnectionString,
-                            sql => sql.MigrationsAssembly(currentAssembly));
+                    options.ResolveDbContextOptions = (provider, builder) =>
+                    {
+                        builder.UseSqlServer(provider.GetRequiredService<IdentityServerDbContext>().ConnectionString,
+                            sql => sql.MigrationsAssembly(currentAssembly
+                        ));
+                    };
 
                     options.EnableTokenCleanup = true;
                 });
@@ -48,8 +57,28 @@ namespace authentication.server
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            InitializeDatabase(app);
             app.UseIdentityServer(); 
         }
+
+        private void InitializeDatabase(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                serviceScope.ServiceProvider.GetRequiredService<PersistedGrantDbContext>().Database.Migrate();
+
+                var context = serviceScope.ServiceProvider.GetRequiredService<ConfigurationDbContext>();
+                context.Database.Migrate();
+            }
+        }
+    }
+
+    public class IdentityServerDbContext : SqlServerDatabaseProvider
+    {
+        public IdentityServerDbContext() : base("lifebook")
+        {
+        }
+
+        public string ConnectionString => $@"Server={Host},{Port};Database={DatabaseName};User={Username};Password={Password};";
     }
 }

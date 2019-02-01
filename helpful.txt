@@ -1,0 +1,3 @@
+nuget init lifebook.core/lifebook.core.database/lifebook.core.database.repository/lifebook.core.database.repository/bin/Debug/ lifebook-nuget-feed
+
+nuget init lifebook.core/lifebook.core.database/lifebook.core.database.databaseprovider/lifebook.core.databaseprovider/bin/Debug/ lifebook-nuget-feed
