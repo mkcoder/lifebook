@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App"/>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="IdentityServer4" Version="2.3.2" />
     <PackageReference Include="lifebook.core.database.repository" Version="1.0.3" />
     <PackageReference Include="lifebook.core.database.databaseprovider" Version="1.0.9" />
@@ -25,5 +25,8 @@
 
   <ItemGroup>
     <Compile Remove="InMemoryResources\InmemoryResources.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\lifebook.authentication.core\lifebook.authentication.core.csproj" />
   </ItemGroup>
 </Project>

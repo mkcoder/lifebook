@@ -4,6 +4,7 @@ using Castle.Windsor;
 using Castle.Windsor.Installer;
 using Castle.Windsor.MsDependencyInjection;
 using IdentityServer4.EntityFramework.DbContexts;
+using lifebook.authentication.core.dbcontext;
 using lifebook.core.database.databaseprovider.services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -14,15 +15,14 @@ namespace authentication.server
 {
     public class Startup
     {
+        private IdentityServerDbContext identityServerDbContext;
+
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             WindsorContainer container = new WindsorContainer();
             var currentAssembly = GetType().Assembly.GetName().Name;
-            container.Install(FromAssembly.InThisApplication(GetType().Assembly));
-            container.Register(Component.For<IdentityServerDbContext>());
-            var sqlServerProvider = new IdentityServerDbContext();
-            var dbConnection = sqlServerProvider.Database.GetDbConnection();
-            Console.WriteLine($"SQL SERVER CONNECT: {sqlServerProvider.Database.CanConnect()}");
+            container.Install(FromAssembly.Named("lifebook.authentication.core"));
+            identityServerDbContext = container.Resolve<IdentityServerDbContext>();
             services.AddIdentityServer()
                 .AddInMemoryIdentityResources(InMemoryResources.GetInMemoryIdentityResources())
                 .AddInMemoryClients(InMemoryResources.GetInmemoryClients())
@@ -33,7 +33,6 @@ namespace authentication.server
                         builder.UseSqlServer(provider.GetRequiredService<IdentityServerDbContext>().ConnectionString,
                             sql => sql.MigrationsAssembly(currentAssembly
                         ));
-
                     }
                 )
                 .AddOperationalStore(options =>
@@ -62,7 +61,7 @@ namespace authentication.server
         }
 
         private void InitializeDatabase(IApplicationBuilder app)
-        {
+        {            
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
                 serviceScope.ServiceProvider.GetRequiredService<PersistedGrantDbContext>().Database.Migrate();
@@ -71,14 +70,5 @@ namespace authentication.server
                 context.Database.Migrate();
             }
         }
-    }
-
-    public class IdentityServerDbContext : SqlServerDatabaseProvider
-    {
-        public IdentityServerDbContext() : base("lifebook")
-        {
-        }
-
-        public string ConnectionString => $@"Server={Host},{Port};Database={DatabaseName};User={Username};Password={Password};";
     }
 }

@@ -11,13 +11,17 @@
     <PackageReference Include="Castle.Windsor" Version="4.1.1" />
     <PackageReference Include="Castle.Windsor.MsDependencyInjection" Version="3.3.1" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.2.0" />
-    <PackageReference Include="lifebook.core.database.databaseprovider" Version="1.0.7" />
-    <PackageReference Include="lifebook.core.database.repository" Version="1.0.1" />
+    <PackageReference Include="lifebook.core.database.databaseprovider" Version="1.0.9" />
+    <PackageReference Include="lifebook.core.database.repository" Version="1.0.3" />
+    <PackageReference Include="IdentityServer4.EntityFramework" Version="2.3.2" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\lifebook.authentication.core\lifebook.authentication.core.csproj" />
   </ItemGroup>
 </Project>

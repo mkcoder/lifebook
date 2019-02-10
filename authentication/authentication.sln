@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "authentication.server", "authentication.server\authentication.server.csproj", "{22FFEA0B-A8E7-40FE-BFE4-A69A5C0AE21A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "authentication.web.api", "authentication.web.api\authentication.web.api.csproj", "{CEA642F2-02D8-46B5-991D-2CF5E70BF6D3}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.authentication.web.api", "lifebook.authentication.web.api\lifebook.authentication.web.api\lifebook.authentication.web.api.csproj", "{FE321AF1-CFA9-4CF5-9ADB-E7F67CCD986C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.authentication.core", "lifebook.authentication.core\lifebook.authentication.core.csproj", "{E9FFC457-FC75-4C19-8AC5-5E6B49C7D808}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,13 +17,13 @@ Global
 		{22FFEA0B-A8E7-40FE-BFE4-A69A5C0AE21A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22FFEA0B-A8E7-40FE-BFE4-A69A5C0AE21A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22FFEA0B-A8E7-40FE-BFE4-A69A5C0AE21A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CEA642F2-02D8-46B5-991D-2CF5E70BF6D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CEA642F2-02D8-46B5-991D-2CF5E70BF6D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CEA642F2-02D8-46B5-991D-2CF5E70BF6D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CEA642F2-02D8-46B5-991D-2CF5E70BF6D3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FE321AF1-CFA9-4CF5-9ADB-E7F67CCD986C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FE321AF1-CFA9-4CF5-9ADB-E7F67CCD986C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE321AF1-CFA9-4CF5-9ADB-E7F67CCD986C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE321AF1-CFA9-4CF5-9ADB-E7F67CCD986C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9FFC457-FC75-4C19-8AC5-5E6B49C7D808}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9FFC457-FC75-4C19-8AC5-5E6B49C7D808}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9FFC457-FC75-4C19-8AC5-5E6B49C7D808}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9FFC457-FC75-4C19-8AC5-5E6B49C7D808}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

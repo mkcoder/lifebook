@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
 using Castle.Windsor.MsDependencyInjection;
+using IdentityServer4.EntityFramework.DbContexts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -35,8 +37,9 @@ namespace lifebook.authentication.web.api
             container = new WindsorContainer();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            container.Install(FromAssembly.InThisApplication(GetType().Assembly));
-
+            container.Install(
+                FromAssembly.Named("lifebook.authentication.core")
+            );
             return WindsorRegistrationHelper.CreateServiceProvider(container, services);
         }
 
