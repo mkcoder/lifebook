@@ -21,6 +21,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.database.repo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.database.repository.test", "lifebook.core.database\lifebook.core.database.repository\lifebook.core.database.repository.test\lifebook.core.database.repository.test\lifebook.core.database.repository.test.csproj", "{95B3FB4C-D508-4510-954D-0AC0992A6650}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.services", "lifebook.core.services\lifebook.core.services\lifebook.core.services.csproj", "{CA79C9DE-15DF-4F11-8270-B5A18791AFC5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lifebook.core.services", "lifebook.core.services", "{E54E710C-A58A-4569-9319-153DD07CB8AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.services.test", "lifebook.core.services\lifebook.core.services.test\lifebook.core.services.test.csproj", "{E295B2F5-7749-483B-B2C5-68C97E0106AA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lifebook.core.examples", "lifebook.core.examples", "{2E9CB30D-42EE-4A86-B1E5-D094ADDEAEA6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.examples.mvc", "lifebook.core.examples\lifebook.core.examples.webapi\lifebook.core.examples.mvc.csproj", "{E284284B-2174-4D94-9AFD-34418482CAD4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +61,18 @@ Global
 		{95B3FB4C-D508-4510-954D-0AC0992A6650}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95B3FB4C-D508-4510-954D-0AC0992A6650}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{95B3FB4C-D508-4510-954D-0AC0992A6650}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA79C9DE-15DF-4F11-8270-B5A18791AFC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA79C9DE-15DF-4F11-8270-B5A18791AFC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA79C9DE-15DF-4F11-8270-B5A18791AFC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA79C9DE-15DF-4F11-8270-B5A18791AFC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E295B2F5-7749-483B-B2C5-68C97E0106AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E295B2F5-7749-483B-B2C5-68C97E0106AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E295B2F5-7749-483B-B2C5-68C97E0106AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E295B2F5-7749-483B-B2C5-68C97E0106AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E284284B-2174-4D94-9AFD-34418482CAD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E284284B-2174-4D94-9AFD-34418482CAD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E284284B-2174-4D94-9AFD-34418482CAD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E284284B-2174-4D94-9AFD-34418482CAD4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{425DF67D-9B45-4758-AC32-B0EB214308F7} = {97773F37-71F7-4A0A-89E5-FF8FFA894CDA}
@@ -61,5 +83,8 @@ Global
 		{DE665787-18DF-4C97-A5DE-769DF939DF80} = {88C9B710-17B3-44B2-B9B9-5A1B4C1CBA7B}
 		{B91587A6-A99A-4981-89D2-32BA0E819A06} = {DE665787-18DF-4C97-A5DE-769DF939DF80}
 		{95B3FB4C-D508-4510-954D-0AC0992A6650} = {DE665787-18DF-4C97-A5DE-769DF939DF80}
+		{CA79C9DE-15DF-4F11-8270-B5A18791AFC5} = {E54E710C-A58A-4569-9319-153DD07CB8AB}
+		{E295B2F5-7749-483B-B2C5-68C97E0106AA} = {E54E710C-A58A-4569-9319-153DD07CB8AB}
+		{E284284B-2174-4D94-9AFD-34418482CAD4} = {2E9CB30D-42EE-4A86-B1E5-D094ADDEAEA6}
 	EndGlobalSection
 EndGlobal
