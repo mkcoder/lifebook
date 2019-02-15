@@ -41,4 +41,12 @@
     <None Remove="lifebook.core.services.test\obj\lifebook.core.services.test.csproj.nuget.g.targets" />
     <None Remove="lifebook.core.services.test\obj\project.assets.json" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="appsettings.lifebook.core.services.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

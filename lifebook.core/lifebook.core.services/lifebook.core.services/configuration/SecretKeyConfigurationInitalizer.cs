@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration.Memory;
 namespace lifebook.core.services.configuration
 {
     [ProductionConfiguration]
+    /// Used during production to build a key/value pair off all the settings
     public class SecretKeyConfigurationInitalizer : IConfigurationProviderInistalizer
     {
         public void Provide(IConfigurationBuilder builder)

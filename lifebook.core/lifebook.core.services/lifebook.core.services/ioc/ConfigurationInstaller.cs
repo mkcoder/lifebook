@@ -21,7 +21,7 @@ namespace lifebook.core.services
                     .If(t =>
                     {
                         var attributes = t.GetCustomAttributes(typeof(ProductionConfigurationAttribute)).FirstOrDefault();
-                        if (attributes != null && Environment.GetEnvironmentVariable("PRODUCTION") == null) return false;                        
+                        if (attributes != null && Environment.GetEnvironmentVariable("DEV_ENV") != "PRODUCTION") return false;                        
                         return true;
                     })
                     .LifestyleTransient()

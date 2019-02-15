@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Castle.Facilities.AspNetCore;
+using Castle.Windsor;
+using Castle.Windsor.Installer;
 using lifebook.core.services.middlesware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -15,15 +18,12 @@ namespace lifebook.core.examples.webapi
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
 
-        public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; set; }
+        private static readonly WindsorContainer Container = new WindsorContainer();
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -34,6 +34,15 @@ namespace lifebook.core.examples.webapi
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            Container.Install(FromAssembly.InThisApplication(GetType().Assembly));
+
+            Configuration = Container.Resolve<IConfigurationBuilder>()
+                .AddEnvironmentVariables()
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+            return services.AddWindsor(Container);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,12 +58,11 @@ namespace lifebook.core.examples.webapi
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
             app.UseMiddleware<RegisterServiceMiddleware>("lifebook.core.example.web", "webapi.lifebook", "example, api");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
-
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

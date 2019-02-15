@@ -7,17 +7,14 @@ using System.Collections.Generic;
 
 namespace lifebook.core.services.configuration
 {
-    public class ConfigurationProvider : IConfigurationProviderInistalizer
+    public class InMemoryFromEmbededResourceConfigurationProvider : IConfigurationProviderInistalizer
     {
-        public ConfigurationProvider()
-        {
-
-        }
-
         public void Provide(IConfigurationBuilder configurationBuilder)
         {
             var assemblyName = GetType().AssemblyQualifiedName;
-            var jsonText = GetType().Assembly.FromResourceNameToEmbededAssemblyResources($"{assemblyName}.appsettings.json");
+            Stream stream = GetType().Assembly.GetManifestResourceStream($"appsettings.{assemblyName}.json");
+            if (stream == null) return;
+            var jsonText = GetType().Assembly.FromResourceNameToEmbededAssemblyResources($"appsettings.{assemblyName}.json");
             var config = JObject.Parse(jsonText);
             configurationBuilder.AddInMemoryCollection(config.ToObject<Dictionary<string, string>>());
         }

@@ -12,7 +12,7 @@ namespace lifebook.core.services.configuration
         public ProductionWebConfigurationProvider()
         {
             var assemblyName = GetType().AssemblyQualifiedName;    
-            var jsonText = GetType().Assembly.FromResourceNameToEmbededAssemblyResources($"{assemblyName}.appsettings.json");
+            var jsonText = GetType().Assembly.FromResourceNameToEmbededAssemblyResources($"appsettings.{assemblyName}.json");
             config = JObject.Parse(jsonText);
         }
 
