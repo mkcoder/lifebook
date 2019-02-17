@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
@@ -14,11 +15,24 @@ namespace lifebook.core.examples.webapi
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            new WebHostBuilder()
+                .UseEnvironment("Development")
+                .UseKestrel()
+                .ConfigureKestrel((ctx, opt) => {
+                    opt.Listen(IPAddress.Loopback, 5001, listOpt =>
+                    {
+                        listOpt.UseHttps();
+                    });
+                })
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseStartup<Startup>()
+                .Build()
+                .Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
     }
+
 }

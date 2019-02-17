@@ -14,13 +14,18 @@ namespace lifebook.core.services.discovery
             consul = new ConsulClient();
         }
 
-        public async Task<ServiceInfo> RegisterService(CatalogRegistration service)
+        public async Task<ServiceInfo> RegisterService(AgentServiceRegistration service)
         {
             var s = new ServiceInfo();
-            s.Address = service.Service.Address;
-            s.ServiceName = service.Service.Service;
-            var result = await consul.Catalog.Register(service);
+            s.Address = service.Address;
+            s.ServiceName = service.Name;
+            var result = await consul.Agent.ServiceRegister(service);
             return s;
+        }
+
+        public async Task DeregisterService(string serviceId)
+        {
+            await consul.Agent.ServiceDeregister(serviceId);
         }
 
         public async Task<ServiceInfo> FindServiceByName(string serviceName)
