@@ -22,12 +22,11 @@ lifebook
 <b>[0] we enforce/discourage the use of root level namespaces and restricted to very limited use</b>
 <b>[1] this is reserved for project wide classes </b>
 <b>[2|3] we prefix the namespace with folder </b>
-<pre>     
-
 lifebook.core.logging.interface
+</pre>     
 
 # project creation and development
 ## how to start a new project
 * all apps must have their own wiki page, project home, and tags, and labels creted before inital project kickoff
-** in the future apps maybe required to create their own pipeline **
+> in the future apps maybe required to create their own pipeline 
 
