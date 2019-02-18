@@ -25,3 +25,9 @@ lifebook
 <pre>     
 
 lifebook.core.logging.interface
+
+# project creation and development
+## how to start a new project
+* all apps must have their own wiki page, project home, and tags, and labels creted before inital project kickoff
+** in the future apps maybe required to create their own pipeline **
+
