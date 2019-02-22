@@ -22,6 +22,54 @@ lifebook
 <b>[0] we enforce/discourage the use of root level namespaces and restricted to very limited use</b>
 <b>[1] this is reserved for project wide classes </b>
 <b>[2|3] we prefix the namespace with folder </b>
-<pre>     
-
 lifebook.core.logging.interface
+</pre>     
+
+# project creation and development
+## how to start a new project
+* all apps must have their own wiki page, project home, and tags, and labels creted before inital project kickoff
+> in the future apps maybe required to create their own pipeline 
+a default solution may look something like this, please read more about different thing in the wiki page:
+<pre>
+basic layout of app solutions
+| solution
+| _ service
+   | _ core
+   | _ models
+   | _ domains
+   | _ valueobjects
+   | _ configurations
+   | _ repository
+   | _ ioc
+| _ webapi
+   | _ apis
+   | _ services
+   | _ db
+| _ webapp
+   | _ app    
+       | _ src
+           | _ libs
+           | _ js
+           | _ css
+           | _ resources
+           | _ index.html
+   | _ node_modules 
+   | _ buildscripts
+| _ businessprocess -- folder
+   | _ <solutionname>.<purpose>.businessprocess 
+      | _ service
+      | _ ioc
+      | _ aggregate
+         | _ events
+         | _ commands
+      | _ controllers
+      | _ models
+      | _ domains
+      | _ process.cs
+      | _ start.cs    
+| _ projectors
+   | _ projections
+   | _ projectors
+   | _ api-controllers
+   | _ start.cs
+</pre>
