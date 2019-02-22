@@ -1,0 +1,17 @@
+{
+
+    "log_level": "INFO",
+    "node_name": "foobar",
+    "server": true,
+    "addresses": {
+        "https": "0.0.0.0"
+    },
+    "ports": {
+        "https": 8501
+    },
+    "http_config": {
+        "response_headers": {
+          "Access-Control-Allow-Origin": "*"
+        }
+    }
+  }

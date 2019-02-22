@@ -11,7 +11,9 @@ namespace lifebook.core.services.discovery
         private ConsulClient consul = null;
         public NetworkServiceLocator()
         {
-            consul = new ConsulClient();
+            consul = new ConsulClient((obj) => {
+                obj.Address = new Uri("http://localhost:8500/");
+            });
         }
 
         public async Task<ServiceInfo> RegisterService(AgentServiceRegistration service)
