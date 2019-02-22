@@ -34,6 +34,10 @@ namespace lifebook.core.services.configuration
                 {
                     FlattenStructure((JObject)item.Value, result);
                 }
+                else if (item.Value is JArray)
+                {
+                    result.Add(item.Value.Path.Replace('.', ':'), string.Join(",", item.Value));
+                }
                 else
                 {
                     result.Add(item.Value.Path.Replace('.', ':'), item.Value.ToObject<string>());
