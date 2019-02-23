@@ -952,9 +952,12 @@
             console.log(endDate);
             var query = "/from/"+startDate.toISOString()+"/to/"+endDate.toISOString();
             console.log(query);
-            var consulDiscovery = "http://127.0.0.1:8500/v1/agent/service/example_primary"
+            var consulDiscovery = "http://localhost:8500/v1/agent/service/example_primary"
             fetch(consulDiscovery).then(r => {
-                console.log(r);
+                console.log(r, r.json())
+                r.json().then(function(data) {
+                    console.log(data);
+                });
             });
         });
     });

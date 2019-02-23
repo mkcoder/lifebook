@@ -6,8 +6,10 @@
     <Authors>mkcoder</Authors>
     <Description>core services for all projects</Description>
     <PackageId>lifebook.core.services</PackageId>
-    <PackageVersion>1.0.0</PackageVersion>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <PackageVersion>1.0.2</PackageVersion>
   </PropertyGroup>
+  
 
   <ItemGroup>
     <Folder Include="discovery\" />

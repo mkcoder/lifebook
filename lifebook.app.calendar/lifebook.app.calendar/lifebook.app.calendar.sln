@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.app.calendar.api", "lifebook.app.calendar.api\lifebook.app.calendar.api\lifebook.app.calendar.api.csproj", "{C67FF3A5-2A8C-4994-AD96-59198BDDA518}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.app.calendar.service", "lifebook.app.calendar.service\lifebook.app.calendar.service.csproj", "{2B687218-3507-4A12-B53C-72CAB8A54BFE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,5 +15,9 @@ Global
 		{C67FF3A5-2A8C-4994-AD96-59198BDDA518}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C67FF3A5-2A8C-4994-AD96-59198BDDA518}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C67FF3A5-2A8C-4994-AD96-59198BDDA518}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B687218-3507-4A12-B53C-72CAB8A54BFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B687218-3507-4A12-B53C-72CAB8A54BFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B687218-3507-4A12-B53C-72CAB8A54BFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B687218-3507-4A12-B53C-72CAB8A54BFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
