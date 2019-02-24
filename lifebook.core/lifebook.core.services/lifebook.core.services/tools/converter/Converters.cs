@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace lifebook.core.tools.converter
 {
-    public static class Extensions
+    public static class Converters
     {
         public static string FromResourceNameToEmbededAssemblyResources(this Assembly assembly, string resourceName)
         {

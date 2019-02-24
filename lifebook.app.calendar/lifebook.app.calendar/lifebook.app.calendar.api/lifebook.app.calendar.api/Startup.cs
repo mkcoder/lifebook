@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Castle.Facilities.AspNetCore;
+using Castle.Windsor;
+using Castle.Windsor.Installer;
+using lifebook.core.services.middlesware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -15,17 +19,33 @@ namespace lifebook.app.calendar.api
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+        private readonly WindsorContainer _container = new WindsorContainer();
 
-        public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            _container.Install(FromAssembly.InThisApplication(GetType().Assembly));
+
+            Configuration = _container.Resolve<IConfigurationBuilder>()
+                            .AddJsonFile("appsettings.json")
+                            .Build();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll",
+                    builder =>
+                    {
+                        builder
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials();
+                    });
+            });
+            return services.AddWindsor(_container);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,13 +55,12 @@ namespace lifebook.app.calendar.api
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
 
-            app.UseHttpsRedirection();
+            app.UseHsts();
+            app.RegisterService(Configuration);
+
+            app.UseHttpsRedirection(); 
+            app.UseCors("AllowAll");
             app.UseMvc();
         }
     }

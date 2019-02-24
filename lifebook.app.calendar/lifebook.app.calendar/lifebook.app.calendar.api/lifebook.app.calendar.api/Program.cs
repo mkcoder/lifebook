@@ -14,12 +14,12 @@ namespace lifebook.app.calendar.api
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args)
-            .UseUrls("https://0.0.0.0:5001", "http://0.0.0.0:5000").Build().Run();
+            new WebHostBuilder()
+            //.UseUrls("https://0.0.0.0:5001", "http://0.0.0.0:5000")
+            .UseKestrel()
+            .UseIISIntegration()
+            .UseStartup<Startup>()
+            .Build().Run();
         }
-
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
     }
 }

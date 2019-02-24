@@ -48,7 +48,7 @@ namespace lifebook.core.services.middlesware
             };
 
 
-            if (_configuration["ASPNETCORE_ENVIRONMENT"] == "Development")
+            if (_configuration["ASPNETCORE_ENVIRONMENT"] == null || _configuration["ASPNETCORE_ENVIRONMENT"] == "Development")
             {
                 service.Checks = null;
             }

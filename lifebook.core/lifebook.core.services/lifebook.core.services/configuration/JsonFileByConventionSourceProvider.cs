@@ -9,7 +9,7 @@ namespace lifebook.core.services.configuration
         public void Provide(IConfigurationBuilder configurationBuilder)
         {
             var assemblyName = GetType().Assembly.GetName().Name;
-            configurationBuilder.AddJsonFile($"appsettings.{assemblyName}.json");
+            configurationBuilder.AddJsonFile($"appsettings.{assemblyName}.json", true);
         }
     }
 }

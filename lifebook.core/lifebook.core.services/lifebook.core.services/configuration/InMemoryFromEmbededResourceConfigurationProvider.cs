@@ -11,7 +11,7 @@ namespace lifebook.core.services.configuration
     {
         public void Provide(IConfigurationBuilder configurationBuilder)
         {
-            var assemblyName = GetType().AssemblyQualifiedName;
+            var assemblyName = GetType().Assembly.GetName().Name;
             Stream stream = GetType().Assembly.GetManifestResourceStream($"appsettings.{assemblyName}.json");
             if (stream == null) return;
             var jsonText = GetType().Assembly.FromResourceNameToEmbededAssemblyResources($"appsettings.{assemblyName}.json");

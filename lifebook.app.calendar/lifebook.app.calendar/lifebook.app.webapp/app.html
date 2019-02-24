@@ -928,7 +928,7 @@
                 }
             }
         }
-
+        var consul = new Consul();
         // post the data when user clicks
         $('.week').on('click', function(e)  {
             let dates = $(this).children();
@@ -952,15 +952,42 @@
             console.log(endDate);
             var query = "/from/"+startDate.toISOString()+"/to/"+endDate.toISOString();
             console.log(query);
-            var consulDiscovery = "http://localhost:8500/v1/agent/service/example_primary"
-            fetch(consulDiscovery).then(r => {
-                console.log(r, r.json())
-                r.json().then(function(data) {
-                    console.log(data);
-                });
-            });
+            consul.GetServiceByName("calendarapi_primary").then((data) => {
+
+                var endpoint = `https://${data.Address}:${data.Port}/GetEventsReminderForClient/${window.GetUser().UserId}`
+                fetch(endpoint).then(r => r.json()).then(d => {
+                    console.log(d);
+                })
+            })
+            
         });
     });
+
+    class Consul 
+    {
+        constructor()
+        {
+            this.ConsulUrl = "http://localhost:8500/v1/agent/service/";
+        }
+
+        GetServiceByName(serviceName)
+        {
+            return new Promise((resolve, reject) => {
+                console.log(this.ConsulUrl+serviceName);
+                fetch(this.ConsulUrl+serviceName).then(r => {
+                        r.json().then(function(data) {
+                            resolve(data);
+                    });
+                });
+            });
+        }
+    }
+
+    window.GetUser = function () {
+        return {
+            UserId: "b72a3de6-04fc-42f2-9fd7-ce9119d1d9a0"
+        };
+    };
 </script>
 
 </html>

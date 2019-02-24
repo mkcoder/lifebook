@@ -7,7 +7,7 @@
     <Description>core services for all projects</Description>
     <PackageId>lifebook.core.services</PackageId>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
-    <PackageVersion>1.0.2</PackageVersion>
+    <PackageVersion>1.0.8</PackageVersion>
   </PropertyGroup>
   
 
@@ -20,6 +20,7 @@
     <Folder Include="middlesware\" />
     <Folder Include="interfaces\" />
     <Folder Include="ioc\" />
+    <Folder Include="tools\extensions\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="NuGet.Build.Packaging" Version="0.2.2" />
@@ -42,13 +43,18 @@
     <None Remove="lifebook.core.services.test\obj\lifebook.core.services.test.csproj.nuget.g.props" />
     <None Remove="lifebook.core.services.test\obj\lifebook.core.services.test.csproj.nuget.g.targets" />
     <None Remove="lifebook.core.services.test\obj\project.assets.json" />
+    <None Remove="appsettings.lifebook.core.services.json" />
   </ItemGroup>
   <ItemGroup>
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="appsettings.lifebook.core.services.json">
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="appsettings.lifebook.core.services.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+      <IncludeInPackage>true</IncludeInPackage>
+      <LogicalName>appsettings.lifebook.core.services.json</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>
