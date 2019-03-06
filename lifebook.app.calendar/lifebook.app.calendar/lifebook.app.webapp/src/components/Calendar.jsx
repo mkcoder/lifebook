@@ -21,7 +21,7 @@ export default class Calendar extends React.Component {
     }
     RenderDayInWeek(start=0, end=6) {
         var week = [];
-        for(var i = start; i < end; i++){
+        for(var i = start; i <= end; i++){
             week.push((
                 <td>{i}</td>
             ));
@@ -54,7 +54,7 @@ export default class Calendar extends React.Component {
                     {this.RenderDayInWeek(j, j+6)}
                 </tr>
             ));
-            j += 6;
+            j += 7;
         }
         firstWeek = [];
         for (let i = 0; i <= 6; i++)
