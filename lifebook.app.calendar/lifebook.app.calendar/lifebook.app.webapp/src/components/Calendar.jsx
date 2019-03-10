@@ -19,59 +19,46 @@ export default class Calendar extends React.Component {
         }
         return daysRender;
     }
-    RenderDayInWeek(start=0, end=6) {
-        var week = [];
-        for(var i = start; i <= end; i++){
-            week.push((
-                <td>{i}</td>
-            ));
-        }
-        return week;
-    }
-    RenderWeeksOfTheWeekHeader(start, end) {
+    RenderWeeksOfTheWeekHeader(start, end, selectedDate) {
+        // refactoring
+        var calendarDayCount = 1;
         let firstWeekOffset = start.getDay();
         let weeks = [];
-        // draw the first week 
-        var firstWeek = [];
-        let j = 1;
-        for (let i = 0; i <= 6; i++)
+        let week = [];
+        let selected = false;
+        for(var i = 1; calendarDayCount <= end.getDate(); i++)
         {
-            if(i < firstWeekOffset)
-            {
-                firstWeek.push(<td></td>);
+            if(i < firstWeekOffset+1)
+            {                
+                week.push(<td key={i}></td>);
             }
             else
             {
-                firstWeek.push(<td>{j++}</td>);
+                var td = <td key={i}>{calendarDayCount}</td>;
+                if(calendarDayCount === selectedDate.getDate())
+                {                   
+                    selected = true; 
+                    td = <td className="selected-date" key={i}>{calendarDayCount}</td>;
+                }                
+                week.push(td);
+                calendarDayCount++;
+            }
+
+            if(i%7===0) // end of the week
+            {
+                var tr = <tr key="tr">{week}</tr>;
+                if(selected)
+                {
+                    tr = <tr className="selected-week" key="tr">{week}</tr>;
+                    selected = false;
+                }
+                weeks.push(tr);
+                week = [];
             }
         }
         weeks.push((
-            <tr>{firstWeek}</tr>
+            <tr key="tr">{week}</tr>
         ));
-        for(let i = 7; i < end.getDate(); i+=6) {
-            weeks.push((
-                <tr>
-                    {this.RenderDayInWeek(j, j+6)}
-                </tr>
-            ));
-            j += 7;
-        }
-        firstWeek = [];
-        for (let i = 0; i <= 6; i++)
-        {
-            if(j > end.getDate())
-            {
-                firstWeek.push(<td></td>);
-            }
-            else
-            {
-                firstWeek.push(<td>{j++}</td>);
-            }
-        }
-        weeks.push((
-            <tr>{firstWeek}</tr>
-        ));
-        // draw the last week
         return weeks;
     }
 
@@ -81,21 +68,23 @@ export default class Calendar extends React.Component {
         console.log(firstDayOfMonth, lastDayOfMonth);
         return (
             <table>
+                <caption>{this.GetMonthNameFromInt(firstDayOfMonth.getMonth())} - {date.getFullYear()}</caption>
                 <thead>
                     <tr>
                         {this.RenderDaysOfTheWeekHeader()}                        
                     </tr>
                 </thead>
                 <tbody>
-                    {this.RenderWeeksOfTheWeekHeader(firstDayOfMonth, lastDayOfMonth)}
+                    {this.RenderWeeksOfTheWeekHeader(firstDayOfMonth, lastDayOfMonth, date)}
                 </tbody>
             </table>
         ); 
     }
+
     render() {
         return (
             <React.Fragment>        
-                {this.RenderCalendar(this.props.state.date)}
+                {this.RenderCalendar(this.props.date)}
             </React.Fragment>
         );
     }
