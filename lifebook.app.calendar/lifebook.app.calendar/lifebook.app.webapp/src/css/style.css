@@ -1,0 +1,60 @@
+aside {
+    float: left;
+    padding-right: 20px;
+}
+
+aside table {    
+    background: #eee;
+}
+
+aside table caption {
+    padding: 10px 0px 0px 0px;
+    background: #eee;
+}
+
+aside table thead th {
+    background: #ddd;
+    padding: 10px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin: 0px;    
+}
+
+aside table tbody tr {
+    background: #2171b5;
+    color: #9ecae1;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+aside table tbody td {    
+    padding: 10px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin: 0px;    
+    text-align: center;
+}
+
+tr.selected-week {
+    background: #08519c;
+    color: #fff;
+}
+
+table { 
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+aside table caption {
+    background: #3182bd;
+    color: #fff;
+    padding-bottom: 10px;
+    font-weight: bold;
+    font-size: 1.2em;
+    letter-spacing: 5px;
+}
+
+aside table thead tr th {
+    background: #9ecae1;
+    color: #08519c;
+}

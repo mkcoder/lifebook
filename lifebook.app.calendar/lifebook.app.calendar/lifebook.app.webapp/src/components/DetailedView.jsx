@@ -28,7 +28,6 @@ export default class DetailedView extends React.Component {
         return header;
     }
     RenderBody(selectedDates, intervals) {
-        debugger;
         var tr = [];
         var hoursDiv = 60/intervals;
         for(let i = 0, time = 12, intv=0; i < 24*hoursDiv; i++) {

@@ -56,6 +56,10 @@ export default class Calendar extends React.Component {
                 week = [];
             }
         }
+        for(let i = 0; i < 6-end.getDay(); i++) {
+            week.push(<td key={i}></td>);
+        }
+
         weeks.push((
             <tr key="tr">{week}</tr>
         ));
