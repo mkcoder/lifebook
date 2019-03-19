@@ -87,9 +87,9 @@ export default class Calendar extends React.Component {
 
     render() {
         return (
-            <React.Fragment>        
+            <div class="calendar">        
                 {this.RenderCalendar(this.props.date)}
-            </React.Fragment>
+            </div>
         );
     }
 }

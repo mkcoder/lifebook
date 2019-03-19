@@ -31,11 +31,13 @@ export default class App extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <aside>
-                    <Calendar date={this.state.selectedDate} selectedDates={this.state.selectedDates} />
-                    <Reminders />
+                <aside className="sidebar">
+                    <Calendar className="calendar" date={this.state.selectedDate} selectedDates={this.state.selectedDates} />
+                    <Reminders className="reminders" />
                 </aside>
-                <DetailedView date={this.state.selectedDate} intervals={this.state.intervals} selectedDates={this.state.selectedDates} />
+                <div className="details-view" >
+                    <DetailedView date={this.state.selectedDate} intervals={this.state.intervals} selectedDates={this.state.selectedDates} />
+                </div>
             </React.Fragment>
         );
     }

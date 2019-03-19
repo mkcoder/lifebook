@@ -3,31 +3,27 @@ aside {
     padding-right: 20px;
 }
 
-aside table {    
-    background: #eee;
+aside .calendar table {    
 }
 
-aside table caption {
+aside .calendar table caption {
     padding: 10px 0px 0px 0px;
-    background: #eee;
 }
 
-aside table thead th {
-    background: #ddd;
+aside .calendar  table thead th {
     padding: 10px;
     margin-left: 0px;
     margin-right: 0px;
     margin: 0px;    
 }
 
-aside table tbody tr {
-    background: #2171b5;
-    color: #9ecae1;
+aside .calendar  table tbody tr {
+    color: #070e12;
     font-size: 14px;
     font-weight: bold;
 }
 
-aside table tbody td {    
+aside  .calendar table tbody td {    
     padding: 10px;
     margin-left: 0px;
     margin-right: 0px;
@@ -35,26 +31,56 @@ aside table tbody td {
     text-align: center;
 }
 
-tr.selected-week {
-    background: #08519c;
-    color: #fff;
+.calendar tr.selected-week {
+    color: #070e12;
 }
 
-table { 
+.calendar .selected-date {
+    background: #f0d9e8;
+    border-radius: 100px;
+}
+
+.calendar table { 
     border-spacing: 0;
     border-collapse: collapse;
 }
 
-aside table caption {
-    background: #3182bd;
-    color: #fff;
+aside .calendar  table caption {
+    color: #070e12;
     padding-bottom: 10px;
     font-weight: bold;
     font-size: 1.2em;
-    letter-spacing: 5px;
 }
 
-aside table thead tr th {
-    background: #9ecae1;
-    color: #08519c;
+aside  .calendar table thead tr th {
+    color: #070e12;
 }
+
+table {
+    border-collapse: collapse;
+  }
+  
+  .details-view table tr {
+      border: 0px;
+  }
+  
+  .details-view table th {
+    padding: 5px 60px;
+    border-bottom: 1px solid #000;
+  }
+  
+  .details-view  table tr td {
+    padding: 5px 40px;
+    border-right: 1px solid #000;
+    border-bottom: 1px solid #000;
+  }
+  
+  .details-view  table tr td:first-child {
+    border-bottom: none;
+  }
+  
+  .details-view  table tr td:last-child {
+     border-right: none;
+  }
+  
+  table td, table th {border-spacing: 0px;border-collapse: collapse;}
