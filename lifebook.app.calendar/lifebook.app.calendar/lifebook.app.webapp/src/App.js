@@ -2,6 +2,7 @@ import React from 'react';
 import Calendar from './components/Calendar'
 import Reminders from './components/Reminders';
 import DetailedView from './components/DetailedView'
+import { Router, Route, Link } from 'react-router'
 import './css/style.css';
 
 export default class App extends React.Component {
@@ -28,7 +29,14 @@ export default class App extends React.Component {
         }
     };
 
-    render() {
+    constructor () {
+        // load state for user
+        var x = new URLSearchParams();
+        console.log(x);
+        super();
+    };
+    
+    render () {
         return (
             <React.Fragment>
                 <aside className="sidebar">

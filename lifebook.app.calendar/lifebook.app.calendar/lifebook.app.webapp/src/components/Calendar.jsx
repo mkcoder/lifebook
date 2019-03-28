@@ -49,7 +49,7 @@ export default class Calendar extends React.Component {
                 var tr = <tr key="tr">{week}</tr>;
                 if(selected)
                 {
-                    tr = <tr className="selected-week" key="tr">{week}</tr>;
+                    tr = <tr className="selected-week" key={"tr"-i}>{week}</tr>;
                     selected = false;
                 }
                 weeks.push(tr);
@@ -87,7 +87,7 @@ export default class Calendar extends React.Component {
 
     render() {
         return (
-            <div class="calendar">        
+            <div className="calendar">        
                 {this.RenderCalendar(this.props.date)}
             </div>
         );

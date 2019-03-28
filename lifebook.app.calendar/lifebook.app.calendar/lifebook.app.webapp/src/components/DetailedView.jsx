@@ -33,11 +33,11 @@ export default class DetailedView extends React.Component {
         for(let i = 0, time = 12, intv=0; i < 24*hoursDiv; i++) {
             var ths = [];
             ths.push((
-                <td>{time}:{intv < 9 ? "0"+intv : intv}</td>                
+                <td key={i}>{time}:{intv < 9 ? "0"+intv : intv}</td>                
             ));            
             ths.push(this.GetEventCols(selectedDates, time, intv));
             tr.push((
-                <tr>{ths}</tr>
+                <tr key={i*2}>{ths}</tr>
             ))
             intv += intervals;
             if(intv === 60) {
@@ -55,7 +55,7 @@ export default class DetailedView extends React.Component {
             <React.Fragment>
                 <table>
                     <thead>
-                        <tr>
+                        <tr key="abc123">
                             {this.RenderHeader(selectedDates)}
                         </tr>
                     </thead>

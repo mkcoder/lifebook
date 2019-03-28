@@ -3,8 +3,13 @@
   "version": "0.0.1",
   "private": true,
   "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.4.0",
+    "@babel/env": "^7.4.2",
+    "@babel/node": "^7.2.2",
     "concurrently": "4.1.0",
-    "react-scripts": "^2.1.1"
+    "react-scripts": "^2.1.1",
+    "webpack-cli": "^3.3.0"
   },
   "dependencies": {
     "autoprefixer-stylus": "0.14.0",
@@ -16,7 +21,9 @@
     "react-router-dom": "^4.2.2",
     "react-transition-group": "^2.2.1",
     "serve": "^10.1.1",
-    "stylus": "0.54.5"
+    "stylus": "0.54.5",
+    "express": "^4.16.4",
+    "morgan": "^1.9.1"
   },
   "scripts": {
     "dev": "react-scripts start",
@@ -25,7 +32,9 @@
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "styles": "stylus -u autoprefixer-stylus ./src/css/style.styl -o ./src/css/style.css",
-    "styles:watch": "npm run styles -- -w"
+    "styles:watch": "npm run styles -- -w",
+    "server-build": "webpack -p",
+    "server": "babel-node --presets env ./src/server.js"
   },
   "browserslist": [
     ">0.2%",
