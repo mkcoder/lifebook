@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace lifebook.app.apploader.services.Repository
 {
-    public class AppsRepository : AppDbContext
+    public class AppsRepository : AppDbContext, IRepository<App>
     {
         private DbSet<App> Apps { get; }
 
