@@ -1,33 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using lifebook.app.apploader.services.Database;
 using lifebook.app.apploader.services.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace lifebook.app.apploader.services.Repository
 {
-    public class UserAppsRepository : AppDbContext, IRepository<UserApps>
+    public class UserAppsRepository : IRepository<UserApps>
     {
-        private DbSet<UserApps> UserApps { get; }
+        private readonly AppDbContext appDbContext;
 
-        public bool Add(UserApps app)
+        public UserAppsRepository(AppDbContext appDbContext)
         {
-            throw new NotImplementedException();
+            this.appDbContext = appDbContext;
         }
 
-        public List<UserApps> GetAll()
+        public List<UserApps> GetAll() => appDbContext.UserApps.Select(s => s).ToList();
+
+        public UserApps GetById(Guid id) => appDbContext.UserApps.First(p => p.AppId == id);
+
+        public List<UserApps> GetAllAppsForUser(Guid userId) => appDbContext.UserApps.Where(p => p.UserId == userId).ToList();
+
+        public void Add(UserApps app)
         {
-            throw new NotImplementedException();
+            app.IsValid();
+            appDbContext.UserApps.Add(app);
+            appDbContext.SaveChanges();
         }
 
-        public UserApps GetById(Guid id)
+        public void Update(UserApps app)
         {
-            throw new NotImplementedException();
-        }
-
-        public bool Update(UserApps app)
-        {
-            throw new NotImplementedException();
+            app.IsValid();
+            appDbContext.UserApps.Update(app);
+            appDbContext.SaveChanges();
         }
     }
 }

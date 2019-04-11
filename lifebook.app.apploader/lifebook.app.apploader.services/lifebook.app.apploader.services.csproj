@@ -16,5 +16,9 @@
     <PackageReference Include="lifebook.core.database.databaseprovider" Version="1.0.9" />
     <PackageReference Include="lifebook.core.database.repository" Version="1.0.3" />
     <PackageReference Include="lifebook.core.services" Version="1.0.8" />
+    <PackageReference Include="Castle.Windsor" Version="5.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Class1.cs" />
   </ItemGroup>
 </Project>

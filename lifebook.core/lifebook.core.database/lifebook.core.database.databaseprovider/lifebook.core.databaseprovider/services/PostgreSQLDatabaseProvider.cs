@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Data.Common;
-using JetBrains.Annotations;
 using lifebook.core.database.databaseprovider.interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -20,7 +19,7 @@ namespace lifebook.core.database.databaseprovider.service
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql($"Host={Host};Port={Port};Database={DatabaseName};Username={Username};Password={Password}");
+            optionsBuilder.UseNpgsql($"Host={Host};Port={Port};Database={DatabaseName};User Id={Username};Password={Password}");
         }
 
     }

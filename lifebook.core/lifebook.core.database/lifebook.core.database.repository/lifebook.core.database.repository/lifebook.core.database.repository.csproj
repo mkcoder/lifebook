@@ -23,5 +23,6 @@
     <PackageReference Include="Castle.Windsor" Version="4.1.1" />
     <PackageReference Include="NuGet.Build.Packaging" Version="0.2.2" />
     <PackageReference Include="lifebook.core.database.databaseprovider" Version="1.0.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.4" />
   </ItemGroup>
 </Project>

@@ -7,41 +7,44 @@ using Microsoft.EntityFrameworkCore;
 
 namespace lifebook.app.apploader.services.Repository
 {
-    public class AppsRepository : AppDbContext, IRepository<App>
+    public class AppsRepository : IRepository<App>
     {
-        private DbSet<App> Apps { get; }
+        private readonly AppDbContext appDbContext;
 
-        public List<App> GetAll() => Apps.ToList();
+        public AppsRepository(AppDbContext appDbContext)
+        {
+            this.appDbContext = appDbContext;
+        }
 
-        public App GetById(Guid id) => Apps.Where(a => a.Id == id).Single();
+        public List<App> GetAll() => appDbContext.Apps.ToList();
 
-        public bool Add(App app)
+        public App GetById(Guid id) => appDbContext.Apps.Where(a => a.Id == id).Single();
+
+        public void Add(App app)
         {
             try
             {
                 app.IsValid();
-                Apps.Add(app);
-                SaveChanges();
-                return true;
+                appDbContext.Apps.Add(app);
+                appDbContext.SaveChanges();
             }
             catch (Exception)
             {
-                return false;
+                throw;
             }
         }
 
-        public bool Update(App app)
+        public void Update(App app)
         {
             try
             {
                 app.IsValid();
-                Apps.Update(app);
-                SaveChanges();
-                return true;
+                appDbContext.Apps.Update(app);
+                appDbContext.SaveChanges();
             }
             catch (Exception)
             {
-                return false;
+                throw;
             }
         }
 

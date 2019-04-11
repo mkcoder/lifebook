@@ -30,7 +30,7 @@ namespace lifebook.core.database.repository.test
              {
                  var result = container.Resolve<IRepository<User>>();
                  var result2 = container.Resolve<UserIdentityDbContext>();
-                 var usrs = result.GetAllUsers();
+                 var usrs = result.GetAll();
              });
         }
     }

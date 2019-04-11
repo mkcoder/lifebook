@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.app.apploader.services", "lifebook.app.apploader.services\lifebook.app.apploader.services.csproj", "{15919EAB-9A47-4D23-A22A-D3E5ABECAEDC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.app.apploader.webapi", "lifebook.app.apploader.webapi\lifebook.app.apploader.webapi.csproj", "{D86F9940-EB18-4595-8E1E-E43411A3079D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,5 +15,9 @@ Global
 		{15919EAB-9A47-4D23-A22A-D3E5ABECAEDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15919EAB-9A47-4D23-A22A-D3E5ABECAEDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15919EAB-9A47-4D23-A22A-D3E5ABECAEDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D86F9940-EB18-4595-8E1E-E43411A3079D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D86F9940-EB18-4595-8E1E-E43411A3079D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D86F9940-EB18-4595-8E1E-E43411A3079D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D86F9940-EB18-4595-8E1E-E43411A3079D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

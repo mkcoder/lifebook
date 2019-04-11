@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Threading.Tasks;
 using lifebook.core.database.databaseprovider.service;
 using Microsoft.EntityFrameworkCore;
@@ -10,11 +12,13 @@ namespace lifebook.core.database.databaseprovider.test
     {
         IdentityContext _sut = new IdentityContext("identity");
 
+        [Fact]
         public void BasicExample()
         {
             Assert.Contains("PostgreSQL", _sut.Database.ProviderName);
         }
 
+        [Fact]
         public async Task IdentityExample()
         {
             var result = await _sut.Users.ToListAsync();
@@ -30,8 +34,10 @@ namespace lifebook.core.database.databaseprovider.test
         }
     }
 
+    [Table("users", Schema = "public")]
     public class Users
     {
+        [Key]
         public int Id { get; set; }
         public Guid UserId { get; set; }
         public string Username { get; set; }

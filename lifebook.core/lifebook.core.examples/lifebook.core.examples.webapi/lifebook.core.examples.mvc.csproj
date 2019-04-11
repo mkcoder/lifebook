@@ -11,14 +11,11 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Castle.Windsor" Version="5.0.0" />
     <PackageReference Include="Castle.Facilities.AspNetCore" Version="5.0.0" />
+    <PackageReference Include="lifebook.core.database.databaseprovider" Version="1.0.9" />
+    <PackageReference Include="lifebook.core.database.repository" Version="1.0.3" />
+    <PackageReference Include="lifebook.core.services" Version="1.0.8" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\lifebook.core.database\lifebook.core.database.databaseprovider\lifebook.core.databaseprovider\lifebook.core.database.databaseprovider.csproj" />
-    <ProjectReference Include="..\..\lifebook.core.database\lifebook.core.database.repository\lifebook.core.database.repository\lifebook.core.database.repository.csproj" />
-    <ProjectReference Include="..\..\lifebook.core.services\lifebook.core.services\lifebook.core.services.csproj" />
-    <ProjectReference Include="..\..\lifebook.core.logging\logging\logging.csproj" />
-  </ItemGroup>
   <ItemGroup>
     <Content Remove="appsettings.json" />
   </ItemGroup>

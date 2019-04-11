@@ -1,0 +1,113 @@
+version: '3.5'
+
+services: 
+  sqlserver: 
+    image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
+    hostname: 'sqlserver'
+    environment:
+      ACCEPT_EULA: Y
+      MSSQL_SA_PASSWORD: Passw0rd@1
+      MSSQL_PID: Express
+    ports:
+      - '1433:1433'
+    volumes:
+      - ./sqlserver:/var/opt/mssql
+
+  postgres:
+    container_name: postgres_container
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpassword
+      PGDATA: /data/postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+    networks:
+      - development
+    restart: unless-stopped
+  
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
+      PGADMIN_DEFAULT_PASSWORD: password
+    ports:
+      - "5050:80"
+    networks:
+      - development
+    restart: unless-stopped
+  
+  consul:
+    container_name: "consul1"
+    image: consul
+    networks:
+      - development
+    hostname: "consul1"
+    ports:
+      - '8300:8300'
+      - '8301:8301'
+      - '8301:8301/udp'
+      - '8500:8500'
+      - '8600:8600'
+      - '8600:8600/udp'
+    command: "agent -server -bootstrap -ui -client=0.0.0.0 -bind='{{ GetInterfaceIP \"eth0\" }}'"
+    volumes:
+      - ./consul/config:/consul/config
+
+  elasticsearch:
+   image: docker.elastic.co/elasticsearch/elasticsearch:6.2.4
+   container_name: elasticsearch
+   ports:
+    - "9200:9200"
+   volumes:
+    - ./elk:/usr/share/elasticsearch/data
+   networks:
+    - development
+
+  kibana:
+   image: docker.elastic.co/kibana/kibana:6.2.4
+   container_name: kibana
+   ports:
+    - "5601:5601"
+   depends_on:
+    - elasticsearch
+   networks:
+    - development
+
+  elasticsearchui:
+   image: appbaseio/dejavu
+   container_name: dejavu
+   ports:
+    - "1358:1358"
+   depends_on:
+    - elasticsearch
+   networks:
+    - development
+
+  consul:
+    container_name: eventstore
+    image: eventstore/eventstore
+    networks:
+      - development
+    ports:
+      - '2113:2113'
+      - '1113:1113'
+
+  registrator:
+    depends_on:
+      - consul
+    image: gliderlabs/registrator:v7
+    links:
+      - consul:consul     
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock 
+    entrypoint: /bin/registrator consul://consul:8500
+    networks:
+      - development
+
+networks:
+  development:
+    driver: bridge

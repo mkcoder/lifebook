@@ -7,9 +7,10 @@ namespace lifebook.core.database.repository.interfaces
 {
     public interface IRepository<T> where T: IModel
     {
-        List<User> GetAllUsers();
-        T GetUserByGuid(Guid guid);
-        T GetUserById(int id);
-        T AddNewUser(T user);
+        List<User> GetAll();
+        T GetByGuid(Guid guid);
+        T GetById(int id);
+        T Add(T user);
+        T Update(Guid guid, T user);
     }
 }

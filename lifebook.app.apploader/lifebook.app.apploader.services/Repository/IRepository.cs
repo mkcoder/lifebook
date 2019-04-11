@@ -9,7 +9,7 @@ namespace lifebook.app.apploader.services.Repository
     {
         List<T> GetAll();
         T GetById(Guid id);
-        bool Add(T app);
-        bool Update(T app);
+        void Add(T app);
+        void Update(T app);
     }
 }
