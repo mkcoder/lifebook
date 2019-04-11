@@ -58,17 +58,19 @@ services:
       - ./consul/config:/consul/config
 
   elasticsearch:
-   image: docker.elastic.co/elasticsearch/elasticsearch:6.2.4
+   image: docker.elastic.co/elasticsearch/elasticsearch:7.0.0
    container_name: elasticsearch
+   environment:
+    - discovery.type=single-node
    ports:
     - "9200:9200"
    volumes:
-    - ./elk:/usr/share/elasticsearch/data
+    - ./elk/elasticsearch:/usr/share/elasticsearch/data    
    networks:
     - development
 
   kibana:
-   image: docker.elastic.co/kibana/kibana:6.2.4
+   image: docker.elastic.co/kibana/kibana:7.0.0
    container_name: kibana
    ports:
     - "5601:5601"
@@ -78,16 +80,16 @@ services:
     - development
 
   elasticsearchui:
-   image: appbaseio/dejavu
-   container_name: dejavu
+   image: elastichq/elasticsearch-hq
+   container_name: elasticsearch-hq
    ports:
-    - "1358:1358"
+    - "5000:5000"
    depends_on:
     - elasticsearch
    networks:
     - development
 
-  consul:
+  eventstore:
     container_name: eventstore
     image: eventstore/eventstore
     networks:
