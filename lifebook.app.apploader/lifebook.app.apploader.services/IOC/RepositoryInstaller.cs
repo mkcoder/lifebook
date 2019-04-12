@@ -5,6 +5,7 @@ using Castle.Windsor;
 using lifebook.app.apploader.services.Database;
 using lifebook.app.apploader.services.Models;
 using lifebook.app.apploader.services.Repository;
+using lifebook.core.database.repository.interfaces;
 
 namespace lifebook.app.apploader.services.IOC
 {

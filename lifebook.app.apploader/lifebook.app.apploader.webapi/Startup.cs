@@ -6,7 +6,6 @@ using Castle.Facilities.AspNetCore;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
 using lifebook.app.apploader.webapi.Controllers;
-using lifebook.core.services.middlesware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -54,7 +53,6 @@ namespace lifebook.app.apploader.webapi
                 app.UseHsts();
             }
 
-            app.UseMiddleware<RegisterServiceMiddleware>();
             app.UseHttpsRedirection();
             app.UseMvc();
         }

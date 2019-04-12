@@ -13,12 +13,15 @@
     <Folder Include="Repository\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="lifebook.core.database.databaseprovider" Version="1.0.9" />
-    <PackageReference Include="lifebook.core.database.repository" Version="1.0.3" />
-    <PackageReference Include="lifebook.core.services" Version="1.0.8" />
+    <PackageReference Include="lifebook.core.database.databaseprovider" Version="1.0.10" />
     <PackageReference Include="Castle.Windsor" Version="5.0.0" />
+    <PackageReference Include="lifebook.core.services" Version="1.0.10" />
+    <PackageReference Include="lifebook.core.database.repository" Version="1.0.11" />
+    <PackageReference Include="lifebook.core.logging" Version="1.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.4" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Class1.cs" />
+    <Compile Remove="Repository\IRepository.cs" />
   </ItemGroup>
 </Project>

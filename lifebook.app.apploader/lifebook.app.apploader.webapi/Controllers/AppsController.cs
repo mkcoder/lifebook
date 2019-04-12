@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using lifebook.app.apploader.services.Models;
 using lifebook.app.apploader.services.Repository;
+using lifebook.core.database.repository.interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 

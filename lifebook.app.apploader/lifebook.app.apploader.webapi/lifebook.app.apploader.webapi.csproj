@@ -8,11 +8,11 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
-    <PackageReference Include="lifebook.core.services" Version="1.0.8" />
-    <PackageReference Include="lifebook.core.database.repository" Version="1.0.3" />
-    <PackageReference Include="lifebook.core.database.databaseprovider" Version="1.0.9" />
+    <PackageReference Include="lifebook.core.database.repository" Version="1.0.11" />
+    <PackageReference Include="lifebook.core.database.databaseprovider" Version="1.0.10" />
     <PackageReference Include="Castle.Windsor" Version="5.0.0" />
     <PackageReference Include="Castle.Facilities.AspNetCore" Version="5.0.0" />
+    <PackageReference Include="lifebook.core.services" Version="1.0.10" />
   </ItemGroup>
 
   <ItemGroup>

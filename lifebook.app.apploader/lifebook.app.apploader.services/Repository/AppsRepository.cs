@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using lifebook.app.apploader.services.Database;
 using lifebook.app.apploader.services.Models;
+using lifebook.core.database.repository.interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace lifebook.app.apploader.services.Repository
@@ -18,15 +19,16 @@ namespace lifebook.app.apploader.services.Repository
 
         public List<App> GetAll() => appDbContext.Apps.ToList();
 
-        public App GetById(Guid id) => appDbContext.Apps.Where(a => a.Id == id).Single();
+        public App GetByGuid(Guid id) => appDbContext.Apps.Where(a => a.Id == id).Single();
 
-        public void Add(App app)
+        public App Add(App app)
         {
             try
             {
                 app.IsValid();
                 appDbContext.Apps.Add(app);
                 appDbContext.SaveChanges();
+                return app;
             }
             catch (Exception)
             {
@@ -34,13 +36,14 @@ namespace lifebook.app.apploader.services.Repository
             }
         }
 
-        public void Update(App app)
+        public App Update(Guid id, App app)
         {
             try
             {
                 app.IsValid();
                 appDbContext.Apps.Update(app);
                 appDbContext.SaveChanges();
+                return app;
             }
             catch (Exception)
             {
@@ -48,6 +51,9 @@ namespace lifebook.app.apploader.services.Repository
             }
         }
 
-
+        public App GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
