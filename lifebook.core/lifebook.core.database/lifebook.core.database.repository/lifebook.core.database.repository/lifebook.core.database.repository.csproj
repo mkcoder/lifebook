@@ -10,7 +10,7 @@
     <Description>lifebook repository</Description>
     <Owners>mkcoder</Owners>
     <PackageId>lifebook.core.database.repository</PackageId>
-    <PackageVersion>1.0.3</PackageVersion>
+    <PackageVersion>1.0.10</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>

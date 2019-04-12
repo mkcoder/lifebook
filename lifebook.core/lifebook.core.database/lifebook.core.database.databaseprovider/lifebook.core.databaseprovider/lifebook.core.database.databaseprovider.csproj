@@ -6,7 +6,7 @@
     <Authors>mkcoder</Authors>
     <Description>databaseprovider for the lifebook app</Description>
     <PackageId>lifebook.core.database.databaseprovider</PackageId>
-    <PackageVersion>1.0.9</PackageVersion>
+    <PackageVersion>1.0.10</PackageVersion>
     <ReleaseVersion>0.2</ReleaseVersion>
     <SynchReleaseVersion>false</SynchReleaseVersion>
     <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
