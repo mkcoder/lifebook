@@ -7,7 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.0/dist/semantic.js"></script>
     <title>@ViewBag.Title</title>
 </head>
-<body>
+<body class="">
     <div class="ui menu">
         <div class="right menu container">
             <div class="ui pointing dropdown link item">
@@ -23,17 +23,20 @@
         </div>
     </div>
     <div class="ui two column doubling stackable grid">
-        <div class="ui vertical menu two wide column">
+        <div class="ui vertical menu four wide column">
             <div class="item">
                 <div class="ui input"><input type="text" placeholder="Search..."></div>
             </div>
             <div class="item">
                 Home
             </div>
+            <a class="item" asp-page="/App">
+                <i class="app store ios layout large icon"></i> App management
+            </a>
             <a class="item">
                 <i class="id card layout large icon"></i> Admin
                 <div class="menu">
-                    @Html.ActionLink("User management portal", "Account", "Home", null, new { @class = "active item" })
+                    @Html.ActionLink("User management portal", "Account", "Home", null, new { @class = "item" })
                     <a class="item" href=@Url.Action("client")>Clients portal</a>
                     <a class="item" href=@Url.Action("resource")>Resource portal</a>
                 </div>
@@ -51,26 +54,26 @@
                 </div>
             </div>
         </div>
-        <div class="column">
+        <div class="twelve wide column">
             @RenderBody()
         </div>
     </div>
 </body>
 
 <script>$(document)
-    .ready(function() {
-      $('.ui.menu .ui.dropdown').dropdown({
-        on: 'hover'
-      });
-      $('.ui.menu a.item')
-        .on('click', function() {
-          $(this)
-            .addClass('active')
-            .siblings()
-            .removeClass('active')
-          ;
+        .ready(function () {
+            $('.ui.menu .ui.dropdown').dropdown({
+                on: 'hover'
+            });
+            $('.ui.menu a.item')
+                .on('click', function () {
+                    $(this)
+                        .addClass('active')
+                        .siblings()
+                        .removeClass('active')
+                        ;
+                })
+                ;
         })
-      ;
-    })
-  ;</script>
+        ;</script>
 </html>

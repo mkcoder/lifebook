@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+
+namespace lifebook.admin.ui.Pages
+{
+    public class AppModel : PageModel
+    {
+        public void OnGet()
+        {
+
+        }
+    }
+}
