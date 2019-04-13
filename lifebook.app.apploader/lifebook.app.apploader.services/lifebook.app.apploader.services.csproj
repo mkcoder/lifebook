@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
+    <PackOnBuild>true</PackOnBuild>
+    <PackageId>lifebook.apploader.internal.services</PackageId>
+    <PackageVersion>1.0.10</PackageVersion>
+    <Authors>mkcoder</Authors>
+    <Description>this is public services to gain access to a read/write model to internal datastore and models</Description>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,6 +24,7 @@
     <PackageReference Include="lifebook.core.database.repository" Version="1.0.11" />
     <PackageReference Include="lifebook.core.logging" Version="1.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.4" />
+    <PackageReference Include="NuGet.Build.Packaging" Version="0.2.0" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Class1.cs" />

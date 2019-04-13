@@ -11,12 +11,17 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="lifebook.core.logging" Version="1.0.10" />
     <PackageReference Include="lifebook.core.database.databaseprovider" Version="1.0.10" />
-    <PackageReference Include="lifebook.core.database.repository" Version="1.0.10" />
+    <PackageReference Include="lifebook.core.database.repository" Version="1.0.11" />
     <PackageReference Include="lifebook.core.services" Version="1.0.10" />
+    <PackageReference Include="lifebook.apploader.internal.services" Version="1.0.10" />
+    <PackageReference Include="Castle.Windsor" Version="5.0.0" />
+    <PackageReference Include="Castle.Facilities.AspNetCore" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
-    <Folder Include="Repository\" />
+    <Folder Include="Controllers\" />
+    <Folder Include="Views\" />
+    <Folder Include="Views\App\" />
+    <Folder Include="Views\Shared\" />
   </ItemGroup>
 </Project>

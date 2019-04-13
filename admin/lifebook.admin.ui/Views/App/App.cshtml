@@ -1,0 +1,35 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model List<lifebook.app.apploader.services.Models.App>
+@{
+}
+
+<div class="ui buttons right floated">
+    <button class="ui green button">
+        <a asp-controller="App" asp-action="Add">Add</a>
+    </button>
+    <button class="ui yellow button">Update</button>
+    <button class="ui red button">Delete</button>
+</div>
+<table class="ui celled table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Icon</th>
+            <th>Name</th>
+            <th>Service Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Icon</td>
+                <td>@item.Name</td>
+                <td>@item.ServiceName</td>
+            </tr>
+        }
+    </tbody>
+</table>

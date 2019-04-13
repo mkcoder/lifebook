@@ -1,0 +1,14 @@
+﻿@{
+}
+@model lifebook.app.apploader.services.Models.App
+
+Add new apps
+
+<form asp-route="/app/register" method="post">
+    <!-- Input and Submit elements -->
+    <input asp-for="Id" hidden/>
+    <input asp-for="Icon" />
+    <input asp-for="Name" />
+    <input asp-for="ServiceName" />
+    <button type="submit">Register</button>
+</form>
