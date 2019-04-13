@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using lifebook.app.apploader.services.Models;
@@ -35,9 +37,17 @@ namespace lifebook.admin.ui.Controllers
 
         [Route("/app/register")]
         [HttpPost]
-        public IActionResult AddNewApp(App app)
+        public IActionResult Add(App app)
         {
-
+            var file = Request.Form.Files[0];
+            var sr = new MemoryStream();
+            var stream = file.OpenReadStream();
+            Image image = Image.FromStream(stream);
+            if (image.Width != 128 && image.Height != 128) return Add();
+            stream.Position = 0;
+            stream.CopyTo(sr);
+            app.Icon = sr.ToArray();
+            appRepository.Add(app);
             return App();
         }
     }

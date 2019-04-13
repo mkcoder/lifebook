@@ -16,6 +16,7 @@
     <PackageReference Include="lifebook.apploader.internal.services" Version="1.0.10" />
     <PackageReference Include="Castle.Windsor" Version="5.0.0" />
     <PackageReference Include="Castle.Facilities.AspNetCore" Version="5.0.0" />
+    <PackageReference Include="System.Drawing.Common" Version="4.5.1" />
   </ItemGroup>
 
   <ItemGroup>

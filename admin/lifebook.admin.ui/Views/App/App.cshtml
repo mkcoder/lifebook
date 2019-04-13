@@ -26,7 +26,7 @@
         {
             <tr>
                 <td>@item.Id</td>
-                <td>@item.Icon</td>
+                <td><img src="data:image;base64,@Convert.ToBase64String(item.Icon)" /></td>
                 <td>@item.Name</td>
                 <td>@item.ServiceName</td>
             </tr>

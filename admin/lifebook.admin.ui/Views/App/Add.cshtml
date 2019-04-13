@@ -4,11 +4,20 @@
 
 Add new apps
 
-<form asp-route="/app/register" method="post">
+<form enctype="multipart/form-data" asp-route="/app/register" method="post" class="ui form">
     <!-- Input and Submit elements -->
     <input asp-for="Id" hidden/>
-    <input asp-for="Icon" />
-    <input asp-for="Name" />
-    <input asp-for="ServiceName" />
-    <button type="submit">Register</button>
+    <div class="field">
+        <label>App icon (MAX: 128x128px)</label>
+        <input type="file" name="Icon" accept="image/*">
+    </div>
+    <div class="field">
+        <label>App name</label>
+        <input asp-for="Name" />
+    </div>
+    <div class="field">
+        <label>Service Name</label>
+        <input asp-for="ServiceName" />
+    </div>
+    <button class="ui green button" type="submit">Register</button>
 </form>
