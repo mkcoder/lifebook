@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  lifebook.app.apploader.webapi:
+    image: ${DOCKER_REGISTRY-}lifebookappapploader
+    build:
+      context: .
+      dockerfile: lifebook.app.apploader.webapi/Dockerfile

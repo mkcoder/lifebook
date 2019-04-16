@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.app.apploader.serv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.app.apploader.webapi", "lifebook.app.apploader.webapi\lifebook.app.apploader.webapi.csproj", "{D86F9940-EB18-4595-8E1E-E43411A3079D}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{1AF8E728-C42B-4237-B766-A47F19887DFE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,5 +21,9 @@ Global
 		{D86F9940-EB18-4595-8E1E-E43411A3079D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D86F9940-EB18-4595-8E1E-E43411A3079D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D86F9940-EB18-4595-8E1E-E43411A3079D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AF8E728-C42B-4237-B766-A47F19887DFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AF8E728-C42B-4237-B766-A47F19887DFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AF8E728-C42B-4237-B766-A47F19887DFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AF8E728-C42B-4237-B766-A47F19887DFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
