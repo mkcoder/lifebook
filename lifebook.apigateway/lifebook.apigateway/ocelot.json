@@ -1,0 +1,11 @@
+﻿{
+  "ReRoutes": [],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:5000.com"
+  },
+  "ServiceDiscoveryProvider": {
+    "Host": "localhost",
+    "Port": 8500,
+    "Type": "Consul"
+  }
+}
