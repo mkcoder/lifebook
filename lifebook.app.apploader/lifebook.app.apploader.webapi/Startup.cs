@@ -1,19 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Castle.Facilities.AspNetCore;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
 using lifebook.app.apploader.webapi.Controllers;
+using lifebook.core.services.middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace lifebook.app.apploader.webapi
 {
@@ -53,7 +48,8 @@ namespace lifebook.app.apploader.webapi
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            app.RegisterService(Configuration);
+            //app.UseHttpsRedirection();
             app.UseMvc();
         }
     }

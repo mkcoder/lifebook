@@ -1,13 +1,13 @@
 {
-  "main.css": "/static/css/main.abd59588.chunk.css",
-  "main.js": "/static/js/main.ec598a9f.chunk.js",
-  "main.js.map": "/static/js/main.ec598a9f.chunk.js.map",
-  "runtime~main.js": "/static/js/runtime~main.fdfcfda2.js",
-  "runtime~main.js.map": "/static/js/runtime~main.fdfcfda2.js.map",
-  "static/js/2.bac0b39d.chunk.js": "/static/js/2.bac0b39d.chunk.js",
-  "static/js/2.bac0b39d.chunk.js.map": "/static/js/2.bac0b39d.chunk.js.map",
-  "index.html": "/index.html",
-  "precache-manifest.39f4804f4ed375ef8efb74f97b6e6e40.js": "/precache-manifest.39f4804f4ed375ef8efb74f97b6e6e40.js",
-  "service-worker.js": "/service-worker.js",
-  "static/css/main.abd59588.chunk.css.map": "/static/css/main.abd59588.chunk.css.map"
+  "main.css": "https://localhost:4501/calendar_ui/static/css/main.abd59588.chunk.css",
+  "main.js": "https://localhost:4501/calendar_ui/static/js/main.beb505d8.chunk.js",
+  "main.js.map": "https://localhost:4501/calendar_ui/static/js/main.beb505d8.chunk.js.map",
+  "runtime~main.js": "https://localhost:4501/calendar_ui/static/js/runtime~main.0825cd7f.js",
+  "runtime~main.js.map": "https://localhost:4501/calendar_ui/static/js/runtime~main.0825cd7f.js.map",
+  "static/js/2.bac0b39d.chunk.js": "https://localhost:4501/calendar_ui/static/js/2.bac0b39d.chunk.js",
+  "static/js/2.bac0b39d.chunk.js.map": "https://localhost:4501/calendar_ui/static/js/2.bac0b39d.chunk.js.map",
+  "index.html": "https://localhost:4501/calendar_ui/index.html",
+  "precache-manifest.cef08afec4e4c8306a87174885bad5a1.js": "https://localhost:4501/calendar_ui/precache-manifest.cef08afec4e4c8306a87174885bad5a1.js",
+  "service-worker.js": "https://localhost:4501/calendar_ui/service-worker.js",
+  "static/css/main.abd59588.chunk.css.map": "https://localhost:4501/calendar_ui/static/css/main.abd59588.chunk.css.map"
 }

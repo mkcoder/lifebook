@@ -7,7 +7,7 @@
     <Description>core services for all projects</Description>
     <PackageId>lifebook.core.services</PackageId>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
-    <PackageVersion>1.0.10</PackageVersion>
+    <PackageVersion>1.0.11</PackageVersion>
   </PropertyGroup>
   
 
@@ -17,7 +17,7 @@
     <Folder Include="tools\" />
     <Folder Include="tools\converter\" />
     <Folder Include="models\" />
-    <Folder Include="middlesware\" />
+    <Folder Include="middleware\" />
     <Folder Include="interfaces\" />
     <Folder Include="ioc\" />
     <Folder Include="tools\extensions\" />

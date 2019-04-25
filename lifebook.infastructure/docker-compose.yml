@@ -83,7 +83,7 @@ services:
    image: elastichq/elasticsearch-hq
    container_name: elasticsearch-hq
    ports:
-    - "5000:5000"
+    - "7000:5000"
    depends_on:
     - elasticsearch
    networks:

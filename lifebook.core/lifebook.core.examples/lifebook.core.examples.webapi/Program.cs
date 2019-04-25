@@ -18,13 +18,13 @@ namespace lifebook.core.examples.webapi
             new WebHostBuilder()
                 .UseEnvironment("Development")
                 .UseKestrel()
-                .UseUrls("https://0.0.0.0:5002")
                 //.ConfigureKestrel((ctx, opt) => {
                 //    opt.Listen(IPAddress.Loopback, 5001, listOpt =>
                 //    {
                 //        listOpt.UseHttps();
                 //    });
                 //})
+                .UseUrls("http://localhost:6001")
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<Startup>()
                 .Build()

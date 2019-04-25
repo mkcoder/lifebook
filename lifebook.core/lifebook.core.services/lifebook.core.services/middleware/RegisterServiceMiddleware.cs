@@ -7,7 +7,7 @@ using lifebook.core.services.discovery;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 
-namespace lifebook.core.services.middlesware
+namespace lifebook.core.services.middleware
 {
     public class RegisterServiceMiddleware
     {

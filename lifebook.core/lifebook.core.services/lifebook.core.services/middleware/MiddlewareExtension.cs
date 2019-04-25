@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 
-namespace lifebook.core.services.middlesware
+namespace lifebook.core.services.middleware
 {
     public static class MiddlewareExtension
     {

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using lifebook.core.services.middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -10,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Ocelot.DependencyInjection;
+using Ocelot.Middleware;
 using Ocelot.Provider.Consul;
 
 namespace lifebook.apigateway
@@ -33,6 +35,19 @@ namespace lifebook.apigateway
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll",
+                    builder =>
+                    {
+                        builder
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials();
+                    });
+            });
+
             services.AddOcelot()
                     .AddConsul();
 
@@ -44,6 +59,11 @@ namespace lifebook.apigateway
         {
             if (env.IsDevelopment())
             {
+                app.UseCors(builder => builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
                 app.UseDeveloperExceptionPage();
             }
             else
@@ -53,11 +73,14 @@ namespace lifebook.apigateway
                 app.UseHsts();
             }
 
+            app.RegisterService(Configuration);
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
             app.UseMvc();
+
+            app.UseOcelot().Wait();
         }
     }
 }

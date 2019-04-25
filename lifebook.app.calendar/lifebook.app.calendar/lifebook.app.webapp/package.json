@@ -1,5 +1,6 @@
 {
   "name": "lifebook.app.calendar",
+  "homepage": "http:https://localhost:4501/calendar_ui/",
   "version": "0.0.1",
   "private": true,
   "devDependencies": {
@@ -15,7 +16,11 @@
   },
   "dependencies": {
     "autoprefixer-stylus": "0.14.0",
+    "consul": "^0.34.1",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
     "firebase": "^5.7.0",
+    "morgan": "^1.9.1",
     "prop-types": "^15.6.0",
     "re-base": "4.0.0",
     "react": "^16.6.3",
@@ -23,9 +28,7 @@
     "react-router-dom": "^4.2.2",
     "react-transition-group": "^2.2.1",
     "serve": "^10.1.1",
-    "stylus": "0.54.5",
-    "express": "^4.16.4",
-    "morgan": "^1.9.1"
+    "stylus": "0.54.5"
   },
   "scripts": {
     "dev": "react-scripts start",

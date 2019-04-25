@@ -11,4 +11,4 @@ class CalendarCustomHTMLElement extends HTMLElement {
 }
 
 window.customElements.define("app-calendar", CalendarCustomHTMLElement);
-render(<App />, document.querySelector("#app"));
+render(<App />, document.querySelector("#calendar"));

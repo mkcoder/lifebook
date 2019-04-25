@@ -23,15 +23,7 @@ namespace lifebook.apigateway
                        .AddJsonFile("ocelot.json")
                        .AddEnvironmentVariables();
                })
-               .ConfigureLogging((hostingContext, logging) =>
-               {
-                   //add your logging
-               })
                .UseIIS()
-               .Configure(app =>
-               {
-                   app.UseOcelot().Wait();
-               })
                .UseStartup<Startup>()
                .Build()
                .Run();

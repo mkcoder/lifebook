@@ -1,11 +1,27 @@
 ﻿{
-  "ReRoutes": [],
+  "ReRoutes": [
+    //{
+    //  "DownstreamPathTemplate": "/about",
+    //  "DownstreamScheme": "http",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "localhost",
+    //      "Port": 3331
+    //    }
+    //  ],
+    //  "UpstreamPathTemplate": "/calendarui"
+    //}
+  ],
+  "Aggregates": [],
   "GlobalConfiguration": {
-    "BaseUrl": "https://localhost:5000.com"
-  },
-  "ServiceDiscoveryProvider": {
-    "Host": "localhost",
-    "Port": 8500,
-    "Type": "Consul"
+    "BaseUrl": "https://localhost:4501",
+    "DownstreamScheme": "http",
+    "ServiceDiscoveryProvider": {
+      "Host": "localhost",
+      "Port": 8500,
+      "Type": "Consul",
+      "Token": null,
+      "ConfigurationKey": null
+    }
   }
 }
