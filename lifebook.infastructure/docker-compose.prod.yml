@@ -10,6 +10,8 @@ services:
       MSSQL_PID: Express
     ports:
       - '1433:1433'
+    volumes:
+      - ./sqlserver:/var/opt/mssql
 
   postgres:
     container_name: postgres_container
@@ -20,6 +22,8 @@ services:
       PGDATA: /data/postgres
     ports:
       - "5432:5432"
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
     networks:
       - development
     restart: unless-stopped
@@ -60,6 +64,8 @@ services:
     - discovery.type=single-node
    ports:
     - "9200:9200"
+   volumes:
+    - ./elk/elasticsearch:/usr/share/elasticsearch/data    
    networks:
     - development
 

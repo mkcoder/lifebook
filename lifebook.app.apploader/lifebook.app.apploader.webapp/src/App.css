@@ -31,3 +31,25 @@
     transform: rotate(360deg);
   }
 }
+
+
+.apps {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.app {
+  display: block;
+}
+
+.app-icon {
+  display: block;
+}
+
+.app-name {
+  display: block;
+  text-transform: capitalize;
+  margin: 0 auto;
+  text-align: center;
+}

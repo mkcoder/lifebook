@@ -87,13 +87,9 @@ class App extends Component {
         {
           this.state.apps.map(a => {
             return (
-              <div>
-                <ul>
-                  <li>{a.id}</li>
-                  <li>{a.name}</li>
-                  <li>{a.serviceName}</li>
-                  <li onClick={() => this.loadService(a.serviceName, a.name)}><img src={"data:image/png;base64,"+a.icon} alt=""/></li>
-                </ul>
+              <div onClick={() => this.loadService(a.serviceName, a.name)} class="app">
+                <img class="app-icon" src={"data:image/png;base64,"+a.icon} alt=""/>
+                <span class="app-name">{a.name}</span>
               </div>
             );
           })

@@ -1,6 +1,15 @@
 import React from 'react'; 
 
 export default class Calendar extends React.Component {
+    constructor() {
+        super();
+
+        this.state = {
+            month: 0,
+            year: 0
+        }
+    }
+
     GetMonthNameFromInt(monthInt) {
         const monthNames = ["January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December"
@@ -8,6 +17,7 @@ export default class Calendar extends React.Component {
         
         return monthNames[monthInt]; 
     }
+
     RenderDaysOfTheWeekHeader() {
         var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         var daysRender = [];
@@ -19,58 +29,10 @@ export default class Calendar extends React.Component {
         }
         return daysRender;
     }
-    RenderWeeksOfTheWeekHeader(start, end, selectedDate) {
-        // refactoring
-        var calendarDayCount = 1;
-        let firstWeekOffset = start.getDay();
-        let weeks = [];
-        let week = [];
-        let selected = false;
-        for(var i = 1; calendarDayCount <= end.getDate(); i++)
-        {
-            if(i < firstWeekOffset+1)
-            {                
-                week.push(<td key={i}></td>);
-            }
-            else
-            {
-                var td = <td key={i}>{calendarDayCount}</td>;
-                if(calendarDayCount === selectedDate.getDate())
-                {                   
-                    selected = true; 
-                    td = <td className="selected-date" key={i}>{calendarDayCount}</td>;
-                }                
-                week.push(td);
-                calendarDayCount++;
-            }
 
-            if(i%7===0) // end of the week
-            {
-                var tr = <tr key="tr">{week}</tr>;
-                if(selected)
-                {
-                    tr = <tr className="selected-week" key={"tr"-i}>{week}</tr>;
-                    selected = false;
-                }
-                weeks.push(tr);
-                week = [];
-            }
-        }
-        for(let i = 0; i < 6-end.getDay(); i++) {
-            week.push(<td key={i}></td>);
-        }
-
-        weeks.push((
-            <tr key="tr">{week}</tr>
-        ));
-        return weeks;
-    }
-
-    RenderCalendar(date) {
-        var firstDayOfMonth = new Date(date.getFullYear(), date.getMonth());
-        var lastDayOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-        console.log(firstDayOfMonth, lastDayOfMonth);
-        var days = this.getDaysOfTheCalendar();
+    RenderCalendar(date) {        
+        var firstDayOfMonth = new Date(date.getFullYear()+this.state.year, date.getMonth()+this.state.month);
+        var days = this.getDaysOfTheCalendar(new Date(new Date().getFullYear()+this.state.year, new Date().getMonth()+this.state.month));
         var trs = [];
         var tds = [];
         for(var i = 0; i < days.length; i++) {
@@ -91,11 +53,14 @@ export default class Calendar extends React.Component {
             <tr>{tds}</tr>
         ));
         tds = [];
-        console.log(tds);
-        console.log(trs);
+
         return (
             <table>
-                <caption>{this.GetMonthNameFromInt(firstDayOfMonth.getMonth())} - {date.getFullYear()}</caption>
+                <caption>
+                <button onClick={() => this.removeMonth()}>-</button>
+                    {this.GetMonthNameFromInt(firstDayOfMonth.getMonth())} - {firstDayOfMonth.getFullYear()}
+                    <button onClick={() => this.addMonth()}>+</button> 
+                </caption>
                 <thead>
                     <tr>
                         {this.RenderDaysOfTheWeekHeader()}                        
@@ -107,7 +72,8 @@ export default class Calendar extends React.Component {
             </table>
         ); 
     }
-    getDaysOfTheCalendar() {
+
+    getDaysOfTheCalendar(date) {
         var range = function (start, edge, step) {
             // If only 1 number passed make it the edge and 0 the start
             if (arguments.length === 1) {
@@ -130,7 +96,7 @@ export default class Calendar extends React.Component {
           const startOfWeek = 0; // SUNDAY
           const endOfWeek = 6; // SATURDAY
           const offset = 0;
-          const date = new Date(new Date().getFullYear(), new Date().getMonth());
+          date = date || new Date(new Date().getFullYear(), new Date().getMonth());
           const endOfMonth = new Date(date.getFullYear(), date.getMonth()+1, 0);
           var bDays = []
           if(date.getDay()-startOfWeek!==0)
@@ -143,10 +109,31 @@ export default class Calendar extends React.Component {
           const days = [...bDays, ...range(1, endOfMonth.getDate()+1), ...range(1, endingLastFewDays.getDate()+1)]
           return days;
     }
+
+    addMonth () {
+        var thisMonth = new Date().getMonth();
+        let month = this.state.month;
+        let year = 0;
+        if(thisMonth+1 > 12)
+        {
+            month = 0;
+            year = 1;
+        }
+        else
+        {
+            month++;            
+        }
+        this.setState({month: month, year: year});
+    }
+
+    removeMonth() {
+        let month = this.state.month;
+        this.setState({month: --month});
+    }
+
     render() {
-        console.log(this.getDaysOfTheCalendar())
         return (
-            <div className="calendar">        
+            <div className="calendar">                       
                 {this.RenderCalendar(this.props.date)}
             </div>
         );
