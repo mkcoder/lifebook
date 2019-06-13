@@ -22,7 +22,7 @@ steps:
         # dotnet restore $line --packages $(Build.SourcesDirectory)/lifebook-nuget-feed/** 
         # -s https://api.nuget.org/v3/index.json
         dotnet restore -s $(Build.SourcesDirectory)/lifebook-nuget-feed
-        dotnet build $line -c $(buildConfiguration)
+        dotnet build $line --no-restore -c $(buildConfiguration)
     done
   displayName: 'dotnet build $(buildConfiguration)'
   continueOnError: true
