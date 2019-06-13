@@ -21,7 +21,7 @@ steps:
         echo $(Build.SourcesDirectory)
         # dotnet restore $line --packages $(Build.SourcesDirectory)/lifebook-nuget-feed/** 
         # -s https://api.nuget.org/v3/index.json
-        dotnet restore -s $(Build.SourcesDirectory)/lifebook-nuget-feed -s https://api.nuget.org/v3/index.json
+        dotnet restore -s $(Build.SourcesDirectory)/lifebook-nuget-feed
         dotnet build $line -c $(buildConfiguration)
     done
   displayName: 'dotnet build $(buildConfiguration)'
