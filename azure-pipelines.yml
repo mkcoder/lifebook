@@ -17,11 +17,13 @@ steps:
 - bash: >
     find . -name '*.csproj' -print0 | 
     while IFS= read -r -d $'\0' line; do
-        echo "Building directory $line"; 
+        echo "Building directory $line";
+        echo "Building directory parent $(dirname "$dir")"; 
         echo $(Build.SourcesDirectory)
-        dotnet restore $line --packages $(Build.SourcesDirectory)/lifebook-nuget-feed/** 
+        # dotnet restore $line --packages $(Build.SourcesDirectory)/lifebook-nuget-feed/** 
         # -s https://api.nuget.org/v3/index.json
-        dotnet build $line -c $(buildConfiguration)
+        # dotnet restore -s $(Build.SourcesDirectory)/lifebook-nuget-feed
+        dotnet build $line --source $(Build.SourcesDirectory)/lifebook-nuget-feed -c $(buildConfiguration)
     done
   displayName: 'dotnet build $(buildConfiguration)'
   continueOnError: true
