@@ -48,6 +48,9 @@ class App extends Component {
       
       return resp.text();
     }).then(data => {
+      var node = <div class="application">
+        
+      </div>
       document.getElementById("app2").innerHTML = data;
       // eslint-disable-next-line
       var regex = /<script.+?<\/script>/g;
