@@ -8,9 +8,9 @@ using lifebook.core.eventstore.services;
 
 namespace lifebook.core.eventstore.ioc
 {
-    public class EventStoreClientInstaller : IComponentsInstaller
+    public class EventStoreClientInstaller : IWindsorInstaller
     {
-        public void SetUp(IWindsorContainer container, IConfigurationStore store)
+        public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.AddFacility<TypedFactoryFacility>();
 
