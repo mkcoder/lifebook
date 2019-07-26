@@ -15,9 +15,10 @@ namespace lifebook.core.eventstore.ioc
             container.AddFacility<TypedFactoryFacility>();
 
             container.Register(
-                Component.For<AbstractEventStoreClient>().ImplementedBy<EventStoreClient>().LifestyleTransient(),
+                Component.For<AbstractEventStoreClient>().ImplementedBy<FakeEventStoreClient>().LifestyleTransient(),
                 Component.For<IEventStoreClientFactory>().AsFactory(),
-                Component.For<IEventWriter>().ImplementedBy<EventWriter>().LifestyleTransient()
+                Component.For<IEventWriter>().ImplementedBy<EventWriter>().LifestyleTransient(),
+                Component.For<IEventReader>().ImplementedBy<EventReader>().LifestyleTransient()
             );
         }
     }

@@ -13,18 +13,30 @@ namespace Tests
         private IEventStoreClient _sut;
         WindsorContainer container = new WindsorContainer();
 
-        [SetUp]
-        public void Setup()
+        public EventStoreClientTest()
         {
             container.Install(FromAssembly.InThisApplication(typeof(EventStoreClientInstaller).Assembly));
             _sut = container.Resolve<AbstractEventStoreClient>();
-            var ew = container.Resolve<IEventWriter>();
         }
 
         [Test]
-        public void Test()
+        public void EventStoreClient_Is_IEvenStoreClient()
         {
+            Assert.IsInstanceOf<IEventStoreClient>(_sut);
+            Assert.IsInstanceOf<FakeEventStoreClient>(_sut);
+        }
 
+        [Test]
+        public void EventStoreClient_CanBeCretedFromIOC()
+        {
+            Assert.IsNotNull(_sut);
+        }
+
+        [Test]
+        public void EventStoreClient_Can_Connect()
+        {
+            _sut.Connect();
+            Assert.IsTrue(_sut.IsConnected());
         }
     }
 }
