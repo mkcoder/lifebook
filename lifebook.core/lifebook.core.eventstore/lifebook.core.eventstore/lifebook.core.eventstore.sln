@@ -1,0 +1,29 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.eventstore", "lifebook.core.eventstore\lifebook.core.eventstore.csproj", "{8592F2F0-D9D0-4F2E-A328-6D2D4B96FEDF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.eventstore.tests", "lifebook.core.eventstore.tests\lifebook.core.eventstore.tests.csproj", "{D9C00904-2153-4F85-B552-036A14878BDC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.eventstore.domain", "lifebook.core.eventstore.domain\lifebook.core.eventstore.domain.csproj", "{E6677735-B5F8-4036-BC64-BDCCF7B6B902}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8592F2F0-D9D0-4F2E-A328-6D2D4B96FEDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8592F2F0-D9D0-4F2E-A328-6D2D4B96FEDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8592F2F0-D9D0-4F2E-A328-6D2D4B96FEDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8592F2F0-D9D0-4F2E-A328-6D2D4B96FEDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9C00904-2153-4F85-B552-036A14878BDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9C00904-2153-4F85-B552-036A14878BDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9C00904-2153-4F85-B552-036A14878BDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9C00904-2153-4F85-B552-036A14878BDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6677735-B5F8-4036-BC64-BDCCF7B6B902}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6677735-B5F8-4036-BC64-BDCCF7B6B902}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6677735-B5F8-4036-BC64-BDCCF7B6B902}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6677735-B5F8-4036-BC64-BDCCF7B6B902}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

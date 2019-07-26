@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="services\" />
+    <Folder Include="ioc\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\lifebook.core.eventstore.domain\lifebook.core.eventstore.domain.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Castle.Windsor" Version="5.0.0" />
+  </ItemGroup>
+</Project>
