@@ -4,19 +4,20 @@ using Castle.Windsor.Installer;
 using lifebook.core.eventstore.domain.interfaces;
 using lifebook.core.eventstore.ioc;
 using lifebook.core.eventstore.services;
+using lifebook.core.eventstore.testing.framework;
 using NSubstitute;
 using NUnit.Framework;
+using Tests;
 
 namespace lifebook.core.eventstore.tests.EventStoreClientTest
 {
-    public sealed class EventWriterTests
-    {
-        WindsorContainer container = new WindsorContainer();
-        IEventWriter eventWriter;
-        IEventReader eventReader;
+    public sealed class EventWriterTests : BaseServiceTests<EventStoreClientTestIntaller>
+    {        
         private static Guid aggregateId = Guid.Parse("0e72cae2-a160-41aa-b168-97b420977f02");
-        StreamCategorySpecifier streamCategory = new StreamCategorySpecifier("eventwriter", "test", "eventwriter", aggregateId);
-        TestEvent testEvent = new TestEvent()
+        private IEventWriter eventWriter;
+        private IEventReader eventReader;
+        private StreamCategorySpecifier streamCategory = new StreamCategorySpecifier("eventwriter", "test", "eventwriter", aggregateId);
+        private TestEvent testEvent = new TestEvent()
         {
             AggregateId = aggregateId,
             TestProperty = "Abc"
@@ -24,7 +25,6 @@ namespace lifebook.core.eventstore.tests.EventStoreClientTest
 
         public EventWriterTests()
         {
-            container.Install(FromAssembly.InThisApplication(typeof(EventStoreClientInstaller).Assembly));
             var eventStoreClient = Substitute.For<FakeEventStoreClient>();
             eventWriter = new EventWriter(eventStoreClient);
             eventReader = new EventReader(eventStoreClient);

@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using lifebook.core.eventstore.domain.interfaces;
 
 namespace lifebook.core.eventstore.services
 {
     public class FakeEventStoreClient : AbstractEventStoreClient
     {
-        private ConcurrentDictionary<string, List<IEvent>> EventStore = new ConcurrentDictionary<string, List<IEvent>>();
-        private bool _connected;
+        private static ConcurrentDictionary<string, List<IEvent>> EventStore = new ConcurrentDictionary<string, List<IEvent>>();
 
         internal override void WriteEvent(StreamCategorySpecifier specifier, IEvent @e)
         {
@@ -34,6 +34,9 @@ namespace lifebook.core.eventstore.services
 
         public override void Connect() => _connected = true;
 
-        public override bool IsConnected() => _connected;
+        public override async Task ConnectAsync()
+        {            
+            await Task.Run(() => _connected = true);
+        }
     }
 }

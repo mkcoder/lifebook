@@ -1,22 +1,18 @@
-using Castle.Windsor;
-using Castle.Windsor.Installer;
 using lifebook.core.eventstore.domain.interfaces;
-using lifebook.core.eventstore.ioc;
 using lifebook.core.eventstore.services;
-using NSubstitute;
+using lifebook.core.eventstore.testing.framework;
+using lifebook.core.eventstore.tests.EventStoreClientTest;
 using NUnit.Framework;
 
 namespace Tests
 {
-    public class EventStoreClientTest
+    public class EventStoreClientTest : BaseServiceTests<EventStoreClientTestIntaller>
     {
         private IEventStoreClient _sut;
-        WindsorContainer container = new WindsorContainer();
 
         public EventStoreClientTest()
         {
-            container.Install(FromAssembly.InThisApplication(typeof(EventStoreClientInstaller).Assembly));
-            _sut = container.Resolve<AbstractEventStoreClient>();
+            _sut = container.Resolve<IEventStoreClientFactory>().GetFakeEventStoreClient();
         }
 
         [Test]
@@ -35,8 +31,8 @@ namespace Tests
         [Test]
         public void EventStoreClient_Can_Connect()
         {
-            _sut.Connect();
-            Assert.IsTrue(_sut.IsConnected());
+            _sut.ConnectAsync();
+            Assert.IsTrue(_sut.IsConnected);
         }
     }
 }
