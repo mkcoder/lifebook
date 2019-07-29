@@ -3,10 +3,13 @@ using lifebook.core.eventstore.domain.interfaces;
 
 namespace lifebook.core.eventstore.tests.EventStoreClientTest
 {
-    internal class TestEvent : IEvent
+    internal class TestEvent : Event
     {
-        public Guid AggregateId { get; set; }
-        public Guid EventId { get; set; } = Guid.NewGuid();
+        public TestEvent(Guid aggregateId)
+        {
+            AggregateId = aggregateId;
+        }
+
         public string TestProperty { get; set; }
     }
 }

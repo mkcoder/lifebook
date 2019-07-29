@@ -17,9 +17,8 @@ namespace lifebook.core.eventstore.tests.EventStoreClientTest
         private IEventWriter eventWriter;
         private IEventReader eventReader;
         private StreamCategorySpecifier streamCategory = new StreamCategorySpecifier("eventwriter", "test", "eventwriter", aggregateId);
-        private TestEvent testEvent = new TestEvent()
+        private TestEvent testEvent = new TestEvent(aggregateId)
         {
-            AggregateId = aggregateId,
             TestProperty = "Abc"
         };
 

@@ -2,7 +2,7 @@
 
 namespace lifebook.core.eventstore.domain.interfaces
 {
-    public class StreamCategorySpecifier
+    public sealed class StreamCategorySpecifier
     {
         public string Service { get; }
         public string Instance { get; }

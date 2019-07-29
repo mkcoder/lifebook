@@ -8,6 +8,7 @@
     <Folder Include="services\" />
     <Folder Include="ioc\" />
     <Folder Include="interfaces\" />
+    <Folder Include="extensions\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\lifebook.core.eventstore.domain\lifebook.core.eventstore.domain.csproj" />

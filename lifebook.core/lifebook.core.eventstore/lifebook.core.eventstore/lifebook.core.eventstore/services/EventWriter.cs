@@ -12,7 +12,7 @@ namespace lifebook.core.eventstore.services
             _eventStoreClient = abstractEventStoreClient;
         }
 
-        public void WriteEvent(StreamCategorySpecifier streamCategorySpecifier, IEvent @e)
+        public void WriteEvent(StreamCategorySpecifier streamCategorySpecifier, Event @e)
         {
             _eventStoreClient.WriteEvent(streamCategorySpecifier, e);
         }

@@ -15,8 +15,8 @@ namespace lifebook.core.eventstore.services
         public abstract Task ConnectAsync();
 
         // Internal 
-        internal abstract List<IEvent> ReadEvent(StreamCategorySpecifier specifier);
+        internal abstract List<Event> ReadEvent(StreamCategorySpecifier specifier);
 
-        internal abstract void WriteEvent(StreamCategorySpecifier specifier, IEvent @e);
+        internal abstract void WriteEvent(StreamCategorySpecifier specifier, Event @e);
     }
 }

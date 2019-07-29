@@ -14,16 +14,16 @@ namespace lifebook.core.eventstore.services
             _eventStoreClient = eventStoreClient;
         }
 
-        public IEvent GetLastEventWrittenToStream(StreamCategorySpecifier streamCategory)
+        public Event GetLastEventWrittenToStream(StreamCategorySpecifier streamCategory)
             => _eventStoreClient.ReadEvent(streamCategory).Last();
 
-        public IEvent GetLastEventWrittenToStreamForAggregate(StreamCategorySpecifier streamCategory)
+        public Event GetLastEventWrittenToStreamForAggregate(StreamCategorySpecifier streamCategory)
             => ReadAllEventsFromStreamCategoryForAggregate(streamCategory).Last();
 
-        public List<IEvent> ReadAllEventsFromStreamCategory(StreamCategorySpecifier categorySpecifier)
+        public List<Event> ReadAllEventsFromStreamCategory(StreamCategorySpecifier categorySpecifier)
             => _eventStoreClient.ReadEvent(categorySpecifier);
 
-        public List<IEvent> ReadAllEventsFromStreamCategoryForAggregate(StreamCategorySpecifier categorySpecifier)
+        public List<Event> ReadAllEventsFromStreamCategoryForAggregate(StreamCategorySpecifier categorySpecifier)
             => _eventStoreClient.ReadEvent(categorySpecifier)
                                     .Where(e => e.AggregateId == categorySpecifier.AggregateId)
                                     .ToList();

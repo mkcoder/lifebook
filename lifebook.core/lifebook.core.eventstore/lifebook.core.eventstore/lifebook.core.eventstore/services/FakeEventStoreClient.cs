@@ -8,18 +8,18 @@ namespace lifebook.core.eventstore.services
 {
     public class FakeEventStoreClient : AbstractEventStoreClient
     {
-        private static ConcurrentDictionary<string, List<IEvent>> EventStore = new ConcurrentDictionary<string, List<IEvent>>();
+        private static ConcurrentDictionary<string, List<Event>> EventStore = new ConcurrentDictionary<string, List<Event>>();
 
-        internal override void WriteEvent(StreamCategorySpecifier specifier, IEvent @e)
+        internal override void WriteEvent(StreamCategorySpecifier specifier, Event @e)
         {
             lock (EventStore)
             {
-                if (!EventStore.ContainsKey(specifier.GetCategoryStream())) EventStore[specifier.GetCategoryStream()] = new List<IEvent>();
+                if (!EventStore.ContainsKey(specifier.GetCategoryStream())) EventStore[specifier.GetCategoryStream()] = new List<Event>();
                 EventStore[specifier.GetCategoryStream()].Add(@e);
             }
         }
 
-        internal override List<IEvent> ReadEvent(StreamCategorySpecifier specifier)
+        internal override List<Event> ReadEvent(StreamCategorySpecifier specifier)
         {
             lock (EventStore)
             {
