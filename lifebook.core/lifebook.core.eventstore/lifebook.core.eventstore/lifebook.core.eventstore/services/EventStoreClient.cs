@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using EventStore.ClientAPI;
@@ -34,21 +35,20 @@ namespace lifebook.core.eventstore.services
         internal override List<Event> ReadEvent(StreamCategorySpecifier specifier)
         {
             var slice = eventStoreConnection.ReadStreamEventsForwardAsync(specifier.GetCategoryStream(), 0, int.MaxValue, true);
-            
             return null;
         }
 
-        internal async Task<List<Event>> ReadEventAsync(StreamCategorySpecifier specifier)
+        internal async Task<List<AggregateEvent>> ReadEventAsync(StreamCategorySpecifier specifier)
         {
+
             var slice = await eventStoreConnection.ReadStreamEventsForwardAsync(specifier.GetCategoryStream(), 0, int.MaxValue, true);
-            
+            slice.Events.Select(e => AggregateEvent.Create(e.Event.EventType, e.Event.EventNumber, e.Event.Created, e.Event.EventId, e.Event.Data, e.Event.Metadata));
             return null;
         }
 
         internal override void WriteEvent(StreamCategorySpecifier specifier, Event e)
         {            
-             eventStoreConnection.AppendToStreamAsync(specifier.GetCategoryStream(), e.Version, new EventData(e.EventId, "", true, e.EventDataToByteArray(), e.EventMetadataToByteArray()));
-            throw new NotImplementedException();
+            eventStoreConnection.AppendToStreamAsync(specifier.GetCategoryStream(), e.Version, new EventData(e.EventId, e.GetType().AssemblyQualifiedName, true, e.EventDataToByteArray(), e.EventMetadataToByteArray()));
         }
     }
 }
