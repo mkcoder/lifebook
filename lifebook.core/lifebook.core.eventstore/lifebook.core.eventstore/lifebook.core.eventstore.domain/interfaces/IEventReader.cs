@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace lifebook.core.eventstore.domain.interfaces
 {
     public interface IEventReader
     {
-        List<Event> ReadAllEventsFromStreamCategory(StreamCategorySpecifier categorySpecifier);
-        List<Event> ReadAllEventsFromStreamCategoryForAggregate(StreamCategorySpecifier categorySpecifier);
-        Event GetLastEventWrittenToStream(StreamCategorySpecifier streamCategory);
-        Event GetLastEventWrittenToStreamForAggregate(StreamCategorySpecifier streamCategory);
+        Task<List<Event>> ReadAllEventsFromStreamCategoryAsync(StreamCategorySpecifier categorySpecifier);
+        Task<List<Event>> ReadAllEventsFromStreamCategoryForAggregateAsync(StreamCategorySpecifier categorySpecifier);
+        Task<Event> GetLastEventWrittenToStreamAsync(StreamCategorySpecifier streamCategory);
+        Task<Event> GetLastEventWrittenToStreamForAggregateAsync(StreamCategorySpecifier streamCategory);
     }
 }

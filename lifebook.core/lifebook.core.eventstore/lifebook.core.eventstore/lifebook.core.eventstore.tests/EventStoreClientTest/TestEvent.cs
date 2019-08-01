@@ -7,7 +7,7 @@ namespace lifebook.core.eventstore.tests.EventStoreClientTest
     {
         public TestEvent(Guid aggregateId)
         {
-            AggregateId = aggregateId;
+            EntityId = aggregateId;
         }
 
         public string TestProperty { get; set; }

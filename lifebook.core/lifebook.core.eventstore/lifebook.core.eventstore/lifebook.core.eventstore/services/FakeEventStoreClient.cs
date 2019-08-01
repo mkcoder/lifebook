@@ -10,6 +10,24 @@ namespace lifebook.core.eventstore.services
     {
         private static ConcurrentDictionary<string, List<Event>> EventStore = new ConcurrentDictionary<string, List<Event>>();
 
+        public override void Connect() => _connected = true;
+
+        public override async Task ConnectAsync()
+        {
+            await Task.Run(() => _connected = true);
+        }
+
+        public override void Close()
+        {
+            _connected = false;
+        }
+
+        internal override async Task WriteEventAsync(StreamCategorySpecifier specifier, Event e)
+        {
+            await Task.Run(() => WriteEvent(specifier, e));
+        }
+
+        [Obsolete]
         internal override void WriteEvent(StreamCategorySpecifier specifier, Event @e)
         {
             lock (EventStore)
@@ -32,11 +50,9 @@ namespace lifebook.core.eventstore.services
             throw new ArgumentNullException($"Could not find any stream for this {specifier}.");
         }
 
-        public override void Connect() => _connected = true;
-
-        public override async Task ConnectAsync()
-        {            
-            await Task.Run(() => _connected = true);
+        internal override Task<List<AggregateEvent>> ReadEventsAsync(StreamCategorySpecifier specifier)
+        {
+            throw new NotImplementedException();
         }
     }
 }

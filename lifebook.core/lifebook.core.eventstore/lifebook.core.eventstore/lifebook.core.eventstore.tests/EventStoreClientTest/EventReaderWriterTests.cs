@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
 using lifebook.core.eventstore.domain.interfaces;
@@ -30,12 +31,12 @@ namespace lifebook.core.eventstore.tests.EventStoreClientTest
         }
 
         [Test]
-        public void WriteAnEventToStreamAndReadWorks()
+        public async Task WriteAnEventToStreamAndReadWorks()
         {
             eventWriter.WriteEvent(streamCategory, testEvent);
             
-            var e = (TestEvent)eventReader.GetLastEventWrittenToStream(streamCategory);
-            Assert.AreEqual(testEvent.AggregateId, e.AggregateId);
+            var e = (TestEvent)await eventReader.GetLastEventWrittenToStreamAsync(streamCategory);
+            Assert.AreEqual(testEvent.EntityId, e.EntityId);
             Assert.AreEqual(testEvent.TestProperty, e.TestProperty);
         }
     }

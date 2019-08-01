@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using lifebook.core.eventstore.domain.interfaces;
 
 namespace lifebook.core.eventstore.services
@@ -14,18 +15,75 @@ namespace lifebook.core.eventstore.services
             _eventStoreClient = eventStoreClient;
         }
 
-        public Event GetLastEventWrittenToStream(StreamCategorySpecifier streamCategory)
-            => _eventStoreClient.ReadEvent(streamCategory).Last();
+        public async Task<Event> GetLastEventWrittenToStreamAsync(StreamCategorySpecifier streamCategory)
+        {
+            try
+            {
+                await _eventStoreClient.ConnectAsync();
+                return (await _eventStoreClient.ReadEventsAsync(streamCategory)).Last();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                _eventStoreClient.Close();
+            }
+        }
 
-        public Event GetLastEventWrittenToStreamForAggregate(StreamCategorySpecifier streamCategory)
-            => ReadAllEventsFromStreamCategoryForAggregate(streamCategory).Last();
+        public async Task<Event> GetLastEventWrittenToStreamForAggregateAsync(StreamCategorySpecifier streamCategory)
+        {
+            try
+            {
+                await _eventStoreClient.ConnectAsync();
+                return (await ReadAllEventsFromStreamCategoryForAggregateAsync(streamCategory)).Last();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                _eventStoreClient.Close();
+            }
+        }
 
-        public List<Event> ReadAllEventsFromStreamCategory(StreamCategorySpecifier categorySpecifier)
-            => _eventStoreClient.ReadEvent(categorySpecifier);
+        public async Task<List<Event>> ReadAllEventsFromStreamCategoryAsync(StreamCategorySpecifier categorySpecifier)            
+        {
+            try
+            {
+                await _eventStoreClient.ConnectAsync();
+                var result = await _eventStoreClient.ReadEventsAsync(categorySpecifier);
+                return result.ToList<Event>();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                _eventStoreClient.Close();
+            }
+        }
 
-        public List<Event> ReadAllEventsFromStreamCategoryForAggregate(StreamCategorySpecifier categorySpecifier)
-            => _eventStoreClient.ReadEvent(categorySpecifier)
-                                    .Where(e => e.AggregateId == categorySpecifier.AggregateId)
-                                    .ToList();
+        public async Task<List<Event>> ReadAllEventsFromStreamCategoryForAggregateAsync(StreamCategorySpecifier categorySpecifier)
+        {            
+            try
+            {
+                await _eventStoreClient.ConnectAsync();
+                return (await _eventStoreClient.ReadEventsAsync(categorySpecifier))
+                        .Where(e => e.EntityId == categorySpecifier.AggregateId)
+                        .ToList<Event>();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                _eventStoreClient.Close();
+            }
+        }
     }
 }

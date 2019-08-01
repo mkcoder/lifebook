@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using lifebook.core.eventstore.domain.interfaces;
 
 namespace lifebook.core.eventstore.services
@@ -14,7 +15,38 @@ namespace lifebook.core.eventstore.services
 
         public void WriteEvent(StreamCategorySpecifier streamCategorySpecifier, Event @e)
         {
-            _eventStoreClient.WriteEvent(streamCategorySpecifier, e);
+            try
+            {
+                _eventStoreClient.Connect();
+                _eventStoreClient.WriteEvent(streamCategorySpecifier, e);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                _eventStoreClient.Close();
+            }
+        }
+
+        public async Task WriteEventAsync(StreamCategorySpecifier streamCategorySpecifier, Event e)
+        {
+            try
+            {
+                if(!_eventStoreClient.IsConnected)
+                {
+                    await _eventStoreClient.ConnectAsync();
+                }
+                await _eventStoreClient.WriteEventAsync(streamCategorySpecifier, e);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+            }
         }
     }
 }

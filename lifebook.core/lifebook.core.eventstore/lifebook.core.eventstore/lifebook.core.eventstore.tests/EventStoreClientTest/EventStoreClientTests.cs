@@ -29,5 +29,12 @@ namespace lifebook.core.eventstore.tests.EventStoreClientTest
             await eventStoreClient.ConnectAsync();
             Assert.IsTrue(eventStoreClient.IsConnected);
         }
+
+        [Test]
+        public void Test_EventStoreClient_IsAbleToDisconnectAsync()
+        {
+            eventStoreClient.Close();
+            Assert.IsFalse(eventStoreClient.IsConnected);
+        }
     }
 }

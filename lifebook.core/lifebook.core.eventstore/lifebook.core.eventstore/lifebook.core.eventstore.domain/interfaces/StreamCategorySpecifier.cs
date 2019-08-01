@@ -22,6 +22,9 @@ namespace lifebook.core.eventstore.domain.interfaces
         }
 
         public string GetCategoryStream() => $"{Service}.{Instance}.{Category}";
-        public string GetCategoryStreamWithAggregateId() => $"{Service}.{Instance}.{Category}-{AggregateId.ToString()}";
+        public string GetCategoryStreamWithAggregateId() => $"{GetCategoryStream()}-{GetAggregateId(AggregateId.Value)}";
+        public string GetCategoryStreamWithAggregateId(Guid aggregateId) => $"{GetCategoryStream()}-{GetAggregateId(aggregateId)}";
+
+        private string GetAggregateId(Guid guid) => guid.ToString().Replace("-", "");
     }
 }

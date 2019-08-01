@@ -8,5 +8,7 @@ namespace lifebook.core.eventstore.domain.interfaces
         void Connect();
         Task ConnectAsync();
         bool IsConnected { get; }
+
+        void Close();
     }
 }
