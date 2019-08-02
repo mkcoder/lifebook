@@ -15,6 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\lifebook.core.databaseprovider\lifebook.core.database.databaseprovider.csproj" />
+    <Reference Include="Microsoft.EntityFrameworkCore, Version=2.2.4.0, Culture=neutral, PublicKeyToken=adb9793829ddae60" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\lifebook.core.databaseprovider.deprecated\lifebook.core.database.databaseprovider.deprecated.csproj" />
   </ItemGroup>
 </Project>

@@ -23,7 +23,6 @@ namespace lifebook.core.database.repository.test
             );
         }
 
-        [Fact]
         public async Task Test1()
         {
             await ExecWithContext((container) =>
