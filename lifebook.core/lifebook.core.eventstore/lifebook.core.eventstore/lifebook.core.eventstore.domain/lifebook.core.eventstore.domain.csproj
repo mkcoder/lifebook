@@ -2,6 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <PackOnBuild>true</PackOnBuild>
+    <Authors>lifebook</Authors>
+    <Description>this is the domain for eventstore</Description>
+    <Copyright>2019</Copyright>
+    <Owners>lifebook</Owners>
+    <PackageProjectUrl>https://github.com/mkcoder/lifebook</PackageProjectUrl>
+    <Title>lifebook</Title>
+    <PackageId>lifebook.core.eventstore.domain</PackageId>
   </PropertyGroup>
 
   <ItemGroup>

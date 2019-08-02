@@ -4,22 +4,24 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using EventStore.ClientAPI;
+using lifebook.core.eventstore.configurations;
 using lifebook.core.eventstore.domain.interfaces;
 using lifebook.core.eventstore.extensions;
+using Microsoft.Extensions.Configuration;
 
 namespace lifebook.core.eventstore.services
 {
     public class EventStoreClient : AbstractEventStoreClient
     {
-        private IEventStoreConnection eventStoreConnection;
+        private readonly IEventStoreConnection eventStoreConnection;
+        private readonly EventStoreConfiguration _eventStoreConfiguration;
 
         public object EventVersion { get; private set; }
 
-        public EventStoreClient()
+        public EventStoreClient(EventStoreConfiguration eventStoreConfiguration)
         {
-            // IEventStoreClientConnection
-            // IEventStoreConfiguration
-            eventStoreConnection = EventStoreConnection.Create(ConnectionSettings.Create(), new IPEndPoint(IPAddress.Parse("127.0.0.1"), 1113));
+            eventStoreConnection = EventStoreConnection.Create(ConnectionSettings.Create(), new IPEndPoint(IPAddress.Parse(eventStoreConfiguration.IpAddress), eventStoreConfiguration.Port));
+            _eventStoreConfiguration = eventStoreConfiguration;
         }
 
         public override void Connect()

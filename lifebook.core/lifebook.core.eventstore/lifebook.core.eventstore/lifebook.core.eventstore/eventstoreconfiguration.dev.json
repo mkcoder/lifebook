@@ -1,0 +1,5 @@
+﻿{
+    "EventStore.IpAddress":  "127.0.0.1",
+    "EventStore.Port": 1113,
+    "EventStore.UseFakeEventStore": false
+}

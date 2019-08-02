@@ -7,7 +7,7 @@ lifebook.infastructure/consul/**
 lifebook.infastructure/elk/**
 lifebook.infastructure/postgres/**
 lifebook.infastructure/sqlserver/**
-
+**/nupkg
 # User-specific files
 *.suo
 *.user

@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
 using lifebook.core.eventstore.domain.interfaces;
-using lifebook.core.eventstore.ioc;
 using lifebook.core.eventstore.services;
 using lifebook.core.eventstore.testing.framework;
 using NSubstitute;

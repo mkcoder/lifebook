@@ -1,3 +1,4 @@
+using lifebook.core.eventstore;
 using lifebook.core.eventstore.domain.interfaces;
 using lifebook.core.eventstore.services;
 using lifebook.core.eventstore.testing.framework;
