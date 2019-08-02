@@ -1,5 +1,5 @@
 using lifebook.core.eventstore;
-using lifebook.core.eventstore.domain.interfaces;
+using lifebook.core.eventstore.domain.api;
 using lifebook.core.eventstore.services;
 using lifebook.core.eventstore.testing.framework;
 using lifebook.core.eventstore.tests.EventStoreClientTest;

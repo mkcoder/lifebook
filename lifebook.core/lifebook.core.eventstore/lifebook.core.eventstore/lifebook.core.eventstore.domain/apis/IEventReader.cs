@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace lifebook.core.eventstore.domain.interfaces
+namespace lifebook.core.eventstore.domain.api
 {
     public interface IEventReader
     {

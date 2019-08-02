@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using lifebook.core.eventstore.domain.interfaces;
+using lifebook.core.eventstore.domain.api;
 
 namespace lifebook.core.eventstore.services
 {

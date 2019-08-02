@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "logging.test", "lifebook.co
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lifebook.core.database", "lifebook.core.database", "{88C9B710-17B3-44B2-B9B9-5A1B4C1CBA7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.database.databaseprovider", "lifebook.core.database\lifebook.core.database.databaseprovider\lifebook.core.databaseprovider\lifebook.core.database.databaseprovider.csproj", "{9B18D800-C306-4AFD-9F6D-553E62C69D12}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.database.databaseprovider.test", "lifebook.core.database\lifebook.core.database.databaseprovider\lifebook.core.database.databaseprovider.test\lifebook.core.database.databaseprovider.test.csproj", "{CF34DE56-303A-431D-A71F-BFA2E791F5F6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lifebook.core.database.databaseprovider", "lifebook.core.database.databaseprovider", "{F84881E3-99C8-4FB5-8AD5-24DF96723739}"
@@ -31,6 +29,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lifebook.core.examples", "l
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.examples.mvc", "lifebook.core.examples\lifebook.core.examples.webapi\lifebook.core.examples.mvc.csproj", "{E284284B-2174-4D94-9AFD-34418482CAD4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.database.databaseprovider.deprecated", "lifebook.core.database\lifebook.core.database.databaseprovider\lifebook.core.databaseprovider.deprecated\lifebook.core.database.databaseprovider.deprecated.csproj", "{DA308BD1-C3E6-4597-AE0B-6609E9EA47F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.database", "lifebook.core.database\lifebook.core.database.databaseprovider\lifebook.core.database\lifebook.core.database.csproj", "{3C3D9064-4F94-4618-B094-4DF51E57AF3A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,10 +47,6 @@ Global
 		{A085B9C4-FD73-4F9B-8B74-B59C65780B7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A085B9C4-FD73-4F9B-8B74-B59C65780B7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A085B9C4-FD73-4F9B-8B74-B59C65780B7C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9B18D800-C306-4AFD-9F6D-553E62C69D12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9B18D800-C306-4AFD-9F6D-553E62C69D12}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9B18D800-C306-4AFD-9F6D-553E62C69D12}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9B18D800-C306-4AFD-9F6D-553E62C69D12}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CF34DE56-303A-431D-A71F-BFA2E791F5F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CF34DE56-303A-431D-A71F-BFA2E791F5F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF34DE56-303A-431D-A71F-BFA2E791F5F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -73,11 +71,18 @@ Global
 		{E284284B-2174-4D94-9AFD-34418482CAD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E284284B-2174-4D94-9AFD-34418482CAD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E284284B-2174-4D94-9AFD-34418482CAD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA308BD1-C3E6-4597-AE0B-6609E9EA47F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA308BD1-C3E6-4597-AE0B-6609E9EA47F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA308BD1-C3E6-4597-AE0B-6609E9EA47F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA308BD1-C3E6-4597-AE0B-6609E9EA47F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C3D9064-4F94-4618-B094-4DF51E57AF3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C3D9064-4F94-4618-B094-4DF51E57AF3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C3D9064-4F94-4618-B094-4DF51E57AF3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C3D9064-4F94-4618-B094-4DF51E57AF3A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{425DF67D-9B45-4758-AC32-B0EB214308F7} = {97773F37-71F7-4A0A-89E5-FF8FFA894CDA}
 		{A085B9C4-FD73-4F9B-8B74-B59C65780B7C} = {97773F37-71F7-4A0A-89E5-FF8FFA894CDA}
-		{9B18D800-C306-4AFD-9F6D-553E62C69D12} = {F84881E3-99C8-4FB5-8AD5-24DF96723739}
 		{CF34DE56-303A-431D-A71F-BFA2E791F5F6} = {F84881E3-99C8-4FB5-8AD5-24DF96723739}
 		{F84881E3-99C8-4FB5-8AD5-24DF96723739} = {88C9B710-17B3-44B2-B9B9-5A1B4C1CBA7B}
 		{DE665787-18DF-4C97-A5DE-769DF939DF80} = {88C9B710-17B3-44B2-B9B9-5A1B4C1CBA7B}
@@ -86,5 +91,7 @@ Global
 		{CA79C9DE-15DF-4F11-8270-B5A18791AFC5} = {E54E710C-A58A-4569-9319-153DD07CB8AB}
 		{E295B2F5-7749-483B-B2C5-68C97E0106AA} = {E54E710C-A58A-4569-9319-153DD07CB8AB}
 		{E284284B-2174-4D94-9AFD-34418482CAD4} = {2E9CB30D-42EE-4A86-B1E5-D094ADDEAEA6}
+		{DA308BD1-C3E6-4597-AE0B-6609E9EA47F1} = {F84881E3-99C8-4FB5-8AD5-24DF96723739}
+		{3C3D9064-4F94-4618-B094-4DF51E57AF3A} = {F84881E3-99C8-4FB5-8AD5-24DF96723739}
 	EndGlobalSection
 EndGlobal

@@ -4,7 +4,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace lifebook.core.eventstore.domain.interfaces
+namespace lifebook.core.eventstore.domain.api
 {
     public interface IEvent
     {

@@ -5,7 +5,7 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
 using lifebook.core.eventstore.configurations;
-using lifebook.core.eventstore.domain.interfaces;
+using lifebook.core.eventstore.domain.api;
 using lifebook.core.eventstore.services;
 
 namespace lifebook.core.ioc

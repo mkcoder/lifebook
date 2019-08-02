@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.Text.Json;
-using lifebook.core.eventstore.domain.interfaces;
+using lifebook.core.eventstore.domain.api;
 using lifebook.core.eventstore.extensions;
 using NUnit.Framework;
 

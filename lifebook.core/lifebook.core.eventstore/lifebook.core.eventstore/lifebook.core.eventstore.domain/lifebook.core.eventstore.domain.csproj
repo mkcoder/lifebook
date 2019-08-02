@@ -13,6 +13,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="interfaces\" />
+    <Folder Include="apis\" />
   </ItemGroup>
 </Project>

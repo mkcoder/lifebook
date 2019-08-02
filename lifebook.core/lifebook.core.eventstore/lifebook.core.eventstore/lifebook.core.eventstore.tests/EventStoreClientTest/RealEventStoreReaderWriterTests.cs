@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
-using lifebook.core.eventstore.domain.interfaces;
+using lifebook.core.eventstore.domain.api;
 using lifebook.core.eventstore.extensions;
 using lifebook.core.eventstore.testing.framework;
 using Newtonsoft.Json.Linq;

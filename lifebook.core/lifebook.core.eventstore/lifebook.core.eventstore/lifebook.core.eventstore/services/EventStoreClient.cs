@@ -5,7 +5,7 @@ using System.Net;
 using System.Threading.Tasks;
 using EventStore.ClientAPI;
 using lifebook.core.eventstore.configurations;
-using lifebook.core.eventstore.domain.interfaces;
+using lifebook.core.eventstore.domain.api;
 using lifebook.core.eventstore.extensions;
 using Microsoft.Extensions.Configuration;
 

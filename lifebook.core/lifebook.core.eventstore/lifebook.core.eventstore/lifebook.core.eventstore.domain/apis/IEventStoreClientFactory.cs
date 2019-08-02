@@ -1,5 +1,5 @@
 ﻿using System;
-namespace lifebook.core.eventstore.domain.interfaces
+namespace lifebook.core.eventstore.domain.api
 {
     public interface IEventStoreClientFactory
     {

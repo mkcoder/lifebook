@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using lifebook.core.eventstore.domain.interfaces;
+using lifebook.core.eventstore.domain.api;
 using lifebook.core.eventstore.services;
 using lifebook.core.eventstore.testing.framework;
 using NUnit.Framework;
