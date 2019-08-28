@@ -5,6 +5,11 @@ namespace lifebook.core.eventstore.tests.EventStoreClientTest
 {
     internal class TestEvent : Event
     {
+        public TestEvent()
+        {
+
+        }
+
         public TestEvent(Guid aggregateId)
         {
             EntityId = aggregateId;

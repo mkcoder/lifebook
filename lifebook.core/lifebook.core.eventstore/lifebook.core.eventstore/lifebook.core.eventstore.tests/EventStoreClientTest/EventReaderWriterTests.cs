@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
@@ -35,8 +36,10 @@ namespace lifebook.core.eventstore.tests.EventStoreClientTest
             await eventWriter.WriteEventAsync(streamCategory, testEvent);
             
             var e = (AggregateEvent)await eventReader.GetLastEventWrittenToStreamAsync(streamCategory);
+            var myTestEvent = e.Data.TransformDataFromByte(b => JsonSerializer.Deserialize<TestEvent>(b));
             Assert.AreEqual(testEvent.EntityId, e.EntityId);
             Assert.IsNotNull(e.Data);
+            Assert.AreEqual(testEvent.TestProperty, myTestEvent.TestProperty);
         }
     }
 }
