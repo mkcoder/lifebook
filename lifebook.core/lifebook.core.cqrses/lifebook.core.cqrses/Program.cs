@@ -14,7 +14,11 @@ namespace lifebook.core.cqrses
     {
         public static void Main(string[] args)
         {
-            WebHost.CreateDefaultBuilder(args).UseStartup<BaseStartup>().Build().Run();
+            WebHost
+                .CreateDefaultBuilder(args)
+                .UseStartup<BaseStartup>()
+                .Build().Run();
         }
     }
+
 }

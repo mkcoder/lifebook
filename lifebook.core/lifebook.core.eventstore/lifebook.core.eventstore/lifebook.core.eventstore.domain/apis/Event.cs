@@ -12,7 +12,7 @@ namespace lifebook.core.eventstore.domain.api
 
     public abstract class Event : IEvent
     {
-        public Guid EntityId { get; set; } = Guid.NewGuid();
+        public Guid EntityId { get; set; }
         public Guid EventId { get; set; } = Guid.NewGuid();
         public Guid CorrelationId { get; set; } = Guid.NewGuid();
         public long EventNumber { get; set; } 

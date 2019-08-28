@@ -1,12 +1,13 @@
 using lifebook.core.eventstore;
 using lifebook.core.eventstore.domain.api;
+using lifebook.core.eventstore.extensions;
 using lifebook.core.eventstore.services;
 using lifebook.core.eventstore.testing.framework;
 using lifebook.core.eventstore.tests.EventStoreClientTest;
 using NUnit.Framework;
 
 namespace Tests
-{
+{    
     public class EventStoreClientTest : BaseServiceTests<EventStoreClientTestIntaller>
     {
         private IEventStoreClient _sut;

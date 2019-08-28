@@ -32,11 +32,11 @@ namespace lifebook.core.eventstore.tests.EventStoreClientTest
         [Test]
         public async Task WriteAnEventToStreamAndReadWorks()
         {
-            eventWriter.WriteEvent(streamCategory, testEvent);
+            await eventWriter.WriteEventAsync(streamCategory, testEvent);
             
-            var e = (TestEvent)await eventReader.GetLastEventWrittenToStreamAsync(streamCategory);
+            var e = (AggregateEvent)await eventReader.GetLastEventWrittenToStreamAsync(streamCategory);
             Assert.AreEqual(testEvent.EntityId, e.EntityId);
-            Assert.AreEqual(testEvent.TestProperty, e.TestProperty);
+            Assert.IsNotNull(e.Data);
         }
     }
 }

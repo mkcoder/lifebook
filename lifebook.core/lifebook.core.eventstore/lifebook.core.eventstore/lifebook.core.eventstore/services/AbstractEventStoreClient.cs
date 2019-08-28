@@ -18,12 +18,7 @@ namespace lifebook.core.eventstore.services
         public abstract void Close();
 
         // Internal 
-        internal abstract List<Event> ReadEvent(StreamCategorySpecifier specifier);
-
         internal abstract Task<List<AggregateEvent>> ReadEventsAsync(StreamCategorySpecifier specifier);
-
-        [Obsolete]      
-        internal abstract void WriteEvent(StreamCategorySpecifier specifier, Event @e);
 
         internal abstract Task WriteEventAsync(StreamCategorySpecifier specifier, Event @e);        
     }

@@ -42,12 +42,6 @@ namespace lifebook.core.eventstore.services
             _connected = false;
         }
 
-        internal override List<Event> ReadEvent(StreamCategorySpecifier specifier)
-        {
-            var slice = eventStoreConnection.ReadStreamEventsForwardAsync(specifier.GetCategoryStream(), 0, int.MaxValue, true).Result;
-            return null;
-        }
-
         internal override async Task<List<AggregateEvent>> ReadEventsAsync(StreamCategorySpecifier specifier)
         {
             var result = new List<AggregateEvent>();
@@ -67,12 +61,6 @@ namespace lifebook.core.eventstore.services
             } while (reading);
 
             return result;
-        }
-
-        [Obsolete]
-        internal override void WriteEvent(StreamCategorySpecifier specifier, Event e)
-        {
-                WriteEventAsync(specifier, e).Wait();
         }
 
         internal override async Task WriteEventAsync(StreamCategorySpecifier specifier, Event e)

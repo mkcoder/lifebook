@@ -81,6 +81,7 @@ namespace lifebook.core.eventstore.tests.EventStoreClientTest
         }
 
         [Test]
+        [Explicit]
         public async Task ReadIsWorking()
         {
             var categpory = new StreamCategorySpecifier("test", "primary", "TestPerson");
@@ -92,10 +93,14 @@ namespace lifebook.core.eventstore.tests.EventStoreClientTest
         }
 
         [Test]
-        public async Task ExceptionClosesStream()
+        [Explicit]
+        public void ExceptionClosesStream()
         {
-            var categpory = new StreamCategorySpecifier("test", "primary", "Exception");
-            var events = await eventReader.ReadAllEventsFromStreamCategoryAsync(categpory);
+            Assert.ThrowsAsync<Exception>(async () =>
+            {
+                var categpory = new StreamCategorySpecifier("test", "primary", "Exception");
+                var events = await eventReader.ReadAllEventsFromStreamCategoryAsync(categpory);
+            });
         }
     }
 
