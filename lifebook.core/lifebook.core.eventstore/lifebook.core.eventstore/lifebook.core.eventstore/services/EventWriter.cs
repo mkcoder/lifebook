@@ -13,23 +13,6 @@ namespace lifebook.core.eventstore.services
             _eventStoreClient = abstractEventStoreClient;
         }
 
-        //public void WriteEvent(StreamCategorySpecifier streamCategorySpecifier, Event @e)
-        //{
-        //    try
-        //    {
-        //        _eventStoreClient.Connect();
-        //        _eventStoreClient.WriteEvent(streamCategorySpecifier, e);
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //    finally
-        //    {
-        //        _eventStoreClient.Close();
-        //    }
-        //}
-
         public async Task WriteEventAsync(StreamCategorySpecifier streamCategorySpecifier, Event e)
         {
             try

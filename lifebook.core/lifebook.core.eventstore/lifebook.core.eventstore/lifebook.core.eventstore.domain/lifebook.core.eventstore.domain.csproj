@@ -10,6 +10,9 @@
     <PackageProjectUrl>https://github.com/mkcoder/lifebook</PackageProjectUrl>
     <Title>lifebook</Title>
     <PackageId>lifebook.core.eventstore.domain</PackageId>
+    <ReleaseVersion>2.0.0</ReleaseVersion>
+    <SynchReleaseVersion>false</SynchReleaseVersion>
+    <PackageVersion>2.0.1</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>

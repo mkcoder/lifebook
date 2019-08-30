@@ -5,10 +5,9 @@ namespace lifebook.core.eventstore.domain.api
 {
     public interface IEventStoreClient
     {
+        bool IsConnected { get; }
         void Connect();
         Task ConnectAsync();
-        bool IsConnected { get; }
-
         void Close();
     }
 }

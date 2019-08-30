@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using lifebook.core.cqrses.Attributes;
 using lifebook.core.cqrses.Domains;
 using lifebook.core.cqrses.Services;
+using lifebook.core.eventstore.domain.api;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -12,6 +13,15 @@ namespace lifebook.core.cqrses.Filters
 {
     public sealed class CommandHandler : IAsyncActionFilter, IAsyncResultFilter, IAsyncExceptionFilter
     {
+        private readonly IEventReader _eventReader;
+        private readonly IEventWriter _eventWriter;
+
+        public CommandHandler(IEventReader eventReader, IEventWriter eventWriter)
+        {
+            _eventReader = eventReader;
+            _eventWriter = eventWriter;
+        }
+
         public Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
             var isCommandHandler = ((ControllerActionDescriptor)context.ActionDescriptor).MethodInfo.GetCustomAttributes(typeof(CommandHandlerFor), true);

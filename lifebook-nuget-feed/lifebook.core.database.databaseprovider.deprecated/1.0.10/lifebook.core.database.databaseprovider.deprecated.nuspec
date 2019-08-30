@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>lifebook.core.database.databaseprovider.deprecated</id>
+    <version>1.0.10</version>
+    <title></title>
+    <authors>mkcoder</authors>
+    <owners>mkcoder</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
+    <description>databaseprovider for the lifebook app</description>
+    <summary></summary>
+    <releaseNotes></releaseNotes>
+    <copyright></copyright>
+    <language></language>
+    <dependencies>
+      <group targetFramework=".NETCoreApp2.1">
+        <dependency id="Microsoft.Extensions.Configuration.Json" version="2.2.0" />
+        <dependency id="Microsoft.Extensions.Configuration" version="2.2.0" />
+        <dependency id="Microsoft.Extensions.Configuration.Abstractions" version="2.2.0" />
+        <dependency id="Npgsql.EntityFrameworkCore.PostgreSQL" version="2.2.0" />
+        <dependency id="Castle.Windsor" version="5.0.0" />
+        <dependency id="Microsoft.EntityFrameworkCore.SqlServer" version="2.2.4" />
+        <dependency id="Newtonsoft.Json" version="12.0.1" />
+        <dependency id="Microsoft.EntityFrameworkCore.Design" version="2.2.4" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

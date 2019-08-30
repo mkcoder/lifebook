@@ -21,6 +21,9 @@ namespace lifebook.core.eventstore.domain.api
 
     public sealed class AggregateEvent : Event
     {
+        public int EventVersion { get; private set; }
+        public Guid AggregateId { get; private set; }
+        public string CommandName { get; private set; }
         public DateTime DateCreated { get; private set; }
         public Data Data { get; private set; }
 

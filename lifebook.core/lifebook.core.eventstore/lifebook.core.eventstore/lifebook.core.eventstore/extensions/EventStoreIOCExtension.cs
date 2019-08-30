@@ -1,5 +1,7 @@
 ﻿using System;
 using Castle.Windsor;
+using Castle.Windsor.Installer;
+using lifebook.core.ioc;
 
 namespace lifebook.core.eventstore.extensions
 {
@@ -7,7 +9,7 @@ namespace lifebook.core.eventstore.extensions
     {
         public static void UseEventStore(this IWindsorContainer windsor)
         {
-            windsor.Install();
+            windsor.Install(FromAssembly.InThisApplication(typeof(EventStoreClientInstaller).Assembly));
         }
     }
 }

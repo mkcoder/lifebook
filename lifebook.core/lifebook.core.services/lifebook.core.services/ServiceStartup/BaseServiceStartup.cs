@@ -10,19 +10,13 @@ using Microsoft.Extensions.DependencyInjection;
 namespace lifebook.core.cqrses
 {
     public class BaseStartup
-    { 
+    {
         public void ConfigureServices(IServiceCollection services)
         {
-            Console.WriteLine("Logger");
-            services.AddTransient<ILogger, MyLogger>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
         }
     }
-
-    public interface ILogger { }
-    public class MyLogger : ILogger
-    { }
 }

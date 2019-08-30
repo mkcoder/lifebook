@@ -11,8 +11,9 @@
       <Publish Condition="'%(PackageReference.Version)' == ''">true</Publish>
     </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
-    <PackageReference Include="lifebook.core.eventstore" Version="1.0.0" />
-    <PackageReference Include="lifebook.core.eventstore.domain" Version="1.0.0" />
+    <PackageReference Include="lifebook.core.eventstore" Version="2.0.1" />
+    <PackageReference Include="lifebook.core.eventstore.domain" Version="2.0.1" />
+    <PackageReference Include="Castle.Core" Version="4.4.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,5 +21,7 @@
     <Folder Include="Domains\" />
     <Folder Include="Attributes\" />
     <Folder Include="Services\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="ServiceStartup\" />
   </ItemGroup>
 </Project>
