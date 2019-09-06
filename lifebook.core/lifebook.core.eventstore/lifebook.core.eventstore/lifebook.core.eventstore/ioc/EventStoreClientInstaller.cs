@@ -17,7 +17,6 @@ namespace lifebook.core.ioc
             container.AddFacility<TypedFactoryFacility>();
 
             container.Register(
-                Component.For<AbstractEventStoreClient>().ImplementedBy<FakeEventStoreClient>().IsFallback().LifeStyle.Transient,
                 Component.For<AbstractEventStoreClient>().ImplementedBy<EventStoreClient>().LifeStyle.Transient,
                 Component.For<IEventStoreClientFactory>().AsFactory(),
                 Component.For<IEventStoreClient>().ImplementedBy<EventStoreClient>().Named("EventStoreClient").LifeStyle.Transient,

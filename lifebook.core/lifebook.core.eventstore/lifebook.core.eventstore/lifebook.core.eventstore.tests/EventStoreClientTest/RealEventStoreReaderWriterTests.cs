@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using lifebook.core.eventstore.domain.api;
+using lifebook.core.eventstore.domain.models;
 using lifebook.core.eventstore.extensions;
 using lifebook.core.eventstore.testing.framework;
 using Newtonsoft.Json.Linq;

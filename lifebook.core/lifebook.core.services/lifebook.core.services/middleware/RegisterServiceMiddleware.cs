@@ -12,11 +12,12 @@ namespace lifebook.core.services.middleware
     public class RegisterServiceMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly NetworkServiceLocator networkServiceLocator = new NetworkServiceLocator();
+        private readonly NetworkServiceLocator _networkServiceLocator;
         readonly IConfiguration _configuration;
 
         public RegisterServiceMiddleware(RequestDelegate next, IConfiguration configuration)
         {
+            _networkServiceLocator = new NetworkServiceLocator(configuration);
             _configuration = configuration;
             _next = next;
         }
@@ -53,7 +54,7 @@ namespace lifebook.core.services.middleware
                 service.Checks = null;
             }
 
-            await networkServiceLocator.RegisterService(service);
+            await _networkServiceLocator.RegisterService(service);
 
             await _next(context);
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using lifebook.core.eventstore.domain.api;
+using lifebook.core.eventstore.domain.models;
 
 namespace lifebook.core.eventstore.tests.EventStoreClientTest
 {

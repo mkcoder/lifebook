@@ -4,6 +4,7 @@ using System.Reflection;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
+using lifebook.core.services.attribute;
 using lifebook.core.services.configuration;
 using Microsoft.Extensions.Configuration;
 
@@ -32,8 +33,9 @@ namespace lifebook.core.services
                     var r = container.ResolveAll<IConfigurationProviderInistalizer>();
                     var provider = new ConfigurationBuilderDefaultInitalizer(r);
                     provider.configure(builder);
-                }).ImplementedBy<ConfigurationBuilder>().LifestyleTransient()
-            );
+                }).ImplementedBy<ConfigurationBuilder>().LifestyleTransient(),
+                Component.For <interfaces.IConfiguration>().ImplementedBy<Configuration>().LifeStyle.Transient
+            );            
         }
     }
 }

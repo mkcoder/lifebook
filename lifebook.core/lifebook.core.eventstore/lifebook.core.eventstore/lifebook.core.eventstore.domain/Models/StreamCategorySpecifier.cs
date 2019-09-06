@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace lifebook.core.eventstore.domain.api
+namespace lifebook.core.eventstore.domain.models
 {
     public sealed class StreamCategorySpecifier
     {

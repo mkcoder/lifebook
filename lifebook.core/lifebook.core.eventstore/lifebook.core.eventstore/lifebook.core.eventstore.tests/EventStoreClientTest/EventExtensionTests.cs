@@ -2,6 +2,7 @@
 using System.Text;
 using System.Text.Json;
 using lifebook.core.eventstore.domain.api;
+using lifebook.core.eventstore.domain.models;
 using lifebook.core.eventstore.extensions;
 using NUnit.Framework;
 

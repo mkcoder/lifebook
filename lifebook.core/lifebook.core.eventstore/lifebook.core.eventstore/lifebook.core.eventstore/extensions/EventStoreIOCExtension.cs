@@ -7,7 +7,7 @@ namespace lifebook.core.eventstore.extensions
 {
     public static class EventStoreIOCExtension
     {
-        public static void UseEventStore(this IWindsorContainer windsor)
+        public static void InstallEventStore(this IWindsorContainer windsor)
         {
             windsor.Install(FromAssembly.InThisApplication(typeof(EventStoreClientInstaller).Assembly));
         }

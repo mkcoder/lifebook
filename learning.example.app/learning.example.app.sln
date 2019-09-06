@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test", "test\test.csproj", "{EB6F103B-14D9-4D58-8FBA-6456BF9A418D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "example.app.learning", "example.app.learning\example.app.learning.csproj", "{5F3CA5CD-3ECA-4B8B-BBEC-19469C37D3FB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|anycpu = Debug|anycpu
+		Release|anycpu = Release|anycpu
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EB6F103B-14D9-4D58-8FBA-6456BF9A418D}.Debug|anycpu.ActiveCfg = Debug|anycpu
+		{EB6F103B-14D9-4D58-8FBA-6456BF9A418D}.Debug|anycpu.Build.0 = Debug|anycpu
+		{EB6F103B-14D9-4D58-8FBA-6456BF9A418D}.Release|anycpu.ActiveCfg = Release|anycpu
+		{EB6F103B-14D9-4D58-8FBA-6456BF9A418D}.Release|anycpu.Build.0 = Release|anycpu
+		{5F3CA5CD-3ECA-4B8B-BBEC-19469C37D3FB}.Debug|anycpu.ActiveCfg = Debug|Any CPU
+		{5F3CA5CD-3ECA-4B8B-BBEC-19469C37D3FB}.Debug|anycpu.Build.0 = Debug|Any CPU
+		{5F3CA5CD-3ECA-4B8B-BBEC-19469C37D3FB}.Release|anycpu.ActiveCfg = Release|Any CPU
+		{5F3CA5CD-3ECA-4B8B-BBEC-19469C37D3FB}.Release|anycpu.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

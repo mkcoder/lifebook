@@ -1,28 +1,19 @@
 ﻿using System;
-using System.IO;
-using Newtonsoft.Json.Linq;
-using lifebook.core.tools.converter;
+using System.Collections.Generic;
+using lifebook.core.services.attribute;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Primitives;
 
 namespace lifebook.core.services.configuration
 {
-    public class ProductionWebConfigurationProvider
+    [DevelopmentConfiguration]
+    public class ProductionConfigurationProvider : IConfigurationProviderInistalizer
     {
-        JObject config;
-
-        public ProductionWebConfigurationProvider()
+        public void Provide(IConfigurationBuilder cb)
         {
-            var assemblyName = GetType().AssemblyQualifiedName;    
-            var jsonText = GetType().Assembly.FromResourceNameToEmbededAssemblyResources($"appsettings.{assemblyName}.json");
-            config = JObject.Parse(jsonText);
-        }
-
-        public virtual string this[string key]
-        {
-            get
-            {
-                key = key.Replace(":", ".");
-                return config.SelectToken(key).ToString();
-            }
+            List<KeyValuePair<string, string>> defaultConfiguration = new List<KeyValuePair<string, string>>();
+            defaultConfiguration.Add(new KeyValuePair<string, string>("IsProduction", "true"));
+            cb.AddInMemoryCollection(defaultConfiguration);
         }
     }
 }

@@ -5,6 +5,7 @@ using lifebook.core.cqrses.Attributes;
 using lifebook.core.cqrses.Domains;
 using lifebook.core.cqrses.Services;
 using lifebook.core.eventstore.domain.api;
+using lifebook.core.eventstore.domain.models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -30,7 +31,7 @@ namespace lifebook.core.cqrses.Filters
                 Task.Run(() => Console.WriteLine(context));
                 ((ICommand)context.ActionArguments.Single().Value).IsValid();
             }
-            return Task.Run(() => next());
+            return next();
         }
 
         public Task OnResultExecutionAsync(ResultExecutingContext context, ResultExecutionDelegate next)
@@ -39,7 +40,7 @@ namespace lifebook.core.cqrses.Filters
             if (isCommandHandler.Any())
             {   
                 var result = ((ObjectResult)context.Result).Value;
-                if (result is AggregateEvent @e)
+                if (result is Event @e)
                 {
                     ((ObjectResult)context.Result).Value = @e;
                 }
@@ -48,8 +49,8 @@ namespace lifebook.core.cqrses.Filters
                     throw new Exception("Commands must return IEnumerable<IEvent> or IEvent");
                 }
 
-            }
-            return Task.Run(() => next());
+            }            
+            return next();
         }
 
         public Task OnExceptionAsync(ExceptionContext context)

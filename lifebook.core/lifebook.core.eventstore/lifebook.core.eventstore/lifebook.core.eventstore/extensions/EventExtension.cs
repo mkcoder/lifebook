@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Text;
 using System.Text.Json;
 using lifebook.core.eventstore.domain.api;
+using lifebook.core.eventstore.domain.models;
 using Newtonsoft.Json.Linq;
 
 namespace lifebook.core.eventstore.extensions
@@ -35,7 +36,11 @@ namespace lifebook.core.eventstore.extensions
                     json.Remove(elem.Key);
                 }
             }
-            json["EventName"] = e.GetType().Name;
+            //json["EventName"] = e.GetType().Name;
+            //json["$correlationId"] = json["CorrelationId"];
+            //json["$causationId"] = json["CausationId"];
+            //json["CorrelationId"].Parent.Remove();
+            //json["CausationId"].Parent.Remove();
             return Encoding.UTF8.GetBytes(json.ToString());
         }
 

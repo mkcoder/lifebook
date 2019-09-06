@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace lifebook.core.cqrses.Attributes
 {
-    public class Aggregate : TypeFilterAttribute
+    public class CommandHandlers : TypeFilterAttribute
     {
-        public Aggregate() : base(typeof(CommandHandler))
+        public CommandHandlers() : base(typeof(CommandHandler))
         {
         }
     }

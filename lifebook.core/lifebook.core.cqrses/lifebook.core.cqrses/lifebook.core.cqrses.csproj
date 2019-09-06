@@ -3,17 +3,30 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <PackOnBuild>true</PackOnBuild>
+    <PackageId>lifebook.core.cqrs</PackageId>
+    <PackageVersion>2.0.1</PackageVersion>
+    <Authors>mkcoder</Authors>
+    <Owners>mkcoder</Owners>
+    <Description>adds cqrs support to any console application</Description>
+    <PackageIconUrl>https://github.com/mkcoder/lifebook</PackageIconUrl>
+    <PackageLicenseUrl>https://github.com/mkcoder/lifebook</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/mkcoder/lifebook</PackageProjectUrl>
+    <Copyright>open</Copyright>
+    <IsPackable>true</IsPackable>
+    <OutputType>Library</OutputType>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App">
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.6">
       <PrivateAssets Condition="'%(PackageReference.Version)' == ''">all</PrivateAssets>
       <Publish Condition="'%(PackageReference.Version)' == ''">true</Publish>
     </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
-    <PackageReference Include="lifebook.core.eventstore" Version="2.0.1" />
-    <PackageReference Include="lifebook.core.eventstore.domain" Version="2.0.1" />
+    <PackageReference Include="lifebook.core.eventstore" Version="2.0.4" />
+    <PackageReference Include="lifebook.core.eventstore.domain" Version="2.0.2" />
     <PackageReference Include="Castle.Core" Version="4.4.0" />
+    <PackageReference Include="lifebook.core.services" Version="2.0.3" />
   </ItemGroup>
 
   <ItemGroup>

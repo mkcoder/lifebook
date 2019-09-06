@@ -3,16 +3,17 @@ using System.Text;
 using System.Threading.Tasks;
 using Consul;
 using lifebook.core.services.models;
+using Microsoft.Extensions.Configuration;
 
 namespace lifebook.core.services.discovery
 {
     public class NetworkServiceLocator
     {
         private ConsulClient consul = null;
-        public NetworkServiceLocator()
+        public NetworkServiceLocator(IConfiguration configuration)
         {
             consul = new ConsulClient((obj) => {
-                obj.Address = new Uri("http://localhost:8500/");
+                obj.Address = new Uri(configuration["ConsulAddress"]);
             });
         }
 

@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Castle.Windsor;
-using Castle.Windsor.Installer;
 using lifebook.core.eventstore.domain.api;
+using lifebook.core.eventstore.domain.models;
 using lifebook.core.eventstore.services;
 using lifebook.core.eventstore.testing.framework;
 using NSubstitute;
 using NUnit.Framework;
-using Tests;
 
 namespace lifebook.core.eventstore.tests.EventStoreClientTest
 {

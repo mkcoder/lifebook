@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using lifebook.core.eventstore.domain.api;
+using lifebook.core.eventstore.domain.models;
 using lifebook.core.eventstore.extensions;
 
 namespace lifebook.core.eventstore.services
