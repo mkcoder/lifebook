@@ -15,6 +15,7 @@ namespace lifebook.core.services.configuration
 
         public string GetValue(string key) => _configurationBuilder[key];
         public T TryGetValueOrDefault<T>(string key, T defaultValue) => (T)(Convert.ChangeType(GetValue(key), typeof(T)) ?? defaultValue);
+        public T GetValue<T>(string key) => (T)Convert.ChangeType(GetValue(key), typeof(T));
         public string this[string key] => GetValue(key);
     }
 }

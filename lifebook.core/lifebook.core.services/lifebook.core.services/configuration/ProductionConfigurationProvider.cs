@@ -6,7 +6,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace lifebook.core.services.configuration
 {
-    [DevelopmentConfiguration]
+    [ProductionConfiguration]
     public class ProductionConfigurationProvider : IConfigurationProviderInistalizer
     {
         public void Provide(IConfigurationBuilder cb)
