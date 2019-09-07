@@ -15,7 +15,7 @@ namespace lifebook.core.services.configuration
         {
             List<KeyValuePair<string, string>> defaultConfiguration = new List<KeyValuePair<string, string>>();
 
-            defaultConfiguration.Add(new KeyValuePair<string, string>("Service", GetService(GetType())));
+            defaultConfiguration.Add(new KeyValuePair<string, string>("ServiceName", GetService(GetType())));
             defaultConfiguration.Add(new KeyValuePair<string, string>("ServiceInstance", "Primary"));
             defaultConfiguration.Add(new KeyValuePair<string, string>("IsProduction", "false"));
             defaultConfiguration.Add(new KeyValuePair<string, string>("ConsulAddress", "http://localhost:8500"));
@@ -30,7 +30,17 @@ namespace lifebook.core.services.configuration
                 .Select(f => new { frame = f, CanBeServiceName = CanBeServiceName(f.GetMethod().ReflectedType.FullName, t.Assembly)})
                 .Where(f => f.CanBeServiceName)
                 .Select(f => f.frame).Last();
-            return initialAssembly.GetMethod().ReflectedType.Assembly.GetName().Name;
+            return GetServiceNameFromAssemblyName(initialAssembly.GetMethod().ReflectedType.Assembly.GetName().Name);
+        }
+
+        private static string GetServiceNameFromAssemblyName(string name)
+        {
+            var result = string.Join("", name.Split('.')
+                        .Select(s => s.ToLower())
+                        .Select(s => (s.First() + "").ToUpper() + s.Substring(1))
+                        .ToArray());
+
+            return result[0].ToString().ToLower()+result.Substring(1);
         }
 
         public static bool CanBeServiceName(string text, Assembly thisAssembly)

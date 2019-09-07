@@ -20,7 +20,7 @@ namespace lifebook.core.services.configuration.tests
         public void Congiuration_GetValue_ReturnCorrectValues()
         {
             Assert.IsFalse(configuration.GetValue<bool>("IsProduction"));
-            Assert.AreEqual("lifebook.core.services.tests", configuration.GetValue<string>("Service"));
+            Assert.AreEqual("lifebookCoreServicesTests", configuration.GetValue<string>("ServiceName"));
         }
 
         [Test]
