@@ -12,12 +12,13 @@ namespace lifebook.core.services.configuration
 
         public ConfigurationBuilderDefaultInitalizer(IConfigurationProviderInistalizer[] configuration)
         {
-            // Order:
-            // Development
-            // Production        
-            _configuration = configuration
-                .OrderBy(c => c.GetType().GetCustomAttributes(typeof(ProductionConfigurationAttribute), false))
-                .ToList();
+            //// Order:
+            //// Development
+            //// Production        
+            //_configuration = configuration
+            //    .OrderBy(c => c.GetType().GetCustomAttributes(typeof(ProductionConfigurationAttribute), false))
+            //    .ToList();
+            _configuration = configuration;
         }
 
         public void configure(IConfigurationBuilder arg)

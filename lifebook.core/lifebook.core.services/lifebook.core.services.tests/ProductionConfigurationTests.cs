@@ -1,3 +1,4 @@
+using System;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
 using Microsoft.Extensions.Configuration;
@@ -5,13 +6,14 @@ using NUnit.Framework;
 
 namespace lifebook.core.services.configuration.tests
 {
-    public class ConfigurationTests
+    public class ProductionConfigurationTests
     {
         private WindsorContainer container = new WindsorContainer();
         private interfaces.IConfiguration configuration;
-
-        public ConfigurationTests()
+        
+        public ProductionConfigurationTests()
         {
+            Environment.SetEnvironmentVariable("DEV_ENV", "PRODUCTION");
             container.Install(FromAssembly.InThisApplication(typeof(ConfigurationInstaller).Assembly));
             configuration = container.Resolve<interfaces.IConfiguration>();
         }
@@ -19,15 +21,13 @@ namespace lifebook.core.services.configuration.tests
         [Test]
         public void Congiuration_GetValue_ReturnCorrectValues()
         {
-            Assert.IsFalse(configuration.GetValue<bool>("IsProduction"));
-            Assert.AreEqual("lifebook.core.services.tests", configuration.GetValue<string>("Service"));
+            Assert.IsTrue(configuration.GetValue<bool>("IsProduction"));
         }
 
-        [Test]
-        public void Congiuration_TryGetValueOrDefault_ReturnCorrectValues()
+        [TearDown]
+        public void After()
         {
-            Assert.IsFalse(configuration.TryGetValueOrDefault("DoesNotExist", false));
-            Assert.AreEqual(1, configuration.TryGetValueOrDefault("DoesNotExist", 1));
+            Environment.SetEnvironmentVariable("DEV_ENV", "");
         }
     }
 }
