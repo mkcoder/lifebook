@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>lifebook.core.services</id>
+    <version>3.0.6</version>
+    <title></title>
+    <authors>mkcoder</authors>
+    <owners>mkcoder</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>core services for all projects</description>
+    <summary></summary>
+    <releaseNotes></releaseNotes>
+    <copyright></copyright>
+    <language></language>
+    <dependencies>
+      <group targetFramework=".NETCoreApp3.0">
+        <dependency id="Newtonsoft.Json" version="12.0.2" />
+        <dependency id="Consul" version="0.7.2.6" />
+        <dependency id="Microsoft.Extensions.Configuration.Json" version="3.0.0-preview5-19227-01" />
+        <dependency id="lifebook.core.logging" version="1.0.10" />
+        <dependency id="Castle.Windsor.MsDependencyInjection" version="3.3.1" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

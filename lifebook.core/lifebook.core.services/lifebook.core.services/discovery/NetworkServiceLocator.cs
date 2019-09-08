@@ -2,8 +2,8 @@
 using System.Text;
 using System.Threading.Tasks;
 using Consul;
+using lifebook.core.services.interfaces;
 using lifebook.core.services.models;
-using Microsoft.Extensions.Configuration;
 
 namespace lifebook.core.services.discovery
 {

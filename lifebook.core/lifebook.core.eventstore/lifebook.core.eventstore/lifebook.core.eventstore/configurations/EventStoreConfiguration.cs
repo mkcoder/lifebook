@@ -1,25 +1,22 @@
-﻿using System;
-using Microsoft.Extensions.Configuration;
+﻿using lifebook.core.services.interfaces;
 
 namespace lifebook.core.eventstore.configurations
 {
     public class EventStoreConfiguration
     {
-        private readonly IConfigurationRoot configuration;
+        private readonly IConfiguration _configuration;
 
         public string IpAddress { get; } 
         public int Port { get; }
         public bool UseFakeEventStore { get; }
 
-        public EventStoreConfiguration(IConfigurationBuilder configurationBuilder)
+        public EventStoreConfiguration(IConfiguration configuration)
         {
-            configuration = configurationBuilder
-                                .AddJsonFile("eventstoreconfiguration.dev.json")
-                                .Build();
+            _configuration = configuration;
 
-            IpAddress = configuration["EventStore.IpAddress"];
-            Port = int.Parse(configuration["EventStore.Port"]);
-            UseFakeEventStore = bool.Parse(configuration["EventStore.UseFakeEventStore"]);
+            IpAddress = _configuration["EventStore.IpAddress"];
+            Port = _configuration.GetValue<int>("EventStore.Port");
+            UseFakeEventStore = _configuration.GetValue<bool>("EventStore.UseFakeEventStore");
         }
     }
 }

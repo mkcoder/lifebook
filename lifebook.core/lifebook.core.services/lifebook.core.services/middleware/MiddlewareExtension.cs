@@ -1,7 +1,6 @@
-﻿using System;
+﻿using lifebook.core.services.interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
 
 namespace lifebook.core.services.middleware
 {

@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 
 namespace lifebook.core.services.ServiceStartup
 {
@@ -8,9 +8,12 @@ namespace lifebook.core.services.ServiceStartup
     {
         public static void Start<T>() where T : BaseServiceStartup
         {
-            WebHost
+            Host
                 .CreateDefaultBuilder()
-                .UseStartup<T>()
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<T>();
+                })
                 .Build()
                 .Run();
         }

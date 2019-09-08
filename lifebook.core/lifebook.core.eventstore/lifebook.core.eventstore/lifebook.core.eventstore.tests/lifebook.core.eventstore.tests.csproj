@@ -7,13 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="nunit" Version="3.11.0" />
-    <PackageReference Include="NUnit3TestAdapter" Version="3.11.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+    <PackageReference Include="nunit" Version="3.12.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.15.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
     <PackageReference Include="NSubstitute" Version="4.2.1" />
     <PackageReference Include="NUnit.Console" Version="3.10.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-    <PackageReference Include="lifebook.core.services" Version="1.0.11" />
+    <PackageReference Include="lifebook.core.services" Version="3.0.10" />
     <PackageReference Include="lifebook.core.database.repository" Version="1.0.11" />
     <PackageReference Include="lifebook.apploader.internal.services" Version="1.0.10" />
     <PackageReference Include="lifebook.core.database.databaseprovider" Version="1.0.10" />

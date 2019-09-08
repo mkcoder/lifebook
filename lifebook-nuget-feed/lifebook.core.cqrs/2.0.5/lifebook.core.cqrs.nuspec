@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>lifebook.core.cqrs</id>
+    <version>2.0.5</version>
+    <authors>mkcoder</authors>
+    <owners>mkcoder</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <licenseUrl>https://github.com/mkcoder/lifebook</licenseUrl>
+    <projectUrl>https://github.com/mkcoder/lifebook</projectUrl>
+    <iconUrl>https://github.com/mkcoder/lifebook</iconUrl>
+    <description>adds cqrs support to any console application</description>
+    <copyright>open</copyright>
+    <dependencies>
+      <group targetFramework=".NETCoreApp3.0">
+        <dependency id="Castle.Core" version="4.4.0" exclude="Build,Analyzers" />
+        <dependency id="lifebook.core.eventstore" version="3.0.1" exclude="Build,Analyzers" />
+        <dependency id="lifebook.core.eventstore.domain" version="3.0.0" exclude="Build,Analyzers" />
+        <dependency id="lifebook.core.services" version="3.0.6" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <contentFiles>
+      <files include="any/netcoreapp3.0/appsettings.Development.json" buildAction="Content" />
+      <files include="any/netcoreapp3.0/appsettings.json" buildAction="Content" />
+    </contentFiles>
+  </metadata>
+</package>

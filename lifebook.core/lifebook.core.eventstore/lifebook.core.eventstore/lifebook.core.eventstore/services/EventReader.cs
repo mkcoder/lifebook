@@ -18,64 +18,56 @@ namespace lifebook.core.eventstore.services
 
         public async Task<Event> GetLastEventWrittenToStreamAsync(StreamCategorySpecifier streamCategory)
         {
-            try
+            return await TryCatchCloseConnection(async () =>
             {
-                await _eventStoreClient.ConnectAsync();
                 return (await _eventStoreClient.ReadEventsAsync(streamCategory)).Last();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                _eventStoreClient.Close();
-            }
+            });
         }
 
         public async Task<Event> GetLastEventWrittenToStreamForAggregateAsync(StreamCategorySpecifier streamCategory)
         {
-            try
+            return await TryCatchCloseConnection(async () =>
             {
-                await _eventStoreClient.ConnectAsync();
                 return (await ReadAllEventsFromStreamCategoryForAggregateAsync(streamCategory)).Last();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                _eventStoreClient.Close();
-            }
+            });
         }
 
         public async Task<List<Event>> ReadAllEventsFromStreamCategoryAsync(StreamCategorySpecifier categorySpecifier)            
         {
-            try
+            return await TryCatchCloseConnection(async () =>
             {
-                await _eventStoreClient.ConnectAsync();
                 var result = await _eventStoreClient.ReadEventsAsync(categorySpecifier);
                 return result.ToList<Event>();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                _eventStoreClient.Close();
-            }
+            });            
         }
 
-        public async Task<List<Event>> ReadAllEventsFromStreamCategoryForAggregateAsync(StreamCategorySpecifier categorySpecifier)
-        {            
-            try
+        public async Task<List<T>> ReadAllEventsFromStreamCategoryAsync<T>(StreamCategorySpecifier categorySpecifier) where T : EntityEvent, ICreateEvent<T>, new()
+        {
+            return await TryCatchCloseConnection(async () =>
             {
-                await _eventStoreClient.ConnectAsync();
+                var result = await _eventStoreClient.ReadEventsAsync<T>(categorySpecifier);
+                return result.ToList<T>();
+            });
+        }
+
+        // NO NO NO NO NO
+        [Obsolete]
+        public async Task<List<Event>> ReadAllEventsFromStreamCategoryForAggregateAsync(StreamCategorySpecifier categorySpecifier)
+        {
+            return await TryCatchCloseConnection(async () =>
+            {
                 return (await _eventStoreClient.ReadEventsAsync(categorySpecifier))
                         .Where(e => e.EntityId == categorySpecifier.AggregateId)
                         .ToList<Event>();
+            });
+        }
+
+        private async Task<T> TryCatchCloseConnection<T>(Func<Task<T>> func)
+        {
+            try
+            {
+                await _eventStoreClient.ConnectAsync();
+                return await func();
             }
             catch (Exception)
             {

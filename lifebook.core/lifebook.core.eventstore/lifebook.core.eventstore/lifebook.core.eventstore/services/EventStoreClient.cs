@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -43,9 +42,9 @@ namespace lifebook.core.eventstore.services
             _connected = false;
         }
 
-        internal override async Task<List<AggregateEvent>> ReadEventsAsync(StreamCategorySpecifier specifier)
+        internal override async Task<List<EntityEvent>> ReadEventsAsync(StreamCategorySpecifier specifier)
         {
-            var result = new List<AggregateEvent>();
+            var result = new List<EntityEvent>();
             var reading = true;
             int index = 0;
             int readPerCycle = 200;            
@@ -54,7 +53,28 @@ namespace lifebook.core.eventstore.services
                 var slice = await eventStoreConnection.ReadStreamEventsForwardAsync($"$ce-{specifier.GetCategoryStream()}", index*readPerCycle, readPerCycle, true);
                 result.AddRange(
                     slice.Events
-                    .Select(e => AggregateEvent.Create(e.Event.EventType, e.Event.Created, e.Event.Data, e.Event.Metadata))
+                    .Select(e => EntityEvent.Create(e.Event.EventType, e.Event.Created, e.Event.Data, e.Event.Metadata))
+                    .ToList()
+                );
+                reading = !slice.IsEndOfStream;
+                index++;
+            } while (reading);
+
+            return result;
+        }
+
+        internal override async Task<List<T>> ReadEventsAsync<T>(StreamCategorySpecifier specifier)
+        {
+            var result = new List<T>();
+            var reading = true;
+            int index = 0;
+            int readPerCycle = 200;
+            do
+            {
+                var slice = await eventStoreConnection.ReadStreamEventsForwardAsync($"$ce-{specifier.GetCategoryStream()}", index * readPerCycle, readPerCycle, true);
+                result.AddRange(
+                    slice.Events
+                    .Select(e => new T().Create(e.Event.EventType, e.Event.Created, e.Event.Data, e.Event.Metadata))
                     .ToList()
                 );
                 reading = !slice.IsEndOfStream;
@@ -66,8 +86,8 @@ namespace lifebook.core.eventstore.services
 
         internal override async Task WriteEventAsync(StreamCategorySpecifier specifier, Event e)
         {
-            await eventStoreConnection.AppendToStreamAsync(specifier.GetCategoryStreamWithAggregateId(e.EntityId),
-                e.EventNumber == 0 ? ExpectedVersion.Any : e.EventNumber,
+            await eventStoreConnection.AppendToStreamAsync(specifier.GetCategoryStreamWithAggregateId(),
+                e.EventVersion == 0 ? ExpectedVersion.Any : e.EventVersion,
                 new EventData(e.EventId, e.GetEventType(), true, e.EventDataToByteArray(), e.EventMetadataToByteArray()));
         }
     }

@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.cqrses", "lifebook.core.cqrses\lifebook.core.cqrses.csproj", "{7DD69C7C-0308-48E1-BA46-7053ECBF7356}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.cqrs.tests", "lifebook.core.cqrs.tests\lifebook.core.cqrs.tests.csproj", "{FAFC7AB6-AE4D-48EB-A51E-50E04B83F726}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,5 +15,9 @@ Global
 		{7DD69C7C-0308-48E1-BA46-7053ECBF7356}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DD69C7C-0308-48E1-BA46-7053ECBF7356}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DD69C7C-0308-48E1-BA46-7053ECBF7356}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAFC7AB6-AE4D-48EB-A51E-50E04B83F726}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAFC7AB6-AE4D-48EB-A51E-50E04B83F726}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAFC7AB6-AE4D-48EB-A51E-50E04B83F726}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAFC7AB6-AE4D-48EB-A51E-50E04B83F726}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

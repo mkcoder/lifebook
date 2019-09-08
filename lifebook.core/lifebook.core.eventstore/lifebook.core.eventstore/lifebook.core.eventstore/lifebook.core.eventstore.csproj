@@ -10,7 +10,7 @@
     <Description>the library to connect to eventstore</Description>
     <PackageId>lifebook.core.eventstore</PackageId>
     <PackageProjectUrl>https://github.com/mkcoder/lifebook</PackageProjectUrl>
-    <PackageVersion>2.0.4</PackageVersion>
+    <PackageVersion>3.0.9</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,6 +19,7 @@
     <Folder Include="interfaces\" />
     <Folder Include="extensions\" />
     <Folder Include="configurations\" />
+    <Folder Include="providers\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\lifebook.core.eventstore.domain\lifebook.core.eventstore.domain.csproj" />
@@ -28,20 +29,6 @@
     <PackageReference Include="EventStore.ClientAPI.NetCore" Version="4.1.0.23" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     <PackageReference Include="lifebook.core.logging" Version="1.0.10" />
-    <PackageReference Include="lifebook.core.services" Version="1.0.11" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="eventstoreconfiguration.dev.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Update="eventstoreconfiguration.dev.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="eventstoreconfiguration.dev.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <IncludeInPackage>true</IncludeInPackage>
-    </EmbeddedResource>
+    <PackageReference Include="lifebook.core.services" Version="3.0.9" />
   </ItemGroup>
 </Project>

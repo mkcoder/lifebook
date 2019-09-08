@@ -12,11 +12,12 @@
     <PackageId>lifebook.core.eventstore.domain</PackageId>
     <ReleaseVersion>2.0.0</ReleaseVersion>
     <SynchReleaseVersion>false</SynchReleaseVersion>
-    <PackageVersion>2.0.2</PackageVersion>
+    <PackageVersion>3.0.7</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <Folder Include="apis\" />
     <Folder Include="Models\" />
+    <Folder Include="Attributes\" />
   </ItemGroup>
 </Project>

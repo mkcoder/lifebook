@@ -59,9 +59,14 @@ namespace lifebook.core.eventstore.services
             throw new ArgumentNullException($"Could not find any stream for this {specifier}.");
         }
 
-        internal override async Task<List<AggregateEvent>> ReadEventsAsync(StreamCategorySpecifier specifier)
+        internal override async Task<List<EntityEvent>> ReadEventsAsync(StreamCategorySpecifier specifier)
         {
-            return (await ReadEvent(specifier)).Select(e => AggregateEvent.Create("AggregateEvent", e.Item2, e.Item1.EventDataToByteArray(), e.Item1.EventMetadataToByteArray())).ToList();
+            return (await ReadEvent(specifier)).Select(e => EntityEvent.Create("AggregateEvent", e.Item2, e.Item1.EventDataToByteArray(), e.Item1.EventMetadataToByteArray())).ToList();
+        }
+
+        internal override Task<List<T>> ReadEventsAsync<T>(StreamCategorySpecifier specifier)
+        {
+            throw new NotImplementedException();
         }
     }
 }

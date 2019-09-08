@@ -72,11 +72,11 @@ namespace lifebook.core.eventstore.tests.EventStoreClientTest
             for (int i = 0; i < 5; i++)
             {
                 Guid g = Guid.NewGuid();
-                var categpory = new StreamCategorySpecifier("test", "primary", "TestPerson", g);
+                var category = new StreamCategorySpecifier("test", "primary", "TestPerson", g);
                 foreach (var e in lifeEvents)
                 {
                     e.EntityId = g;
-                    await eventWriter.WriteEventAsync(categpory, e);
+                    await eventWriter.WriteEventAsync(category, e);
                 }
             }
         }
@@ -91,17 +91,6 @@ namespace lifebook.core.eventstore.tests.EventStoreClientTest
             var e = ae.Data.TransformDataFromString(s => JObject.Parse(s).ToObject<PersonCreated>());
             Assert.IsNotNull(events);
             Assert.IsNotNull(e.EntityId);
-        }
-
-        [Test]
-        [Explicit]
-        public void ExceptionClosesStream()
-        {
-            Assert.ThrowsAsync<Exception>(async () =>
-            {
-                var categpory = new StreamCategorySpecifier("test", "primary", "Exception");
-                var events = await eventReader.ReadAllEventsFromStreamCategoryAsync(categpory);
-            });
         }
     }
 

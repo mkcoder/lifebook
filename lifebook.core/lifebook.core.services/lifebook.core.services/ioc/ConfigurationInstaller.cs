@@ -7,6 +7,7 @@ using Castle.Windsor;
 using lifebook.core.services.attribute;
 using lifebook.core.services.configuration;
 using Microsoft.Extensions.Configuration;
+using lifebook.core.services.extensions;
 
 namespace lifebook.core.services
 {
@@ -16,8 +17,7 @@ namespace lifebook.core.services
         {
             container.Register(
                 // register all our IConfigurationProviderInitializer
-
-                Classes.FromAssembly(Assembly.GetExecutingAssembly())
+                Classes.FromAssemblyInThisApplication(GetType().Assembly.GetRootAssembly())
                     .BasedOn<IConfigurationProviderInistalizer>()  
                     .If(t =>
                     {
@@ -26,7 +26,7 @@ namespace lifebook.core.services
                         return true;
                     })
                     .LifestyleTransient()
-                    .WithServiceFromInterface(),
+                    .WithServiceAllInterfaces(),
                 // when we rebind it with on create and pass it through the initializer
                 Component.For<IConfigurationBuilder>().OnCreate(builder =>
                 {
