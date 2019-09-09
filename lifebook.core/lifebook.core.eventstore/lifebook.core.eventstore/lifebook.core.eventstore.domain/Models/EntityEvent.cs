@@ -6,7 +6,7 @@ namespace lifebook.core.eventstore.domain.models
 {
     public class EntityEvent : Event
     {
-        public Data Data { get; private set; }
+        public Data Data { get; protected set; }
 
         public static EntityEvent Create(string eventType, DateTime created, byte[] data, byte[] metadata)
         {

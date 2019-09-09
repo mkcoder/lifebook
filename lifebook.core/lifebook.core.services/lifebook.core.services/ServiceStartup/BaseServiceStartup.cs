@@ -9,31 +9,41 @@ using lifebook.core.services.extensions;
 using lifebook.core.services.interfaces;
 using lifebook.core.services.middleware;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace lifebook.core.services.ServiceStartup
 {
     public abstract class BaseServiceStartup
     {
-        private readonly IWindsorContainer _container = new WindsorContainer();
-        public interfaces.IConfiguration Configuration { get; set; }
+        public IConfiguration Configuration { get; set; }
 
         public abstract void RegisterService(IWindsorContainer windsorContainer);
 
-        public void ConfigureServices(IServiceCollection services)
+        public virtual void AfterConfigureServices(IApplicationBuilder app, IWebHostEnvironment env) { }
+
+        public virtual void AfterConfigureServices(IServiceCollection services) { }
+
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            _container.Install(FromAssembly.InThisApplication(GetType().Assembly.GetRootAssembly()));
-            _container.Register(Component.For<ILogger>().ImplementedBy<Logger>());
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
 
-            Configuration = _container.Resolve<IConfiguration>();
+            app.UseHttpsRedirection();
 
-            RegisterService(_container);
-            WindsorRegistrationHelper.CreateServiceProvider(_container, services);
-        }
+            app.UseRouting();
 
-        public void Configure(IApplicationBuilder app)
-        {
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+            Configuration = app.ApplicationServices.GetService<IConfiguration>();
             app.RegisterService(Configuration);
+            AfterConfigureServices(app, env);
         }
     }
 }

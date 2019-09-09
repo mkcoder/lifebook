@@ -1,5 +1,6 @@
 ﻿using System;
 using lifebook.core.cqrses;
+using lifebook.core.services.interfaces;
 using lifebook.core.services.ServiceStartup;
 
 namespace lifebook.core.cqrs.tests
@@ -8,7 +9,11 @@ namespace lifebook.core.cqrs.tests
     {
         static void Main(string[] args)
         {
-            Hosting.Start<CQRSStartup>();
+            Hosting.Start<Startup>();
         }
+    }
+
+    public class Startup : CQRSStartup
+    {
     }
 }

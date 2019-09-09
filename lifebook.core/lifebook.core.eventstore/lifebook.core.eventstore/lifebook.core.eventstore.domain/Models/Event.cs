@@ -12,7 +12,7 @@ namespace lifebook.core.eventstore.domain.models
         public Guid CausationId { get; set; } = Guid.NewGuid();
         public string EventName { get; set; }
         public int EventVersion { get; set; }
-        public DateTime DateCreated { get; set; }
+        public DateTime DateCreated { get; set; } = DateTime.UtcNow;
 
         public Event()
         {
