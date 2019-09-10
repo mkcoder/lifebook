@@ -1,4 +1,4 @@
-IE﻿using System;
+using System;
 using lifebook.core.cqrses.Attributes;
 using lifebook.core.cqrses.Domains;
 using lifebook.core.cqrses.Services;
