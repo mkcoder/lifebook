@@ -1,4 +1,4 @@
-E﻿using System;
+IE﻿using System;
 using lifebook.core.cqrses.Attributes;
 using lifebook.core.cqrses.Domains;
 using lifebook.core.cqrses.Services;
@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace lifebook.core.cqrs.tests.Aggregates
 {
     [CommandHandlers]
-    public class PersonController : AggregateRoot
+    public class PersonAggregate : AggregateRoot
     {
         [Route("hello"), HttpGet]
         public string Hello() { return "hello"; }
