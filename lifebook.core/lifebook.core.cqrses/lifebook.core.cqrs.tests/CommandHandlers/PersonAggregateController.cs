@@ -8,19 +8,19 @@ using Microsoft.AspNetCore.Mvc;
 namespace lifebook.core.cqrs.tests.Aggregates
 {
     [CommandHandlers]
-    [ApiController]
-    public class PersonController : ControllerBase
+    [EventHandlers(typeof(PersonAggregate))]
+    public class PersonAggregateController : AggregateRoot
     {
-        [Route("hello"), HttpGet]
-        public string Hello() { return "hello"; }
-
         [CommandHandlerFor("CreatePerson")]
-        public AggregateEvent CreatePerson(CreatePersonCommand createPersonCommand)
+        public AggregateEvent CreatePerson([FromBody]CreatePersonCommand createPersonCommand)
         {
-            return new PersonCreated()
+            return WithAggregate<PersonAggregate, AggregateEvent>(aggregate =>
             {
-                FirstName = createPersonCommand.FirstName
-            };
+                return new PersonCreated()
+                {
+                    FirstName = createPersonCommand.FirstName
+                };
+            });
         }
 
         public class CreatePersonCommand : Command

@@ -41,12 +41,12 @@ namespace lifebook.core.eventstore.services
             });            
         }
 
-        public async Task<List<T>> ReadAllEventsFromStreamCategoryAsync<T>(StreamCategorySpecifier categorySpecifier) where T : EntityEvent, ICreateEvent<T>, new()
+        public async Task<List<TOut>> ReadAllEventsFromStreamCategoryAsync<T, TOut>(StreamCategorySpecifier categorySpecifier) where T : ICreateEvent<TOut>, new() where TOut : Event
         {
             return await TryCatchCloseConnection(async () =>
             {
-                var result = await _eventStoreClient.ReadEventsAsync<T>(categorySpecifier);
-                return result.ToList<T>();
+                var result = await _eventStoreClient.ReadEventsAsync<T, TOut>(categorySpecifier);
+                return result;
             });
         }
 

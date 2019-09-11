@@ -15,6 +15,13 @@ namespace lifebook.core.services.ServiceStartup
 {
     public class CustomWindosrCastleServiceProviderFactory : IServiceProviderFactory<IWindsorContainer>
     {
+        private IServiceResolver serviceResolver;
+
+        public CustomWindosrCastleServiceProviderFactory(IServiceResolver serviceResolver)
+        {
+            this.serviceResolver = serviceResolver;
+        }
+
         public IWindsorContainer CreateBuilder(IServiceCollection services)
         {
             var container = new WindsorContainer();
@@ -26,8 +33,9 @@ namespace lifebook.core.services.ServiceStartup
             container.Install(FromAssembly.InThisApplication(GetType().Assembly.GetRootAssembly()));
             container.Register(Component.For<ILogger>().ImplementedBy<Logger>());
             container.Register(Component.For<IServiceProvider>().ImplementedBy<WindosrCastleServiceProvider>());
-
             container.AddServices(services);
+
+            serviceResolver?.ServiceResolver(container, services);
             return container;
         }
 

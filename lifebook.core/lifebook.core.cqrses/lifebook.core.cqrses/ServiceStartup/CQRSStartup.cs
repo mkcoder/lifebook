@@ -1,5 +1,4 @@
 ﻿using Castle.Windsor;
-using lifebook.core.eventstore.extensions;
 using lifebook.core.services.interfaces;
 using lifebook.core.services.ServiceStartup;
 using Microsoft.AspNetCore.Builder;

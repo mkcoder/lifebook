@@ -13,6 +13,7 @@ namespace lifebook.core.eventstore.domain.models
         public string EventName { get; set; }
         public int EventVersion { get; set; }
         public DateTime DateCreated { get; set; } = DateTime.UtcNow;
+        public string EventType { get; set; } = "EntityEvent";
 
         public Event()
         {

@@ -63,9 +63,9 @@ namespace lifebook.core.eventstore.services
             return result;
         }
 
-        internal override async Task<List<T>> ReadEventsAsync<T>(StreamCategorySpecifier specifier)
+        internal override async Task<List<TOut>> ReadEventsAsync<T, TOut>(StreamCategorySpecifier specifier)
         {
-            var result = new List<T>();
+            var result = new List<TOut>();
             var reading = true;
             int index = 0;
             int readPerCycle = 200;
@@ -88,7 +88,7 @@ namespace lifebook.core.eventstore.services
         {
             await eventStoreConnection.AppendToStreamAsync(specifier.GetCategoryStreamWithAggregateId(),
                 e.EventVersion == 0 ? ExpectedVersion.Any : e.EventVersion,
-                new EventData(e.EventId, e.GetEventType(), true, e.EventDataToByteArray(), e.EventMetadataToByteArray()));
+                new EventData(e.EventId, e.EventType, true, e.EventDataToByteArray(), e.EventMetadataToByteArray()));
         }
     }
 }

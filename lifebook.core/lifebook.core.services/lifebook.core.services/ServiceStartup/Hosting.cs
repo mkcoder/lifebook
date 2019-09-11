@@ -10,11 +10,11 @@ namespace lifebook.core.services.ServiceStartup
 {
     public static class Hosting
     {
-        public static void Start<T>() where T : BaseServiceStartup
+        public static void Start<T>(IServiceResolver serviceResolver = null) where T : BaseServiceStartup
         {
                 Host
                 .CreateDefaultBuilder()
-                .UseServiceProviderFactory(new CustomWindosrCastleServiceProviderFactory())
+                .UseServiceProviderFactory(new CustomWindosrCastleServiceProviderFactory(serviceResolver))
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<T>();
@@ -22,12 +22,10 @@ namespace lifebook.core.services.ServiceStartup
                 .Build()
                 .Run();
         }
+    }
 
-        private class ContainerBuilder
-        {
-            public ContainerBuilder()
-            {
-            }
-        }
+    public interface IServiceResolver
+    {
+        void ServiceResolver(IWindsorContainer container, IServiceCollection services);
     }
 }

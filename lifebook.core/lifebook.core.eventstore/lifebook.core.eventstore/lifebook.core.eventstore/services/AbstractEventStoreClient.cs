@@ -20,7 +20,7 @@ namespace lifebook.core.eventstore.services
 
         // Internal 
         internal abstract Task<List<EntityEvent>> ReadEventsAsync(StreamCategorySpecifier specifier);
-        internal abstract Task<List<T>> ReadEventsAsync<T>(StreamCategorySpecifier specifier) where T : ICreateEvent<T>, new();
+        internal abstract Task<List<TOut>> ReadEventsAsync<T, TOut>(StreamCategorySpecifier specifier) where T : ICreateEvent<TOut>, new() where TOut : Event;
         internal abstract Task WriteEventAsync(StreamCategorySpecifier specifier, Event @e);        
     }
 }

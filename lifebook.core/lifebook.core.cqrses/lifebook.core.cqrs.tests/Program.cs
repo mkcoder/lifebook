@@ -9,7 +9,7 @@ namespace lifebook.core.cqrs.tests
     {
         static void Main(string[] args)
         {
-            Hosting.Start<Startup>();
+            Hosting.Start<Startup>(new ServiceResolver());
         }
     }
 

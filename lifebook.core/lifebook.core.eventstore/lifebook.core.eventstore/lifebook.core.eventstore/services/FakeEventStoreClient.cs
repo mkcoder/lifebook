@@ -64,7 +64,7 @@ namespace lifebook.core.eventstore.services
             return (await ReadEvent(specifier)).Select(e => EntityEvent.Create("AggregateEvent", e.Item2, e.Item1.EventDataToByteArray(), e.Item1.EventMetadataToByteArray())).ToList();
         }
 
-        internal override Task<List<T>> ReadEventsAsync<T>(StreamCategorySpecifier specifier)
+        internal override Task<List<TOut>> ReadEventsAsync<T, TOut>(StreamCategorySpecifier specifier)
         {
             throw new NotImplementedException();
         }

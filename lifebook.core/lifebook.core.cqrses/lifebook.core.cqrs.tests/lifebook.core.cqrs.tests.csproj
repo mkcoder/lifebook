@@ -18,9 +18,10 @@
     <ProjectReference Include="..\lifebook.core.cqrses\lifebook.core.cqrses.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="CommandHandlers\" />
+    <Folder Include="CommandHandlers\Schemas\" />
+    <Folder Include="CommandHandlers\Schemas\Commands\" />
+    <Folder Include="CommandHandlers\Schemas\Events\" />
     <Folder Include="Aggregates\" />
-    <Folder Include="Aggregates\Schemas\" />
-    <Folder Include="Aggregates\Schemas\Commands\" />
-    <Folder Include="Aggregates\Schemas\Events\" />
   </ItemGroup>
 </Project>

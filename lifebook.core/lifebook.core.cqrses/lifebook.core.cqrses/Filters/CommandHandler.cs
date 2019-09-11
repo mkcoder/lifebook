@@ -29,25 +29,21 @@ namespace lifebook.core.cqrses.Filters
         private Guid _causationId = Guid.Empty;
         private string _aggregateType = null;
 
-        public CommandHandler(IServiceProvider serviceProvider, IConfiguration configuration, ILogger logger)
+        public CommandHandler(IConfiguration configuration, ILogger logger, IEventReader eventReader, IEventWriter eventWriter)
         {
-            var container = (WindsorContainer)serviceProvider.GetService(typeof(IWindsorContainer));
-            if(!container.Kernel.HasComponent(typeof(IEventStoreClient)))
-            {
-                container.InstallEventStore();
-            }
-            _eventReader = container.Resolve<IEventReader>();
-            _eventWriter = container.Resolve<IEventWriter>();
+            _eventReader = eventReader;
+            _eventWriter = eventWriter;
             _configuration = configuration;
             _logger = logger;
         }
 
-        public Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
+        public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
             var isCommandHandler = ((ControllerActionDescriptor)context.ActionDescriptor).MethodInfo.GetCustomAttributes(typeof(CommandHandlerFor), true);
             if (isCommandHandler.Any())
             {                
-                var command = (Command)context.ActionArguments.Single().Value;
+                var command = (Command)context.ActionArguments.First().Value;
+                var mightBeAggregate = (EventHandlersAttribute)context.Controller.GetType().GetCustomAttributes(typeof(EventHandlersAttribute), false).Single();
                 _logger.Information($"Command read {command}");
                 command.IsValid();
                 command.CorrelationId = Guid.NewGuid();
@@ -55,8 +51,10 @@ namespace lifebook.core.cqrses.Filters
                 _aggregateId = command.AggregateId;
                 _correlationId = command.CorrelationId;
                 _causationId = command.CommandId;
+                var ae = new AggregateReader(_eventReader, _configuration, command, mightBeAggregate);
+                ((AggregateRoot)context.Controller).SetAggregate(await ae.GetAggregate());
             }
-            return next();
+            await next();
         }
 
         public Task OnResultExecutionAsync(ResultExecutingContext context, ResultExecutionDelegate next)

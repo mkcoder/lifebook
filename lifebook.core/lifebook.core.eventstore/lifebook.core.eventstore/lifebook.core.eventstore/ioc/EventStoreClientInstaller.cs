@@ -14,7 +14,19 @@ namespace lifebook.core.ioc
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
+            try
+            {
+                if (!container.Kernel.HasComponent(typeof(TypedFactoryFacility)))
+                {
+                    container.AddFacility<TypedFactoryFacility>();
+                }
+            }
+            catch (Exception)
+            {
+            }
+
             container.Register(
+                Component.For<AbstractEventStoreClient>().ImplementedBy<EventStoreClient>().LifeStyle.Transient,
                 Component.For<IEventStoreClientFactory>().AsFactory(),
                 Component.For<IEventStoreClient>().ImplementedBy<EventStoreClient>().Named("EventStoreClient").LifeStyle.Transient,
                 Component.For<IEventWriter>().ImplementedBy<EventWriter>().LifeStyle.Transient,
