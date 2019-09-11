@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using lifebook.core.eventstore.domain.api;
 using lifebook.core.eventstore.domain.Attributes;
 using lifebook.core.eventstore.domain.models;
+using Newtonsoft.Json;
 
 namespace lifebook.core.cqrses.Domains
 {
@@ -13,7 +13,8 @@ namespace lifebook.core.cqrses.Domains
         [Metadata]
         public string CommandName { get; set; }
         public new string EventType { get; set; } = "AggregateEvent";
-        [JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public Data Data { get; set; }
     }
 
@@ -23,7 +24,7 @@ namespace lifebook.core.cqrses.Domains
 
         public AggregateEvent Create(string eventType, DateTime created, byte[] data, byte[] metadata)
         {
-            var ag = JsonSerializer.Deserialize<AggregateEvent>(Encoding.UTF8.GetString(metadata));
+            var ag = System.Text.Json.JsonSerializer.Deserialize<AggregateEvent>(Encoding.UTF8.GetString(metadata));
             /*var aee = new AggregateEntityEvent();
             aee.EntityId = ag.EntityId;
             aee.CorrelationId = ag.CorrelationId;

@@ -68,7 +68,7 @@ namespace lifebook.core.eventstore.services
             var result = new List<TOut>();
             var reading = true;
             int index = 0;
-            int readPerCycle = 200;
+            int readPerCycle = _eventStoreConfiguration.ReadPerCycle;
             do
             {
                 var slice = await eventStoreConnection.ReadStreamEventsForwardAsync($"$ce-{specifier.GetCategoryStream()}", index * readPerCycle, readPerCycle, true);

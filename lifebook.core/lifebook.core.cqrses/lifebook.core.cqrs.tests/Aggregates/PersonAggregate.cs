@@ -8,16 +8,24 @@ using static lifebook.core.cqrs.tests.Aggregates.PersonAggregateController;
 
 namespace lifebook.core.cqrs.tests.Aggregates
 {
-    [EventHandlers(typeof(PersonAggregate))]
     public class PersonAggregate : Aggregate
     {
         public string FirstName { get; private set; }
+        public int Age { get; private set; }
 
         [EventHandlerFor("PersonCreated")]
-        public void Handle(AggregateEvent e)
+        public void PersonCreated(AggregateEvent e)
         {
             var personCreated = e.Data.TransformDataFromString(j => JsonSerializer.Deserialize<PersonCreated>(j));
-            this.FirstName = personCreated.FirstName;
+            FirstName = personCreated.FirstName;
+            Age = personCreated.Age;
+        }
+
+        [EventHandlerFor("PersonAgeChanged")]
+        public void PersonAgeChanged(AggregateEvent e)
+        {
+            var personCreated = e.Data.TransformDataFromString(j => JsonSerializer.Deserialize<PersonAgeChanged>(j));
+            Age = personCreated.Age;
         }
 
         public PersonAggregate GetAggregate() => this;

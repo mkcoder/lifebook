@@ -8,6 +8,7 @@ namespace lifebook.core.eventstore.configurations
 
         public string IpAddress { get; } 
         public int Port { get; }
+        public int ReadPerCycle { get; }
         public bool UseFakeEventStore { get; }
 
         public EventStoreConfiguration(IConfiguration configuration)
@@ -16,7 +17,8 @@ namespace lifebook.core.eventstore.configurations
 
             IpAddress = _configuration["EventStore.IpAddress"];
             Port = _configuration.GetValue<int>("EventStore.Port");
-            UseFakeEventStore = _configuration.GetValue<bool>("EventStore.UseFakeEventStore");
+            ReadPerCycle = _configuration.GetValue<int>("EventStore.ReadPerCycle");
+            UseFakeEventStore = _configuration.GetValue<bool>("EventStore.UseFakeEventStore"); 
         }
     }
 }
