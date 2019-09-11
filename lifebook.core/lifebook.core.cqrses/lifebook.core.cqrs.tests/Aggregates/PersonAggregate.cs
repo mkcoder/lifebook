@@ -4,7 +4,7 @@ using lifebook.core.cqrses.Attributes;
 using lifebook.core.cqrses.Domains;
 using lifebook.core.cqrses.Services;
 using lifebook.core.eventstore.domain.models;
-using static lifebook.core.cqrs.tests.Aggregates.PersonAggregateController;
+using static lifebook.core.cqrs.tests.Aggregates.PersonAggregateControllers;
 
 namespace lifebook.core.cqrs.tests.Aggregates
 {

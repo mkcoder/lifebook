@@ -9,7 +9,7 @@ namespace lifebook.core.cqrs.tests.Aggregates
 {
     [CommandHandlers]
     [EventHandlers(typeof(PersonAggregate))]
-    public class PersonAggregateController : AggregateRoot
+    public class PersonAggregateControllers : AggregateRoot
     {
         [CommandHandlerFor("CreatePerson")]
         public AggregateEvent CreatePerson(CreatePersonCommand createPersonCommand)
@@ -34,27 +34,6 @@ namespace lifebook.core.cqrs.tests.Aggregates
                     Age = aggregate.Age + 1
                 };
             });
-        }
-
-        public class CreatePersonCommand : Command
-        {
-            public string FirstName { get; set; }
-            public int Age { get; set; }
-        }
-
-        public class BirthdayCommand : Command
-        {
-        }
-
-        public class PersonCreated : AggregateEvent
-        {
-            public string FirstName { get; set; }
-            public int Age { get; set; }
-        }
-
-        public class PersonAgeChanged : AggregateEvent
-        {
-            public int Age { get; set; }
         }
     }
 }

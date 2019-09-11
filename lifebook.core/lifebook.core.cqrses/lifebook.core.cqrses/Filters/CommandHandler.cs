@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Castle.Windsor;
 using lifebook.core.cqrses.Attributes;
 using lifebook.core.cqrses.Domains;
+using lifebook.core.cqrses.Extensions;
 using lifebook.core.cqrses.Services;
 using lifebook.core.eventstore.domain.api;
 using lifebook.core.eventstore.domain.models;
@@ -43,16 +44,18 @@ namespace lifebook.core.cqrses.Filters
             if (isCommandHandler.Any())
             {                
                 var command = (Command)context.ActionArguments.First().Value;
-                var mightBeAggregate = (EventHandlersAttribute)context.Controller.GetType().GetCustomAttributes(typeof(EventHandlersAttribute), false).Single();
-                _logger.Information($"Command read {command}");
+                var mightBeAggregate = (EventHandlersAttribute)context.Controller.GetType().GetCustomAttributes(typeof(EventHandlersAttribute), false).Single();                
                 command.IsValid();
                 command.CorrelationId = Guid.NewGuid();
                 _aggregateType = command.AggregateType;
                 _aggregateId = command.AggregateId;
                 _correlationId = command.CorrelationId;
                 _causationId = command.CommandId;
+                _logger.LogCommand(command);
                 var ae = new AggregateReader(_eventReader, _configuration, command, mightBeAggregate);
-                ((AggregateRoot)context.Controller).SetAggregate(await ae.GetAggregate());
+                var aggregate = await ae.GetAggregate();
+                _logger.LogJson("Aggregate hydrated as", aggregate);
+                ((AggregateRoot)context.Controller).SetAggregate(aggregate);
             }
             await next();
         }
@@ -70,7 +73,7 @@ namespace lifebook.core.cqrses.Filters
                     @e.CorrelationId = _correlationId;
                     @e.CausationId = _causationId;
                     ((ObjectResult)context.Result).Value = @e;
-                    _logger.Information($"Aggregate Event write {((ObjectResult)context.Result).Value}");
+                    _logger.LogEvent(@e);                    
                     _eventWriter.WriteEventAsync(new StreamCategorySpecifier(_configuration["ServiceName"], _configuration["ServiceInstance"], _aggregateType, e.EntityId), @e);
                 }
                 else
