@@ -1,9 +1,6 @@
-﻿using System;
-using lifebook.core.cqrses.Attributes;
+﻿using lifebook.core.cqrses.Attributes;
 using lifebook.core.cqrses.Domains;
 using lifebook.core.cqrses.Services;
-using lifebook.core.eventstore.domain.models;
-using Microsoft.AspNetCore.Mvc;
 
 namespace lifebook.core.cqrs.tests.Aggregates
 {

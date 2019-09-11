@@ -16,7 +16,7 @@ namespace lifebook.core.cqrses.Extensions
 
         public static void LogEvent(this ILogger logger, AggregateEvent e)
         {
-            logger.Information($"AggregateEvent writen for {e.EntityId} having {e.CorrelationId} and with data {JObject.FromObject(e).ToString()}");
+            logger.Information($"AggregateEvent writen for {e.EntityId} having correlationId {e.CorrelationId} and with data {JObject.FromObject(e).ToString()}");
         }
 
         public static void LogJson(this ILogger logger, string message, object e)
