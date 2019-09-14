@@ -9,7 +9,9 @@ namespace lifebook.core.eventstore.services
     public abstract class AbstractEventStoreClient : IEventStoreClient
     {
         protected bool _connected;
+        protected bool _closed;
         public bool IsConnected => _connected;
+        public bool Closed => _closed;
 
         // Public Abstract
         public abstract void Connect();

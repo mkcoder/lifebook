@@ -4,15 +4,20 @@ using System.Linq;
 using System.Threading.Tasks;
 using lifebook.core.eventstore.domain.api;
 using lifebook.core.eventstore.domain.models;
+using lifebook.core.logging.interfaces;
+using NeoSmart.AsyncLock;
 
 namespace lifebook.core.eventstore.services
 {
     public class EventReader : IEventReader
     {
         private readonly AbstractEventStoreClient _eventStoreClient;
+        private readonly AsyncLock asyncLock = new AsyncLock();
+        private readonly ILogger _logger;
 
-        public EventReader(AbstractEventStoreClient eventStoreClient)
+        public EventReader(AbstractEventStoreClient eventStoreClient, ILogger logger)
         {
+            _logger = logger;
             _eventStoreClient = eventStoreClient;
         }
 
@@ -50,8 +55,6 @@ namespace lifebook.core.eventstore.services
             });
         }
 
-        // NO NO NO NO NO
-        [Obsolete]
         public async Task<List<Event>> ReadAllEventsFromStreamCategoryForAggregateAsync(StreamCategorySpecifier categorySpecifier)
         {
             return await TryCatchCloseConnection(async () =>
@@ -64,19 +67,17 @@ namespace lifebook.core.eventstore.services
 
         private async Task<T> TryCatchCloseConnection<T>(Func<Task<T>> func)
         {
+            T result;
             try
             {
-                await _eventStoreClient.ConnectAsync();
-                return await func();
+                result = await func();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.Error(ex, "Error trying to read event from eventstore");
                 throw;
             }
-            finally
-            {
-                _eventStoreClient.Close();
-            }
+            return result;
         }
     }
 }

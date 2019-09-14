@@ -1,5 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using lifebook.core.cqrses.Domains;
+using lifebook.core.eventstore.domain.api;
+using lifebook.core.eventstore.domain.models;
 
 namespace lifebook.core.cqrses.Services
 {
@@ -7,7 +12,20 @@ namespace lifebook.core.cqrses.Services
     {
         public Guid CommandId { get; set; }
         public int CommandVersion { get; set; }
-        public Guid CorrelationId { get; set; }
+        private Guid _correlationId;
+        public Guid CorrelationId
+        {
+            get
+            {
+                if (_correlationId == Guid.Empty) return Guid.NewGuid();
+                return _correlationId;
+            }
+            set
+            {
+                if (value == Guid.Empty) _correlationId = Guid.NewGuid();
+                else _correlationId = value;
+            }
+        }
         public string AggregateType { get; set; }
         public string CommandName { get; set; }
         private DateTime _utcCommandDate;
@@ -18,14 +36,16 @@ namespace lifebook.core.cqrses.Services
         }
         public Guid AggregateId { get; set; }
 
-        public virtual void IsValid()
+        public virtual async Task IsValid(IEventReader eventReader, StreamCategorySpecifier category)
         {
+            var events = await eventReader.ReadAllEventsFromStreamCategoryAsync(category);
             Assertion.IsNotNull(CommandId);
+            Assertion.IsCommandUnique(events, CommandId);
             Assertion.IsNotDefault(CommandId);
             Assertion.IsNotNull(AggregateId);
             Assertion.IsNotDefault(AggregateId);
             Assertion.IsNotNull(CommandName);
-            Assertion.IsNotNull(AggregateType);
+            Assertion.IsNotNull(AggregateType);            
         }
     }
 
@@ -44,6 +64,14 @@ namespace lifebook.core.cqrses.Services
             if (t.Equals(default(T)))
             {
                 throw new ArgumentNullException(message ?? $"{nameof(t)} is null");
+            }
+        }
+
+        internal static void IsCommandUnique(List<Event> events, Guid commandId)
+        {
+            if (events.Where(e => e.CausationId == commandId).Any())
+            {
+                throw new UniqueConstraintViolatedException($"Unique constraint violated. CommandId (commandId) must be unique.");
             }
         }
     }

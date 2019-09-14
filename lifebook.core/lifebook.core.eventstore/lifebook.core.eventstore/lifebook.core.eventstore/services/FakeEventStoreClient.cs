@@ -39,8 +39,7 @@ namespace lifebook.core.eventstore.services
                 EventStore[specifier.GetCategoryStream()].Add((@e, DateTime.Now));                
             }
 
-            // I DON'T LIKE WARNINGS!
-            await Task.Run(() => { });
+            await Task.CompletedTask;
         }
 
         internal async Task<List<(Event, DateTime)>> ReadEvent(StreamCategorySpecifier specifier)
@@ -52,10 +51,7 @@ namespace lifebook.core.eventstore.services
                     return EventStore[specifier.GetCategoryStream()];
                 }
             }
-            // I DON'T LIKE WARNINGS!
-            await Task.Run(() => {
-
-            });
+            await Task.CompletedTask;
             throw new ArgumentNullException($"Could not find any stream for this {specifier}.");
         }
 

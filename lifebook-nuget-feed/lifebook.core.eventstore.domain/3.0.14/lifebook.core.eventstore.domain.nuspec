@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>lifebook.core.eventstore.domain</id>
+    <version>3.0.14</version>
+    <title>lifebook</title>
+    <authors>lifebook</authors>
+    <owners>lifebook</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <projectUrl>https://github.com/mkcoder/lifebook</projectUrl>
+    <description>this is the domain for eventstore</description>
+    <copyright>2019</copyright>
+    <dependencies>
+      <group targetFramework=".NETCoreApp3.0" />
+    </dependencies>
+  </metadata>
+</package>

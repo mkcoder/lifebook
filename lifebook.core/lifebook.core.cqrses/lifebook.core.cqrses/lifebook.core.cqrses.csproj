@@ -22,8 +22,8 @@
       <PrivateAssets Condition="'%(PackageReference.Version)' == ''">all</PrivateAssets>
       <Publish Condition="'%(PackageReference.Version)' == ''">true</Publish>
     </PackageReference>
-    <PackageReference Include="lifebook.core.eventstore" Version="3.0.14" />
-    <PackageReference Include="lifebook.core.eventstore.domain" Version="3.0.13" />
+    <PackageReference Include="lifebook.core.eventstore" Version="3.0.24" />
+    <PackageReference Include="lifebook.core.eventstore.domain" Version="3.0.14" />
     <PackageReference Include="Castle.Core" Version="4.4.0" />
     <PackageReference Include="lifebook.core.services" Version="3.0.40" />
   </ItemGroup>
@@ -35,5 +35,6 @@
     <Folder Include="Services\" />
     <Folder Include="Extensions\" />
     <Folder Include="ServiceStartup\" />
+    <Folder Include="Invariants\" />
   </ItemGroup>
 </Project>

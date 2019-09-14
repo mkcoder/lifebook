@@ -1,4 +1,5 @@
-﻿using lifebook.core.cqrses.Attributes;
+﻿using System.Collections.Generic;
+using lifebook.core.cqrses.Attributes;
 using lifebook.core.cqrses.Domains;
 using lifebook.core.cqrses.Services;
 
@@ -21,6 +22,15 @@ namespace lifebook.core.cqrs.tests.Aggregates
             });
         }
 
+        [CommandHandlerFor("ChangePersonNameAndAge")]
+        public List<AggregateEvent> ChangePersonNameAndAge(ChangePersonNameAndAgeCommand createPersonCommand)
+        {
+            var result = new List<AggregateEvent>();
+            result.Add(new PersonNameChanged() { Name = createPersonCommand.Name });
+            result.Add(new PersonAgeChanged() { Age = createPersonCommand.Age });
+            return result;
+        }
+
         [CommandHandlerFor("Birthday")]
         public AggregateEvent Birthday(BirthdayCommand createPersonCommand)
         {
@@ -32,5 +42,16 @@ namespace lifebook.core.cqrs.tests.Aggregates
                 };
             });
         }
+    }
+
+    internal class PersonNameChanged : AggregateEvent
+    {
+        public string Name { get; set; }
+    }
+
+    public class ChangePersonNameAndAgeCommand : Command
+    {
+        public string Name { get; set; }
+        public int Age { get; set; }
     }
 }

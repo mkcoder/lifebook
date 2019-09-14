@@ -12,7 +12,7 @@ namespace lifebook.core.logging.ioc
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(
-                Component.For<ILogger>().ImplementedBy<Logger>().LifestyleTransient()
+                Component.For<ILogger>().ImplementedBy<Logger>().LifeStyle.Singleton
             );
         }
     }

@@ -11,6 +11,7 @@ namespace lifebook.core.cqrs.tests.Aggregates
     public class PersonAggregate : Aggregate
     {
         public string FirstName { get; private set; }
+        public string LastName { get; private set; }
         public int Age { get; private set; }
 
         [EventHandlerFor("PersonCreated")]
@@ -19,6 +20,15 @@ namespace lifebook.core.cqrs.tests.Aggregates
             var personCreated = e.Data.TransformDataFromString(j => JsonSerializer.Deserialize<PersonCreated>(j));
             FirstName = personCreated.FirstName;
             Age = personCreated.Age;
+        }
+
+        [EventHandlerFor("PersonNameChanged")]
+        public void ChangePersonNameAndAge(AggregateEvent e)
+        {
+            var personCreated = e.Data.TransformDataFromString(j => JsonSerializer.Deserialize<PersonNameChanged>(j));
+            var fullName = personCreated.Name.Split(" ");
+            FirstName = fullName[0];
+            LastName = fullName[1];
         }
 
         [EventHandlerFor("PersonAgeChanged")]

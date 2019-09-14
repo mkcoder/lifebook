@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Castle.Windsor;
@@ -44,9 +45,9 @@ namespace lifebook.core.cqrses.Filters
             if (isCommandHandler.Any())
             {                
                 var command = (Command)context.ActionArguments.First().Value;
-                var mightBeAggregate = (EventHandlersAttribute)context.Controller.GetType().GetCustomAttributes(typeof(EventHandlersAttribute), false).Single();                
-                command.IsValid();
-                command.CorrelationId = Guid.NewGuid();
+
+                var mightBeAggregate = (EventHandlersAttribute)context.Controller.GetType().GetCustomAttributes(typeof(EventHandlersAttribute), false).Single();
+                await command.IsValid(_eventReader, new StreamCategorySpecifier(_configuration["ServiceName"], _configuration["ServiceInstance"], command.AggregateType, command.AggregateId));
                 _aggregateType = command.AggregateType;
                 _aggregateId = command.AggregateId;
                 _correlationId = command.CorrelationId;
@@ -60,21 +61,29 @@ namespace lifebook.core.cqrses.Filters
             await next();
         }
 
-        public Task OnResultExecutionAsync(ResultExecutingContext context, ResultExecutionDelegate next)
+        public async Task OnResultExecutionAsync(ResultExecutingContext context, ResultExecutionDelegate next)
         {
             var isCommandHandler = ((ControllerActionDescriptor)context.ActionDescriptor).MethodInfo.GetCustomAttributes(typeof(CommandHandlerFor), true);
             if (isCommandHandler.Any())
             {   
                 var result = ((ObjectResult)context.Result).Value;
+                var commandName = ((CommandHandlerFor)isCommandHandler[0]).Template;
                 if (result is AggregateEvent @e)
-                {                    
-                    @e.CommandName = ((CommandHandlerFor)isCommandHandler[0]).Template;
-                    @e.EntityId = _aggregateId;
-                    @e.CorrelationId = _correlationId;
-                    @e.CausationId = _causationId;
+                {
+                    SetupDefaultValues(e, commandName);
                     ((ObjectResult)context.Result).Value = @e;
-                    _logger.LogEvent(@e);                    
-                    _eventWriter.WriteEventAsync(new StreamCategorySpecifier(_configuration["ServiceName"], _configuration["ServiceInstance"], _aggregateType, e.EntityId), @e);
+                    _logger.LogEvent(@e);
+                    await _eventWriter.WriteEventAsync(new StreamCategorySpecifier(_configuration["ServiceName"], _configuration["ServiceInstance"], _aggregateType, e.EntityId), @e);
+                }
+                else if (result is List<AggregateEvent> listOfEvents)
+                {
+                    foreach (var @event in listOfEvents)
+                    {
+                        SetupDefaultValues(@event, commandName);
+                        _logger.LogEvent(@event);
+                        await _eventWriter.WriteEventAsync(new StreamCategorySpecifier(_configuration["ServiceName"], _configuration["ServiceInstance"], _aggregateType, @event.EntityId), @event).ConfigureAwait(false);
+                    }
+                    ((ObjectResult)context.Result).Value = listOfEvents;
                 }
                 else
                 {
@@ -82,17 +91,22 @@ namespace lifebook.core.cqrses.Filters
                 }
 
             }            
-            return next();
+            await next();
         }
 
-        private string GetAggregateFromRequest(PathString path)
+        public AggregateEvent SetupDefaultValues(AggregateEvent aggregateEvent, String commandName)
         {
-            return path.Value.Split('/').First();
+            aggregateEvent.CommandName = commandName;
+            aggregateEvent.EntityId = _aggregateId;
+            aggregateEvent.CorrelationId = _correlationId;
+            aggregateEvent.CausationId = _causationId;
+            return aggregateEvent;
         }
 
-        public Task OnExceptionAsync(ExceptionContext context)
+        public async Task OnExceptionAsync(ExceptionContext context)
         {
-            return Task.Run(() => Console.WriteLine(context));
+            _logger.Error(context.Exception, "Error occured trying to handle command");
+            
         }
     }
 }

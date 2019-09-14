@@ -5,6 +5,7 @@ using lifebook.core.eventstore.domain.api;
 using lifebook.core.eventstore.domain.models;
 using lifebook.core.eventstore.services;
 using lifebook.core.eventstore.testing.framework;
+using lifebook.core.logging.services;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -24,8 +25,8 @@ namespace lifebook.core.eventstore.tests.EventStoreClientTest
         public EventWriterTests()
         {
             var eventStoreClient = Substitute.For<FakeEventStoreClient>();
-            eventWriter = new EventWriter(eventStoreClient);
-            eventReader = new EventReader(eventStoreClient);
+            eventWriter = new EventWriter(eventStoreClient, new Logger());
+            eventReader = new EventReader(eventStoreClient, new Logger());
         }
 
         [Test]

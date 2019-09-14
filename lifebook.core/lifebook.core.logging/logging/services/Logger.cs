@@ -20,6 +20,9 @@ namespace lifebook.core.logging.services
                             }).CreateLogger();
         }
 
+        public void Error(Exception ex, string message) => _logger
+                                                            .ForContext(GetType())
+                                                            .Error(ex, message);
         public void Error(string message) => _logger.Error(message);
         public void Information(string message) => _logger.Information(message);
         public void Verbose(string message) => _logger.Verbose(message);        

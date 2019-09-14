@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>lifebook.core.logging</PackageId>
-    <PackageVersion>1.0.10</PackageVersion>
+    <PackageVersion>1.0.11</PackageVersion>
     <Authors>mkcoder</Authors>
     <Description>logging service</Description>
   </PropertyGroup>
@@ -18,7 +18,6 @@
   <ItemGroup>
     <Folder Include="interfaces\" />
     <Folder Include="services\" />
-    <Folder Include="New Folder\" />
     <Folder Include="ioc\" />
     <Folder Include="ioc\installers\" />
   </ItemGroup>
