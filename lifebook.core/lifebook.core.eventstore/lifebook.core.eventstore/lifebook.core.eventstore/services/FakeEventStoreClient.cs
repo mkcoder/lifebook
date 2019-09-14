@@ -57,10 +57,20 @@ namespace lifebook.core.eventstore.services
 
         internal override async Task<List<EntityEvent>> ReadEventsAsync(StreamCategorySpecifier specifier)
         {
-            return (await ReadEvent(specifier)).Select(e => EntityEvent.Create("AggregateEvent", e.Item2, e.Item1.EventDataToByteArray(), e.Item1.EventMetadataToByteArray())).ToList();
+            return (await ReadEvent(specifier)).Select(e => new EntityEvent().Create("AggregateEvent", e.Item2, e.Item1.EventDataToByteArray(), e.Item1.EventMetadataToByteArray())).ToList();
         }
 
         internal override Task<List<TOut>> ReadEventsAsync<T, TOut>(StreamCategorySpecifier specifier)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal override Task<List<EntityEvent>> ReadSingleStreamEventsAsync(StreamCategorySpecifier specifier)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal override Task<List<TOut>> ReadSingeStreamEventsAsync<T, TOut>(StreamCategorySpecifier specifier)
         {
             throw new NotImplementedException();
         }

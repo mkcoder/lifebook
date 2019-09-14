@@ -38,7 +38,7 @@ namespace lifebook.core.cqrses.Services
 
         public virtual async Task IsValid(IEventReader eventReader, StreamCategorySpecifier category)
         {
-            var events = await eventReader.ReadAllEventsFromStreamCategoryAsync(category);
+            var events = await eventReader.ReadAllEventsFromSingleStreamCategoryAsync<AggregateEventCreator, AggregateEvent>(category);
             Assertion.IsNotNull(CommandId);
             Assertion.IsCommandUnique(events, CommandId);
             Assertion.IsNotDefault(CommandId);
@@ -67,11 +67,11 @@ namespace lifebook.core.cqrses.Services
             }
         }
 
-        internal static void IsCommandUnique(List<Event> events, Guid commandId)
+        internal static void IsCommandUnique(List<AggregateEvent> events, Guid commandId)
         {
             if (events.Where(e => e.CausationId == commandId).Any())
             {
-                throw new UniqueConstraintViolatedException($"Unique constraint violated. CommandId (commandId) must be unique.");
+                throw new UniqueConstraintViolatedException($"Unique constraint violated. CommandId ({commandId}) must be unique.");
             }
         }
     }

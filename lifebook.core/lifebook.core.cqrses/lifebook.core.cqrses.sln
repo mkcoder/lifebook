@@ -5,8 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.cqrses", "lif
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.cqrs.tests", "lifebook.core.cqrs.tests\lifebook.core.cqrs.tests.csproj", "{FAFC7AB6-AE4D-48EB-A51E-50E04B83F726}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "todelete", "todelete\todelete.csproj", "{A4B8B0F2-DE38-4C8B-903C-E4896C64FC0B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,9 +19,5 @@ Global
 		{FAFC7AB6-AE4D-48EB-A51E-50E04B83F726}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FAFC7AB6-AE4D-48EB-A51E-50E04B83F726}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FAFC7AB6-AE4D-48EB-A51E-50E04B83F726}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A4B8B0F2-DE38-4C8B-903C-E4896C64FC0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A4B8B0F2-DE38-4C8B-903C-E4896C64FC0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A4B8B0F2-DE38-4C8B-903C-E4896C64FC0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A4B8B0F2-DE38-4C8B-903C-E4896C64FC0B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

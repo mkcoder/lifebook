@@ -15,11 +15,12 @@ namespace lifebook.core.eventstore.domain.models
         public string EventName { get; set; }
         public int EventVersion { get; set; }
         public DateTime DateCreated { get; set; } = DateTime.UtcNow;
-        public virtual string EventType { get; set; } = "EntityEvent";
+        public virtual string EventType { get; set; }
 
         public Event()
         {
             EventName = GetType().Name;
+            EventType = "EntityEvent";
             CorrelationId = CorrelationId != Guid.Empty ? CorrelationId : Guid.NewGuid();
         }
 

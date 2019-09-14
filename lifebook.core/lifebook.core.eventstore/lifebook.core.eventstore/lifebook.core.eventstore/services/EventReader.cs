@@ -37,14 +37,19 @@ namespace lifebook.core.eventstore.services
             });
         }
 
-        public async Task<List<Event>> ReadAllEventsFromStreamCategoryAsync(StreamCategorySpecifier categorySpecifier)            
+        /// <summary>
+        /// Read all events from category stream.
+        /// </summary>
+        /// <param name="categorySpecifier"></param>
+        /// <returns></returns>
+        public async Task<List<EntityEvent>> ReadAllEventsFromStreamCategoryAsync(StreamCategorySpecifier categorySpecifier)            
         {
             return await TryCatchCloseConnection(async () =>
             {
-                var result = await _eventStoreClient.ReadEventsAsync(categorySpecifier);
-                return result.ToList<Event>();
+                return await _eventStoreClient.ReadEventsAsync(categorySpecifier);
             });            
         }
+
 
         public async Task<List<TOut>> ReadAllEventsFromStreamCategoryAsync<T, TOut>(StreamCategorySpecifier categorySpecifier) where T : ICreateEvent<TOut>, new() where TOut : Event
         {
@@ -55,13 +60,36 @@ namespace lifebook.core.eventstore.services
             });
         }
 
-        public async Task<List<Event>> ReadAllEventsFromStreamCategoryForAggregateAsync(StreamCategorySpecifier categorySpecifier)
+        /// <summary>
+        /// Read all evetns from a single category or stream.
+        /// {serviceName}.{instance}.{category}-{Id}
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TOut"></typeparam>
+        /// <param name="categorySpecifier"></param>
+        /// <returns></returns>
+        public async Task<List<TOut>> ReadAllEventsFromSingleStreamCategoryAsync<T, TOut>(StreamCategorySpecifier categorySpecifier) where T : ICreateEvent<TOut>, new() where TOut : Event
         {
             return await TryCatchCloseConnection(async () =>
             {
-                return (await _eventStoreClient.ReadEventsAsync(categorySpecifier))
-                        .Where(e => e.EntityId == categorySpecifier.AggregateId)
-                        .ToList<Event>();
+                var result = await _eventStoreClient.ReadSingeStreamEventsAsync<T, TOut>(categorySpecifier);
+                return result;
+            });
+        }
+
+        /// <summary>
+        /// Read all evetns from a single category or stream.
+        /// {serviceName}.{instance}.{category}-{Id}
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TOut"></typeparam>
+        /// <param name="categorySpecifier"></param>
+        /// <returns></returns>
+        public async Task<List<EntityEvent>> ReadAllEventsFromStreamCategoryForAggregateAsync(StreamCategorySpecifier categorySpecifier)
+        {
+            return await TryCatchCloseConnection(async () =>
+            {
+                return (await _eventStoreClient.ReadSingleStreamEventsAsync(categorySpecifier));
             });
         }
 

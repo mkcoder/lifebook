@@ -34,7 +34,7 @@ namespace lifebook.core.cqrses.Filters
         {
             dynamic eventhandlers = (dynamic)Activator.CreateInstance(_eventHandlersAttribute.EventHandlers);
             BuildEventNameToMethodMapper(eventhandlers);
-            var events = await _eventReader.ReadAllEventsFromStreamCategoryAsync<AggregateEventCreator, AggregateEvent>(_category);
+            var events = await _eventReader.ReadAllEventsFromSingleStreamCategoryAsync<AggregateEventCreator, AggregateEvent>(_category);
             foreach (var item in events)
             {
                 _map[item.EventName].Invoke(eventhandlers, new object[] { item });
