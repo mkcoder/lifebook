@@ -17,6 +17,7 @@ namespace lifebook.core.cqrs.tests.Aggregates
                 return new PersonCreated()
                 {
                     FirstName = createPersonCommand.FirstName,
+                    LastName = createPersonCommand.LastName,
                     Age = createPersonCommand.Age
                 };
             });
