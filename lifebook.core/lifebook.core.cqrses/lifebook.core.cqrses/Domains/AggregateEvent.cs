@@ -13,10 +13,14 @@ namespace lifebook.core.cqrses.Domains
     {
         [Metadata]
         public string CommandName { get; set; }
-        public override string EventType { get; set; } = "AggregateEvent";
         [JsonIgnore]
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public Data Data { get; set; }
+
+        public AggregateEvent()
+        {
+            EventType = "AggregateEvent";
+        }
     }
 
     public class AggregateEventCreator : ICreateEvent<AggregateEvent>

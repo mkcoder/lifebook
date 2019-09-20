@@ -43,15 +43,4 @@ namespace lifebook.core.cqrs.tests.Aggregates
             });
         }
     }
-
-    internal class PersonNameChanged : AggregateEvent
-    {
-        public string Name { get; set; }
-    }
-
-    public class ChangePersonNameAndAgeCommand : Command
-    {
-        public string Name { get; set; }
-        public int Age { get; set; }
-    }
 }

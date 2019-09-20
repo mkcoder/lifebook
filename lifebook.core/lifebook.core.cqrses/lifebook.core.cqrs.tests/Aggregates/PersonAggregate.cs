@@ -19,6 +19,7 @@ namespace lifebook.core.cqrs.tests.Aggregates
         {
             var personCreated = e.Data.TransformDataFromString(j => JsonSerializer.Deserialize<PersonCreated>(j));
             FirstName = personCreated.FirstName;
+            FirstName = personCreated.LastName;
             Age = personCreated.Age;
         }
 
