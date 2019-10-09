@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>lifebook.core.logging</PackageId>
-    <PackageVersion>1.0.11</PackageVersion>
+    <PackageVersion>1.0.12</PackageVersion>
     <Authors>mkcoder</Authors>
     <Description>logging service</Description>
   </PropertyGroup>

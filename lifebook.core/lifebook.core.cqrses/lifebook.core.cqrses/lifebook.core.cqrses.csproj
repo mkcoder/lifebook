@@ -37,4 +37,9 @@
     <Folder Include="ServiceStartup\" />
     <Folder Include="Invariants\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\lifebook.core.cqrses.domain\lifebook.core.cqrses.domain.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="providers\" />
+    <Folder Include="configurations\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="lifebook.core.services" Version="3.0.40" />
+  </ItemGroup>
+</Project>

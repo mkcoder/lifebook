@@ -18,11 +18,10 @@
     <Folder Include="ioc\" />
     <Folder Include="interfaces\" />
     <Folder Include="extensions\" />
-    <Folder Include="configurations\" />
-    <Folder Include="providers\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\lifebook.core.eventstore.domain\lifebook.core.eventstore.domain.csproj" />
+    <ProjectReference Include="..\lifebook.core.eventstore.core\lifebook.core.eventstore.core.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Castle.Windsor" Version="5.0.0" />

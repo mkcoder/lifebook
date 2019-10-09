@@ -22,10 +22,12 @@
   <ItemGroup>
     <ProjectReference Include="..\lifebook.core.eventstore\lifebook.core.eventstore.csproj" />
     <ProjectReference Include="..\lifebook.core.eventstore.domain\lifebook.core.eventstore.domain.csproj" />
+    <ProjectReference Include="..\lifebook.core.eventstore.subscription\lifebook.core.eventstore.subscription\lifebook.core.eventstore.subscription.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="EventStoreClientTest\" />
     <Folder Include="BaseServiceTest\" />
+    <Folder Include="SubscriptionTests\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="EventStoreClientTest\EventStoreConfigurationTests.css" />

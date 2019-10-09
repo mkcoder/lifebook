@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.cqrses", "lif
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.cqrs.tests", "lifebook.core.cqrs.tests\lifebook.core.cqrs.tests.csproj", "{FAFC7AB6-AE4D-48EB-A51E-50E04B83F726}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.cqrses.domain", "lifebook.core.cqrses.domain\lifebook.core.cqrses.domain.csproj", "{8FE329AE-A6C7-447F-A699-BB9B40F368A7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,5 +21,9 @@ Global
 		{FAFC7AB6-AE4D-48EB-A51E-50E04B83F726}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FAFC7AB6-AE4D-48EB-A51E-50E04B83F726}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FAFC7AB6-AE4D-48EB-A51E-50E04B83F726}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FE329AE-A6C7-447F-A699-BB9B40F368A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FE329AE-A6C7-447F-A699-BB9B40F368A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FE329AE-A6C7-447F-A699-BB9B40F368A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FE329AE-A6C7-447F-A699-BB9B40F368A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

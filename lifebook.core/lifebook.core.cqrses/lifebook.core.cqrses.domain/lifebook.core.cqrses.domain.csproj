@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <PackOnBuild>true</PackOnBuild>
+    <PackageId>lifebook.core.cqrs.domain</PackageId>
+    <Authors>mkcoder</Authors>
+    <Description>domain api for usage</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Class1.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Domains\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="lifebook.core.eventstore" Version="3.0.26" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+  </ItemGroup>
+</Project>
