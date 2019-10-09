@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <PackOnBuild>true</PackOnBuild>
+    <PackageId>lifebook.core.subscription</PackageId>
+    <Authors>mkcoder</Authors>
+    <Description>subscription api for eventstore
+</Description>
   </PropertyGroup>
 
   <ItemGroup>

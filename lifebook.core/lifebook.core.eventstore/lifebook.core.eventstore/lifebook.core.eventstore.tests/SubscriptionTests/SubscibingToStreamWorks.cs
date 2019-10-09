@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using lifebook.core.eventstore.domain.models;
 using lifebook.core.eventstore.subscription.Apis;
@@ -22,14 +23,15 @@ namespace lifebook.core.eventstore.tests.SubscriptionTests
         }
 
         [Test]
-        public void Works()
+        public async Task Works()
         {
-            sut.SubscribeToSingleStream<EntityEvent>(category, react);            
+            sut.SubscribeToSingleStream<EntityEvent>(category, react);
+            Console.ReadLine();
         }
 
         private async Task react(SubscriptionEvent<EntityEvent> arg)
         {
-            var a = arg;           
+            Console.WriteLine(arg);          
         }
     }
 }

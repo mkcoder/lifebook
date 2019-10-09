@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.eventstore.su
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.eventstore.core", "lifebook.core.eventstore.core\lifebook.core.eventstore.core.csproj", "{9EDCD112-F7C9-48D9-9E8C-0B38B8D5BEF4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.eventstore.sampleapp", "lifebook.core.eventstore.sampleapp\lifebook.core.eventstore.sampleapp.csproj", "{785B29C4-D98C-43D2-BD30-2BB13ADF5FF6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{9EDCD112-F7C9-48D9-9E8C-0B38B8D5BEF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9EDCD112-F7C9-48D9-9E8C-0B38B8D5BEF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9EDCD112-F7C9-48D9-9E8C-0B38B8D5BEF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{785B29C4-D98C-43D2-BD30-2BB13ADF5FF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{785B29C4-D98C-43D2-BD30-2BB13ADF5FF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{785B29C4-D98C-43D2-BD30-2BB13ADF5FF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{785B29C4-D98C-43D2-BD30-2BB13ADF5FF6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection

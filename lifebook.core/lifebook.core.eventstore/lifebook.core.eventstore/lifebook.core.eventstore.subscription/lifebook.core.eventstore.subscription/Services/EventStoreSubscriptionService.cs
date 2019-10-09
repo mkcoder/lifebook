@@ -3,6 +3,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
 using EventStore.ClientAPI;
+using EventStore.ClientAPI.SystemData;
 using lifebook.core.eventstore.configurations;
 using lifebook.core.eventstore.domain.api;
 using lifebook.core.eventstore.domain.models;
@@ -22,14 +23,26 @@ namespace lifebook.core.eventstore.subscription.Services
         public EventStoreSubscriptionService(EventStoreConfiguration eventStoreConfiguration, ILogger logger)
         {
             connection = EventStoreConnection.Create(ConnectionSettings.Create(), new IPEndPoint(IPAddress.Parse(eventStoreConfiguration.IpAddress), eventStoreConfiguration.Port));
+            connection.ConnectAsync().Wait();
             _eventStoreConfiguration = eventStoreConfiguration;
             _logger = logger;
         }
 
-        public void SubscribeToSingleStream<T>(StreamCategorySpecifier streamCategory, Func<SubscriptionEvent<T>, Task> action, long? from = StreamPosition.Start) where T : ICreateEvent<T>, new()
+        public void SubscribeToSingleStream<T>(StreamCategorySpecifier streamCategory, Func<SubscriptionEvent<T>, Task> action, long? from = null) where T : ICreateEvent<T>, new()
         {
+            var stream = $"$ce-{streamCategory.GetCategoryStream()}";
             var settings = CatchUpSubscriptionSettings.Default;
-            connection.SubscribeToStreamFrom(streamCategory.GetCategoryStream(), from, CatchUpSubscriptionSettings.Default, EventAppeared(action), subscriptionDropped: SubscriptionDropped);
+            var subscription = connection.SubscribeToStreamFrom(stream, from, CatchUpSubscriptionSettings.Default,
+                async (es, re) =>
+                {
+                    var subEvent = new SubscriptionEvent<T>();
+                    subEvent.EventNumber = re.OriginalEventNumber;
+                    subEvent.StreamInfo = es.StreamId;
+                    subEvent.Event = new T().Create(re.Event.EventType, re.Event.Created, re.Event.Data, re.Event.Metadata);
+                    await action(subEvent);
+                },
+                userCredentials: new UserCredentials("admin", "changeit"),
+                subscriptionDropped: SubscriptionDropped);
         }
 
         private Func<EventStoreCatchUpSubscription, ResolvedEvent, Task> EventAppeared<T>(Func<SubscriptionEvent<T>, Task> action) where T : ICreateEvent<T>, new()

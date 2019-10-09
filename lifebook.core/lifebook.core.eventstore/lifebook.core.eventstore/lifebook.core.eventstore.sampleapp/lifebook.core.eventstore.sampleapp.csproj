@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="SubscriptionExample\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\lifebook.core.eventstore.core\lifebook.core.eventstore.core.csproj" />
+    <ProjectReference Include="..\lifebook.core.eventstore\lifebook.core.eventstore.csproj" />
+    <ProjectReference Include="..\lifebook.core.eventstore.domain\lifebook.core.eventstore.domain.csproj" />
+    <ProjectReference Include="..\lifebook.core.eventstore.subscription\lifebook.core.eventstore.subscription\lifebook.core.eventstore.subscription.csproj" />
+    <ProjectReference Include="..\lifebook.core.eventstore.tests\lifebook.core.eventstore.tests.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Castle.Core" Version="4.4.0" />
+  </ItemGroup>
+</Project>
