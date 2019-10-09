@@ -33,16 +33,17 @@ namespace lifebook.core.eventstore.subscription.Services
             var stream = $"$ce-{streamCategory.GetCategoryStream()}";
             var settings = CatchUpSubscriptionSettings.Default;
             var subscription = connection.SubscribeToStreamFrom(stream, from, CatchUpSubscriptionSettings.Default,
-                async (es, re) =>
-                {
-                    var subEvent = new SubscriptionEvent<T>();
-                    subEvent.EventNumber = re.OriginalEventNumber;
-                    subEvent.StreamInfo = es.StreamId;
-                    subEvent.Event = new T().Create(re.Event.EventType, re.Event.Created, re.Event.Data, re.Event.Metadata);
-                    await action(subEvent);
-                },
-                userCredentials: new UserCredentials("admin", "changeit"),
-                subscriptionDropped: SubscriptionDropped);
+                EventAppeared(action),
+                subscriptionDropped: SubscriptionDropped(streamCategory, action));
+        }
+
+        private Action<EventStoreCatchUpSubscription, SubscriptionDropReason, Exception> SubscriptionDropped<T>(StreamCategorySpecifier streamCategory, Func<SubscriptionEvent<T>, Task> action) where T : ICreateEvent<T>, new()
+        {
+            return (esc, sdr, ex) =>
+            {
+                SubscriptionDropped(esc, sdr, ex);
+                SubscribeToSingleStream<T>(streamCategory, action);
+            };
         }
 
         private Func<EventStoreCatchUpSubscription, ResolvedEvent, Task> EventAppeared<T>(Func<SubscriptionEvent<T>, Task> action) where T : ICreateEvent<T>, new()
@@ -50,9 +51,10 @@ namespace lifebook.core.eventstore.subscription.Services
             Func<EventStoreCatchUpSubscription, ResolvedEvent, Task> func = async (es, re) =>
             {
                 var subEvent = new SubscriptionEvent<T>();
-                subEvent.EventNumber = re.OriginalEventNumber;
+                subEvent.LastStreamEventNumberRead = re.OriginalEventNumber;
+                subEvent.EventNumber = re.Event.EventNumber;
                 subEvent.StreamInfo = es.StreamId;
-                subEvent.Event = new T().Create(re.OriginalEvent.EventType, re.OriginalEvent.Created, re.OriginalEvent.Data, re.OriginalEvent.Metadata);
+                subEvent.Event = new T().Create(re.Event.EventType, re.Event.Created, re.Event.Data, re.Event.Metadata);
                 await action(subEvent);
             };
 

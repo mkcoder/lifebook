@@ -19,6 +19,9 @@ namespace lifebook.core.eventstore.sampleapp.SubscriptionExample
             sut.SubscribeToSingleStream<EntityEvent>(category, async se => {
                 Console.WriteLine(se);
                 Console.WriteLine(se.Event.EventName);
+                Console.WriteLine(se.LastStreamEventNumberRead);
+                Console.WriteLine(se.EventNumber);
+                Console.WriteLine(se.StreamInfo);
             });
             Console.ReadLine();
         }

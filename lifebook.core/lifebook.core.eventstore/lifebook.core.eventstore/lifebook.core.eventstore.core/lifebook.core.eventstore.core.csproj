@@ -2,6 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <PackOnBuild>true</PackOnBuild>
+    <PackageVersion>1.0.0</PackageVersion>
+    <Authors>mkcoder</Authors>
+    <Description>internal package use only</Description>
+    <Owners>mkcoder</Owners>
+    <PackageId>lifebook.core.eventstore.core</PackageId>
   </PropertyGroup>
 
   <ItemGroup>

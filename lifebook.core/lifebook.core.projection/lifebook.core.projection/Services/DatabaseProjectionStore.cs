@@ -43,6 +43,7 @@ namespace lifebook.core.projection.Services
                             }
                             bt.HasKey(new string[] { "AggregateId" });
                             bt.Property<string>("JSON");
+                            bt.Property<string>("EventNumber");
                         }
                     );
             }

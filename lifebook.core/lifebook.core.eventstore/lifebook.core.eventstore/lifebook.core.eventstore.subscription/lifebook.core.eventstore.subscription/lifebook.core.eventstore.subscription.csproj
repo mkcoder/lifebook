@@ -7,6 +7,8 @@
     <Authors>mkcoder</Authors>
     <Description>subscription api for eventstore
 </Description>
+    <PackageVersion>1.0.4</PackageVersion>
+    <DevelopmentDependency>true</DevelopmentDependency>
   </PropertyGroup>
 
   <ItemGroup>

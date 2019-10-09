@@ -22,5 +22,9 @@
     <PackageReference Include="lifebook.core.eventstore.domain" Version="3.0.16" />
     <PackageReference Include="lifebook.core.eventstore" Version="3.0.26" />
     <PackageReference Include="lifebook.core.cqrs.domain" Version="1.0.0" />
+    <PackageReference Include="lifebook.core.subscription" Version="1.0.3">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
 </Project>
