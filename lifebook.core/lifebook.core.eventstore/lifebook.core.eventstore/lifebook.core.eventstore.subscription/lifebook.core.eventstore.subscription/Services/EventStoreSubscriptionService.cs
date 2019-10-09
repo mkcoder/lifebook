@@ -28,12 +28,13 @@ namespace lifebook.core.eventstore.subscription.Services
             _logger = logger;
         }
 
-        public void SubscribeToSingleStream<T>(StreamCategorySpecifier streamCategory, Func<SubscriptionEvent<T>, Task> action, long? from = null) where T : ICreateEvent<T>, new()
+        public void SubscribeToSingleStream<T>(StreamCategorySpecifier streamCategory, Func<SubscriptionEvent<T>, Task> action, long? from = null, string subscriptionName = "") where T : ICreateEvent<T>, new()
         {
             var stream = $"$ce-{streamCategory.GetCategoryStream()}";
-            var settings = CatchUpSubscriptionSettings.Default;
+            var defaultSettings = CatchUpSubscriptionSettings.Default;
+            var settings = new CatchUpSubscriptionSettings(defaultSettings.MaxLiveQueueSize, defaultSettings.ReadBatchSize, defaultSettings.VerboseLogging, defaultSettings.ResolveLinkTos, subscriptionName);
             var subscription = connection.SubscribeToStreamFrom(stream, from, CatchUpSubscriptionSettings.Default,
-                EventAppeared(action),
+                EventAppeared(action),                
                 subscriptionDropped: SubscriptionDropped(streamCategory, action));
         }
 
@@ -54,6 +55,7 @@ namespace lifebook.core.eventstore.subscription.Services
                 subEvent.LastStreamEventNumberRead = re.OriginalEventNumber;
                 subEvent.EventNumber = re.Event.EventNumber;
                 subEvent.StreamInfo = es.StreamId;
+                subEvent.StreamName = es.SubscriptionName;
                 subEvent.Event = new T().Create(re.Event.EventType, re.Event.Created, re.Event.Data, re.Event.Metadata);
                 await action(subEvent);
             };
