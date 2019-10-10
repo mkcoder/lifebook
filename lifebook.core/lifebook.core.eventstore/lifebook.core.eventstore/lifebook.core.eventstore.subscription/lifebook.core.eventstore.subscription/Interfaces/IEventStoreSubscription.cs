@@ -8,6 +8,6 @@ namespace lifebook.core.eventstore.subscription.Interfaces
 {
     public interface IEventStoreSubscription
     {
-        void SubscribeToSingleStream<T>(StreamCategorySpecifier streamCategory, Func<SubscriptionEvent<T>, Task> action, long? from = null) where T : ICreateEvent<T>, new();
+        void SubscribeToSingleStream<T, TOut>(StreamCategorySpecifier streamCategory, Func<SubscriptionEvent<TOut>, Task> action, long? from = null, string subscriptionName = "") where T : ICreateEvent<TOut>, new() where TOut : Event;
     }
 }

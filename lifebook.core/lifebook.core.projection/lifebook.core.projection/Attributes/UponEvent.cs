@@ -1,7 +1,8 @@
 ﻿using System;
 namespace lifebook.core.projection.Attributes
 {
-    public class UponEvent
+    [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
+    public class UponEvent : Attribute
     {
         public string EventName { get; }
 

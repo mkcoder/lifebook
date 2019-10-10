@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace lifebook.core.projection.Services
 {
-    public sealed class DatabaseProjectionStore : DbContext, IProjectionStore
+    public class DatabaseProjectionStore : DbContext, IProjectionStore
     {
         private readonly IConfiguration _configuration;
 
         public DatabaseProjectionStore(DbContextOptions<DatabaseProjectionStore> options, IConfiguration configuration)
             : base(options)
         {
-            Database.EnsureCreated();
             _configuration = configuration;
+            Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

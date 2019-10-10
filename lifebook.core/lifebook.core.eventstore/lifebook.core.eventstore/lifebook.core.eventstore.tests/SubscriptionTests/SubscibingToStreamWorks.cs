@@ -25,7 +25,7 @@ namespace lifebook.core.eventstore.tests.SubscriptionTests
         [Test]
         public async Task Works()
         {
-            sut.SubscribeToSingleStream<EntityEvent>(category, react);
+            sut.SubscribeToSingleStream<EntityEvent, EntityEvent>(category, react);
             Console.ReadLine();
         }
 

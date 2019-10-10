@@ -16,7 +16,7 @@ namespace lifebook.core.eventstore.sampleapp.SubscriptionExample
             // install the componenets
             new EventStoreSubscriptionTestIntaller().Install(container);
             var sut = container.Resolve<IEventStoreSubscription>();
-            sut.SubscribeToSingleStream<EntityEvent>(category, async se => {
+            sut.SubscribeToSingleStream<EntityEvent, EntityEvent>(category, async se => {
                 Console.WriteLine(se);
                 Console.WriteLine(se.Event.EventName);
                 Console.WriteLine(se.LastStreamEventNumberRead);

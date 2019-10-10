@@ -28,30 +28,31 @@ namespace lifebook.core.eventstore.subscription.Services
             _logger = logger;
         }
 
-        public void SubscribeToSingleStream<T>(StreamCategorySpecifier streamCategory, Func<SubscriptionEvent<T>, Task> action, long? from = null, string subscriptionName = "") where T : ICreateEvent<T>, new()
+        public void SubscribeToSingleStream<T, TOut>(StreamCategorySpecifier streamCategory, Func<SubscriptionEvent<TOut>, Task> action, long? from = null, string subscriptionName = "") where T : ICreateEvent<TOut>, new() where TOut : Event
         {
             var stream = $"$ce-{streamCategory.GetCategoryStream()}";
             var defaultSettings = CatchUpSubscriptionSettings.Default;
             var settings = new CatchUpSubscriptionSettings(defaultSettings.MaxLiveQueueSize, defaultSettings.ReadBatchSize, defaultSettings.VerboseLogging, defaultSettings.ResolveLinkTos, subscriptionName);
             var subscription = connection.SubscribeToStreamFrom(stream, from, CatchUpSubscriptionSettings.Default,
-                EventAppeared(action),                
-                subscriptionDropped: SubscriptionDropped(streamCategory, action));
+                EventAppeared<T, TOut>(action),                
+                subscriptionDropped: SubscriptionDropped<T, TOut>(streamCategory, action));
+            _logger.Information($"Subscription started to stream [SubscriptionName:{subscription.SubscriptionName}]-[StreamId:{subscription.StreamId}]-[LastProcessedEventNumber:{subscription.LastProcessedEventNumber}]");
         }
 
-        private Action<EventStoreCatchUpSubscription, SubscriptionDropReason, Exception> SubscriptionDropped<T>(StreamCategorySpecifier streamCategory, Func<SubscriptionEvent<T>, Task> action) where T : ICreateEvent<T>, new()
+        private Action<EventStoreCatchUpSubscription, SubscriptionDropReason, Exception> SubscriptionDropped<T, TOut>(StreamCategorySpecifier streamCategory, Func<SubscriptionEvent<TOut>, Task> action) where T : ICreateEvent<TOut>, new() where TOut : Event
         {
             return (esc, sdr, ex) =>
             {
                 SubscriptionDropped(esc, sdr, ex);
-                SubscribeToSingleStream<T>(streamCategory, action);
+                SubscribeToSingleStream<T, TOut>(streamCategory, action, subscriptionName: esc.SubscriptionName);
             };
         }
 
-        private Func<EventStoreCatchUpSubscription, ResolvedEvent, Task> EventAppeared<T>(Func<SubscriptionEvent<T>, Task> action) where T : ICreateEvent<T>, new()
+        private Func<EventStoreCatchUpSubscription, ResolvedEvent, Task> EventAppeared<T, TOut>(Func<SubscriptionEvent<TOut>, Task> action) where T : ICreateEvent<TOut>, new() where TOut : Event
         {
             Func<EventStoreCatchUpSubscription, ResolvedEvent, Task> func = async (es, re) =>
             {
-                var subEvent = new SubscriptionEvent<T>();
+                var subEvent = new SubscriptionEvent<TOut>();
                 subEvent.LastStreamEventNumberRead = re.OriginalEventNumber;
                 subEvent.EventNumber = re.Event.EventNumber;
                 subEvent.StreamInfo = es.StreamId;
