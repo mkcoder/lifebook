@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
@@ -54,7 +56,7 @@ namespace lifebook.core.projection.sampleapp
 
     public class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             IWindsorContainer container = new WindsorContainer();
 
@@ -68,7 +70,20 @@ namespace lifebook.core.projection.sampleapp
                 FromAssembly.InThisApplication(assembly)
             );
             var projector = new PersonProjector(container.Resolve<ProjectorServices>());
-            projector.Run();            
+            projector.Run();
+            var result = await projector.Query<List<PersonEntity>>(
+                async e =>
+                {
+                    return e.ToList();
+                }
+            );
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.FirstName);
+                Console.WriteLine(item.LastName);
+                Console.WriteLine(item.Age);
+                Console.WriteLine(item.Occupation);
+            }
             Console.ReadLine();
         }
     }

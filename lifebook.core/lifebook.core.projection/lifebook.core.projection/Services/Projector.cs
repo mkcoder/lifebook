@@ -27,6 +27,11 @@ namespace lifebook.core.projection.Services
             _projectorServices = projectorServices;
         }
 
+        public async Task<TResult> Query<TResult>(Func<IEntitySet<T>, Task<TResult>> query)
+        {
+            return await query(_projectorServices.ProjectionStore.GetEntitySet<T>());
+        }
+
         protected virtual void Start()
         {
             var methods = GetType()
