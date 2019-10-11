@@ -7,13 +7,13 @@
     <Authors>mkcoder</Authors>
     <Description>subscription api for eventstore
 </Description>
-    <PackageVersion>1.0.6</PackageVersion>
+    <PackageVersion>1.0.8</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="EventStore.ClientAPI.NetCore" Version="4.1.0.23" />
-    <PackageReference Include="lifebook.core.services" Version="3.0.40" />
-    <PackageReference Include="lifebook.core.logging" Version="1.0.11" />
+    <PackageReference Include="lifebook.core.services" Version="3.0.41" />
+    <PackageReference Include="lifebook.core.logging" Version="1.0.12" />
     <PackageReference Include="Castle.Core" Version="4.4.0" />
   </ItemGroup>
   <ItemGroup>

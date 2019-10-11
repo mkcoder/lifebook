@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\lifebook.core.projection\lifebook.core.projection.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="lifebook.core.services" Version="3.0.41" />
+    <PackageReference Include="lifebook.core.cqrs.domain" Version="1.0.0" />
+  </ItemGroup>
+</Project>

@@ -15,6 +15,6 @@
     <Folder Include="configurations\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="lifebook.core.services" Version="3.0.40" />
+    <PackageReference Include="lifebook.core.services" Version="3.0.41" />
   </ItemGroup>
 </Project>

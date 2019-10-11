@@ -10,6 +10,7 @@ using lifebook.core.eventstore.domain.models;
 using lifebook.core.eventstore.subscription.Apis;
 using lifebook.core.eventstore.subscription.Interfaces;
 using lifebook.core.logging.interfaces;
+using Newtonsoft.Json.Linq;
 using ILogger = lifebook.core.logging.interfaces.ILogger;
 
 namespace lifebook.core.eventstore.subscription.Services
@@ -58,6 +59,7 @@ namespace lifebook.core.eventstore.subscription.Services
                 subEvent.StreamInfo = es.StreamId;
                 subEvent.StreamName = es.SubscriptionName;
                 subEvent.Event = new T().Create(re.Event.EventType, re.Event.Created, re.Event.Data, re.Event.Metadata);
+                _logger.Information($"Event Recieved: {JObject.FromObject(subEvent).ToString()}");
                 await action(subEvent);
             };
 

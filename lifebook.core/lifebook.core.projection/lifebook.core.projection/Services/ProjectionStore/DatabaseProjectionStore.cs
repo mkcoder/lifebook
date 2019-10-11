@@ -1,5 +1,6 @@
 ﻿using lifebook.core.projection.Domain;
 using lifebook.core.projection.Interfaces;
+using lifebook.core.projection.Services.StreamTracker;
 using lifebook.core.services.interfaces;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
@@ -41,13 +42,14 @@ namespace lifebook.core.projection.Services
                             {
                                 bt.Ignore(prop.Name);
                             }
-                            bt.HasKey(new string[] { "AggregateId" });
-                            bt.Property<string>("JSON");
+                            bt.HasKey(new string[] { "Key" });
+                            bt.Property<string>("JSON").HasColumnType("jsonb");
                             bt.Property<string>("EventNumber");
                         }
                     );
             }
 
+            modelBuilder.Entity<StreamTrackingInformation>();
             base.OnModelCreating(modelBuilder);
         }
 
@@ -71,7 +73,14 @@ namespace lifebook.core.projection.Services
             var dbset = this.Set<TEntity>();//this.Find(typeof(), new object[] { });
             var entry = Entry(value);
             entry.Property("JSON").CurrentValue = JObject.FromObject(value).ToString();
-            dbset.Add(value);
+            if(dbset.Any(e => e.Key == value.Key))
+            {
+                dbset.Update(value);
+            }
+            else
+            {
+                dbset.Add(value);
+            }
             SaveChanges();
             return value;
         }

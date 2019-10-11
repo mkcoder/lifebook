@@ -22,10 +22,15 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.0.1" />
-    <PackageReference Include="lifebook.core.services" Version="3.0.40" />
+    <PackageReference Include="lifebook.core.services" Version="3.0.41" />
     <PackageReference Include="lifebook.core.eventstore.domain" Version="3.0.16" />
-    <PackageReference Include="lifebook.core.eventstore" Version="3.0.26" />
+    <PackageReference Include="lifebook.core.eventstore" Version="3.0.27" />
     <PackageReference Include="lifebook.core.cqrs.domain" Version="1.0.0" />
-    <PackageReference Include="lifebook.core.subscription" Version="1.0.6" />
+    <PackageReference Include="lifebook.core.subscription" Version="1.0.8" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="configurations.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

@@ -12,16 +12,23 @@ namespace lifebook.core.projection.Services.StreamTracker
 {
     public class EntityStreamTracker : DbContext, IStreamTracker
     {
-        DbSet<StreamTrackingInformation> StreamTrackingInformation { get; set; }
+        public DbSet<StreamTrackingInformation> StreamTrackingInformation { get; set; }
         private readonly IConfiguration _configuration;
 
         public EntityStreamTracker(DbContextOptions<EntityStreamTracker> options, IConfiguration configuration)
             : base(options)
         {
             _configuration = configuration;
+            Database.EnsureCreated();
         }
 
-        public List<StreamTrackingInformation> Track<T>(Projector<T> projector) where T : EntityProjection
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+            optionsBuilder.UseNpgsql(_configuration.GetValue("ProjectionConnectionString"));
+        }
+
+        public List<StreamTrackingInformation> Track<T>(Projector<T> projector) where T : EntityProjection, new()
         {
             var result = new List<StreamTrackingInformation>();
             var uniqueName = projector.GetType().Assembly.FullName;
@@ -32,7 +39,16 @@ namespace lifebook.core.projection.Services.StreamTracker
                 sti.StreamId = category.ToString();
                 sti.StreamKey = $"{category}-{uniqueName}";
                 sti.Id = StringExtensions.ToGuid(sti.StreamKey);
-                StreamTrackingInformation.Add(sti);
+                var record = StreamTrackingInformation.FirstOrDefault(s => s.Id == sti.Id);
+                if(record == null)
+                {
+                    StreamTrackingInformation.Add(sti);
+                    result.Add(sti);
+                }
+                else
+                {
+                    result.Add(record);
+                }
             }
             SaveChanges();
             return result;

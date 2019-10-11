@@ -3,6 +3,7 @@ using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
 using lifebook.core.cqrses.Domains;
+using lifebook.core.logging.ioc;
 using lifebook.core.projection.Attributes;
 using lifebook.core.projection.Domain;
 using lifebook.core.projection.Interfaces;
@@ -53,9 +54,10 @@ namespace lifebook.core.projection.tests
             container.Register(
                 Component.For<DbContextOptions<DatabaseProjectionStore>>().Instance(new DbContextOptions<DatabaseProjectionStore>()),
                 Component.For<DbContextOptions<EntityStreamTracker>>().Instance(new DbContextOptions<EntityStreamTracker>())
-            );
+            );           
             container.Install(
-                FromAssembly.InThisApplication(typeof(ProjectionResolver).Assembly)
+                FromAssembly.InThisApplication(typeof(BootLoader).Assembly),                
+                FromAssembly.InThisApplication(assembly)
             );
             var projector = new PersonProjector(container.Resolve<ProjectorServices>());
             projector.Run();

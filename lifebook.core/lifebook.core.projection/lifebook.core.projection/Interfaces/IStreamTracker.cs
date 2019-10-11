@@ -9,7 +9,7 @@ namespace lifebook.core.projection.Interfaces
 {
     public interface IStreamTracker
     {
-        List<StreamTrackingInformation> Track<T>(Projector<T> projector) where T : EntityProjection;
+        List<StreamTrackingInformation> Track<T>(Projector<T> projector) where T : EntityProjection, new();
         long GetLastEventStoredFromStream(string streamKey);
         long GetLastEventStoredFromStream(Guid streamId);
         StreamTrackingInformation Update(Guid streamId, long newEventNumber);

@@ -24,6 +24,13 @@ namespace lifebook.core.ioc
 
                 if (!container.Kernel.HasComponent(typeof(IEventStoreClient)))
                 {
+                    if (!container.Kernel.HasComponent(typeof(EventStoreConfiguration)))
+                    {
+                        container.Register(
+                            Component.For<EventStoreConfiguration>().ImplementedBy<EventStoreConfiguration>().IsDefault().LifeStyle.Singleton
+                        );
+                    }
+
                     container.Register(
                         Component.For<AbstractEventStoreClient>()
                         .ImplementedBy<EventStoreClient>()
@@ -37,8 +44,7 @@ namespace lifebook.core.ioc
                             .ImplementedBy<EventStoreClient>()
                             .Named("EventStoreClient").LifeStyle.Singleton,
                         Component.For<IEventWriter>().ImplementedBy<EventWriter>().LifeStyle.Transient,
-                        Component.For<IEventReader>().ImplementedBy<EventReader>().LifeStyle.Transient,
-                        Component.For<EventStoreConfiguration>().ImplementedBy<EventStoreConfiguration>().IsDefault().LifeStyle.Singleton
+                        Component.For<IEventReader>().ImplementedBy<EventReader>().LifeStyle.Transient
                     );
                 }
             }

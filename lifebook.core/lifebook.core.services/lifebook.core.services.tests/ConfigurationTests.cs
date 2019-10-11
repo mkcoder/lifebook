@@ -29,5 +29,11 @@ namespace lifebook.core.services.configuration.tests
             Assert.IsFalse(configuration.TryGetValueOrDefault("DoesNotExist", false));
             Assert.AreEqual(1, configuration.TryGetValueOrDefault("DoesNotExist", 1));
         }
+
+        [Test]
+        public void Congiuration_LoadsValueFromJsonFileIfPresent_TryGetValueOrDefault_ReturnCorrectValues()
+        {
+            Assert.IsNotNull(configuration.TryGetValueOrDefault<string>("DefaultConnectionSettings", null));
+        }
     }
 }
