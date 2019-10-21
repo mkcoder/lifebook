@@ -27,12 +27,17 @@ namespace lifebook.core.projection.Services
 
         public async Task<TEntity> GetAsync<TKey, TEntity>(TKey key) where TEntity : EntityProjection
         {
-            return await _applicationContext.Get<TEntity>().FindAsync(new object[] { key });
+            var dbset = _applicationContext.Get<TEntity>();
+            var result = await dbset.FindAsync(new object[] { key });
+            //var mr = EF.Property<TEntity>(result, "JSON");
+            return result;
         }
 
         public async Task<TEntity> GetAsync<TEntity>(Guid key) where TEntity : EntityProjection
         {
-            return await GetAsync<Guid, TEntity>(key);
+            var dbset = _applicationContext.Get<TEntity>();
+            var result = dbset.Select(p => EF.Property<TEntity>(p, "JSON")).ToList().FirstOrDefault(p => p.Key == key);
+            return result;
         }
 
         public TEntity Get<TKey, TEntity>(TKey key) where TEntity : EntityProjection
@@ -47,7 +52,7 @@ namespace lifebook.core.projection.Services
                 var dbset = _applicationContext.Get<TEntity>();//this.Find(typeof(), new object[] { });
                 var entry = _applicationContext.GetEntityEntry(value);
                 entry.Entity.LastUpdated = DateTime.UtcNow;
-                entry.Property("JSON").CurrentValue = JObject.FromObject(value).ToString();
+                entry.Property("JSON").CurrentValue = value;
                 if (dbset.Any(e => e.Key == value.Key))
                 {
                     dbset.Update(value);

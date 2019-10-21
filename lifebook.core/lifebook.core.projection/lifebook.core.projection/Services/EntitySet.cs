@@ -2,6 +2,7 @@
 using lifebook.core.projection.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -18,7 +19,12 @@ namespace lifebook.core.projection.Services
 
         public List<T> ToList()
         {
-            return _entity.Select(p => JObject.Parse(EF.Property<string>(p, "JSON")).ToObject<T>()).ToList();
+            return _entity.Select(p => EF.Property<T>(p, "JSON")).ToList();
+        }
+
+        public IQueryable<T> AsQueryable()
+        {
+            return _entity.Select(p => EF.Property<T>(p, "JSON")).AsQueryable();
         }
     }
 }

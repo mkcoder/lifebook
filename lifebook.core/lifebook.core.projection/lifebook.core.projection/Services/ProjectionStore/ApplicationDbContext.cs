@@ -59,7 +59,7 @@ namespace lifebook.core.projection.Services
                         }
                         bt.ToTable($"{TableNamePrefix}_{type.Name}".ToLower());
                         bt.HasKey(new string[] { "Key" });
-                        bt.Property<string>("JSON").HasColumnType("jsonb");
+                        bt.Property(type, "JSON").HasColumnType("jsonb");
                     }
                 );
             }

@@ -78,7 +78,11 @@ namespace lifebook.core.projection.Services
                     if (subscriptionEvent.LastStreamEventNumberRead >= lastSuccessfulHandledEventNumber)
                     {
                         _projectorServices.Logger.Information($"Handling Event: {subscriptionEvent.Event.EventName}-{subscriptionEvent.Event.EntityId}");
-                        Value = services.ProjectionStore.Get<Guid, T>(subscriptionEvent.Event.EntityId) ?? new T() { Key = subscriptionEvent.Event.EntityId };
+                        var entry = await services.ProjectionStore.GetAsync<T>(subscriptionEvent.Event.EntityId);
+                        if (entry == default(T))
+                            Value = new T { Key = subscriptionEvent.Event.EntityId };
+                        else
+                            Value =  entry;
 
                         mi.Invoke(this, new object[] { subscriptionEvent.Event });
                         services.ProjectionStore.Store(Value);

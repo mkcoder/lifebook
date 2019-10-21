@@ -67,11 +67,6 @@ namespace lifebook.core.projection.sampleapp
             Value.FirstName = personCreated["FirstName"].ToObject<string>();
             Value.LastName = personCreated["LastName"].ToObject<string>();
         }
-
-        public void Run()
-        {
-            Start();
-        }
     }
 
     public class PersonGuidToOccupation : EntityProjection
@@ -99,11 +94,6 @@ namespace lifebook.core.projection.sampleapp
         {
             var personCreated = aggregateEvent.Data.TransformDataFromString(str => JObject.Parse(str));
             Value.Occupation = personCreated["Occupation"].ToObject<string>();
-        }
-
-        public void Run()
-        {
-            Start();
         }
     }
 
@@ -145,7 +135,39 @@ namespace lifebook.core.projection.sampleapp
             // Hosting
             IWindsorContainer container = new WindsorContainer();
             await Hosting.Run(container);
+            var api = container.Resolve<PersonServiceApi>();
+            var result = await api.GetPeople();
+            Console.WriteLine(result);
+            result = await api.GetJAmes();
+            Console.WriteLine("=============/ JAMES /=================");
+            Console.WriteLine(result);
             Console.ReadLine();
+        }
+    }
+
+    public class PersonServiceApi
+    {
+        private readonly PersonGuidToNameProjector personGuidToNameProjector;
+        private readonly PersonProjector personProjector;
+        private readonly PersonGuidToOccupationProjector personGuidToOccupationProjector;
+
+        public PersonServiceApi(PersonGuidToNameProjector personGuidToNameProjector, PersonProjector personProjector, PersonGuidToOccupationProjector personGuidToOccupationProjector)
+        {
+            this.personGuidToNameProjector = personGuidToNameProjector;
+            this.personProjector = personProjector;
+            this.personGuidToOccupationProjector = personGuidToOccupationProjector;
+        }
+
+        public async Task<JArray> GetPeople()
+        {
+            var result = await personProjector.Query(async e => e.ToList());
+            return JArray.FromObject(result);
+        }
+
+        public async Task<JArray> GetJAmes()
+        {
+            var result = await personProjector.Query(async e => e.AsQueryable().Where(p => p.FirstName == "James").ToList());
+            return JArray.FromObject(result);
         }
     }
 
@@ -159,6 +181,8 @@ namespace lifebook.core.projection.sampleapp
                 FromAssembly.InThisApplication(typeof(BootLoader).Assembly),
                 FromAssembly.InThisApplication(assembly)
             );
+
+            container.Register(Component.For<PersonServiceApi>().ImplementedBy<PersonServiceApi>());
 
             var contextCreator = container.Resolve<IApplicationContextCreator>();
             contextCreator.CreateContext();

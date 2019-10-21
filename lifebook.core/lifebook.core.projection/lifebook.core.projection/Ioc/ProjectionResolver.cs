@@ -27,6 +27,7 @@ namespace lifebook.core.projection.Ioc
                 Classes.FromAssemblyInThisApplication(GetType().Assembly.GetRootAssembly())
                     .BasedOn<IProjector>()
                     .LifestyleTransient()
+                    .WithServiceSelf()
                     .WithServiceAllInterfaces()
             );
         }
