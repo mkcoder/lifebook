@@ -51,10 +51,6 @@ namespace lifebook.core.projection.tests
         public void Setup()
         {
             var assembly = GetType().Assembly.GetRootAssembly();
-            container.Register(
-                Component.For<DbContextOptions<DatabaseProjectionStore>>().Instance(new DbContextOptions<DatabaseProjectionStore>()),
-                Component.For<DbContextOptions<EntityStreamTracker>>().Instance(new DbContextOptions<EntityStreamTracker>())
-            );           
             container.Install(
                 FromAssembly.InThisApplication(typeof(BootLoader).Assembly),                
                 FromAssembly.InThisApplication(assembly)

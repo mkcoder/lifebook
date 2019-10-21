@@ -1,7 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
+  <PropertyGroup>   
+    <Id>lifebook.core.projection</Id>
+    <Version>1.0.0</Version>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <Authors>mkcoder</Authors>
+    <Description>projector service to projection eventstore data to datastore</Description>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,6 +20,8 @@
     <Folder Include="Services\ProjectionStore\" />
     <Folder Include="Util\" />
     <Folder Include="Ioc\" />
+    <Folder Include="Hosting\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0" />

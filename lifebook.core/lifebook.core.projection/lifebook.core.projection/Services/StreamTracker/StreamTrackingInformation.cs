@@ -1,4 +1,6 @@
 ﻿using System;
+using lifebook.core.projection.Domain;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace lifebook.core.projection.Services.StreamTracker
 {

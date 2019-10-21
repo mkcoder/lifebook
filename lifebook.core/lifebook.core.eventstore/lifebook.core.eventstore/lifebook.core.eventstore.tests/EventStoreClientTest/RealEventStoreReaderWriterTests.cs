@@ -28,7 +28,10 @@ namespace lifebook.core.eventstore.tests.EventStoreClientTest
         public async Task WriteIsWorking()
         {
             var personGuid = Guid.Parse("5b4a440e-db6d-40d4-8b9a-a0cc2cccd16d");
-            var lifeEvents = new List<Event>() {
+
+            for (int i = 0; i < 5; i++)
+            {
+                var lifeEvents = new List<Event>() {
                 new TestPersonCreated()
                 {
                     Id = 1,
@@ -39,11 +42,11 @@ namespace lifebook.core.eventstore.tests.EventStoreClientTest
                 },
                 new TestPersonAgeChanged()
                 {
-                    Age = 25
+                    Age = new Random().Next(20)
                 },
                 new TestPersonAgeChanged()
                 {
-                    Age = 26
+                    Age = new Random().Next(60)
                 },
                 new TestPersonNameChanged()
                 {
@@ -57,20 +60,18 @@ namespace lifebook.core.eventstore.tests.EventStoreClientTest
                 },
                 new TestPersonOccupationChanged()
                 {
-                    Occupation = "maanager"
+                    Occupation = "maanager " + Guid.NewGuid()
                 },
                 new TestPersonOccupationChanged()
                 {
-                    Occupation = "developer"
+                    Occupation = "developer" + Guid.NewGuid()
                 },
                 new TestPersonOccupationChanged()
                 {
-                    Occupation = "cto"
+                    Occupation = "cto" + Guid.NewGuid()
                 },
             };
             
-            for (int i = 0; i < 5; i++)
-            {
                 Guid g = Guid.NewGuid();
                 var category = new StreamCategorySpecifier("test", "primary", "TestPerson", g);
                 foreach (var e in lifeEvents)

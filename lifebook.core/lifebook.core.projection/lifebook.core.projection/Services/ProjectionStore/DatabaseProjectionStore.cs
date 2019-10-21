@@ -1,8 +1,8 @@
 ﻿using lifebook.core.projection.Domain;
 using lifebook.core.projection.Interfaces;
-using lifebook.core.projection.Services.StreamTracker;
 using lifebook.core.services.interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Linq;
@@ -10,78 +10,54 @@ using System.Threading.Tasks;
 
 namespace lifebook.core.projection.Services
 {
-    public class DatabaseProjectionStore : DbContext, IProjectionStore
+    public class DatabaseProjectionStore : IProjectionStore
     {
-        private readonly IConfiguration _configuration;
+        private readonly IApplicationContext  _applicationContext;
+        private static readonly object _lock = new object();
 
-        public DatabaseProjectionStore(DbContextOptions<DatabaseProjectionStore> options, IConfiguration configuration)
-            : base(options)
+        public DatabaseProjectionStore(IApplicationContext applicationContext)
         {
-            _configuration = configuration;
-            Database.EnsureCreated();
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseNpgsql(_configuration.GetValue("ProjectionConnectionString"));
-        }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            var assemblies = AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes())
-            .Where(x => typeof(EntityProjection).IsAssignableFrom(x) && !x.IsInterface && !x.IsAbstract)
-            .ToList();
-            foreach (var type in assemblies)
-            {
-                modelBuilder
-                    .Entity(type, bt =>
-                        {
-                            var props = type.GetProperties(System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.DeclaredOnly);
-                            foreach (var prop in props)
-                            {
-                                bt.Ignore(prop.Name);
-                            }
-                            bt.HasKey(new string[] { "Key" });
-                            bt.Property<string>("JSON").HasColumnType("jsonb");
-                            bt.Property<string>("EventNumber");
-                        }
-                    );
-            }
-
-            modelBuilder.Entity<StreamTrackingInformation>();
-            base.OnModelCreating(modelBuilder);
+            _applicationContext = applicationContext;
         }
 
         public IEntitySet<TEntity> GetEntitySet<TEntity>() where TEntity : EntityProjection
         {
-            return new DbEntitySet<TEntity>(Set<TEntity>());
+            return new DbEntitySet<TEntity>(_applicationContext.Get<TEntity>());
         }
 
-        public async Task<TEntity> Get<TKey, TEntity>(TKey key) where TEntity : EntityProjection
+        public async Task<TEntity> GetAsync<TKey, TEntity>(TKey key) where TEntity : EntityProjection
         {
-            return await FindAsync<TEntity>(new object[] { key });
+            return await _applicationContext.Get<TEntity>().FindAsync(new object[] { key });
         }
 
-        public async Task<TEntity> Get<TEntity>(Guid key) where TEntity : EntityProjection
+        public async Task<TEntity> GetAsync<TEntity>(Guid key) where TEntity : EntityProjection
         {
-            return await Get<Guid, TEntity>(key);
+            return await GetAsync<Guid, TEntity>(key);
+        }
+
+        public TEntity Get<TKey, TEntity>(TKey key) where TEntity : EntityProjection
+        {
+            return _applicationContext.Get<TEntity>().Find(new object[] { key });
         }
 
         public TEntity Store<TEntity>(TEntity value) where TEntity : EntityProjection
         {
-            var dbset = this.Set<TEntity>();//this.Find(typeof(), new object[] { });
-            var entry = Entry(value);
-            entry.Property("JSON").CurrentValue = JObject.FromObject(value).ToString();
-            if(dbset.Any(e => e.Key == value.Key))
+            lock (_lock)
             {
-                dbset.Update(value);
+                var dbset = _applicationContext.Get<TEntity>();//this.Find(typeof(), new object[] { });
+                var entry = _applicationContext.GetEntityEntry(value);
+                entry.Entity.LastUpdated = DateTime.UtcNow;
+                entry.Property("JSON").CurrentValue = JObject.FromObject(value).ToString();
+                if (dbset.Any(e => e.Key == value.Key))
+                {
+                    dbset.Update(value);
+                }
+                else
+                {
+                    dbset.Add(value);
+                }
+                _applicationContext.TrySaveChangesOrFail();
             }
-            else
-            {
-                dbset.Add(value);
-            }
-            SaveChanges();
             return value;
         }
     }

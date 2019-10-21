@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
 using EventStore.ClientAPI;
@@ -20,8 +21,9 @@ namespace lifebook.core.eventstore.subscription.Services
         private IEventStoreConnection connection;
         private readonly EventStoreConfiguration _eventStoreConfiguration;
         private readonly ILogger _logger;
+		private static SemaphoreSlim semaphoreSlim = new SemaphoreSlim(1, 1);
 
-        public EventStoreSubscriptionService(EventStoreConfiguration eventStoreConfiguration, ILogger logger)
+		public EventStoreSubscriptionService(EventStoreConfiguration eventStoreConfiguration, ILogger logger)
         {
             connection = EventStoreConnection.Create(ConnectionSettings.Create(), new IPEndPoint(IPAddress.Parse(eventStoreConfiguration.IpAddress), eventStoreConfiguration.Port));
             connection.ConnectAsync().Wait();
@@ -53,14 +55,22 @@ namespace lifebook.core.eventstore.subscription.Services
         {
             Func<EventStoreCatchUpSubscription, ResolvedEvent, Task> func = async (es, re) =>
             {
-                var subEvent = new SubscriptionEvent<TOut>();
-                subEvent.LastStreamEventNumberRead = re.OriginalEventNumber;
-                subEvent.EventNumber = re.Event.EventNumber;
-                subEvent.StreamInfo = es.StreamId;
-                subEvent.StreamName = es.SubscriptionName;
-                subEvent.Event = new T().Create(re.Event.EventType, re.Event.Created, re.Event.Data, re.Event.Metadata);
-                _logger.Information($"Event Recieved: {JObject.FromObject(subEvent).ToString()}");
-                await action(subEvent);
+                await semaphoreSlim.WaitAsync();
+				try
+				{
+                    var subEvent = new SubscriptionEvent<TOut>();
+                    subEvent.LastStreamEventNumberRead = re.OriginalEventNumber;
+                    subEvent.EventNumber = re.Event.EventNumber;
+                    subEvent.StreamInfo = es.StreamId;
+                    subEvent.StreamName = es.SubscriptionName;
+                    subEvent.Event = new T().Create(re.Event.EventType, re.Event.Created, re.Event.Data, re.Event.Metadata);
+                    _logger.Information($"Event Recieved: {JObject.FromObject(subEvent).ToString()}");
+                    await action(subEvent);
+                }
+				finally
+				{
+                    semaphoreSlim.Release();
+				}
             };
 
             return func;
