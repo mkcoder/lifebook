@@ -135,6 +135,9 @@ namespace lifebook.core.projection.sampleapp
             // Hosting
             IWindsorContainer container = new WindsorContainer();
             await Hosting.Run(container);
+
+            container.Register(Component.For<PersonServiceApi>().ImplementedBy<PersonServiceApi>());
+
             var api = container.Resolve<PersonServiceApi>();
             var result = await api.GetPeople();
             Console.WriteLine(result);
@@ -166,7 +169,11 @@ namespace lifebook.core.projection.sampleapp
 
         public async Task<JArray> GetJAmes()
         {
-            var result = await personProjector.Query(async e => e.AsQueryable().Where(p => p.FirstName == "James").ToList());
+            var ppname = await personGuidToNameProjector.Query(async e => e.ToList());
+            var result = await personGuidToOccupationProjector.Query(async e => {
+                var occupations = e.ToList();
+                return ppname.Join(occupations, p => p.Key, pp => pp.Key, (p, pp) => new { BothEqual = p.Key == pp.Key, Key = p.Key, Name = $"{p.FirstName} {p.LastName}", Occupation = pp.Occupation });
+            });
             return JArray.FromObject(result);
         }
     }
@@ -181,8 +188,6 @@ namespace lifebook.core.projection.sampleapp
                 FromAssembly.InThisApplication(typeof(BootLoader).Assembly),
                 FromAssembly.InThisApplication(assembly)
             );
-
-            container.Register(Component.For<PersonServiceApi>().ImplementedBy<PersonServiceApi>());
 
             var contextCreator = container.Resolve<IApplicationContextCreator>();
             contextCreator.CreateContext();
