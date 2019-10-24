@@ -1,4 +1,4 @@
-<mxfile modified="2019-10-24T15:58:16.747Z" host="www.draw.io" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.2 Safari/605.1.15" etag="2hsu_XEUUkmdCv5uqD86" version="12.1.4" type="github" pages="11">
+<mxfile modified="2019-10-24T15:59:31.800Z" host="www.draw.io" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.2 Safari/605.1.15" etag="q_-d6EEfPPcq_bbGZsfm" version="12.1.4" type="github" pages="11">
   <diagram name="lifebook architecture" id="5f0bae14-7c28-e335-631c-24af17079c00">
     <mxGraphModel dx="1089" dy="759" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3000" pageHeight="2000" background="#ffffff" math="0" shadow="0">
       <root>
@@ -960,6 +960,9 @@
       <root>
         <mxCell id="OM-LaSDlgRMeTXrcYikM-0"/>
         <mxCell id="OM-LaSDlgRMeTXrcYikM-1" parent="OM-LaSDlgRMeTXrcYikM-0"/>
+        <mxCell id="KiftyZbSxjQhEujjADec-81" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;" vertex="1" parent="OM-LaSDlgRMeTXrcYikM-1">
+          <mxGeometry x="114" y="625" width="1080" height="770" as="geometry"/>
+        </mxCell>
         <mxCell id="KiftyZbSxjQhEujjADec-54" style="edgeStyle=orthogonalEdgeStyle;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0.636;entryY=0.983;entryDx=0;entryDy=0;entryPerimeter=0;startArrow=classic;startFill=1;endArrow=none;endFill=0;" edge="1" parent="OM-LaSDlgRMeTXrcYikM-1" source="KiftyZbSxjQhEujjADec-49" target="KiftyZbSxjQhEujjADec-7">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
@@ -1075,7 +1078,7 @@
           <mxGeometry x="130" y="375" width="140" height="20" as="geometry"/>
         </mxCell>
         <mxCell id="KiftyZbSxjQhEujjADec-0" value="Projector Internals" style="text;html=1;resizable=0;points=[];autosize=1;align=left;verticalAlign=top;spacingTop=-4;fontStyle=1;fontFamily=Courier New;labelPosition=center;verticalLabelPosition=middle;horizontal=1;" vertex="1" parent="OM-LaSDlgRMeTXrcYikM-1">
-          <mxGeometry x="120" y="650" width="150" height="20" as="geometry"/>
+          <mxGeometry x="120" y="600" width="150" height="20" as="geometry"/>
         </mxCell>
         <mxCell id="KiftyZbSxjQhEujjADec-1" value="projector" style="shape=umlFrame;whiteSpace=wrap;html=1;width=70;height=30;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="OM-LaSDlgRMeTXrcYikM-1">
           <mxGeometry x="172" y="690" width="120" height="80" as="geometry"/>
