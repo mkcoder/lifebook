@@ -6,6 +6,11 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <Authors>mkcoder</Authors>
     <Description>projector service to projection eventstore data to datastore</Description>
+    <PackOnBuild>true</PackOnBuild>
+    <Owners>mkcoder</Owners>
+    <PackageProjectUrl>https://github.com/mkcoder/lifebook</PackageProjectUrl>
+    <ReleaseVersion>1.0</ReleaseVersion>
+    <SynchReleaseVersion>false</SynchReleaseVersion>
   </PropertyGroup>
 
   <ItemGroup>

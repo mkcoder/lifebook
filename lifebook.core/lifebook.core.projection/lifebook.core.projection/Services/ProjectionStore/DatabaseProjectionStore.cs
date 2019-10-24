@@ -1,9 +1,6 @@
 ﻿using lifebook.core.projection.Domain;
 using lifebook.core.projection.Interfaces;
-using lifebook.core.services.interfaces;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Linq;
 using System.Threading.Tasks;

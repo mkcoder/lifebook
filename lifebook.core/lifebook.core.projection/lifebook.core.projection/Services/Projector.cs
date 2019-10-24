@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Threading;
 using System.Threading.Tasks;
 using lifebook.core.cqrses.Domains;
 using lifebook.core.eventstore.subscription.Apis;
 using lifebook.core.projection.Attributes;
 using lifebook.core.projection.Domain;
 using lifebook.core.projection.Interfaces;
-using lifebook.core.projection.Services.StreamTracker;
-using Microsoft.Extensions.Caching.Memory;
 
 namespace lifebook.core.projection.Services
 {

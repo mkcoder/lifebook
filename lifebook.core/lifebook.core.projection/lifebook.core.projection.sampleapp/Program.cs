@@ -2,20 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Threading;
 using System.Threading.Tasks;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
-using Castle.Windsor.Installer;
 using lifebook.core.cqrses.Domains;
-using lifebook.core.logging.ioc;
 using lifebook.core.projection.Attributes;
 using lifebook.core.projection.Domain;
-using lifebook.core.projection.Interfaces;
+using lifebook.core.projection.Hosting;
 using lifebook.core.projection.Services;
-using lifebook.core.projection.Services.StreamTracker;
-using lifebook.core.services.extensions;
-using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 
 namespace lifebook.core.projection.sampleapp
@@ -134,16 +128,23 @@ namespace lifebook.core.projection.sampleapp
         {
             // Hosting
             IWindsorContainer container = new WindsorContainer();
-            await Hosting.Run(container);
+            await ProjectorHosting.Run(container);
 
             container.Register(Component.For<PersonServiceApi>().ImplementedBy<PersonServiceApi>());
 
-            var api = container.Resolve<PersonServiceApi>();
-            var result = await api.GetPeople();
-            Console.WriteLine(result);
-            result = await api.GetJAmes();
-            Console.WriteLine("=============/ JAMES /=================");
-            Console.WriteLine(result);
+            try
+            {
+                var api = container.Resolve<PersonServiceApi>();
+                var result = await api.GetPeople();
+                Console.WriteLine(result);
+                result = await api.GetJAmes();
+                Console.WriteLine("=============/ JAMES /=================");
+                Console.WriteLine(result);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
             Console.ReadLine();
         }
     }
@@ -171,29 +172,10 @@ namespace lifebook.core.projection.sampleapp
         {
             var ppname = await personGuidToNameProjector.Query(async e => e.ToList());
             var result = await personGuidToOccupationProjector.Query(async e => {
-                var occupations = e.ToList();
-                return ppname.Join(occupations, p => p.Key, pp => pp.Key, (p, pp) => new { BothEqual = p.Key == pp.Key, Key = p.Key, Name = $"{p.FirstName} {p.LastName}", Occupation = pp.Occupation });
+                var occupations = e.AsQueryable();
+                return ppname.Join(occupations, p => p.Key, pp => pp.Key, (p, pp) => new { BothEqual = p.Key == pp.Key, Key = p.Key, Name = $"{p.LastName}, {p.FirstName}", Occupation = pp.Occupation });
             });
             return JArray.FromObject(result);
-        }
-    }
-
-    public class Hosting
-    {
-        public static async Task Run(IWindsorContainer container)
-        {
-            var assembly = typeof(Program).Assembly.GetRootAssembly();
-
-            container.Install(
-                FromAssembly.InThisApplication(typeof(BootLoader).Assembly),
-                FromAssembly.InThisApplication(assembly)
-            );
-
-            var contextCreator = container.Resolve<IApplicationContextCreator>();
-            contextCreator.CreateContext();
-            var projectors = container.ResolveAll<IProjector>();
-
-            projectors.Select(p => p.TestProjector()).ToList().ForEach(s => s.Run());
         }
     }
 
@@ -212,6 +194,11 @@ namespace lifebook.core.projection.sampleapp
         public TestProjector(IProjector projector)
         {
             _projector = projector;
+        }
+
+        public void HandleEvent(AggregateEvent @event)
+        {
+            
         }
 
         public void Run()

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Reflection;
 using lifebook.core.logging.interfaces;
 using lifebook.core.projection.Domain;
 using lifebook.core.projection.Interfaces;
@@ -11,7 +10,6 @@ using lifebook.core.services.interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
-using Newtonsoft.Json.Linq;
 
 namespace lifebook.core.projection.Services.ProjectionStore
 {
@@ -60,12 +58,33 @@ namespace lifebook.core.projection.Services.ProjectionStore
 
             try
             {
-                _rdbc.CreateTables();
+                CreateStreamTrackingInformation();
                 CreateTablesIfNotExist();
             }
             catch (Exception ex)
             {
                 _logger.Information($"Failed attempting to create tables {ex.Message}");
+            }
+        }
+
+        private void CreateStreamTrackingInformation()
+        {
+            var conn = Database.GetDbConnection();
+            if (conn.State.Equals(ConnectionState.Closed)) conn.Open();
+            using (var command = conn.CreateCommand())
+            {
+                command.CommandText = $@"
+CREATE TABLE public.""StreamTrackingInformation""
+(
+    ""Id"" uuid NOT NULL,
+    ""StreamKey"" text COLLATE pg_catalog.""default"",
+    ""StreamId"" text COLLATE pg_catalog.""default"",
+    ""LastEventRead"" bigint NOT NULL,
+    CONSTRAINT ""PK_StreamTrackingInformation"" PRIMARY KEY(""Id"")
+)";
+                _logger.Information($"Running SQL Query: {command.CommandText}");
+                var result = command.ExecuteNonQuery();
+                _logger.Information($"Result From SQL Query: {result}");
             }
         }
 
@@ -96,8 +115,8 @@ CREATE TABLE IF NOT EXISTS {tableName} (
     CONSTRAINT ""PK_${tableName}"" PRIMARY KEY(""Key"")
 );";
                 _logger.Information($"Running SQL Query: {command.CommandText}");
-                result = command.ExecuteScalar();
-                _logger.Information($"Result From SQL Query: {(result == null ? "null result" : JObject.FromObject(result).ToString())}");
+                result = command.ExecuteNonQuery();
+                _logger.Information($"Result From SQL Query: {(result == null ? "null result" : result)}");
             }
             return result != null;
         }
