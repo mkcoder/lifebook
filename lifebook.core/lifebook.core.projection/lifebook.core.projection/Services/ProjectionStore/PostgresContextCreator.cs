@@ -74,7 +74,7 @@ namespace lifebook.core.projection.Services.ProjectionStore
             using (var command = conn.CreateCommand())
             {
                 command.CommandText = $@"
-CREATE TABLE public.""StreamTrackingInformation""
+CREATE TABLE IF NOT EXISTS public.""StreamTrackingInformation""
 (
     ""Id"" uuid NOT NULL,
     ""StreamKey"" text COLLATE pg_catalog.""default"",
