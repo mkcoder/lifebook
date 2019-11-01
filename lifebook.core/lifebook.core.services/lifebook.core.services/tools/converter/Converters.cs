@@ -16,5 +16,11 @@ namespace lifebook.core.tools.converter
             }
             return result;
         }
+
+        public static Stream FromResourceNameToEmbededAssemblyResourcesStream(this Assembly assembly, string resourceName)
+        {
+            Stream stream = assembly.GetManifestResourceStream(resourceName);
+            return stream;
+        }
     }
 }

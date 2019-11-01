@@ -17,8 +17,11 @@
     <ProjectReference Include="..\lifebook.core.services\lifebook.core.services.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Update="configurations.json">
+    <None Remove="configurations.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="configurations.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>
