@@ -72,8 +72,8 @@ namespace lifebook.core.eventstore.tests.EventStoreClientTest
                 },
             };
             
-                Guid g = Guid.NewGuid();
-                var category = new StreamCategorySpecifier("test", "primary", "TestPerson", g);
+                Guid g = Guid.Parse("6022727c-7bfe-44f6-a722-48e1b98397df");
+                var category = new StreamCategorySpecifier("test", "primary", "TestPerson2", g);
                 foreach (var e in lifeEvents)
                 {
                     e.EntityId = g;

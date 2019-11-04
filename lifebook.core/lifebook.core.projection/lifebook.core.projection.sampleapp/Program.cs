@@ -24,6 +24,7 @@ namespace lifebook.core.projection.sampleapp
 
     // test.primary.TestPerson
     [StreamCategory("TestPerson", "test", "primary")]
+    [StreamCategory("TestPerson2", "test", "primary")]
     public class PersonProjector : Projector<PersonEntity>
     {
         public PersonProjector(ProjectorServices projectorServices) : base(projectorServices)
@@ -70,6 +71,7 @@ namespace lifebook.core.projection.sampleapp
 
     // test.primary.TestPerson
     [StreamCategory("TestPerson", "test", "primary")]
+    [StreamCategory("TestPerson2", "test", "primary")]
     public class PersonGuidToOccupationProjector : Projector<PersonGuidToOccupation>
     {
         public PersonGuidToOccupationProjector(ProjectorServices projectorServices) : base(projectorServices)
@@ -99,6 +101,7 @@ namespace lifebook.core.projection.sampleapp
 
     // test.primary.TestPerson
     [StreamCategory("TestPerson", "test", "primary")]
+    [StreamCategory("TestPerson2", "test", "primary")]
     public class PersonGuidToNameProjector : Projector<PersonGuidToName>
     {
         public PersonGuidToNameProjector(ProjectorServices projectorServices) : base(projectorServices)
