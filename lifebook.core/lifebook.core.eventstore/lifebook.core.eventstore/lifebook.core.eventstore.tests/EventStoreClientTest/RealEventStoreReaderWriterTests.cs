@@ -72,14 +72,36 @@ namespace lifebook.core.eventstore.tests.EventStoreClientTest
                 },
             };
             
-                Guid g = Guid.Parse("6022727c-7bfe-44f6-a722-48e1b98397df");
-                var category = new StreamCategorySpecifier("test", "primary", "TestPerson2", g);
+                Guid g = Guid.NewGuid();
+                var category = new StreamCategorySpecifier("test", "primary", "TestPerson", g);
                 foreach (var e in lifeEvents)
                 {
                     e.EntityId = g;
                     await eventWriter.WriteEventAsync(category, e);
                 }
             }
+        }
+
+        [Explicit]
+        [Test]
+        public async Task Test2()
+        {
+            Guid productId = Guid.Parse("62e27ca5-6ad8-4832-99a2-5dbd849383fc"); // Guid.Parse("6022727c-7bfe-44f6-a722-48e1b98397df");
+            var category = new StreamCategorySpecifier("test", "primary", "Catalog", productId);
+            var catalogProductCreated = new TestProductCreated()
+            {
+                ProductName = "Product-5dbd849383fc"
+            };
+            catalogProductCreated.EntityId = productId;
+            await eventWriter.WriteEventAsync(category, catalogProductCreated);
+            Guid productPurchased = Guid.Parse("9cf88a45-1399-4e2f-9c67-e4dcf2cf5696");
+            var personCateogry = new StreamCategorySpecifier("test", "primary", "TestPerson", productPurchased);
+            var testProductPurchased = new TestProductPurchased()
+            {
+                ProductId = productId                
+            };
+            testProductPurchased.EntityId = productPurchased;
+            await eventWriter.WriteEventAsync(personCateogry, testProductPurchased);
         }
 
         [Test]
@@ -119,5 +141,15 @@ namespace lifebook.core.eventstore.tests.EventStoreClientTest
     public class TestPersonOccupationChanged : Event
     {
         public string Occupation { get; set; }
+    }
+
+    public class TestProductPurchased : Event
+    {
+        public Guid ProductId { get; set; }
+    }
+
+    public class TestProductCreated : Event
+    {
+        public string ProductName { get; set; }
     }
 }

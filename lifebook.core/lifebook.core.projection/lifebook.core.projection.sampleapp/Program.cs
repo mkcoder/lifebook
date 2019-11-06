@@ -20,6 +20,7 @@ namespace lifebook.core.projection.sampleapp
         public string LastName { get; set; }
         public int Age { get; set; }
         public string Occupation { get; set; }
+        public Guid ProductId { get; set; }
     }
 
     // test.primary.TestPerson
@@ -61,6 +62,13 @@ namespace lifebook.core.projection.sampleapp
             var personCreated = aggregateEvent.Data.TransformDataFromString(str => JObject.Parse(str));
             Value.FirstName = personCreated["FirstName"].ToObject<string>();
             Value.LastName = personCreated["LastName"].ToObject<string>();
+        }
+
+        [UponEvent("TestProductPurchased")]
+        public void TestProductPurchased(AggregateEvent aggregateEvent)
+        {
+            var personCreated = aggregateEvent.Data.TransformDataFromString(str => JObject.Parse(str));
+            Value.ProductId = personCreated["ProductId"].ToObject<Guid>();
         }
     }
 
@@ -125,6 +133,27 @@ namespace lifebook.core.projection.sampleapp
         }
     }
 
+    public class CatalogProjection : EntityProjection
+    {
+        public string ProductName { get; set; }
+    }
+
+    // test.primary.TestPerson
+    [StreamCategory("Catalog", "test", "primary")]
+    public class CatalogProjector : Projector<CatalogProjection>
+    {
+        public CatalogProjector(ProjectorServices projectorServices) : base(projectorServices)
+        {
+        }
+
+        [UponEvent("TestProductCreated")]
+        public void PersonCreated(AggregateEvent aggregateEvent)
+        {
+            var personCreated = aggregateEvent.Data.TransformDataFromString(str => JObject.Parse(str));
+            Value.ProductName = personCreated["ProductName"].ToObject<string>();
+        }
+    }
+
     public class Program
     {
         static async Task Main(string[] args)
@@ -143,6 +172,9 @@ namespace lifebook.core.projection.sampleapp
                 result = await api.GetJAmes();
                 Console.WriteLine("=============/ JAMES /=================");
                 Console.WriteLine(result);
+                result = await api.GetProductPeoplePurchased();
+                Console.WriteLine("=============/ Product Person Purchased /=================");
+                Console.WriteLine(result);
             }
             catch (Exception ex)
             {
@@ -157,12 +189,17 @@ namespace lifebook.core.projection.sampleapp
         private readonly PersonGuidToNameProjector personGuidToNameProjector;
         private readonly PersonProjector personProjector;
         private readonly PersonGuidToOccupationProjector personGuidToOccupationProjector;
+        private readonly CatalogProjector catalogProjector;
 
-        public PersonServiceApi(PersonGuidToNameProjector personGuidToNameProjector, PersonProjector personProjector, PersonGuidToOccupationProjector personGuidToOccupationProjector)
+        public PersonServiceApi(PersonGuidToNameProjector personGuidToNameProjector,
+            PersonProjector personProjector,
+            PersonGuidToOccupationProjector personGuidToOccupationProjector,
+            CatalogProjector catalogProjector)
         {
             this.personGuidToNameProjector = personGuidToNameProjector;
             this.personProjector = personProjector;
             this.personGuidToOccupationProjector = personGuidToOccupationProjector;
+            this.catalogProjector = catalogProjector;
         }
 
         public async Task<JArray> GetPeople()
@@ -177,6 +214,26 @@ namespace lifebook.core.projection.sampleapp
             var result = await personGuidToOccupationProjector.Query(async e => {
                 var occupations = e.AsQueryable();
                 return ppname.Join(occupations, p => p.Key, pp => pp.Key, (p, pp) => new { BothEqual = p.Key == pp.Key, Key = p.Key, Name = $"{p.LastName}, {p.FirstName}", Occupation = pp.Occupation });
+            });
+            return JArray.FromObject(result);
+        }
+
+        public async Task<JArray> GetProductPeoplePurchased()
+        {
+            var items = await personProjector.Query(async e => e.ToList());
+            var result = await catalogProjector.Query(async e => {
+                var products = e.AsQueryable();
+                var query = from personproject in items
+                            join catalogs in products
+                            on personproject.ProductId equals catalogs.Key
+                            select new { Text = $"{catalogs.ProductName} purchased by [{personproject.LastName}, {personproject.FirstName}]" };
+                var query2 = items
+                            .Select(p => p.ProductId)
+                            //.Select(p => new { Name = $"{p.FirstName}, {p.LastName}", ProductName = products.FirstOrDefault(c => c.Key == p.ProductId).ProductName })
+                            ;
+                // return query.ToList();
+                //return occupations.Join(items, cp => cp.Key, pp => pp.Key, (cp, pp) => new { cp = cp, pp = pp });
+                return items.Join(products, p => p.ProductId, pp => pp.Key, (p, pp) => new { BothEqual = p.Key == pp.Key, PersonId = p.Key, ProductId = pp.Key, Name = $"{p.FirstName} {p.LastName}", Message = $"{pp.ProductName} purchased by [{p.LastName}, {p.FirstName}]", Occupation = p.Occupation });
             });
             return JArray.FromObject(result);
         }
