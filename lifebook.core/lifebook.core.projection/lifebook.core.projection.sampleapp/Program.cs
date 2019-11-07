@@ -223,17 +223,11 @@ namespace lifebook.core.projection.sampleapp
             var items = await personProjector.Query(async e => e.ToList());
             var result = await catalogProjector.Query(async e => {
                 var products = e.AsQueryable();
-                var query = from personproject in items
+                var query = from person in items
                             join catalogs in products
-                            on personproject.ProductId equals catalogs.Key
-                            select new { Text = $"{catalogs.ProductName} purchased by [{personproject.LastName}, {personproject.FirstName}]" };
-                var query2 = items
-                            .Select(p => p.ProductId)
-                            //.Select(p => new { Name = $"{p.FirstName}, {p.LastName}", ProductName = products.FirstOrDefault(c => c.Key == p.ProductId).ProductName })
-                            ;
-                // return query.ToList();
-                //return occupations.Join(items, cp => cp.Key, pp => pp.Key, (cp, pp) => new { cp = cp, pp = pp });
-                return items.Join(products, p => p.ProductId, pp => pp.Key, (p, pp) => new { BothEqual = p.Key == pp.Key, PersonId = p.Key, ProductId = pp.Key, Name = $"{p.FirstName} {p.LastName}", Message = $"{pp.ProductName} purchased by [{p.LastName}, {p.FirstName}]", Occupation = p.Occupation });
+                            on person.ProductId equals catalogs.Key
+                            select new { PersonId = person.Key, ProductId = catalogs.Key, ProductName = catalogs.ProductName, Name = $"{person.FirstName} {person.LastName}", Message = $"{catalogs.ProductName} purchased by [{person.LastName}, {person.FirstName}]" };
+                 return query.ToList();
             });
             return JArray.FromObject(result);
         }
