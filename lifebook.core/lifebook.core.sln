@@ -37,8 +37,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.projection", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.projection.tests", "lifebook.core.projection\lifebook.core.projection.tests\lifebook.core.projection.tests.csproj", "{B48A4904-7AE0-4B24-85C1-D8BE4AC5A717}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "lifebook.core.examples.mvc", "lifebook.core.examples\lifebook.core.examples.webapi\lifebook.core.examples.mvc.csproj", "{AB119FFD-6BAC-4D8C-9F8C-C9E951F3B298}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.projection.sampleapp", "lifebook.core.projection\lifebook.core.projection.sampleapp\lifebook.core.projection.sampleapp.csproj", "{2FE1CDF5-A4C7-4970-8E13-5C5F251F8FBD}"
 EndProject
 Global
@@ -87,10 +85,6 @@ Global
 		{B48A4904-7AE0-4B24-85C1-D8BE4AC5A717}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B48A4904-7AE0-4B24-85C1-D8BE4AC5A717}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B48A4904-7AE0-4B24-85C1-D8BE4AC5A717}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AB119FFD-6BAC-4D8C-9F8C-C9E951F3B298}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AB119FFD-6BAC-4D8C-9F8C-C9E951F3B298}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AB119FFD-6BAC-4D8C-9F8C-C9E951F3B298}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AB119FFD-6BAC-4D8C-9F8C-C9E951F3B298}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2FE1CDF5-A4C7-4970-8E13-5C5F251F8FBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2FE1CDF5-A4C7-4970-8E13-5C5F251F8FBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FE1CDF5-A4C7-4970-8E13-5C5F251F8FBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -110,7 +104,6 @@ Global
 		{5B348CBF-8682-44A9-9B2A-665A3DED5700} = {E54E710C-A58A-4569-9319-153DD07CB8AB}
 		{4BA11401-0138-4D68-8B1B-0613147488B5} = {9B475D1E-8904-4BB3-A381-70B6B041CE28}
 		{B48A4904-7AE0-4B24-85C1-D8BE4AC5A717} = {9B475D1E-8904-4BB3-A381-70B6B041CE28}
-		{AB119FFD-6BAC-4D8C-9F8C-C9E951F3B298} = {2E9CB30D-42EE-4A86-B1E5-D094ADDEAEA6}
 		{2FE1CDF5-A4C7-4970-8E13-5C5F251F8FBD} = {9B475D1E-8904-4BB3-A381-70B6B041CE28}
 	EndGlobalSection
 EndGlobal
