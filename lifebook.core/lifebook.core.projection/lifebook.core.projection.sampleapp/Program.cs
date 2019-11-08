@@ -232,33 +232,4 @@ namespace lifebook.core.projection.sampleapp
             return JArray.FromObject(result);
         }
     }
-
-    public static class TestProjectorExt
-    {
-        public static TestProjector TestProjector(this IProjector projector)
-        {
-            return new TestProjector(projector);
-        }
-    }
-
-    public class TestProjector
-    {
-        private readonly IProjector _projector;
-
-        public TestProjector(IProjector projector)
-        {
-            _projector = projector;
-        }
-
-        public void HandleEvent(AggregateEvent @event)
-        {
-            
-        }
-
-        public void Run()
-        {
-            var projector = _projector.GetType().GetMethod("Start", BindingFlags.NonPublic | BindingFlags.Instance);
-            projector?.Invoke(_projector, null);
-        }
-    }
 }
