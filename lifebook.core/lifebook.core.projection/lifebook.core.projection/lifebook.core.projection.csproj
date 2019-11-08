@@ -11,7 +11,7 @@
     <PackageProjectUrl>https://github.com/mkcoder/lifebook</PackageProjectUrl>
     <ReleaseVersion>1.0</ReleaseVersion>
     <SynchReleaseVersion>false</SynchReleaseVersion>
-    <PackageVersion>1.0.3</PackageVersion>
+    <PackageVersion>1.0.4</PackageVersion>
     <PackageId>lifebook.core.projection</PackageId>
   </PropertyGroup>
 

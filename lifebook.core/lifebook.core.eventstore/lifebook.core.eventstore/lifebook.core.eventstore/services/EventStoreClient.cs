@@ -102,8 +102,8 @@ namespace lifebook.core.eventstore.services
 
         internal override async Task WriteEventAsync(StreamCategorySpecifier specifier, Event e)
         {
-            if (e.EntityId == Guid.Empty && specifier.AggregateId != null)
-                throw new Exception("Entity Id must be a Guid if Aggregate Id is set in the StreamCategorySpecifier.");
+            if (e.EntityId == Guid.Empty)
+                throw new Exception("Entity Id must be a Guid.");
             await eventStoreConnection.AppendToStreamAsync(specifier.GetCategoryStreamWithAggregateId(),
             e.EventVersion == 0 ? ExpectedVersion.Any : e.EventVersion,
             new EventData(e.EventId, e.EventType, true, e.EventDataToByteArray(), e.EventMetadataToByteArray()));

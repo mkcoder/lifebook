@@ -220,13 +220,13 @@ namespace lifebook.core.projection.sampleapp
 
         public async Task<JArray> GetProductPeoplePurchased()
         {
-            var items = await personProjector.Query(async e => e.ToList());
+            var people = await personProjector.Query(async e => e.ToList());
             var result = await catalogProjector.Query(async e => {
-                var products = e.AsQueryable();
-                var query = from person in items
-                            join catalogs in products
-                            on person.ProductId equals catalogs.Key
-                            select new { PersonId = person.Key, ProductId = catalogs.Key, ProductName = catalogs.ProductName, Name = $"{person.FirstName} {person.LastName}", Message = $"{catalogs.ProductName} purchased by [{person.LastName}, {person.FirstName}]" };
+                var catalog = e.AsQueryable();
+                var query = from person in people
+                            join product in catalog
+                            on person.ProductId equals product.Key
+                            select new { PersonId = person.Key, ProductId = product.Key, ProductName = product.ProductName, Name = $"{person.FirstName} {person.LastName}", Message = $"{product.ProductName} purchased by [{person.LastName}, {person.FirstName}]" };
                  return query.ToList();
             });
             return JArray.FromObject(result);

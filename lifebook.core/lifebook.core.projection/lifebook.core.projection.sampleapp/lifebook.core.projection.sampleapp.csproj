@@ -8,6 +8,6 @@
   <ItemGroup>
     <PackageReference Include="lifebook.core.services" Version="3.0.43" />
     <PackageReference Include="lifebook.core.cqrs.domain" Version="1.0.0" />
-    <PackageReference Include="lifebook.core.projection" Version="1.0.3" />
+    <PackageReference Include="lifebook.core.projection" Version="1.0.4" />
   </ItemGroup>
 </Project>
