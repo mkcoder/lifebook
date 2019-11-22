@@ -13,6 +13,9 @@ lifebook.infastructure/sqlserver/**
 *.user
 *.userosscache
 *.sln.docstates
+**/.DS_Store
+**/.gitignore
+*/.gitignore
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
