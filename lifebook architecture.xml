@@ -1,4 +1,4 @@
-<mxfile modified="2019-11-24T12:18:02.306Z" host="www.draw.io" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Safari/605.1.15" etag="LFaHfarNMKD6Npx3N3YL" version="12.2.9" type="github" pages="12">
+<mxfile modified="2019-11-24T12:19:16.002Z" host="www.draw.io" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Safari/605.1.15" etag="NAYg3WC62hSLf3Hkmzvi" version="12.2.9" type="github" pages="12">
   <diagram name="lifebook architecture" id="5f0bae14-7c28-e335-631c-24af17079c00">
     <mxGraphModel dx="1089" dy="734" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3000" pageHeight="2000" background="#ffffff" math="0" shadow="0">
       <root>
@@ -1566,6 +1566,18 @@
         </mxCell>
         <mxCell id="5bswoITKxaShNht801pm-32" value="" style="aspect=fixed;html=1;points=[];align=center;image;fontSize=12;image=img/lib/mscae/Cache_Redis_Product.svg;" vertex="1" parent="5bswoITKxaShNht801pm-38">
           <mxGeometry x="20" y="34" width="50" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="5bswoITKxaShNht801pm-42" value="" style="group" vertex="1" connectable="0" parent="_KId3ynk4aB9r7oPcg_o-1">
+          <mxGeometry x="190" y="520" width="210" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="5bswoITKxaShNht801pm-43" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="5bswoITKxaShNht801pm-42">
+          <mxGeometry width="210" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="5bswoITKxaShNht801pm-45" value="&lt;span style=&quot;font-size: 22px&quot;&gt;Backend Service&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Courier New;fontStyle=1" vertex="1" parent="5bswoITKxaShNht801pm-42">
+          <mxGeometry x="110" y="42" width="50" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="5bswoITKxaShNht801pm-46" value="" style="image;html=1;labelBackgroundColor=#ffffff;image=img/lib/clip_art/computers/Server_128x128.png;fontFamily=Courier New;" vertex="1" parent="5bswoITKxaShNht801pm-42">
+          <mxGeometry x="20" y="30" width="55" height="50" as="geometry"/>
         </mxCell>
       </root>
     </mxGraphModel>
