@@ -10,7 +10,7 @@
     <Description>the library to connect to eventstore</Description>
     <PackageId>lifebook.core.eventstore</PackageId>
     <PackageProjectUrl>https://github.com/mkcoder/lifebook</PackageProjectUrl>
-    <PackageVersion>3.0.27</PackageVersion>
+    <PackageVersion>3.0.33</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>

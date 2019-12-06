@@ -41,6 +41,9 @@ namespace lifebook.core.services.ServiceStartup
             {
                 endpoints.MapControllers();
             });
+
+            RegisterService(app.ApplicationServices.GetService<IWindsorContainer>());
+
             Configuration = app.ApplicationServices.GetService<IConfiguration>();
             app.RegisterService(Configuration);
             AfterConfigureServices(app, env);

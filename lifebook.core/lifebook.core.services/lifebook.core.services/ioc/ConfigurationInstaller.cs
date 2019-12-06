@@ -25,7 +25,7 @@ namespace lifebook.core.services
                         if (attributes != null && Environment.GetEnvironmentVariable("DEV_ENV") != "PRODUCTION") return false;                        
                         return true;
                     })
-                    .LifestyleSingleton()
+                    .LifestyleTransient()                    
                     .WithServiceAllInterfaces(),
                 // when we rebind it with on create and pass it through the initializer
                 Component.For<IConfigurationBuilder>().OnCreate(builder =>
@@ -33,8 +33,8 @@ namespace lifebook.core.services
                     var r = container.ResolveAll<IConfigurationProviderInistalizer>();
                     var provider = new ConfigurationBuilderDefaultInitalizer(r);
                     provider.configure(builder);
-                }).ImplementedBy<ConfigurationBuilder>().LifeStyle.Singleton,
-                Component.For <interfaces.IConfiguration>().ImplementedBy<Configuration>().LifeStyle.Singleton
+                }).ImplementedBy<ConfigurationBuilder>().LifeStyle.Transient.OnlyNewServices(),
+                Component.For <interfaces.IConfiguration>().ImplementedBy<Configuration>().LifeStyle.Transient.OnlyNewServices()
             );            
         }
     }

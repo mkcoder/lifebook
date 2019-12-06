@@ -6,8 +6,10 @@ using Castle.Windsor;
 using Castle.Windsor.Installer;
 using lifebook.core.eventstore.configurations;
 using lifebook.core.eventstore.domain.api;
+using lifebook.core.eventstore.providers;
 using lifebook.core.eventstore.services;
 using lifebook.core.logging.interfaces;
+using lifebook.core.services.configuration;
 
 namespace lifebook.core.ioc
 {
@@ -22,15 +24,16 @@ namespace lifebook.core.ioc
                     container.AddFacility<TypedFactoryFacility>();
                 }
 
+                if (!container.Kernel.HasComponent(typeof(EventStoreConfiguration)))
+                {
+                    container.Register(
+                        Component.For<EventStoreConfiguration>().ImplementedBy<EventStoreConfiguration>().IsDefault().LifeStyle.Transient,
+                        Component.For<IConfigurationProviderInistalizer>().ImplementedBy<DevelopmentEventStoreConfigurationProvider>().IsDefault().LifeStyle.Transient
+                    );
+                }
+
                 if (!container.Kernel.HasComponent(typeof(IEventStoreClient)))
                 {
-                    if (!container.Kernel.HasComponent(typeof(EventStoreConfiguration)))
-                    {
-                        container.Register(
-                            Component.For<EventStoreConfiguration>().ImplementedBy<EventStoreConfiguration>().IsDefault().LifeStyle.Singleton
-                        );
-                    }
-
                     container.Register(
                         Component.For<AbstractEventStoreClient>()
                         .ImplementedBy<EventStoreClient>()
