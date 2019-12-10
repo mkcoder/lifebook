@@ -2,6 +2,7 @@
 using Serilog;
 using Serilog.Sinks.Elasticsearch;
 using lifebook.core.logging.interfaces;
+using Serilog.Sinks.SystemConsole.Themes;
 
 namespace lifebook.core.logging.services
 {
@@ -17,7 +18,10 @@ namespace lifebook.core.logging.services
                             {
                                 AutoRegisterTemplate = true,
                                 AutoRegisterTemplateVersion = AutoRegisterTemplateVersion.ESv6
-                            }).CreateLogger();
+                            })
+                            .WriteTo.File("logs")
+                            .WriteTo.Console(theme: AnsiConsoleTheme.Code)
+                            .CreateLogger();
         }
 
         public void Error(Exception ex, string message) => _logger

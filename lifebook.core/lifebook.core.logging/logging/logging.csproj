@@ -1,24 +1,30 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <PackageId>lifebook.core.logging</PackageId>
-    <PackageVersion>1.0.11</PackageVersion>
+    <PackageVersion>1.0.13</PackageVersion>
     <Authors>mkcoder</Authors>
     <Description>logging service</Description>
+    <PackOnBuild>true</PackOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Serilog" Version="2.8.0" />
-    <PackageReference Include="Serilog.Extensions.Logging" Version="2.0.2" />
-    <PackageReference Include="Serilog.Sinks.Elasticsearch" Version="6.5.0" />
-    <PackageReference Include="Castle.Windsor" Version="4.1.1" />
-    <PackageReference Include="NuGet.Build.Packaging" Version="0.2.0" />
+    <PackageReference Include="Serilog" Version="2.9.0" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="3.0.1" />
+    <PackageReference Include="Serilog.Sinks.Elasticsearch" Version="8.0.1" />
+    <PackageReference Include="Castle.Windsor" Version="5.0.1" />
+    <PackageReference Include="NuGet.Build.Packaging" Version="0.2.2"><PrivateAssets>all</PrivateAssets>
+<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+</PackageReference>
+    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
+    <PackageReference Include="Serilog.Sinks.File" Version="4.1.0" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="interfaces\" />
     <Folder Include="services\" />
     <Folder Include="ioc\" />
     <Folder Include="ioc\installers\" />
+    <Folder Include="ConfigurationProvider\" />
   </ItemGroup>
 </Project>

@@ -24,18 +24,11 @@ namespace lifebook.core.ioc
                     container.AddFacility<TypedFactoryFacility>();
                 }
 
-                if (!container.Kernel.HasComponent(typeof(EventStoreConfiguration)))
-                {
-                    container.Register(
-                        Component.For<EventStoreConfiguration>().ImplementedBy<EventStoreConfiguration>().IsDefault().LifeStyle.Transient,
-                        Component.For<IConfigurationProviderInistalizer>().ImplementedBy<DevelopmentEventStoreConfigurationProvider>().IsDefault().LifeStyle.Transient
-                    );
-                }
-
                 if (!container.Kernel.HasComponent(typeof(IEventStoreClient)))
                 {
                     container.Register(
-                        Component.For<AbstractEventStoreClient>()
+						Component.For<EventStoreConfiguration>().ImplementedBy<EventStoreConfiguration>().IsDefault().LifeStyle.Transient,
+						Component.For<AbstractEventStoreClient>()
                         .ImplementedBy<EventStoreClient>()
                             .OnCreate(async es => await es.ConnectAsync())
                             .OnDestroy(async es => es.Close())

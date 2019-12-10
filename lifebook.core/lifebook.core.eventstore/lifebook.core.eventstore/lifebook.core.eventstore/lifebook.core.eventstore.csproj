@@ -10,7 +10,7 @@
     <Description>the library to connect to eventstore</Description>
     <PackageId>lifebook.core.eventstore</PackageId>
     <PackageProjectUrl>https://github.com/mkcoder/lifebook</PackageProjectUrl>
-    <PackageVersion>3.0.33</PackageVersion>
+    <PackageVersion>3.0.34</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,9 +26,9 @@
   <ItemGroup>
     <PackageReference Include="Castle.Windsor" Version="5.0.1" />
     <PackageReference Include="EventStore.ClientAPI.NetCore" Version="4.1.0.23" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="lifebook.core.logging" Version="1.0.12" />
-    <PackageReference Include="lifebook.core.services" Version="3.0.41" />
+    <PackageReference Include="lifebook.core.services" Version="3.0.48" />
     <PackageReference Include="NeoSmart.AsyncLock" Version="0.3.0.2" />
   </ItemGroup>
 </Project>

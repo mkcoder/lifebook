@@ -1,7 +1,8 @@
-﻿using System;
-using lifebook.core.cqrses.Attributes;
+﻿using lifebook.core.cqrses.Attributes;
 using lifebook.core.cqrses.Domains;
 using lifebook.core.cqrses.Services;
+using SchoolBookApp.Aggregates.Relationship.Commands;
+using SchoolBookApp.Aggregates.Relationship.Events;
 
 namespace SchoolBookApp.Aggregates.Relationship.CommandHandler
 {
@@ -18,11 +19,5 @@ namespace SchoolBookApp.Aggregates.Relationship.CommandHandler
                 ClassroomId = createClassroom.ClassroomId
             };
         }
-    }
-
-    public class AssignHomeworkToClassroom
-    {
-        public Guid HomeworkId { get; set; }
-        public Guid ClassroomId { get; set; }
     }
 }

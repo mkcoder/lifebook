@@ -6,9 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace lifebook.core.cqrses
 {
-    public class ServiceResolver : IServiceResolver
+    public class CQRSServiceResolver : IServiceResolver
     {
-        void IServiceResolver.ServiceResolver(IWindsorContainer container, IServiceCollection services)
+        public void ServiceResolver(IWindsorContainer container, IServiceCollection services)
         {
             if (!container.Kernel.HasComponent(typeof(IEventStoreClient)))
             {

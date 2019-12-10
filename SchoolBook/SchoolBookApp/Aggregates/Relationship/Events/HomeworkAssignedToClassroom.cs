@@ -1,7 +1,7 @@
 ﻿using System;
 using lifebook.core.cqrses.Domains;
 
-namespace SchoolBookApp.Aggregates.Relationship.CommandHandler
+namespace SchoolBookApp.Aggregates.Relationship.Events
 {
     internal class HomeworkAssignedToClassroom : AggregateEvent
     {

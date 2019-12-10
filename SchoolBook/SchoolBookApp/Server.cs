@@ -1,8 +1,11 @@
 ﻿using System;
+using Castle.Windsor;
 using lifebook.core.cqrses;
+using lifebook.core.projection.Hosting;
 using lifebook.core.services.ServiceStartup;
+using lifebook.SchoolBookApp.Projectors;
 
-namespace SchoolBookApp
+namespace lifebook.SchoolBookApp
 {
     public class Server
     {
@@ -14,5 +17,18 @@ namespace SchoolBookApp
 
     public class Startup : CQRSStartup
     {
+        public override void RegisterService(IWindsorContainer windsorContainer)
+        {
+            base.RegisterService(windsorContainer);
+            try
+            {
+
+                ProjectorHosting.Run(windsorContainer);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
     }
 }

@@ -1,10 +1,15 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Threading.Tasks;
+using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
+using lifebook.core.logging.interfaces;
 using lifebook.core.logging.ioc;
+using lifebook.core.projection.ConfigurationProvider;
 using lifebook.core.projection.Interfaces;
 using lifebook.core.projection.Services;
+using lifebook.core.services.configuration;
 using lifebook.core.services.extensions;
 
 namespace lifebook.core.projection.Hosting
@@ -13,12 +18,14 @@ namespace lifebook.core.projection.Hosting
     {
         public static async Task Run(IWindsorContainer container)
         {
-            var assembly = typeof(ProjectorHosting).Assembly.GetRootAssembly();
-
-            container.Install(
-                FromAssembly.InThisApplication(typeof(BootLoader).Assembly),
-                FromAssembly.InThisApplication(assembly)
-            );
+            if(!container.Kernel.HasComponent(typeof(ILogger)))
+            {
+                var assembly = typeof(ProjectorHosting).Assembly.GetRootAssembly();
+                container.Install(
+                    FromAssembly.InThisApplication(typeof(BootLoader).Assembly),
+                    FromAssembly.InThisApplication(assembly)
+                );
+            }
 
             var contextCreator = container.Resolve<IApplicationContextCreator>();
             contextCreator.CreateContext();
@@ -30,10 +37,17 @@ namespace lifebook.core.projection.Hosting
             }
         }
 
-        public static void Start(IProjector projector)
+        internal static void Start(IProjector projector)
         {
             var type = projector.GetType().GetMethod("Start", BindingFlags.NonPublic | BindingFlags.Instance);
-            type?.Invoke(projector, null);
+            try
+            {
+                type?.Invoke(projector, null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
     }
 }
