@@ -30,7 +30,7 @@ namespace SchoolBookApp.Aggregates.Classroom.CommandHandler
     public class Classroom : AggregateRoot
     {
         [CommandHandlerFor("CreateClassroom")]
-        public AggregateEvent CreateClassroom(CreateClassroom createClassroom)
+        public AggregateEvent CreateClassroom(CreateGradebook createClassroom)
         {
             return new ClassroomCreated()
             {

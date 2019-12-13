@@ -8,6 +8,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Readme.md = Readme.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.orchestrator.sampleapp", "lifebook.core.orchestrator.sampleapp\lifebook.core.orchestrator.sampleapp.csproj", "{A2A46634-D1D4-4DC4-92F6-CFDD86F4F838}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{25D5DA53-CADC-4DEB-8920-2834AC1EEF96}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{25D5DA53-CADC-4DEB-8920-2834AC1EEF96}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{25D5DA53-CADC-4DEB-8920-2834AC1EEF96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2A46634-D1D4-4DC4-92F6-CFDD86F4F838}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2A46634-D1D4-4DC4-92F6-CFDD86F4F838}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2A46634-D1D4-4DC4-92F6-CFDD86F4F838}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2A46634-D1D4-4DC4-92F6-CFDD86F4F838}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

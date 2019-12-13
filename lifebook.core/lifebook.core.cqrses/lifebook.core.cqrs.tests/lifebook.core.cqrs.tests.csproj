@@ -14,7 +14,7 @@
       <Publish Condition="'%(PackageReference.Version)' == ''">true</Publish>
     </PackageReference>
     <PackageReference Include="lifebook.core.cqrs.domain" Version="1.1.0" />
-    <PackageReference Include="lifebook.core.cqrs" Version="2.1.0" />
+    <PackageReference Include="lifebook.core.cqrs" Version="2.1.1" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CommandHandlers\" />

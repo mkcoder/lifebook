@@ -1,7 +1,30 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <PackageId>lifebook.core.orchestrator</PackageId>
+    <Version>1.0.0</Version>
+    <PackOnBuild>true</PackOnBuild>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <Authors>mkcoder</Authors>
+    <Description>orchestrator to register</Description>
+    <PackOnBuild>true</PackOnBuild>
+    <Copyright>2020</Copyright>
+    <Owners>mkcoder</Owners>
+    <PackageReleaseNotes>lifebook.core.orchestrator</PackageReleaseNotes>
+    <Summary>lifebook.core.orchestrator</Summary>
+    <Title>lifebook.core.orchestrator</Title>
+    <PackageVersion>1.0.3</PackageVersion>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+    <Folder Include="Services\" />
+    <Folder Include="Models\" />
+    <Folder Include="Runner\" />
+    <Folder Include="Ioc\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="lifebook.core.subscription" Version="1.0.9" />
+    <PackageReference Include="lifebook.core.cqrs.domain" Version="1.1.0" />
+  </ItemGroup>
 </Project>

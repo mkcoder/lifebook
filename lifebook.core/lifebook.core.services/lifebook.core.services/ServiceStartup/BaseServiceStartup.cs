@@ -1,16 +1,9 @@
 ﻿using System;
-using Castle.MicroKernel.Registration;
 using Castle.Windsor;
-using Castle.Windsor.Installer;
-using Castle.Windsor.MsDependencyInjection;
-using lifebook.core.logging.interfaces;
-using lifebook.core.logging.services;
-using lifebook.core.services.extensions;
 using lifebook.core.services.interfaces;
 using lifebook.core.services.middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -26,7 +19,7 @@ namespace lifebook.core.services.ServiceStartup
 
         public virtual void AfterConfigureServices(IServiceCollection services) { }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime hostApplicationLifetime)
         {
             if (env.IsDevelopment())
             {
@@ -42,11 +35,17 @@ namespace lifebook.core.services.ServiceStartup
                 endpoints.MapControllers();
             });
 
-            RegisterService(app.ApplicationServices.GetService<IWindsorContainer>());
+            hostApplicationLifetime.ApplicationStopped.Register(() => app.DeregisterService(Configuration));
 
+            RegisterService(app.ApplicationServices.GetService<IWindsorContainer>());            
             Configuration = app.ApplicationServices.GetService<IConfiguration>();
             app.RegisterService(Configuration);
             AfterConfigureServices(app, env);
+        }
+
+        private void appShutDown()
+        {
+            throw new NotImplementedException();
         }
     }
 }

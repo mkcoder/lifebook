@@ -1,6 +1,7 @@
 ﻿using System;
 using Castle.Windsor;
 using lifebook.core.cqrses;
+using lifebook.core.orchestrator.Runner;
 using lifebook.core.projection.Hosting;
 using lifebook.core.services.ServiceStartup;
 using lifebook.SchoolBookApp.Projectors;
@@ -22,7 +23,7 @@ namespace lifebook.SchoolBookApp
             base.RegisterService(windsorContainer);
             try
             {
-
+                OrchestratorRunner.Run(windsorContainer);
                 ProjectorHosting.Run(windsorContainer);
             }
             catch (Exception ex)

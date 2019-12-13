@@ -5,7 +5,7 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <PackOnBuild>true</PackOnBuild>
     <PackageId>lifebook.core.cqrs</PackageId>
-    <PackageVersion>2.1.0</PackageVersion>
+    <PackageVersion>2.1.1</PackageVersion>
     <Authors>mkcoder</Authors>
     <Owners>mkcoder</Owners>
     <Description>adds cqrs support to any console application</Description>
@@ -26,6 +26,7 @@
     <PackageReference Include="lifebook.core.eventstore.domain" Version="3.0.16" />
     <PackageReference Include="Castle.Core" Version="4.4.0" />
     <PackageReference Include="lifebook.core.services" Version="3.0.48" />
+    <PackageReference Include="Consul" Version="0.7.2.6" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,6 +37,7 @@
     <Folder Include="Extensions\" />
     <Folder Include="ServiceStartup\" />
     <Folder Include="Invariants\" />
+    <Folder Include="Utils\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\lifebook.core.cqrses.domain\lifebook.core.cqrses.domain.csproj">
