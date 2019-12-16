@@ -9,11 +9,6 @@ namespace lifebook.core.cqrses
 {
     public class CQRSStartup : ServiceStartup
     {
-        public override void AfterConfigureServices(IServiceCollection services)
-        {
-            base.AfterConfigureServices(services);
-        }
-
         public override void AfterConfigureServices(IApplicationBuilder app, IWebHostEnvironment env)
         {
             var container = app.ApplicationServices.GetService<IWindsorContainer>();

@@ -11,7 +11,7 @@
     <PackageProjectUrl>https://github.com/mkcoder/lifebook</PackageProjectUrl>
     <ReleaseVersion>1.0</ReleaseVersion>
     <SynchReleaseVersion>false</SynchReleaseVersion>
-    <PackageVersion>1.1.0</PackageVersion>
+    <PackageVersion>2.0.0</PackageVersion>
     <PackageId>lifebook.core.projection</PackageId>
   </PropertyGroup>
 
@@ -36,10 +36,10 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.0" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.0" />
-    <PackageReference Include="lifebook.core.services" Version="3.0.48" />
+    <PackageReference Include="lifebook.core.services" Version="4.0.0" />
     <PackageReference Include="lifebook.core.eventstore.domain" Version="3.0.16" />
     <PackageReference Include="lifebook.core.eventstore" Version="3.0.34" />
-    <PackageReference Include="lifebook.core.cqrs.domain" Version="1.0.0" />
+    <PackageReference Include="lifebook.core.cqrs.domain" Version="1.1.0" />
     <PackageReference Include="lifebook.core.subscription" Version="1.0.9" />
   </ItemGroup>
   <ItemGroup>

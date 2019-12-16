@@ -24,7 +24,7 @@
     <Folder Include="Ioc\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="lifebook.core.subscription" Version="1.0.9" />
-    <PackageReference Include="lifebook.core.cqrs.domain" Version="1.1.0" />
+    <PackageReference Include="lifebook.core.cqrs.domain" Version="2.0.0" />
+    <PackageReference Include="lifebook.core.subscription" Version="2.0.0" />
   </ItemGroup>
 </Project>

@@ -5,6 +5,8 @@ using lifebook.core.orchestrator.Runner;
 using lifebook.core.projection.Hosting;
 using lifebook.core.services.ServiceStartup;
 using lifebook.SchoolBookApp.Projectors;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 
 namespace lifebook.SchoolBookApp
 {
@@ -18,11 +20,12 @@ namespace lifebook.SchoolBookApp
 
     public class Startup : CQRSStartup
     {
-        public override void RegisterService(IWindsorContainer windsorContainer)
+        public override void AfterConfigureServices(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            base.RegisterService(windsorContainer);
+            base.AfterConfigureServices(app, env);
             try
             {
+                var windsorContainer = (IWindsorContainer)app.ApplicationServices.GetService(typeof(IWindsorContainer));
                 OrchestratorRunner.Run(windsorContainer);
                 ProjectorHosting.Run(windsorContainer);
             }
@@ -30,6 +33,11 @@ namespace lifebook.SchoolBookApp
             {
                 Console.WriteLine(ex);
             }
+        }
+
+        public override void RegisterService(IWindsorContainer windsorContainer)
+        {
+            base.RegisterService(windsorContainer);            
         }
     }
 }

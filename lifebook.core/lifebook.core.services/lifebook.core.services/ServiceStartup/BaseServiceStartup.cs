@@ -1,5 +1,6 @@
 ﻿using System;
 using Castle.Windsor;
+using lifebook.core.logging.interfaces;
 using lifebook.core.services.interfaces;
 using lifebook.core.services.middleware;
 using Microsoft.AspNetCore.Builder;
@@ -17,10 +18,12 @@ namespace lifebook.core.services.ServiceStartup
 
         public virtual void AfterConfigureServices(IApplicationBuilder app, IWebHostEnvironment env) { }
 
-        public virtual void AfterConfigureServices(IServiceCollection services) { }
-
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime hostApplicationLifetime)
         {
+            var logger = app.ApplicationServices.GetService<ILogger>();
+            logger.Information($"Sarting application with name: {env.ApplicationName}");
+            logger.Information($"On environment: {env.EnvironmentName}");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -35,17 +38,16 @@ namespace lifebook.core.services.ServiceStartup
                 endpoints.MapControllers();
             });
 
-            hostApplicationLifetime.ApplicationStopped.Register(() => app.DeregisterService(Configuration));
-
             RegisterService(app.ApplicationServices.GetService<IWindsorContainer>());            
             Configuration = app.ApplicationServices.GetService<IConfiguration>();
-            app.RegisterService(Configuration);
-            AfterConfigureServices(app, env);
-        }
 
-        private void appShutDown()
-        {
-            throw new NotImplementedException();
+            logger.Information($"Registering application to consul.");
+            app.RegisterService(Configuration);
+
+            hostApplicationLifetime.ApplicationStopped.Register(() => app.DeregisterService(Configuration));
+            hostApplicationLifetime.ApplicationStarted.Register(() => app.RegisterService(Configuration));
+
+            AfterConfigureServices(app, env);
         }
     }
 }

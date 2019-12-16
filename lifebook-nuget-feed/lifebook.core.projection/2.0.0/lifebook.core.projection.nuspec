@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>lifebook.core.projection</id>
+    <version>2.0.0</version>
+    <authors>mkcoder</authors>
+    <owners>mkcoder</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <projectUrl>https://github.com/mkcoder/lifebook</projectUrl>
+    <description>projector service to projection eventstore data to datastore</description>
+    <dependencies>
+      <group targetFramework=".NETCoreApp3.0">
+        <dependency id="Microsoft.EntityFrameworkCore" version="3.1.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.EntityFrameworkCore.SqlServer" version="3.1.0" exclude="Build,Analyzers" />
+        <dependency id="Newtonsoft.Json" version="12.0.3" exclude="Build,Analyzers" />
+        <dependency id="Npgsql.EntityFrameworkCore.PostgreSQL" version="3.1.0" exclude="Build,Analyzers" />
+        <dependency id="lifebook.core.cqrs.domain" version="1.1.0" exclude="Build,Analyzers" />
+        <dependency id="lifebook.core.eventstore" version="3.0.34" exclude="Build,Analyzers" />
+        <dependency id="lifebook.core.eventstore.domain" version="3.0.16" exclude="Build,Analyzers" />
+        <dependency id="lifebook.core.services" version="4.0.0" exclude="Build,Analyzers" />
+        <dependency id="lifebook.core.subscription" version="1.0.9" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

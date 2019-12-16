@@ -24,15 +24,9 @@
     <Folder Include="Aggregates\Gradebook\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="lifebook.core.cqrs.domain" Version="1.1.0" />
-    <PackageReference Include="lifebook.core.services" Version="3.0.48" />
-    <PackageReference Include="lifebook.core.logging" Version="1.0.13" />
-    <PackageReference Include="lifebook.core.eventstore.core" Version="1.0.1" />
-    <PackageReference Include="lifebook.core.eventstore.domain" Version="3.0.16" />
-    <PackageReference Include="lifebook.core.projection" Version="1.1.0" />
-    <PackageReference Include="lifebook.core.subscription" Version="1.0.9" />
-    <PackageReference Include="lifebook.core.cqrs" Version="2.1.1" />
-    <PackageReference Include="lifebook.core.eventstore" Version="3.0.34" />
+    <PackageReference Include="lifebook.core.cqrs" Version="3.0.2" />
+    <PackageReference Include="lifebook.core.projection" Version="2.0.0" />
     <PackageReference Include="lifebook.core.orchestrator" Version="1.0.3" />
+    <PackageReference Include="lifebook.core.subscription" Version="2.0.0" />
   </ItemGroup>
 </Project>
