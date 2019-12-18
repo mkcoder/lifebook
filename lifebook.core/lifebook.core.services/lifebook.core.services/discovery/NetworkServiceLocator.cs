@@ -7,12 +7,13 @@ using lifebook.core.services.models;
 
 namespace lifebook.core.services.discovery
 {
-    public class NetworkServiceLocator
+    public class NetworkServiceLocator : INetworkServiceLocator
     {
         private ConsulClient consul = null;
         public NetworkServiceLocator(IConfiguration configuration)
         {
-            consul = new ConsulClient((obj) => {
+            consul = new ConsulClient((obj) =>
+            {
                 obj.Address = new Uri(configuration["ConsulAddress"]);
             });
         }
@@ -34,7 +35,7 @@ namespace lifebook.core.services.discovery
         public async Task<ServiceInfo> FindServiceByName(string serviceName)
         {
             var response = await consul.KV.Get(serviceName);
-            if(response.StatusCode == System.Net.HttpStatusCode.OK)
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 var serviceResponse = new ServiceInfo();
                 var value = Encoding.UTF8.GetString(response.Response.Value);

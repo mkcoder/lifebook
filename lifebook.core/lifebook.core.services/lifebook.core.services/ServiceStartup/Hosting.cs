@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using Castle.Windsor;
 using Castle.Windsor.MsDependencyInjection;
+using lifebook.core.services.discovery;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,10 +19,25 @@ namespace lifebook.core.services.ServiceStartup
                 .UseServiceProviderFactory(new CustomWindosrCastleServiceProviderFactory(serviceResolver))
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<T>();
-                })
+                    webBuilder
+                    .UseKestrel(server =>
+                    {
+                        server.ListenAnyIP(GetPort(), opt =>
+                        {
+                            opt.UseHttps();
+                            var serviceRegister = opt.ApplicationServices.GetService<IServiceRegister>();
+                            serviceRegister.Register(opt.IPEndPoint.Address.ToString(), opt.IPEndPoint.Port);
+                        });
+                    })
+                    .UseStartup<T>();
+                })                
                 .Build()
                 .Run();
+        }
+
+        private static int GetPort()
+        {
+            return new Random(DateTime.Now.Second).Next(1000, 9999);
         }
     }
 

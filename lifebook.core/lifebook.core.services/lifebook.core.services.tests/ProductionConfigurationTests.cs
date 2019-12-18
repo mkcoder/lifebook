@@ -14,7 +14,7 @@ namespace lifebook.core.services.configuration.tests
         public ProductionConfigurationTests()
         {
             Environment.SetEnvironmentVariable("DEV_ENV", "PRODUCTION");
-            container.Install(FromAssembly.InThisApplication(typeof(ConfigurationInstaller).Assembly));
+            container.Install(FromAssembly.InThisApplication(typeof(ServiceInstaller).Assembly));
             configuration = container.Resolve<interfaces.IConfiguration>();
         }
 

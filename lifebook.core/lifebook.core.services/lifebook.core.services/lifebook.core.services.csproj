@@ -7,7 +7,7 @@
     <Description>core services for all projects</Description>
     <PackageId>lifebook.core.services</PackageId>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
-    <PackageVersion>4.0.1</PackageVersion>
+    <PackageVersion>4.1.0</PackageVersion>
   </PropertyGroup>
   
 

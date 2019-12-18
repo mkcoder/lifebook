@@ -1,6 +1,7 @@
 ﻿using System;
 using Castle.Windsor;
 using lifebook.core.logging.interfaces;
+using lifebook.core.services.discovery;
 using lifebook.core.services.interfaces;
 using lifebook.core.services.middleware;
 using Microsoft.AspNetCore.Builder;
@@ -29,6 +30,14 @@ namespace lifebook.core.services.ServiceStartup
                 app.UseDeveloperExceptionPage();
             }
 
+            RegisterService(app.ApplicationServices.GetService<IWindsorContainer>());
+            Configuration = app.ApplicationServices.GetService<IConfiguration>();
+            var serviceRegister = app.ApplicationServices.GetService<IServiceRegister>();
+            logger.Information($"Registering application to consul.");
+
+            hostApplicationLifetime.ApplicationStarted.Register(() => app.DeregisterService(Configuration));
+            hostApplicationLifetime.ApplicationStopped.Register(() => serviceRegister.Deregister());
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -37,15 +46,6 @@ namespace lifebook.core.services.ServiceStartup
             {
                 endpoints.MapControllers();
             });
-
-            RegisterService(app.ApplicationServices.GetService<IWindsorContainer>());            
-            Configuration = app.ApplicationServices.GetService<IConfiguration>();
-
-            logger.Information($"Registering application to consul.");
-            app.RegisterService(Configuration);
-
-            hostApplicationLifetime.ApplicationStopped.Register(() => app.DeregisterService(Configuration));
-            hostApplicationLifetime.ApplicationStarted.Register(() => app.RegisterService(Configuration));
 
             AfterConfigureServices(app, env);
         }

@@ -18,7 +18,7 @@ namespace lifebook.core.services.configuration
             List<KeyValuePair<string, string>> defaultConfiguration = new List<KeyValuePair<string, string>>();
             var rootAssembly = GetType().Assembly.GetRootAssembly();
             defaultConfiguration.Add(new KeyValuePair<string, string>("ServiceName", GetServiceNameFromAssemblyName(rootAssembly)));
-            defaultConfiguration.Add(new KeyValuePair<string, string>("ServiceInstance", "Primary"));
+            defaultConfiguration.Add(new KeyValuePair<string, string>("ServiceInstance", "primary"));
             defaultConfiguration.Add(new KeyValuePair<string, string>("IsProduction", "false"));
             defaultConfiguration.Add(new KeyValuePair<string, string>("ConsulAddress", "http://localhost:8500"));
             defaultConfiguration.Add(new KeyValuePair<string, string>("ElasticAddress", "http://localhost:9200"));

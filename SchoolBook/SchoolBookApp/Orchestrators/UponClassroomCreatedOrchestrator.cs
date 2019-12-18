@@ -26,7 +26,7 @@ namespace lifebook.SchoolBookApp.Orchestrators
             var result = await CommandSenderSyntax
                 .WithCommandName("CreateGradebook")
                 .ToService("lifebookSchoolBookapp")
-                .ToInstance("Primary")
+                .ToInstance("primary")
                 .WithCommandData(new JObject())
                 .Send<JObject>();
             Console.WriteLine(result);

@@ -25,7 +25,7 @@
     <PackageReference Include="lifebook.core.eventstore" Version="4.0.0" />
     <PackageReference Include="lifebook.core.eventstore.domain" Version="3.0.16" />
     <PackageReference Include="Castle.Core" Version="4.4.0" />
-    <PackageReference Include="lifebook.core.services" Version="4.0.1" />
+    <PackageReference Include="lifebook.core.services" Version="4.0.2" />
     <PackageReference Include="Consul" Version="0.7.2.6" />
   </ItemGroup>
 

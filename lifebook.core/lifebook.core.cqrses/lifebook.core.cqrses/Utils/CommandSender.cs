@@ -23,7 +23,7 @@ namespace lifebook.core.cqrses.Utils
         internal async Task<T> Send<T>()
         {
             var services = (await _client.Agent.Services()).Response;
-            if(services.ContainsKey($"{InstanceName}_{ServiceName}"))
+            if(services.ContainsKey($"{ServiceName}_{InstanceName}"))
             {
                 string json = JsonConvert.SerializeObject(Data, Formatting.Indented);
                 var httpContent = new StringContent(json);

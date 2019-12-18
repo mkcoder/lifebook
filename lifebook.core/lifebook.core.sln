@@ -39,6 +39,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.projection.sa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "logging.core", "lifebook.core.logging\logging.core\logging.core.csproj", "{5A71AAA7-EFA8-40AC-9DDF-82D81DF64916}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.services.exampleapp", "lifebook.core.services\lifebook.core.services.exampleapp\lifebook.core.services.exampleapp.csproj", "{D644593C-7515-4BFA-B43A-C43246A4AB07}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +95,10 @@ Global
 		{5A71AAA7-EFA8-40AC-9DDF-82D81DF64916}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A71AAA7-EFA8-40AC-9DDF-82D81DF64916}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A71AAA7-EFA8-40AC-9DDF-82D81DF64916}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D644593C-7515-4BFA-B43A-C43246A4AB07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D644593C-7515-4BFA-B43A-C43246A4AB07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D644593C-7515-4BFA-B43A-C43246A4AB07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D644593C-7515-4BFA-B43A-C43246A4AB07}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{425DF67D-9B45-4758-AC32-B0EB214308F7} = {97773F37-71F7-4A0A-89E5-FF8FFA894CDA}
@@ -110,5 +116,6 @@ Global
 		{B48A4904-7AE0-4B24-85C1-D8BE4AC5A717} = {9B475D1E-8904-4BB3-A381-70B6B041CE28}
 		{2FE1CDF5-A4C7-4970-8E13-5C5F251F8FBD} = {9B475D1E-8904-4BB3-A381-70B6B041CE28}
 		{5A71AAA7-EFA8-40AC-9DDF-82D81DF64916} = {97773F37-71F7-4A0A-89E5-FF8FFA894CDA}
+		{D644593C-7515-4BFA-B43A-C43246A4AB07} = {E54E710C-A58A-4569-9319-153DD07CB8AB}
 	EndGlobalSection
 EndGlobal
