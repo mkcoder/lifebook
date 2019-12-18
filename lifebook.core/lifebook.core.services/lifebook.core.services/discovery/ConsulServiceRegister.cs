@@ -26,6 +26,11 @@ namespace lifebook.core.services.discovery
                 ipAddress = "localhost";
             }
 
+            if (ipAddress.Contains("0.0.0.0"))
+            {
+                ipAddress = "localhost";
+            }
+
             var httpCheck1 = new AgentServiceCheck()
             {
                 HTTP = $"{scheme}://{ipAddress}:{port}/consul/health",
