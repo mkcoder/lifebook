@@ -16,12 +16,17 @@ namespace lifebook.core.services.ServiceStartup
         public IConfiguration Configuration { get; set; }
 
         public abstract void RegisterService(IWindsorContainer windsorContainer);
+        public virtual void ServiceStarted(IWindsorContainer windsorContainer)
+        {
+
+        }
 
         public virtual void AfterConfigureServices(IApplicationBuilder app, IWebHostEnvironment env) { }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime hostApplicationLifetime)
         {
             var logger = app.ApplicationServices.GetService<ILogger>();
+            var container = app.ApplicationServices.GetService<IWindsorContainer>();
             logger.Information($"Sarting application with name: {env.ApplicationName}");
             logger.Information($"On environment: {env.EnvironmentName}");
 
@@ -30,12 +35,17 @@ namespace lifebook.core.services.ServiceStartup
                 app.UseDeveloperExceptionPage();
             }
 
-            RegisterService(app.ApplicationServices.GetService<IWindsorContainer>());
+            RegisterService(container);
             Configuration = app.ApplicationServices.GetService<IConfiguration>();
             var serviceRegister = app.ApplicationServices.GetService<IServiceRegister>();
             logger.Information($"Registering application to consul.");
 
-            hostApplicationLifetime.ApplicationStarted.Register(() => app.DeregisterService(Configuration));
+            app.RegisterService(Configuration);
+
+            hostApplicationLifetime.ApplicationStarted.Register(() =>
+            {
+                ServiceStarted(container);
+            });
             hostApplicationLifetime.ApplicationStopped.Register(() => serviceRegister.Deregister());
 
             app.UseHttpsRedirection();

@@ -5,7 +5,7 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <PackOnBuild>true</PackOnBuild>
     <PackageId>lifebook.core.cqrs</PackageId>
-    <PackageVersion>3.0.2</PackageVersion>
+    <PackageVersion>3.0.10</PackageVersion>
     <Authors>mkcoder</Authors>
     <Owners>mkcoder</Owners>
     <Description>adds cqrs support to any console application</Description>

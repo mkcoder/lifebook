@@ -15,7 +15,6 @@ namespace lifebook.core.services.middleware
                     await ctx.Response.WriteAsync("Ok");
                 });
             });
-            application.UseMiddleware<RegisterServiceMiddleware>(configuration);
         }
 
         public static void DeregisterService(this IApplicationBuilder application, IConfiguration configuration)

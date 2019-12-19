@@ -19,7 +19,7 @@ namespace lifebook.core.services.discovery
             _logger = logger;
         }
 
-        public async Task Register(string ipAddress, int port, string scheme = "https")
+        public async Task Register(string ipAddress, int port, string scheme = "http")
         {
             if (ipAddress.Contains(":"))
             {
@@ -58,7 +58,7 @@ namespace lifebook.core.services.discovery
 
             if (!_configuration.TryGetValueOrDefault<bool>("IsProduction", false))
             {
-                service.Checks = null;
+                //service.Checks = null;
             }
 
             try
