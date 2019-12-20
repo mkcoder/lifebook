@@ -50,7 +50,17 @@ namespace lifebook.core.services.ServiceStartup
         private static IPAddress IPAddresses(string server)
         {
             IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName()); 
-            IPAddress ipAddress = ipHostInfo.AddressList[0];
+            IPAddress ipAddress = null;
+            foreach (var address in ipHostInfo.AddressList)
+            {
+                if (address.IsIPv6LinkLocal)
+                    continue;
+                if (address.MapToIPv4().ToString() == address.ToString())
+                {
+                    ipAddress = address;
+                    break;
+                }
+            }
             return ipAddress;
         }
     }
