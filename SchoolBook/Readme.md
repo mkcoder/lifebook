@@ -13,6 +13,6 @@ cd ./lifebook.infastructure
 docker-compose up
 cd ../SchoolBook/SchoolBookApp
 dotnet restore lifebook.SchoolBookApp.csproj --source ../../lifebook-nuget-feed 
-dotnet restore lifebook.SchoolBookApp.csproj --source ../../lifebook-nuget-feed 
+dotnet restore lifebook.SchoolBookApp.csproj --source ../../lifebook-nuget-feed --source https://api.nuget.org/v3/index.json 
 dotnet run lifebook.SchoolBookApp.csproj
 ```
