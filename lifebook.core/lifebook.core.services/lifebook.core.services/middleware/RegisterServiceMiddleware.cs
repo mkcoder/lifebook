@@ -24,14 +24,14 @@ namespace lifebook.core.services.middleware
         {
             var httpCheck1 = new AgentServiceCheck()
             {
-                HTTP = $"{context.Request.Scheme}://{context.Request.Host.Host}:{context.Request.Host.Port}/consul/health",
+                HTTP = $"http://{context.Request.Host.Host}:{context.Request.Host.Port}/consul/health",
                 Interval = TimeSpan.FromSeconds(30),
                 DeregisterCriticalServiceAfter = TimeSpan.FromMinutes(5),
             };
 
             var httpCheck2 = new AgentServiceCheck()
             {
-                HTTP = $"{context.Request.Scheme}://{context.Connection.LocalIpAddress}:{context.Connection.LocalPort}/consul/health",
+                HTTP = $"http://{context.Connection.LocalIpAddress}:{context.Connection.LocalPort}/consul/health",
                 Interval = TimeSpan.FromSeconds(30),
                 DeregisterCriticalServiceAfter = TimeSpan.FromMinutes(5),
             };

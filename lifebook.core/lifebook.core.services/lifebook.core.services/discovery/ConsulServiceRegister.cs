@@ -33,22 +33,22 @@ namespace lifebook.core.services.discovery
 
             var httpCheck1 = new AgentServiceCheck()
             {
-                HTTP = $"{scheme}://{ipAddress}:{port}/consul/health",
-                Interval = TimeSpan.FromSeconds(30),
-                DeregisterCriticalServiceAfter = TimeSpan.FromMinutes(5),
+                HTTP = $"http://{ipAddress}:{port}/consul/health",
+                Interval = TimeSpan.FromSeconds(60),
+                DeregisterCriticalServiceAfter = TimeSpan.FromMinutes(30)
             };
 
             var httpCheck2 = new AgentServiceCheck()
             {
-                HTTP = $"{scheme}://{ipAddress}:{port}/consul/health",
-                Interval = TimeSpan.FromSeconds(30),
-                DeregisterCriticalServiceAfter = TimeSpan.FromMinutes(5),
+                HTTP = $"http://{ipAddress}:{port}/consul/health",
+                Interval = TimeSpan.FromMinutes(1),
+                DeregisterCriticalServiceAfter = TimeSpan.FromMinutes(30)
             };
 
             var service = new AgentServiceRegistration()
             {
-                ID = $"{_configuration["ServiceName"]}_{_configuration["ServiceInstance"]}",
-                Name = $"{_configuration["ServiceName"]}",
+                ID = $"{_configuration["ServiceName"].ToLower()}_{_configuration["ServiceInstance"].ToLower()}",
+                Name = $"{_configuration["ServiceName"].ToLower()}",
                 Address = ipAddress,
                 Port = port,
                 //Meta = $"{_configuration["Tags"] ?? "tag|empty"}".Split(",").Select(s => new { key = s.Split('|')[0], value = s.Split('|')[1] }).ToDictionary(kv => kv.key, kv => kv.value),
@@ -74,7 +74,7 @@ namespace lifebook.core.services.discovery
 
         public async Task Deregister()
         {
-            _networkServiceLocator.DeregisterService($"{_configuration["ServiceName"]}_{_configuration["ServiceHost"]}").Wait();            
+            _networkServiceLocator.DeregisterService($"{_configuration["ServiceName"].ToLower()}_{_configuration["ServiceInstance"].ToLower()}").Wait();            
         }
     }
 }

@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Class1.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Syntax\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="lifebook.core.eventstore.domain" Version="3.0.17" />
+  </ItemGroup>
+</Project>
