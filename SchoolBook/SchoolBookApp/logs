@@ -1,0 +1,200 @@
+2019-12-20 08:08:01.833 -06:00 [INF] Service registered to consul with @Service
+2019-12-20 08:08:01.910 -06:00 [INF] Sarting application with name: lifebook.SchoolBookApp
+2019-12-20 08:08:01.910 -06:00 [INF] On environment: Production
+2019-12-20 08:08:01.911 -06:00 [INF] Registering application to consul.
+2019-12-20 08:08:02.631 -06:00 [INF] Subscription started to stream [SubscriptionName:]-[StreamId:$ce-lifebookSchoolbookapp.Primary.Classroom]-[LastProcessedEventNumber:-1]
+2019-12-20 08:08:03.990 -06:00 [ERR] Subscription dropped. Reason: CatchUpError
+EventStore.ClientAPI.Exceptions.AccessDeniedException: Read access denied for stream '$ce-lifebookSchoolbookapp.Primary.Classroom'.
+   at EventStore.ClientAPI.EventStoreStreamCatchUpSubscription.ReadEventsInternalAsync(IEventStoreConnection connection, Boolean resolveLinkTos, UserCredentials userCredentials, Nullable`1 lastEventNumber)
+   at EventStore.ClientAPI.EventStoreCatchUpSubscription.LoadHistoricalEventsAsync()
+2019-12-20 08:08:03.992 -06:00 [INF] Started Building Context for project: lifebook.core.projection.Services.ProjectionStore.PostgresContextCreator.
+2019-12-20 08:08:15.894 -06:00 [INF] Running SQL Query: 
+CREATE TABLE IF NOT EXISTS public."StreamTrackingInformation"
+(
+    "Id" uuid NOT NULL,
+    "StreamKey" text COLLATE pg_catalog."default",
+    "StreamId" text COLLATE pg_catalog."default",
+    "LastEventRead" bigint NOT NULL,
+    CONSTRAINT "PK_StreamTrackingInformation" PRIMARY KEY("Id")
+)
+2019-12-20 08:08:16.301 -06:00 [INF] Result From SQL Query: -1
+2019-12-20 08:08:16.303 -06:00 [INF] Running SQL Query To Create Table If Not Exist
+2019-12-20 08:08:16.303 -06:00 [INF] Type: lifebook.SchoolBookApp.Projectors.Classroom
+2019-12-20 08:08:16.303 -06:00 [INF] Running SQL Query: 
+CREATE TABLE IF NOT EXISTS lifebookSchoolbookapp_Classroom (
+    "Key" uuid NOT NULL,
+    "LastUpdated" timestamp without time zone NOT NULL,
+    "JSON" jsonb,
+    CONSTRAINT "PK_$lifebookSchoolbookapp_Classroom" PRIMARY KEY("Key")
+);
+2019-12-20 08:08:16.509 -06:00 [INF] Result From SQL Query: -1
+2019-12-20 08:08:16.509 -06:00 [INF] Running SQL Query To Create Table If Not Exist
+2019-12-20 08:08:16.509 -06:00 [INF] Type: lifebook.SchoolBookApp.Projectors.Student
+2019-12-20 08:08:16.509 -06:00 [INF] Running SQL Query: 
+CREATE TABLE IF NOT EXISTS lifebookSchoolbookapp_Student (
+    "Key" uuid NOT NULL,
+    "LastUpdated" timestamp without time zone NOT NULL,
+    "JSON" jsonb,
+    CONSTRAINT "PK_$lifebookSchoolbookapp_Student" PRIMARY KEY("Key")
+);
+2019-12-20 08:08:16.923 -06:00 [INF] Result From SQL Query: -1
+2019-12-20 08:08:19.598 -06:00 [INF] Subscription started to stream [SubscriptionName:]-[StreamId:$ce-lifebookSchoolbookapp.Primary.Classroom]-[LastProcessedEventNumber:0]
+2019-12-20 08:08:20.012 -06:00 [ERR] Subscription dropped. Reason: CatchUpError
+EventStore.ClientAPI.Exceptions.AccessDeniedException: Read access denied for stream '$ce-lifebookSchoolbookapp.Primary.Classroom'.
+   at EventStore.ClientAPI.EventStoreStreamCatchUpSubscription.ReadEventsInternalAsync(IEventStoreConnection connection, Boolean resolveLinkTos, UserCredentials userCredentials, Nullable`1 lastEventNumber)
+   at EventStore.ClientAPI.EventStoreCatchUpSubscription.LoadHistoricalEventsAsync()
+2019-12-20 08:08:20.284 -06:00 [INF] Subscription started to stream [SubscriptionName:]-[StreamId:$ce-lifebookSchoolbookapp.Primary.Student]-[LastProcessedEventNumber:0]
+2019-12-20 08:08:20.413 -06:00 [ERR] Subscription dropped. Reason: CatchUpError
+EventStore.ClientAPI.Exceptions.AccessDeniedException: Read access denied for stream '$ce-lifebookSchoolbookapp.Primary.Student'.
+   at EventStore.ClientAPI.EventStoreStreamCatchUpSubscription.ReadEventsInternalAsync(IEventStoreConnection connection, Boolean resolveLinkTos, UserCredentials userCredentials, Nullable`1 lastEventNumber)
+   at EventStore.ClientAPI.EventStoreCatchUpSubscription.LoadHistoricalEventsAsync()
+2019-12-20 08:15:26.341 -06:00 [INF] Service registered to consul with @Service
+2019-12-20 08:15:26.377 -06:00 [INF] Sarting application with name: lifebook.SchoolBookApp
+2019-12-20 08:15:26.378 -06:00 [INF] On environment: Production
+2019-12-20 08:15:26.379 -06:00 [INF] Registering application to consul.
+2019-12-20 08:15:26.581 -06:00 [INF] Subscription started to stream [SubscriptionName:]-[StreamId:$ce-lifebookSchoolbookapp.Primary.Classroom]-[LastProcessedEventNumber:-1]
+2019-12-20 08:15:27.464 -06:00 [INF] Started Building Context for project: lifebook.core.projection.Services.ProjectionStore.PostgresContextCreator.
+2019-12-20 08:15:27.598 -06:00 [ERR] Subscription dropped. Reason: CatchUpError
+EventStore.ClientAPI.Exceptions.AccessDeniedException: Read access denied for stream '$ce-lifebookSchoolbookapp.Primary.Classroom'.
+   at EventStore.ClientAPI.EventStoreStreamCatchUpSubscription.ReadEventsInternalAsync(IEventStoreConnection connection, Boolean resolveLinkTos, UserCredentials userCredentials, Nullable`1 lastEventNumber)
+   at EventStore.ClientAPI.EventStoreCatchUpSubscription.LoadHistoricalEventsAsync()
+2019-12-20 08:15:28.271 -06:00 [INF] Running SQL Query: 
+CREATE TABLE IF NOT EXISTS public."StreamTrackingInformation"
+(
+    "Id" uuid NOT NULL,
+    "StreamKey" text COLLATE pg_catalog."default",
+    "StreamId" text COLLATE pg_catalog."default",
+    "LastEventRead" bigint NOT NULL,
+    CONSTRAINT "PK_StreamTrackingInformation" PRIMARY KEY("Id")
+)
+2019-12-20 08:15:28.279 -06:00 [INF] Result From SQL Query: -1
+2019-12-20 08:15:28.279 -06:00 [INF] Running SQL Query To Create Table If Not Exist
+2019-12-20 08:15:28.280 -06:00 [INF] Type: lifebook.SchoolBookApp.Projectors.Classroom
+2019-12-20 08:15:28.280 -06:00 [INF] Running SQL Query: 
+CREATE TABLE IF NOT EXISTS lifebookSchoolbookapp_Classroom (
+    "Key" uuid NOT NULL,
+    "LastUpdated" timestamp without time zone NOT NULL,
+    "JSON" jsonb,
+    CONSTRAINT "PK_$lifebookSchoolbookapp_Classroom" PRIMARY KEY("Key")
+);
+2019-12-20 08:15:28.281 -06:00 [INF] Result From SQL Query: -1
+2019-12-20 08:15:28.281 -06:00 [INF] Running SQL Query To Create Table If Not Exist
+2019-12-20 08:15:28.281 -06:00 [INF] Type: lifebook.SchoolBookApp.Projectors.Student
+2019-12-20 08:15:28.281 -06:00 [INF] Running SQL Query: 
+CREATE TABLE IF NOT EXISTS lifebookSchoolbookapp_Student (
+    "Key" uuid NOT NULL,
+    "LastUpdated" timestamp without time zone NOT NULL,
+    "JSON" jsonb,
+    CONSTRAINT "PK_$lifebookSchoolbookapp_Student" PRIMARY KEY("Key")
+);
+2019-12-20 08:15:28.282 -06:00 [INF] Result From SQL Query: -1
+2019-12-20 08:15:28.791 -06:00 [INF] Subscription started to stream [SubscriptionName:]-[StreamId:$ce-lifebookSchoolbookapp.Primary.Classroom]-[LastProcessedEventNumber:0]
+2019-12-20 08:15:28.798 -06:00 [INF] Subscription started to stream [SubscriptionName:]-[StreamId:$ce-lifebookSchoolbookapp.Primary.Student]-[LastProcessedEventNumber:0]
+2019-12-20 08:15:28.801 -06:00 [ERR] Subscription dropped. Reason: CatchUpError
+EventStore.ClientAPI.Exceptions.AccessDeniedException: Read access denied for stream '$ce-lifebookSchoolbookapp.Primary.Classroom'.
+   at EventStore.ClientAPI.EventStoreStreamCatchUpSubscription.ReadEventsInternalAsync(IEventStoreConnection connection, Boolean resolveLinkTos, UserCredentials userCredentials, Nullable`1 lastEventNumber)
+   at EventStore.ClientAPI.EventStoreCatchUpSubscription.LoadHistoricalEventsAsync()
+2019-12-20 08:15:28.821 -06:00 [ERR] Subscription dropped. Reason: CatchUpError
+EventStore.ClientAPI.Exceptions.AccessDeniedException: Read access denied for stream '$ce-lifebookSchoolbookapp.Primary.Student'.
+   at EventStore.ClientAPI.EventStoreStreamCatchUpSubscription.ReadEventsInternalAsync(IEventStoreConnection connection, Boolean resolveLinkTos, UserCredentials userCredentials, Nullable`1 lastEventNumber)
+   at EventStore.ClientAPI.EventStoreCatchUpSubscription.LoadHistoricalEventsAsync()
+2019-12-20 10:16:52.181 -06:00 [INF] Service registered to consul with @Service
+2019-12-20 10:16:52.293 -06:00 [INF] Sarting application with name: lifebook.SchoolBookApp
+2019-12-20 10:16:52.293 -06:00 [INF] On environment: Production
+2019-12-20 10:16:52.295 -06:00 [INF] Registering application to consul.
+2019-12-20 10:16:52.689 -06:00 [INF] Subscription started to stream [SubscriptionName:]-[StreamId:$ce-lifebookSchoolbookapp.Primary.Classroom]-[LastProcessedEventNumber:-1]
+2019-12-20 10:16:53.740 -06:00 [ERR] Subscription dropped. Reason: CatchUpError
+EventStore.ClientAPI.Exceptions.AccessDeniedException: Read access denied for stream '$ce-lifebookSchoolbookapp.Primary.Classroom'.
+   at EventStore.ClientAPI.EventStoreStreamCatchUpSubscription.ReadEventsInternalAsync(IEventStoreConnection connection, Boolean resolveLinkTos, UserCredentials userCredentials, Nullable`1 lastEventNumber)
+   at EventStore.ClientAPI.EventStoreCatchUpSubscription.LoadHistoricalEventsAsync()
+2019-12-20 10:16:53.853 -06:00 [INF] Started Building Context for project: lifebook.core.projection.Services.ProjectionStore.PostgresContextCreator.
+2019-12-20 10:16:55.141 -06:00 [INF] Running SQL Query: 
+CREATE TABLE IF NOT EXISTS public."StreamTrackingInformation"
+(
+    "Id" uuid NOT NULL,
+    "StreamKey" text COLLATE pg_catalog."default",
+    "StreamId" text COLLATE pg_catalog."default",
+    "LastEventRead" bigint NOT NULL,
+    CONSTRAINT "PK_StreamTrackingInformation" PRIMARY KEY("Id")
+)
+2019-12-20 10:16:55.156 -06:00 [INF] Result From SQL Query: -1
+2019-12-20 10:16:55.157 -06:00 [INF] Running SQL Query To Create Table If Not Exist
+2019-12-20 10:16:55.157 -06:00 [INF] Type: lifebook.SchoolBookApp.Projectors.Classroom
+2019-12-20 10:16:55.158 -06:00 [INF] Running SQL Query: 
+CREATE TABLE IF NOT EXISTS lifebookSchoolbookapp_Classroom (
+    "Key" uuid NOT NULL,
+    "LastUpdated" timestamp without time zone NOT NULL,
+    "JSON" jsonb,
+    CONSTRAINT "PK_$lifebookSchoolbookapp_Classroom" PRIMARY KEY("Key")
+);
+2019-12-20 10:16:55.161 -06:00 [INF] Result From SQL Query: -1
+2019-12-20 10:16:55.162 -06:00 [INF] Running SQL Query To Create Table If Not Exist
+2019-12-20 10:16:55.162 -06:00 [INF] Type: lifebook.SchoolBookApp.Projectors.Student
+2019-12-20 10:16:55.162 -06:00 [INF] Running SQL Query: 
+CREATE TABLE IF NOT EXISTS lifebookSchoolbookapp_Student (
+    "Key" uuid NOT NULL,
+    "LastUpdated" timestamp without time zone NOT NULL,
+    "JSON" jsonb,
+    CONSTRAINT "PK_$lifebookSchoolbookapp_Student" PRIMARY KEY("Key")
+);
+2019-12-20 10:16:55.174 -06:00 [INF] Result From SQL Query: -1
+2019-12-20 10:16:55.823 -06:00 [INF] Subscription started to stream [SubscriptionName:]-[StreamId:$ce-lifebookSchoolbookapp.Primary.Classroom]-[LastProcessedEventNumber:0]
+2019-12-20 10:16:55.837 -06:00 [INF] Subscription started to stream [SubscriptionName:]-[StreamId:$ce-lifebookSchoolbookapp.Primary.Student]-[LastProcessedEventNumber:0]
+2019-12-20 10:16:55.855 -06:00 [ERR] Subscription dropped. Reason: CatchUpError
+EventStore.ClientAPI.Exceptions.AccessDeniedException: Read access denied for stream '$ce-lifebookSchoolbookapp.Primary.Classroom'.
+   at EventStore.ClientAPI.EventStoreStreamCatchUpSubscription.ReadEventsInternalAsync(IEventStoreConnection connection, Boolean resolveLinkTos, UserCredentials userCredentials, Nullable`1 lastEventNumber)
+   at EventStore.ClientAPI.EventStoreCatchUpSubscription.LoadHistoricalEventsAsync()
+2019-12-20 10:16:55.857 -06:00 [ERR] Subscription dropped. Reason: CatchUpError
+EventStore.ClientAPI.Exceptions.AccessDeniedException: Read access denied for stream '$ce-lifebookSchoolbookapp.Primary.Student'.
+   at EventStore.ClientAPI.EventStoreStreamCatchUpSubscription.ReadEventsInternalAsync(IEventStoreConnection connection, Boolean resolveLinkTos, UserCredentials userCredentials, Nullable`1 lastEventNumber)
+   at EventStore.ClientAPI.EventStoreCatchUpSubscription.LoadHistoricalEventsAsync()
+2019-12-20 12:42:34.115 -06:00 [INF] Service registered to consul with @Service
+2019-12-20 12:42:34.194 -06:00 [INF] Sarting application with name: lifebook.SchoolBookApp
+2019-12-20 12:42:34.195 -06:00 [INF] On environment: Production
+2019-12-20 12:42:34.196 -06:00 [INF] Registering application to consul.
+2019-12-20 12:42:34.503 -06:00 [INF] Subscription started to stream [SubscriptionName:]-[StreamId:$ce-lifebookSchoolbookapp.Primary.Classroom]-[LastProcessedEventNumber:-1]
+2019-12-20 12:42:35.353 -06:00 [INF] Started Building Context for project: lifebook.core.projection.Services.ProjectionStore.PostgresContextCreator.
+2019-12-20 12:42:35.564 -06:00 [ERR] Subscription dropped. Reason: CatchUpError
+EventStore.ClientAPI.Exceptions.AccessDeniedException: Read access denied for stream '$ce-lifebookSchoolbookapp.Primary.Classroom'.
+   at EventStore.ClientAPI.EventStoreStreamCatchUpSubscription.ReadEventsInternalAsync(IEventStoreConnection connection, Boolean resolveLinkTos, UserCredentials userCredentials, Nullable`1 lastEventNumber)
+   at EventStore.ClientAPI.EventStoreCatchUpSubscription.LoadHistoricalEventsAsync()
+2019-12-20 12:42:36.215 -06:00 [INF] Running SQL Query: 
+CREATE TABLE IF NOT EXISTS public."StreamTrackingInformation"
+(
+    "Id" uuid NOT NULL,
+    "StreamKey" text COLLATE pg_catalog."default",
+    "StreamId" text COLLATE pg_catalog."default",
+    "LastEventRead" bigint NOT NULL,
+    CONSTRAINT "PK_StreamTrackingInformation" PRIMARY KEY("Id")
+)
+2019-12-20 12:42:36.226 -06:00 [INF] Result From SQL Query: -1
+2019-12-20 12:42:36.226 -06:00 [INF] Running SQL Query To Create Table If Not Exist
+2019-12-20 12:42:36.226 -06:00 [INF] Type: lifebook.SchoolBookApp.Projectors.Classroom
+2019-12-20 12:42:36.227 -06:00 [INF] Running SQL Query: 
+CREATE TABLE IF NOT EXISTS lifebookSchoolbookapp_Classroom (
+    "Key" uuid NOT NULL,
+    "LastUpdated" timestamp without time zone NOT NULL,
+    "JSON" jsonb,
+    CONSTRAINT "PK_$lifebookSchoolbookapp_Classroom" PRIMARY KEY("Key")
+);
+2019-12-20 12:42:36.229 -06:00 [INF] Result From SQL Query: -1
+2019-12-20 12:42:36.229 -06:00 [INF] Running SQL Query To Create Table If Not Exist
+2019-12-20 12:42:36.229 -06:00 [INF] Type: lifebook.SchoolBookApp.Projectors.Student
+2019-12-20 12:42:36.230 -06:00 [INF] Running SQL Query: 
+CREATE TABLE IF NOT EXISTS lifebookSchoolbookapp_Student (
+    "Key" uuid NOT NULL,
+    "LastUpdated" timestamp without time zone NOT NULL,
+    "JSON" jsonb,
+    CONSTRAINT "PK_$lifebookSchoolbookapp_Student" PRIMARY KEY("Key")
+);
+2019-12-20 12:42:36.231 -06:00 [INF] Result From SQL Query: -1
+2019-12-20 12:42:36.879 -06:00 [INF] Subscription started to stream [SubscriptionName:]-[StreamId:$ce-lifebookSchoolbookapp.Primary.Classroom]-[LastProcessedEventNumber:0]
+2019-12-20 12:42:36.882 -06:00 [ERR] Subscription dropped. Reason: CatchUpError
+EventStore.ClientAPI.Exceptions.AccessDeniedException: Read access denied for stream '$ce-lifebookSchoolbookapp.Primary.Classroom'.
+   at EventStore.ClientAPI.EventStoreStreamCatchUpSubscription.ReadEventsInternalAsync(IEventStoreConnection connection, Boolean resolveLinkTos, UserCredentials userCredentials, Nullable`1 lastEventNumber)
+   at EventStore.ClientAPI.EventStoreCatchUpSubscription.LoadHistoricalEventsAsync()
+2019-12-20 12:42:36.887 -06:00 [INF] Subscription started to stream [SubscriptionName:]-[StreamId:$ce-lifebookSchoolbookapp.Primary.Student]-[LastProcessedEventNumber:0]
+2019-12-20 12:42:36.891 -06:00 [ERR] Subscription dropped. Reason: CatchUpError
+EventStore.ClientAPI.Exceptions.AccessDeniedException: Read access denied for stream '$ce-lifebookSchoolbookapp.Primary.Student'.
+   at EventStore.ClientAPI.EventStoreStreamCatchUpSubscription.ReadEventsInternalAsync(IEventStoreConnection connection, Boolean resolveLinkTos, UserCredentials userCredentials, Nullable`1 lastEventNumber)
+   at EventStore.ClientAPI.EventStoreCatchUpSubscription.LoadHistoricalEventsAsync()
