@@ -73,3 +73,16 @@ basic layout of app solutions
    | _ api-controllers
    | _ start.cs
 </pre>
+
+# lifebook core framework support and packages
+* lifebook.core.services
+   * Configuration - adds configuration to the project, if it is a webapi project you could add a appsettings.json and we will pick it up
+   * NetworkLocater 
+      * look up service on consul
+      * de/register service with consul
+      * + get config file from consul
+   * Hosting - Add webapi support to project
+      * Creates a webserver 
+      * Register's service to consul
+      * Setup container
+      * Setup configuration        
