@@ -31,7 +31,6 @@ namespace lifebook.core.services.ServiceStartup
             services.AddAuthorization();
             
             container.Install(FromAssembly.InThisApplication(GetType().Assembly.GetRootAssembly()));
-            container.Register(Component.For<ILogger>().ImplementedBy<Logger>());
             container.Register(Component.For<IServiceProvider>().ImplementedBy<WindosrCastleServiceProvider>());
             container.AddServices(services);
 
