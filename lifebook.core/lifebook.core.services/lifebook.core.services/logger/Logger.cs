@@ -19,7 +19,7 @@ namespace lifebook.core.logging.services
                                 AutoRegisterTemplate = true,
                                 AutoRegisterTemplateVersion = AutoRegisterTemplateVersion.ESv6
                             })
-                            .WriteTo.File("./logs")
+                            .WriteTo.File("./logs", Serilog.Events.LogEventLevel.Error)
                             .WriteTo.Console(theme: AnsiConsoleTheme.Code)
                             .CreateLogger();
         }
@@ -27,10 +27,26 @@ namespace lifebook.core.logging.services
         public void Error(Exception ex, string message) => _logger
                                                             .ForContext(GetType())
                                                             .Error(ex, message);
+
         public void Error(string message) => _logger.Error(message);
-        public void Error(Exception ex, string message, params object[] args) => _logger.Error(ex, message, args);
+
+        public void Error(Exception ex, string message, params object[] o)
+        {
+            _logger.Error(ex, message, o);
+        }
+
         public void Information(string message) => _logger.Information(message);
-        public void Information(string template, params object[] args) => _logger.Information(template, args);
-        public void Verbose(string message) => _logger.Verbose(message);        
+
+        public void Information(string message, params object[] o)
+        {
+            _logger.Information(message, o);
+        }
+
+        public void Verbose(string message) => _logger.Verbose(message);
+
+        public void Verbose(string message, params object[] o)
+        {
+            _logger.Verbose(message, o);
+        }
     }
 }

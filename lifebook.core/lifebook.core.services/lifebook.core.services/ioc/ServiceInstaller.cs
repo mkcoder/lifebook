@@ -9,6 +9,8 @@ using lifebook.core.services.configuration;
 using Microsoft.Extensions.Configuration;
 using lifebook.core.services.extensions;
 using lifebook.core.services.discovery;
+using lifebook.core.logging.interfaces;
+using lifebook.core.logging.services;
 
 namespace lifebook.core.services
 {    
@@ -27,6 +29,7 @@ namespace lifebook.core.services
                         installed = true;
                         container.Register(
                             Component.For<IServiceRegister>().ImplementedBy<ConsulServiceRegister>(),
+                            Component.For<ILogger>().ImplementedBy<Logger>(),
                             Component.For<INetworkServiceLocator>().ImplementedBy<NetworkServiceLocator>(),
                             // register all our IConfigurationProviderInitializer
                             Classes.FromAssemblyInThisApplication(GetType().Assembly.GetRootAssembly())

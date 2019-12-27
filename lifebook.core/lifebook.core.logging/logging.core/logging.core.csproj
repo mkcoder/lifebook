@@ -4,17 +4,11 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <PackOnBuild>true</PackOnBuild>
     <PackageId>lifebook.core.logging</PackageId>
-    <PackageVersion>2.0.0</PackageVersion>
+    <PackageVersion>3.0.0</PackageVersion>
     <Authors>mkcoder</Authors>
     <Description>logging framework for .net core apps</Description>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="ConfigurationProvider\" />
-    <Folder Include="interfaces\" />
-    <Folder Include="ioc\" />
-    <Folder Include="services\" />
-  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Serilog" Version="2.9.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />

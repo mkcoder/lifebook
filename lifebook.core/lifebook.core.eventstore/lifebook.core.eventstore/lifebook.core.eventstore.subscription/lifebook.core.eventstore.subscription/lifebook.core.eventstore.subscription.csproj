@@ -7,7 +7,7 @@
     <Authors>mkcoder</Authors>
     <Description>subscription api for eventstore
 </Description>
-    <PackageVersion>2.0.0</PackageVersion>
+    <PackageVersion>2.2.0</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>

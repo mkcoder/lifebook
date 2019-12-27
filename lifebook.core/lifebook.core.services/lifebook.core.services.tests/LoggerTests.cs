@@ -1,15 +1,15 @@
 using System;
 using lifebook.core.logging;
 using lifebook.core.logging.services;
-using Xunit;
+using NUnit.Framework;
 
 namespace lifebook.core.logging.test
 {
     public class UnitTest1
     {
-        Logger _sut = new Logger();
+        Logger _sut = new services.Logger();
 
-        [Fact]
+        [Test]
         public void Logging_Error_Logs_Error()
         {
             _sut.Error("Hello world");
