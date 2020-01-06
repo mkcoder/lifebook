@@ -13,5 +13,6 @@
     <Folder Include="Models\" />
     <Folder Include="Services\" />
     <Folder Include="ConfigurationProvider\" />
+    <Folder Include="ioc\" />
   </ItemGroup>
 </Project>

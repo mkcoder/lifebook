@@ -1,10 +1,11 @@
-﻿using lifebook.core.messagebus.Models;
+﻿using System;
+using lifebook.core.messagebus.Models;
 
 namespace lifebook.core.messagebus.Interfaces
 {
     public interface IMessageBus
     {
         MessageConfirmation Publish(object message);
-        T Subscribe<T>(MessageQueueInformation broker);
+        public void Subscribe<T>(MessageQueueInformation broker, Action<EventBusMessage<T>> action);
     }
 }

@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.messagebus", "lifebook.core.messagebus\lifebook.core.messagebus.csproj", "{2B339D4F-86EA-48C4-BAD0-B63AAE4010D4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Example", "Example", "{7B7DD3C6-3E1E-4910-8584-DD3501E6961F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.messagebus.example", "lifebook.core.messagebus.example\lifebook.core.messagebus.example.csproj", "{2930258E-AA1B-41ED-99AA-10E018648596}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,5 +17,12 @@ Global
 		{2B339D4F-86EA-48C4-BAD0-B63AAE4010D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B339D4F-86EA-48C4-BAD0-B63AAE4010D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B339D4F-86EA-48C4-BAD0-B63AAE4010D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2930258E-AA1B-41ED-99AA-10E018648596}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2930258E-AA1B-41ED-99AA-10E018648596}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2930258E-AA1B-41ED-99AA-10E018648596}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2930258E-AA1B-41ED-99AA-10E018648596}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2930258E-AA1B-41ED-99AA-10E018648596} = {7B7DD3C6-3E1E-4910-8584-DD3501E6961F}
 	EndGlobalSection
 EndGlobal
