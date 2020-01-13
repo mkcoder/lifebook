@@ -4,6 +4,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using lifebook.core.messagebus.Interfaces;
 using lifebook.core.messagebus.Models;
+using Newtonsoft.Json.Linq;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using RabbitMQ.Client.Framing;
@@ -23,8 +24,18 @@ namespace lifebook.core.messagebus.Services
 
         public MessageConfirmation Publish(object message)
         {
-            var body = ConvertObjectToByteArray(message);
-            _model.BasicPublish(_queueInformation.QueueName, _queueInformation.RoutingKey, body: body);
+            var json = JObject.FromObject(message);
+            var body = Encoding.UTF8.GetBytes(json.ToString());
+            var properties = _model.CreateBasicProperties();
+            properties.CorrelationId = (string)(json["CorrelationId"] ?? Guid.NewGuid());
+            properties.MessageId = message.GetType().Name;
+            properties.Persistent = true;
+            _model.BasicPublish(
+                exchange: "",
+                routingKey: _queueInformation.RoutingKey,                
+                basicProperties: properties,
+                body: body
+            );
             return MessageConfirmation.Ok();
         }
 
@@ -32,8 +43,18 @@ namespace lifebook.core.messagebus.Services
         {
             var consumer = new EventingBasicConsumer(_model);
             consumer.Received += (obj, evt) => {
-                var body = (T)Convert.ChangeType(ByteArrayToObject(evt.Body), typeof(T));
-                var msg = new EventBusMessage<T>(body)
+                var evtBody = Encoding.UTF8.GetString(evt.Body);
+                T data = default(T);
+                if (evtBody.IsJson())
+                {
+                    data = JObject.Parse(evtBody).ToObject<T>();
+                }
+                else
+                {
+                    data = (T)Convert.ChangeType(evtBody, typeof(T));
+                }
+                
+                var msg = new EventBusMessage<T>(data)
                 {
                     CorrelationId = evt.BasicProperties.CorrelationId,
                     MessageName = evt.BasicProperties.MessageId,
@@ -45,43 +66,20 @@ namespace lifebook.core.messagebus.Services
             };
             _model.BasicConsume(broker.QueueName, true, consumer);
         }
+    }
 
-        public static object ByteArrayToObject(byte[] arrBytes)
+    public static class Extensions
+    {
+        public static bool IsJson(this string jsonString)
         {
-            using (var memStream = new MemoryStream())
+            try
             {
-                object result = null;
-                try
-                {
-                    result = Encoding.UTF8.GetString(arrBytes);
-                    return result;
-                }
-                catch(Exception)
-                {
-                    var binForm = new BinaryFormatter();
-                    memStream.Write(arrBytes, 0, arrBytes.Length);
-                    memStream.Seek(0, SeekOrigin.Begin);
-                    memStream.Position = 0;
-                    try
-                    {
-                        result = binForm.Deserialize(memStream);
-                        return result;
-                    }
-                    catch (Exception ex)
-                    {
-                        throw ex;
-                    }                    
-                }
+                JObject.Parse(jsonString);
+                return true;
             }
-        }
-
-        private byte[] ConvertObjectToByteArray(Object obj)
-        {
-            BinaryFormatter bf = new BinaryFormatter();
-            using (var ms = new MemoryStream())
+            catch (Exception)
             {
-                bf.Serialize(ms, obj);
-                return ms.ToArray();
+                return false;
             }
         }
     }
