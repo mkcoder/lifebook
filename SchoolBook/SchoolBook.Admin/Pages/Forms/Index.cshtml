@@ -1,0 +1,54 @@
+﻿@page "/Form"
+@model WebApplication2.IndexModel
+@{
+    ViewData["Title"] = "Form";
+}
+<table class="table table-striped table-dark">
+    <thead class="thead-dark">
+        <tr>
+            <th>Form Name</th>
+            <th>Page Name</th>
+            <th>Questions</th>
+            <th>
+                <div class="btn-group-vertical" role="group" aria-label="Basic example">
+                    <a id="create-form" class="btn btn-secondary" asp-page="/Forms/Create">Create a new form</a>
+                </div>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var row in Model.Forms)
+        {
+        <tr>
+            <td>@row.FormName</td>
+            <td>
+                @foreach (var rowSection in row.Sections)
+                    {
+                <section>
+                    <p>@rowSection.Name</p>
+                </section>
+                    }
+            </td>
+            <td>
+                @foreach (var rowSection in row.Sections)
+                    {
+                @foreach (var rowQuestion in rowSection.Questions)
+                        {
+                <section>
+                    <p>Key: @rowQuestion.Key</p>
+                    <p>Value: @rowQuestion.Value</p>
+                    <p>Expected Type: @rowQuestion.ExpectedResponseType</p>
+                </section>
+                        }
+                    }
+            </td>
+            <td>
+                <div class="btn-group-vertical" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-secondary">Edit form</button>
+                    <button type="button" class="btn btn-secondary btn-danger">Delete form</button>
+                </div>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
