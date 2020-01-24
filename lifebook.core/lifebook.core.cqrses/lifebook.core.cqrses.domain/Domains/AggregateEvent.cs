@@ -13,6 +13,12 @@ namespace lifebook.core.cqrses.Domains
     {
         [Metadata]
         public string CommandName { get; set; }
+        [Metadata]
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public Guid? ProcessId { get; set; } = null;
+        [Metadata]
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public Guid? ParentProcessId { get; set; } = null;
         [JsonIgnore]
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public Data Data { get; set; }

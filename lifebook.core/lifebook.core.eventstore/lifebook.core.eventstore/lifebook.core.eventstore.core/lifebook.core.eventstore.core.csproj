@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <PackOnBuild>true</PackOnBuild>
-    <PackageVersion>1.0.0</PackageVersion>
+    <PackageVersion>5.0.0</PackageVersion>
     <Authors>mkcoder</Authors>
     <Description>internal package use only</Description>
     <Owners>mkcoder</Owners>
@@ -15,6 +15,6 @@
     <Folder Include="configurations\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="lifebook.core.services" Version="3.0.41" />
+    <PackageReference Include="lifebook.core.services" Version="5.0.0" />
   </ItemGroup>
 </Project>

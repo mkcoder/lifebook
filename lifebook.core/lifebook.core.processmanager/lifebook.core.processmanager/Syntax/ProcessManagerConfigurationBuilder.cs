@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using lifebook.core.cqrses.Domains;
 using lifebook.core.eventstore.domain.api;
 using lifebook.core.eventstore.domain.models;
 
@@ -9,23 +10,30 @@ namespace lifebook.core.processmanager.Syntax
     public class ProcessManagerStep
     {
         public EventSpecifier[] EventSpecifier { get; internal set; }
-        public string StepName { get; internal set; }
-        public Func<EntityEvent, Task> StepAction { get; internal set; }
+        public string StepDescription { get; internal set; }
+        public Func<AggregateEvent, Task> StepAction { get; internal set; }
     }
 
     public class ProcessManagerConfiguration
     {
         private List<ProcessManagerStep> Steps { get; } = new List<ProcessManagerStep>();
-        public ProcessManagerStep CurrentStep { get; private set; } = new ProcessManagerStep();
+        internal ProcessManagerStep CurrentStep { get; private set; } = new ProcessManagerStep();
+
+        public IReadOnlyList<ProcessManagerStep> GetProcessManagerSteps => Steps.AsReadOnly();
+
         public void ConfigureNextStep()
         {
-            Steps.Add(CurrentStep);
-            CurrentStep = new ProcessManagerStep();
+            if (CurrentStep.EventSpecifier != null && CurrentStep.StepDescription != null)
+            {
+                Steps.Add(CurrentStep);
+                CurrentStep = new ProcessManagerStep();
+            }
         }
 
         internal ProcessManagerConfiguration Build()
         {
-            throw new NotImplementedException();
+            ConfigureNextStep();
+            return this;
         }
     }
 
@@ -47,15 +55,14 @@ namespace lifebook.core.processmanager.Syntax
             return this;
         }
 
-        public ProcessManagerConfigurationBuilder TakeStepName(string name)
+        public ProcessManagerConfigurationBuilder SetStepDescription(string description)
         {
-            _configuration.CurrentStep.StepName = name;
+            _configuration.CurrentStep.StepDescription = description;
             return this;
         }
 
-        public ProcessManagerConfigurationBuilder TakeAction(Func<EntityEvent, Task> action)
-        {
-            EntityEvent e = new EntityEvent();
+        public ProcessManagerConfigurationBuilder TakeAction(Func<AggregateEvent, Task> action)
+        {  
             _configuration.CurrentStep.StepAction = action;
             return this;
         }
@@ -66,6 +73,6 @@ namespace lifebook.core.processmanager.Syntax
             return this;
         }
 
-        public ProcessManagerConfiguration Configuration() => _configuration.Build();
+        public ProcessManagerConfiguration Configuration => _configuration.Build();
     }
 }

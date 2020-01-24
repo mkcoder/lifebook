@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.processmanager", "lifebook.core.processmanager\lifebook.core.processmanager.csproj", "{7D57E9B3-95B1-4453-95E2-4836384F5ED5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.processmanager.tests", "lifebook.core.processmanager.tests\lifebook.core.processmanager.tests.csproj", "{36E6D6D4-826B-490A-A65B-11A3A8B06874}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,5 +15,9 @@ Global
 		{7D57E9B3-95B1-4453-95E2-4836384F5ED5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D57E9B3-95B1-4453-95E2-4836384F5ED5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D57E9B3-95B1-4453-95E2-4836384F5ED5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36E6D6D4-826B-490A-A65B-11A3A8B06874}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36E6D6D4-826B-490A-A65B-11A3A8B06874}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36E6D6D4-826B-490A-A65B-11A3A8B06874}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36E6D6D4-826B-490A-A65B-11A3A8B06874}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

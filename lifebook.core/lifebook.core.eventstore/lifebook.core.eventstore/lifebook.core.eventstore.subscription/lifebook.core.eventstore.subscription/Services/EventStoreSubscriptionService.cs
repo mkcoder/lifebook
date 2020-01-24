@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ namespace lifebook.core.eventstore.subscription.Services
         private IEventStoreConnection connection;
         private readonly EventStoreConfiguration _eventStoreConfiguration;
         private readonly ILogger _logger;
-		private static SemaphoreSlim semaphoreSlim = new SemaphoreSlim(1, 1);
+        private static SemaphoreSlim semaphoreSlim = new SemaphoreSlim(1, 1);
 
 		public EventStoreSubscriptionService(EventStoreConfiguration eventStoreConfiguration, ILogger logger)
         {
@@ -31,15 +32,29 @@ namespace lifebook.core.eventstore.subscription.Services
             _logger = logger;
         }
 
-        public void SubscribeToSingleStream<T, TOut>(StreamCategorySpecifier streamCategory, Func<SubscriptionEvent<TOut>, Task> action, long? from = null, string subscriptionName = "", Func<SubscriptionDropped, long> restartFrom=null) where T : ICreateEvent<TOut>, new() where TOut : Event
+        public void SubscribeToSingleStream<T, TOut>(StreamCategorySpecifier streamCategory, Func<SubscriptionEvent<TOut>, Task> action, long? from = null, string subscriptionName = null, Func<SubscriptionDropped, long> restartFrom=null) where T : ICreateEvent<TOut>, new() where TOut : Event
         {
             var stream = $"$ce-{streamCategory.GetCategoryStream()}";
             var defaultSettings = CatchUpSubscriptionSettings.Default;
+            subscriptionName = subscriptionName ?? Guid.NewGuid().ToString();
             var settings = new CatchUpSubscriptionSettings(defaultSettings.MaxLiveQueueSize, defaultSettings.ReadBatchSize, defaultSettings.VerboseLogging, defaultSettings.ResolveLinkTos, subscriptionName);
-            var subscription = connection.SubscribeToStreamFrom(stream, from, CatchUpSubscriptionSettings.Default,
+            var subscription = connection.SubscribeToStreamFrom(stream, from, settings, 
                 EventAppeared<T, TOut>(action),                
                 subscriptionDropped: SubscriptionDropped<T, TOut>(streamCategory, action, restartFrom));
             _logger.Information($"Subscription started to stream [SubscriptionName:{subscription.SubscriptionName}]-[StreamId:{subscription.StreamId}]-[LastProcessedEventNumber:{subscription.LastProcessedEventNumber}]");
+        }
+
+        public EventStoreSubscriptionHook SubscribeToSingleStreamWithSubscription<T, TOut>(StreamCategorySpecifier streamCategory, Func<SubscriptionEvent<TOut>, Task> action, long? from = null, string subscriptionName = null, Func<SubscriptionDropped, long> restartFrom = null) where T : ICreateEvent<TOut>, new() where TOut : Event
+        {
+            var stream = $"$ce-{streamCategory.GetCategoryStream()}";
+            var defaultSettings = CatchUpSubscriptionSettings.Default;
+            subscriptionName = subscriptionName ?? Guid.NewGuid().ToString();
+            var settings = new CatchUpSubscriptionSettings(defaultSettings.MaxLiveQueueSize, defaultSettings.ReadBatchSize, defaultSettings.VerboseLogging, defaultSettings.ResolveLinkTos, subscriptionName);
+            var subscription = connection.SubscribeToStreamFrom(stream, from, settings,
+                EventAppeared<T, TOut>(action),
+                subscriptionDropped: SubscriptionDropped<T, TOut>(streamCategory, action, restartFrom));
+            _logger.Information($"Subscription started to stream [SubscriptionName:{subscription.SubscriptionName}]-[StreamId:{subscription.StreamId}]-[LastProcessedEventNumber:{subscription.LastProcessedEventNumber}]");
+            return new EventStoreSubscriptionHook(subscription);
         }
 
         private Action<EventStoreCatchUpSubscription, SubscriptionDropReason, Exception> SubscriptionDropped<T, TOut>(StreamCategorySpecifier streamCategory, Func<SubscriptionEvent<TOut>, Task> action, Func<SubscriptionDropped, long> restartFrom) where T : ICreateEvent<TOut>, new() where TOut : Event

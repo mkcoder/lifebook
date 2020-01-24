@@ -21,10 +21,6 @@
     <PackageReference Include="Serilog.Sinks.File" Version="4.1.0" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="interfaces\" />
-    <Folder Include="services\" />
-    <Folder Include="ioc\" />
-    <Folder Include="ioc\installers\" />
-    <Folder Include="ConfigurationProvider\" />
+    <Compile Remove="services\Logger.cs" />
   </ItemGroup>
 </Project>

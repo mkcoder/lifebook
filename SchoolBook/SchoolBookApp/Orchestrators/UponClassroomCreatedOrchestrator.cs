@@ -16,9 +16,9 @@ namespace lifebook.SchoolBookApp.Orchestrators
         {
         }
 
-        public override EventSpecifier GetEventSpecifier()
+        public override core.orchestrator.Models.EventSpecifier GetEventSpecifier()
         {
-            return new EventSpecifier("ClassroomCreated", new StreamCategorySpecifier("lifebookSchoolbookapp", "Primary", "Classroom"));
+            return new core.orchestrator.Models.EventSpecifier("ClassroomCreated", new StreamCategorySpecifier("lifebookSchoolbookapp", "Primary", "Classroom"));
         }
 
         public override async Task Orchestrate(AggregateEvent aggregateEvent)
