@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using lifebook.core.eventstore.domain.models;
-using lifebook.core.eventstore.subscription.Apis;
-using lifebook.core.eventstore.subscription.Interfaces;
 using lifebook.core.eventstore.subscription.Services;
-using lifebook.core.processmanager.Models;
 using lifebook.core.processmanager.ProcessStates;
 using lifebook.core.processmanager.Syntax;
-using MediatR;
 
 namespace lifebook.core.processmanager.Services
 {

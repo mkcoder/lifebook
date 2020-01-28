@@ -1,7 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <ID>lifebook.core.messagebus</ID>
+    <Version>1.0.0</Version>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <PackOnBuild>true</PackOnBuild>
+    <Authors>mkcoder</Authors>
+    <Description>message bug using rabbitmq</Description>
+    <Owners>mkcoder</Owners>
+    <PackageReleaseNotes>lifebook.core.messagebus</PackageReleaseNotes>
+    <Summary>lifebook.core.messagebus</Summary>
+    <Title>lifebook.core.messagebus</Title>
+    <PackageId>lifebook.core.messagebus</PackageId>
   </PropertyGroup>
 
   <ItemGroup>

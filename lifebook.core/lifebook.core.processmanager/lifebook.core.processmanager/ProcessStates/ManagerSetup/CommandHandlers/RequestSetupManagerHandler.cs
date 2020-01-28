@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using lifebook.core.cqrses.Domains;
 using lifebook.core.eventstore.domain.models;
 using lifebook.core.eventstore.subscription.Apis;
+using lifebook.core.messagebus.Models;
 using lifebook.core.processmanager.Services;
 using lifebook.core.processmanager.Syntax;
 using MediatR;
@@ -35,7 +36,7 @@ namespace lifebook.core.processmanager.ProcessStates
                     request.ProcessManager.Subscriptions.Add(
                         request.ProcessManager.ProcessManagerServices.EventStoreSubscription.
                         SubscribeToSingleStreamWithSubscription<AggregateEventCreator, AggregateEvent>
-                        (e.StreamCategorySpecifier, action, subscriptionName: $"process_{step.StepDescription.Replace(" ", "")}"));
+                        (e.StreamCategorySpecifier, handle, subscriptionName: $"process_{step.StepDescription.Replace(" ", "")}"));
                 }
             }
 
@@ -43,14 +44,13 @@ namespace lifebook.core.processmanager.ProcessStates
             return new ManagerSetupCompleted();
         }
 
-        private async Task action(SubscriptionEvent<AggregateEvent> evt)
+        private async Task handle(SubscriptionEvent<AggregateEvent> evt)
         {
             if (processmanager.ProcessManagerServices.EventNameToProcessStepDictionary.ContainsKey(evt.Event.EventName))
             {
-                var act = processmanager.ProcessManagerServices.EventNameToProcessStepDictionary[evt.Event.EventName];
-                await processmanager.ProcessManagerServices.EventReader
-                    .ReadAllEventsFromStreamCategoryForAggregateAsync(new StreamCategorySpecifier("", "", ""));
-                await act.StepAction(evt.Event);
+                var act = processmanager.ProcessManagerServices.EventNameToProcessStepDictionary[evt.Event.EventName];                
+                var bus = processmanager.ProcessManagerServices.Messagebus.TryConnectingDirectlyToQueue(processmanager.ProcessManagerServices.MessageQueueInformation);
+                bus.Publish(new { evt.Event, StepAction = act });
             }
         }
     }

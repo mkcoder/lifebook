@@ -9,6 +9,9 @@ using MediatR;
 
 namespace lifebook.core.processmanager.ProcessStates
 {
+    /// <summary>
+    /// Subscribe to manager eventstore stream
+    /// </summary>
     public class RequestSetupManagerEventToEventStoreHandler : IRequestHandler<RequestSetupManagerEventToEventStore>
     {
         public async Task<Unit> Handle(RequestSetupManagerEventToEventStore request, CancellationToken cancellationToken)
@@ -19,7 +22,7 @@ namespace lifebook.core.processmanager.ProcessStates
             {
                 request.ProcessManager.ProcessManagerServices.EventStoreSubscription
                     .SubscribeToSingleStreamWithSubscription<AggregateEventCreator, AggregateEvent>
-                    (domainEvent.StreamCategorySpecifier, domainEventManager.ManageEvent);
+                    (domainEvent.StreamCategorySpecifier, domainEventManager.DispatchDomainEventToHandler);
             }
             return new Unit();
         }

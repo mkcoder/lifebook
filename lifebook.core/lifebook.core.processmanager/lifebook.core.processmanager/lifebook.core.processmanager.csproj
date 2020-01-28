@@ -13,12 +13,23 @@
     <Folder Include="ProcessStates\" />
     <Folder Include="Models\" />
     <Folder Include="Domain\" />
+    <Folder Include="ProcessStates\ManagerSetup\" />
+    <Folder Include="ProcessStates\ManagerSetup\Commands\" />
+    <Folder Include="ProcessStates\ManagerSetup\CommandHandlers\" />
+    <Folder Include="ProcessStates\ProcessSetup\" />
+    <Folder Include="ProcessStates\ProcessSetup\Commands\" />
+    <Folder Include="ProcessStates\ProcessSetup\CommandHandlers\" />
+    <Folder Include="ProcessStates\ProcessSetup\Models\" />
+    <Folder Include="ProcessStates\Dto\" />
+    <Folder Include="Aggregates\" />
+    <Folder Include="Attributes\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="lifebook.core.eventstore.domain" Version="3.0.17" />
-    <PackageReference Include="MediatR" Version="7.0.0" />
-    <PackageReference Include="lifebook.core.subscription" Version="2.2.0" />
-    <PackageReference Include="lifebook.core.services" Version="5.0.0" />
-    <PackageReference Include="lifebook.core.cqrs.domain" Version="2.1.0" />
+    <PackageReference Include="lifebook.core.eventstore.domain" Version="5.0.0" />
+    <PackageReference Include="MediatR" Version="8.0.0" />
+    <PackageReference Include="lifebook.core.subscription" Version="5.0.0" />
+    <PackageReference Include="lifebook.core.services" Version="5.0.1" />
+    <PackageReference Include="lifebook.core.cqrs.domain" Version="5.0.1" />
+    <PackageReference Include="lifebook.core.messagebus" Version="1.0.0" />
   </ItemGroup>
 </Project>
