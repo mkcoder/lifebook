@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using lifebook.core.eventstore.subscription.Services;
 using lifebook.core.processmanager.ProcessStates;
+using lifebook.core.processmanager.ProcessStates.ProcessSetup;
 using lifebook.core.processmanager.Syntax;
 
 namespace lifebook.core.processmanager.Services
@@ -45,7 +46,8 @@ namespace lifebook.core.processmanager.Services
 
             ProcessManagerServices.SetEventNameToProcessStepMapping(EventNameToProcessStepDictionary);
 
-            await ProcessManagerServices.Mediator.Send(new SetupManager(this));
+            var managerSetupResult = await ProcessManagerServices.Mediator.Send(new SetupManager(this));
+            var processSetupResult = await ProcessManagerServices.Mediator.Send(new SetupProcess(this, managerSetupResult.ProcessIdentity));
         }
     }
 }

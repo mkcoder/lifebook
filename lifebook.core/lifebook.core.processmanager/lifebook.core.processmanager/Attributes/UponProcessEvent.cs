@@ -2,7 +2,7 @@
 namespace lifebook.core.processmanager.Attributes
 {
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
-    public class UponProcessEvent
+    internal class UponProcessEvent : Attribute
     {
         public string EventName { get; }
 

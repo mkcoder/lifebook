@@ -15,7 +15,13 @@ namespace lifebook.core.processmanager.Aggregates
         public void Handle(List<AggregateEvent> events)
         {
             BuildEventNameToMethodInfoDictionary();
-            
+            foreach (var evt in events)
+            {
+                if (eventNameToMethods.ContainsKey(evt.EventName))
+                {
+                    eventNameToMethods[evt.EventName].Invoke(this, new object[] { evt });
+                }
+            }
         }
 
         private void BuildEventNameToMethodInfoDictionary()

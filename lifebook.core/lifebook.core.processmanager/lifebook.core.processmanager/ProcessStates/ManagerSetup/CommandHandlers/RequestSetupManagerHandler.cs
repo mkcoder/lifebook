@@ -6,6 +6,7 @@ using lifebook.core.cqrses.Domains;
 using lifebook.core.eventstore.domain.models;
 using lifebook.core.eventstore.subscription.Apis;
 using lifebook.core.messagebus.Models;
+using lifebook.core.processmanager.Models;
 using lifebook.core.processmanager.Services;
 using lifebook.core.processmanager.Syntax;
 using MediatR;
@@ -25,7 +26,7 @@ namespace lifebook.core.processmanager.ProcessStates
         public async Task<ManagerSetupCompleted> Handle(SetupManager request, CancellationToken cancellationToken)
         {
             if(!await _mediator.Send(new AmIManager() { ProcessName = request.ProcessIdentity.ProcessName }))
-                return new ManagerSetupCompleted();
+                return new ManagerSetupCompleted(ProcessIdentity.GetIdentity());
 
             processmanager = request.ProcessManager;
 
@@ -41,7 +42,7 @@ namespace lifebook.core.processmanager.ProcessStates
             }
 
             await _mediator.Send(new RequestSetupManagerEventToEventStore(request.ProcessManager, request.ProcessIdentity));
-            return new ManagerSetupCompleted();
+            return new ManagerSetupCompleted(request.ProcessIdentity);
         }
 
         private async Task handle(SubscriptionEvent<AggregateEvent> evt)
@@ -50,7 +51,7 @@ namespace lifebook.core.processmanager.ProcessStates
             {
                 var act = processmanager.ProcessManagerServices.EventNameToProcessStepDictionary[evt.Event.EventName];                
                 var bus = processmanager.ProcessManagerServices.Messagebus.TryConnectingDirectlyToQueue(processmanager.ProcessManagerServices.MessageQueueInformation);
-                bus.Publish(new { evt.Event, StepAction = act });
+                bus.Publish(new ProcessStateMessageDto(evt.Event, act));
             }
         }
     }
