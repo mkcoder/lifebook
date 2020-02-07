@@ -5,6 +5,7 @@ using lifebook.core.eventstore.subscription.Services;
 using lifebook.core.processmanager.ProcessStates;
 using lifebook.core.processmanager.ProcessStates.ProcessSetup;
 using lifebook.core.processmanager.Syntax;
+using Newtonsoft.Json.Linq;
 
 namespace lifebook.core.processmanager.Services
 {
@@ -13,6 +14,9 @@ namespace lifebook.core.processmanager.Services
         internal readonly ProcessManagerServices ProcessManagerServices;
         internal Dictionary<string, ProcessManagerStep> EventNameToProcessStepDictionary;
         internal List<EventStoreSubscriptionHook> Subscriptions = new List<EventStoreSubscriptionHook>();
+        protected dynamic ViewBag = new JObject();
+
+        internal dynamic GetViewBag => ViewBag;
 
         public ProcessManager(ProcessManagerServices processManagerServices)
         {

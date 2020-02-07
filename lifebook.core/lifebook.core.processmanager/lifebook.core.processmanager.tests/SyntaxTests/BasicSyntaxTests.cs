@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using lifebook.core.eventstore.domain.models;
 using lifebook.core.processmanager.Syntax;
+using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 
 namespace lifebook.core.processmanager.tests.SyntaxTests
@@ -48,6 +49,14 @@ namespace lifebook.core.processmanager.tests.SyntaxTests
                         .TakeAction(async (e) => { })
                         .Configuration;
             Assert.AreEqual(3, configuration.GetProcessManagerSteps.Count);
+        }
+
+        [Test]
+        public void BasicTest()
+        {
+            dynamic viewbag = new JObject();
+            viewbag.Quote = JObject.FromObject(new object());
+            System.Console.WriteLine(viewbag.ToString());
         }
     }
 }
