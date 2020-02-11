@@ -10,6 +10,7 @@ using lifebook.core.processmanager.Models;
 using lifebook.core.processmanager.ProcessStates;
 using lifebook.core.processmanager.ProcessStates.ProcessSetup;
 using lifebook.core.processmanager.Syntax;
+using Microsoft.VisualBasic.CompilerServices;
 using Newtonsoft.Json.Linq;
 
 namespace lifebook.core.processmanager.Aggregates
@@ -17,22 +18,24 @@ namespace lifebook.core.processmanager.Aggregates
     // TODO: initalizing the ProcessManager 
     internal class ProcessManager
     {
+        public dynamic Data { get; private set; }
+        internal ReadOnlyCollection<ModelEvent> GetUncommitedEvents => _uncommitedEvents.AsReadOnly();
+
         private static Dictionary<string, MethodInfo> eventNameToMethods = new Dictionary<string, MethodInfo>();
         private static object _lock = new object();
         private List<ModelEvent> _uncommitedEvents = new List<ModelEvent>();
-        internal ReadOnlyCollection<ModelEvent> GetUncommitedEvents => _uncommitedEvents.AsReadOnly();
-        private readonly Guid processId;
+        private Guid _processId;
         private List<ProcessStep> _steps = new List<ProcessStep>();
         private ProcessStep.ProcessStepBuilder _currentStep;
-
-        public ProcessManager(Guid processId)
-        {
-            this.processId = processId;
-        }
         // aggregate properties
         private bool _initalized = false;
         private ProcessIdentity _processIdentity;
-        private dynamic _queueInfo;
+        private MessageQueueInformation _queueInfo;
+
+        public ProcessManager(Guid processId)
+        {
+            _processId = processId;
+        }
 
         internal void Handle(List<AggregateEvent> events)
         {
@@ -55,38 +58,28 @@ namespace lifebook.core.processmanager.Aggregates
         {
             _initalized = true;
             _processIdentity = pRequest.ProcessIdentity;
-            _queueInfo = new
+            _queueInfo = new MessageQueueInformation()
             {
-                a.ExchangeName,
-                a.RoutingKey,
-                a.MessageName                
+                ExchangeName = a.ExchangeName,
+                RoutingKey = a.RoutingKey,
+                QueueName = a.MessageName
             };
-            CreateUncommitedEvent("ProcessInitalized", 1, new JObject()
+            CreateUncommitedEvent(nameof(ProcessInitalized), 1, new JObject()
             {
                 ["Initalized"] = true,
                 ["ProcessIdentity"] = JObject.FromObject(_processIdentity),
                 ["QueueInfo"] = JObject.FromObject(_queueInfo),
                 ["Steps"] = CreateStepsForInitalProcess(a, pRequest),
-                ["Key"] = processId,
+                ["Key"] = _processId,
             });
         }
 
         internal void ChangeProcessData(dynamic getViewBag)
         {
-            CreateUncommitedEvent("ProcessDataChanged", 1, new JObject()
+            CreateUncommitedEvent(nameof(ProcessDataChanged), 1, new JObject()
             {
                 ["Data"] = JObject.FromObject(getViewBag)
             });
-        }
-
-        private JToken CreateStepsForInitalProcess(EventBusMessage<ProcessStateMessageDto> a, SetupProcess pRequest)
-        {
-            var stepNames = pRequest.ProcessManager.EventNameToProcessStepDictionary.Select(p => new { StepName = p.Key, Step = p.Value});
-            
-            return JArray.FromObject(
-                stepNames.Select(kv => ProcessStep.ProcessStepBuilder
-                .WithRequiredProperties(a.Data.AggregateEvent.CorrelationId, kv.StepName, kv.Step.EventSpecifier))
-            );
         }
 
         internal void InitalizeProcessStep(ProcessManagerStep action, AggregateEvent a)
@@ -96,7 +89,16 @@ namespace lifebook.core.processmanager.Aggregates
                 .Initalized()
                 .CausedBy(a)                
                 .ChangeProcessStatus(ProcessStepStatus.Started);
-            CreateUncommitedEvent("ProcessStepInitalized", 1, JObject.FromObject(_currentStep.Build()));
+            var step = _currentStep.Build();
+            CreateUncommitedEvent(nameof(ProcessStepInitalized), 1, new JObject()
+            {
+                ["StepName"] = step.StepName,
+                ["CausedBy"] = JObject.FromObject(step.CausedBy),
+                ["CausationId"] = step.CausationId,
+                ["Initiated"] = step.Initiated,
+                ["Status"] = step.Status.ToString(),
+                ["StatusInt"] = (int)step.Status
+            });
         }
 
         internal void CompleteProcessStep()
@@ -104,7 +106,7 @@ namespace lifebook.core.processmanager.Aggregates
             _currentStep.ChangeProcessStatus(ProcessStepStatus.Completed);
             var processStep = _currentStep.Build();
 
-            CreateUncommitedEvent("ProcessStepCompleted", 1, new JObject()
+            CreateUncommitedEvent(nameof(ProcessStepCompleted), 1, new JObject()
             {
                 ["StepName"] = processStep.StepName,
                 ["Status"] = processStep.Status.ToString(),
@@ -121,20 +123,55 @@ namespace lifebook.core.processmanager.Aggregates
             {
                 ["StepName"] = processStep.StepName,
                 ["Status"] = processStep.Status.ToString(),
+                ["Exception"] = JObject.FromObject(exception),
                 ["StatusInt"] = (int)processStep.Status
             });
         }
 
-        private void CreateUncommitedEvent(string eventName, int eventVersion, JObject data)
+        [UponProcessEvent("ProcessDataChanged")]
+        public void ProcessDataChanged(AggregateEvent aggregate)
         {
-            _uncommitedEvents.Add(
-                new ModelEvent()
-                {
-                    EventName = eventName,
-                    EventVersion = eventVersion,
-                    Data = data
-                }
-            );
+            Data = aggregate.Data.TransformDataFromString(s => JObject.FromObject(s));
+        }
+
+        [UponProcessEvent(nameof(ProcessInitalized))]
+        public void ProcessInitalized(AggregateEvent aggregate)
+        {
+            var evt = aggregate.Data.TransformDataFromString(s => JObject.Parse(s));
+            _processId = (Guid)evt["Key"];
+            _initalized = (bool)evt["Initalized"];
+            _processIdentity = evt["ProcessIdentity"].ToObject<ProcessIdentity>();
+            _queueInfo = evt["QueueInfo"].ToObject<MessageQueueInformation>();
+            _steps = evt["Steps"].ToObject<List<ProcessStep>>();
+        }
+
+        [UponProcessEvent(nameof(ProcessStepInitalized))]
+        public void ProcessStepInitalized(AggregateEvent aggregate)
+        {
+            var evt = aggregate.Data.TransformDataFromString(s => JObject.Parse(s));
+            _currentStep = ProcessStep.ProcessStepBuilder.UsingProcessStep(_steps.First(s => s.StepName == (string)evt["StepName"]));
+            _currentStep
+                .CausedBy(evt["CausedBy"].ToObject<AggregateEvent>())
+                .Initalized()
+                .ChangeProcessStatus(evt["StatusInt"].ToObject<ProcessStepStatus>());
+        }
+
+        [UponProcessEvent(nameof(ProcessStepCompleted))]
+        public void ProcessStepCompleted(AggregateEvent aggregate)
+        {
+            var evt = aggregate.Data.TransformDataFromString(s => JObject.Parse(s));
+            _currentStep = ProcessStep.ProcessStepBuilder.UsingProcessStep(_steps.First(s => s.StepName == (string)evt["StepName"]));
+            _currentStep
+                .ChangeProcessStatus(evt["StatusInt"].ToObject<ProcessStepStatus>());            
+        }
+
+        [UponProcessEvent(nameof(ProcessStepFailed))]
+        public void ProcessStepFailed(AggregateEvent aggregate)
+        {
+            var evt = aggregate.Data.TransformDataFromString(s => JObject.Parse(s));
+            _currentStep = ProcessStep.ProcessStepBuilder.UsingProcessStep(_steps.First(s => s.StepName == (string)evt["StepName"]));
+            _currentStep
+                .AddException(evt["Exception"].ToObject<Exception>());
         }
 
         private void BuildEventNameToMethodInfoDictionary()
@@ -159,6 +196,29 @@ namespace lifebook.core.processmanager.Aggregates
                 }
             }
         }
+
+        private void CreateUncommitedEvent(string eventName, int eventVersion, JObject data)
+        {
+            _uncommitedEvents.Add(
+                new ModelEvent()
+                {
+                    EventName = eventName,
+                    EventVersion = eventVersion,
+                    Data = data
+                }
+            );
+        }
+
+        private JToken CreateStepsForInitalProcess(EventBusMessage<ProcessStateMessageDto> a, SetupProcess pRequest)
+        {
+            var stepNames = pRequest.ProcessManager.EventNameToProcessStepDictionary.Select(p => new { StepName = p.Key, Step = p.Value });
+
+            return JArray.FromObject(
+                stepNames.Select(kv => ProcessStep.ProcessStepBuilder
+                .WithRequiredProperties(a.Data.AggregateEvent.CorrelationId, kv.StepName, kv.Step.EventSpecifier))
+            );
+        }
+
     }
 
     public static class CollectionExtensions

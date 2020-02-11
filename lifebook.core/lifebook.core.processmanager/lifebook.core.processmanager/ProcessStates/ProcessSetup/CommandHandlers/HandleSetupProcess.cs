@@ -36,7 +36,9 @@ namespace lifebook.core.processmanager.ProcessStates.ProcessSetup.CommandHandler
                     .ReadAllEventsFromSingleStreamCategoryAsync<AggregateEventCreator, AggregateEvent>(category
                     );
                 aggregate.Handle(events);
-                if(aggregate.AmIFirstStep())
+                request.ProcessManager.ViewBag = aggregate.Data;
+
+                if (aggregate.AmIFirstStep())
                 {
                     aggregate.InitalizeProcess(a, request);
                 }
@@ -49,12 +51,12 @@ namespace lifebook.core.processmanager.ProcessStates.ProcessSetup.CommandHandler
                         aggregate.InitalizeProcessStep(action, a.Data.AggregateEvent);
                         await action.StepAction(a.Data.AggregateEvent);
                         aggregate.CompleteProcessStep();
-                        aggregate.ChangeProcessData(request.ProcessManager.GetViewBag);
+                        aggregate.ChangeProcessData(request.ProcessManager.ViewBag);
                     }
                     catch (Exception ex)
                     {
                         // TODO: build in resilit logic here
-                        aggregate.FailProcessStep();
+                        aggregate.FailProcessStep(ex);
                     }
                 }
 
