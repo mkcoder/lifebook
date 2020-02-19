@@ -14,7 +14,7 @@ namespace lifebook.core.processmanager.Services
         internal readonly ProcessManagerServices ProcessManagerServices;
         internal Dictionary<string, ProcessManagerStep> EventNameToProcessStepDictionary;
         internal List<EventStoreSubscriptionHook> Subscriptions = new List<EventStoreSubscriptionHook>();
-        public dynamic ViewBag { get; set; } = new JObject()
+        public dynamic ViewBag { get; set; } = new JObject();
 
         public ProcessManager(ProcessManagerServices processManagerServices)
         {

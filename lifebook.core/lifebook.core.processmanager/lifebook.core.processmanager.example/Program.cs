@@ -1,0 +1,73 @@
+﻿using System;
+using System.Reflection;
+using System.Threading.Tasks;
+using Castle.Facilities.TypedFactory;
+using Castle.MicroKernel.Registration;
+using Castle.Windsor;
+using Castle.Windsor.Installer;
+using lifebook.core.eventstore.configurations;
+using lifebook.core.eventstore.domain.api;
+using lifebook.core.eventstore.domain.models;
+using lifebook.core.eventstore.services;
+using lifebook.core.processmanager.Services;
+using lifebook.core.processmanager.Syntax;
+using lifebook.core.services;
+using lifebook.core.services.extensions;
+using AssemblyExtensions = lifebook.core.services.extensions.AssemblyExtensions;
+
+namespace lifebook.core.processmanager.example
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var container = new WindsorContainer();
+            container.Install(FromAssembly.InThisApplication(AssemblyExtensions.GetRootAssembly(typeof(Program).Assembly)));
+            if(!container.Kernel.HasComponent(typeof(IEventStoreClient)))
+            {
+                container.Register(
+                        Component.For<AbstractEventStoreClient>()
+                        .ImplementedBy<EventStoreClient>()
+                            .OnCreate(async es => await es.ConnectAsync())
+                            .OnDestroy(async es => es.Close())
+                            .LifeStyle.Singleton,
+                        Component.For<IEventStoreClientFactory>().AsFactory(),
+                        Component.For<IEventStoreClient>()
+                            .OnCreate(async es => await es.ConnectAsync())
+                            .OnDestroy(async es => es.Close())
+                            .ImplementedBy<EventStoreClient>()
+                            .Named("EventStoreClient").LifeStyle.Singleton,
+                        Component.For<IEventWriter>().ImplementedBy<EventWriter>().LifeStyle.Transient,
+                        Component.For<IEventReader>().ImplementedBy<EventReader>().LifeStyle.Transient
+                    );
+            }
+            container.Register(Component.For<IWindsorContainer>().Instance(container).LifestyleSingleton());
+            var pm = new DemoPersonProcess(container.Resolve<ProcessManagerServices>());
+        }
+    }
+
+    public class DemoPersonProcess : ProcessManager
+    {
+        public DemoPersonProcess(ProcessManagerServices processManagerServices) : base(processManagerServices)
+        {
+        }
+
+        public override ProcessManagerConfiguration GetConfiguration()
+        {
+            return ProcessManagerConfigurationBuilder
+                    .Instance
+                    .UponEvent(new EventSpecifier("TestPersonCreated", new StreamCategorySpecifier("person", "primary", "Person")))
+                    .SetStepDescription("Set person age to 0")
+                    .TakeAction(async evt => {
+                        Console.WriteLine(evt);
+                        Console.WriteLine(ViewBag);
+                    })
+                    .Configuration;
+        }
+
+        public async Task Run()
+        {
+            await Start();
+        }
+    }
+}
