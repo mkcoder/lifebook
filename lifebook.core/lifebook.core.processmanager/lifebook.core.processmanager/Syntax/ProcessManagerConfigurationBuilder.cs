@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using lifebook.core.cqrses.Domains;
 using lifebook.core.eventstore.domain.api;
 using lifebook.core.eventstore.domain.models;
+using Newtonsoft.Json;
 
 namespace lifebook.core.processmanager.Syntax
 {
@@ -11,6 +12,7 @@ namespace lifebook.core.processmanager.Syntax
     {
         public EventSpecifier[] EventSpecifier { get; internal set; }
         public string StepDescription { get; internal set; }
+        [JsonIgnore]
         public Func<AggregateEvent, Task> StepAction { get; internal set; }
     }
 

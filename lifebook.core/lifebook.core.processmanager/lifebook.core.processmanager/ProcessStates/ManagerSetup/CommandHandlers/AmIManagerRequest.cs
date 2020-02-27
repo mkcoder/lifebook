@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using lifebook.core.services.discovery;
 using lifebook.core.services.interfaces;
+using lifebook.core.services.models;
 using MediatR;
 using Microsoft.VisualBasic;
 
@@ -26,15 +27,15 @@ namespace lifebook.core.processmanager.ProcessStates
 
         public async Task<bool> Handle(AmIManager request, CancellationToken cancellationToken)
         {
-            var processMode = _configuration["ProcessManagerMode"].ToLowerInvariant();
+            var processMode = _configuration.TryGetValueOrDefault("ProcessManagerMode", "Process").ToLowerInvariant();
             var processManagerName = $"{_configuration["ServiceName"]}_{_configuration["InstanceName"]}_Manager";
-            var service = _networkServiceLocator.FindServiceByName(processManagerName);
+            var service = await _networkServiceLocator.FindServiceByName(processManagerName);
             if (processMode == "manager")
             {
                 return true;
             }
             
-            if(service == null && processMode == "processmanager")
+            if(service.ServiceName == null && processMode == "processmanager")
             {
                 return true;
             }

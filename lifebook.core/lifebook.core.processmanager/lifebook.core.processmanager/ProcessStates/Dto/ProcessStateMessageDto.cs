@@ -6,8 +6,8 @@ namespace lifebook.core.processmanager.ProcessStates
 {
     public struct ProcessStateMessageDto
     {
-        public AggregateEvent AggregateEvent { get; }
-        public ProcessManagerStep ProcessManagerStep { get; }
+        public AggregateEvent AggregateEvent { get; set; }
+        public ProcessManagerStep ProcessManagerStep { get; set; }
 
         public ProcessStateMessageDto(AggregateEvent @event, ProcessManagerStep act)
         {

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <PackOnBuild>true</PackOnBuild>
-    <PackageVersion>5.0.0</PackageVersion>
+    <PackageVersion>5.0.3</PackageVersion>
     <Authors>mkcoder</Authors>
     <Description>internal package use only</Description>
     <Owners>mkcoder</Owners>

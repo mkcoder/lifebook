@@ -27,41 +27,72 @@ namespace lifebook.core.processmanager.ProcessStates.ProcessSetup.CommandHandler
             var bus = request.ProcessManager.ProcessManagerServices.Messagebus.TryConnectingDirectlyToQueue(request.ProcessManager.ProcessManagerServices.MessageQueueInformation);
             bus.Subscribe<ProcessStateMessageDto>(request.ProcessManager.ProcessManagerServices.MessageQueueInformation, async a =>
             {
-                DetermineProccessIdFromEvent(a.Data.AggregateEvent, out Guid pid);
-                var aggregate = new ProcessManager(pid);
-                var category =
-                        new StreamCategorySpecifier(request.ProcessManager.
-                        ProcessManagerServices.ServiceName, request.ProcessManager.ProcessManagerServices.Instance, "Process", pid);
-                var events = await request.ProcessManager.ProcessManagerServices.EventReader
-                    .ReadAllEventsFromSingleStreamCategoryAsync<AggregateEventCreator, AggregateEvent>(category
-                    );
-                aggregate.Handle(events);
-                request.ProcessManager.ViewBag = aggregate.Data;
-
-                if (aggregate.AmIFirstStep())
+                await request.ProcessManager.ProcessManagerServices.SemaphoreSlim.WaitAsync();
+                try
                 {
-                    aggregate.InitalizeProcess(a, request);
-                }
-                
-                if (request.ProcessManager.EventNameToProcessStepDictionary.ContainsKey(a.Data.AggregateEvent.EventName))
-                {
-                    var action = request.ProcessManager.EventNameToProcessStepDictionary[a.Data.AggregateEvent.EventName];
-                    try
-                    {
-                        aggregate.InitalizeProcessStep(action, a.Data.AggregateEvent);
-                        await action.StepAction(a.Data.AggregateEvent);
-                        aggregate.CompleteProcessStep();
-                        aggregate.ChangeProcessData(request.ProcessManager.ViewBag);
-                    }
-                    catch (Exception ex)
-                    {
-                        // TODO: build in resilit logic here
-                        aggregate.FailProcessStep(ex);
-                    }
-                }
+                    DetermineProccessIdFromEvent(a.Data.AggregateEvent, out Guid pid);
+                    var aggregate = new ProcessManager(pid);
+                    var category =
+                            new StreamCategorySpecifier(request.ProcessManager.
+                            ProcessManagerServices.ServiceName, request.ProcessManager.ProcessManagerServices.Instance, "Process", pid);
+                    var events = await request.ProcessManager.ProcessManagerServices.EventReader
+                        .ReadAllEventsFromSingleStreamCategoryAsync<AggregateEventCreator, AggregateEvent>(category
+                        );
+                    aggregate.Handle(events);
+                    request.ProcessManager.ViewBag = aggregate.Data;
 
-                var commitEvents = aggregate.GetUncommitedEvents.Select(me => me.Merge(a.Data.AggregateEvent));
-                await request.ProcessManager.ProcessManagerServices.EventWriter.WriteEventAsync(category, (List<Event>)commitEvents);
+                    if (aggregate.AmIFirstStep() || true)
+                    {
+                        aggregate.InitalizeProcess(a, request);
+                    }
+
+                    if (request.ProcessManager.EventNameToProcessStepDictionary.ContainsKey(a.Data.AggregateEvent.EventName))
+                    {
+                        var action = request.ProcessManager.EventNameToProcessStepDictionary[a.Data.AggregateEvent.EventName];
+                        try
+                        {
+                            aggregate.InitalizeProcessStep(action, a.Data.AggregateEvent);
+                            await action.StepAction(a.Data.AggregateEvent);
+                            aggregate.CompleteProcessStep();
+                            aggregate.ChangeProcessData(request.ProcessManager.ViewBag);
+                        }
+                        catch (Exception ex)
+                        {
+                            // TODO: build in resilit logic here
+                            aggregate.FailProcessStep(ex);
+                        }
+                    }
+
+                    var uncommited = aggregate.GetUncommitedEvents.Select(me => me.CommitEvent(a.Data.AggregateEvent));
+                    foreach (var item in uncommited)
+                    {
+                        await request.ProcessManager.ProcessManagerServices.EventWriter.WriteEventAsync(category, item.ae, item.data, null);
+                    }
+
+                    //try
+                    //{
+                    //    foreach (var item in aggregate.GetUncommitedEvents)
+                    //    {
+                    //        var commit = item.CommitEvent(a.Data.AggregateEvent);
+                    //        try
+                    //        {
+                    //            await request.ProcessManager.ProcessManagerServices.EventWriter.WriteEventAsync(category, commit.ae, commit.data, null);
+                    //        }
+                    //        catch (Exception ex)
+                    //        {
+                    //        }
+                    //    }
+
+                    //}
+                    //catch (Exception)
+                    //{
+                    //    throw;
+                    //}
+                }
+                finally
+                {
+                    request.ProcessManager.ProcessManagerServices.SemaphoreSlim.Release();
+                }
             });
             return new ProcessSetupCompleted();
         }

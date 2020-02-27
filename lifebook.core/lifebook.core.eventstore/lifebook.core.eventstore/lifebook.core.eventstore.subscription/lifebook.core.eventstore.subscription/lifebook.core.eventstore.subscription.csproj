@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="EventStore.ClientAPI.NetCore" Version="4.1.0.23" />
-    <PackageReference Include="lifebook.core.services" Version="5.0.0" />
+    <PackageReference Include="lifebook.core.services" Version="5.0.1" />
     <PackageReference Include="Castle.Core" Version="4.4.0" />
   </ItemGroup>
   <ItemGroup>

@@ -12,7 +12,7 @@
     <PackageId>lifebook.core.eventstore.domain</PackageId>
     <ReleaseVersion>2.0.0</ReleaseVersion>
     <SynchReleaseVersion>false</SynchReleaseVersion>
-    <PackageVersion>5.0.0</PackageVersion>
+    <PackageVersion>5.0.3</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>

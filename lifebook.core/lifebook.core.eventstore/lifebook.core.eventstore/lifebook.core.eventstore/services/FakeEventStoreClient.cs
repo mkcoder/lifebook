@@ -74,5 +74,10 @@ namespace lifebook.core.eventstore.services
         {
             throw new NotImplementedException();
         }
+
+        internal override Task WriteEventAsync(StreamCategorySpecifier streamCategorySpecifier, Event e, byte[] data, byte[] metadata = null)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

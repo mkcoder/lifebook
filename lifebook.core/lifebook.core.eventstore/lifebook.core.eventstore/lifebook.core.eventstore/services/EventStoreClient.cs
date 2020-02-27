@@ -101,11 +101,17 @@ namespace lifebook.core.eventstore.services
 
         internal override async Task WriteEventAsync(StreamCategorySpecifier specifier, Event e)
         {
+            await WriteEventAsync(specifier, e, e.EventDataToByteArray(), e.EventMetadataToByteArray());
+        }
+
+
+        internal override async Task WriteEventAsync(StreamCategorySpecifier specifier, Event e, byte[] data, byte[] metadata=null)
+        {
             if (e.EntityId == Guid.Empty)
                 throw new Exception("Entity Id must be a Guid.");
             await eventStoreConnection.AppendToStreamAsync(specifier.GetCategoryStreamWithAggregateId(),
             e.EventVersion == 0 ? ExpectedVersion.Any : e.EventVersion,
-            new EventData(e.EventId, e.EventType, true, e.EventDataToByteArray(), e.EventMetadataToByteArray()));
+            new EventData(e.EventId, e.EventType, true, data ?? e.EventDataToByteArray(), metadata ?? e.EventMetadataToByteArray()));
         }
 
         private async Task<List<TOut>> ReadEventsFromStreamStringAsync<T, TOut>(string stream) where T : ICreateEvent<TOut>, new() where TOut : Event

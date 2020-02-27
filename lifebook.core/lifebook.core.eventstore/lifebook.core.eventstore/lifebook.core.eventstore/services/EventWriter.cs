@@ -31,6 +31,19 @@ namespace lifebook.core.eventstore.services
             }
         }
 
+        public async Task WriteEventAsync(StreamCategorySpecifier streamCategorySpecifier, Event e, byte[] data,byte[] metadata=null)
+        {
+            try
+            {
+                await _eventStoreClient.WriteEventAsync(streamCategorySpecifier, e, data, metadata);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, $"Error occured trying to write event {e.EventName} to stream. {e.ToString()}");
+                throw;
+            }
+        }
+
         public async Task WriteEventAsync(StreamCategorySpecifier streamCategorySpecifier, List<Event> e)
         {
             foreach (var item in e)

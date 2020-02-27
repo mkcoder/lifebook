@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using Castle.Facilities.TypedFactory;
 using Castle.MicroKernel.Registration;
@@ -13,17 +14,18 @@ using lifebook.core.processmanager.Services;
 using lifebook.core.processmanager.Syntax;
 using lifebook.core.services;
 using lifebook.core.services.extensions;
+using Newtonsoft.Json.Linq;
 using AssemblyExtensions = lifebook.core.services.extensions.AssemblyExtensions;
 
 namespace lifebook.core.processmanager.example
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             var container = new WindsorContainer();
             container.Install(FromAssembly.InThisApplication(AssemblyExtensions.GetRootAssembly(typeof(Program).Assembly)));
-            if(!container.Kernel.HasComponent(typeof(IEventStoreClient)))
+            if (!container.Kernel.HasComponent(typeof(IEventStoreClient)))
             {
                 container.Register(
                         Component.For<AbstractEventStoreClient>()
@@ -43,6 +45,11 @@ namespace lifebook.core.processmanager.example
             }
             container.Register(Component.For<IWindsorContainer>().Instance(container).LifestyleSingleton());
             var pm = new DemoPersonProcess(container.Resolve<ProcessManagerServices>());
+            await pm.Run();
+
+            var t = new Thread(() => { });
+            t.Start();
+            Console.ReadLine();
         }
     }
 
@@ -56,11 +63,27 @@ namespace lifebook.core.processmanager.example
         {
             return ProcessManagerConfigurationBuilder
                     .Instance
-                    .UponEvent(new EventSpecifier("TestPersonCreated", new StreamCategorySpecifier("person", "primary", "Person")))
+                    .UponEvent(new EventSpecifier("TestPersonCreated", new StreamCategorySpecifier("test", "primary", "TestPerson")))
                     .SetStepDescription("Set person age to 0")
                     .TakeAction(async evt => {
-                        Console.WriteLine(evt);
-                        Console.WriteLine(ViewBag);
+                        if (evt == null)
+                        {
+                            Console.WriteLine($"evt is null");
+                        }
+                        else
+                        {
+                            Console.WriteLine("EVENT:");
+                            Console.WriteLine(evt);
+                        }
+
+                        if (ViewBag == null)
+                        {
+                            Console.WriteLine("Viewbag is null");
+                        }
+                        else
+                        {
+                            Console.WriteLine(ViewBag);
+                        }
                     })
                     .Configuration;
         }

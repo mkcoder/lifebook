@@ -18,7 +18,7 @@ namespace lifebook.core.processmanager.Aggregates
     // TODO: initalizing the ProcessManager 
     internal class ProcessManager
     {
-        public dynamic Data { get; private set; }
+        public dynamic Data { get; private set; } = new JObject();
         internal ReadOnlyCollection<ModelEvent> GetUncommitedEvents => _uncommitedEvents.AsReadOnly();
 
         private static Dictionary<string, MethodInfo> eventNameToMethods = new Dictionary<string, MethodInfo>();
@@ -51,7 +51,7 @@ namespace lifebook.core.processmanager.Aggregates
 
         internal bool AmIFirstStep()
         {
-            return _initalized;
+            return !_initalized;
         }
 
         internal void InitalizeProcess(EventBusMessage<ProcessStateMessageDto> a, SetupProcess pRequest)
@@ -129,13 +129,13 @@ namespace lifebook.core.processmanager.Aggregates
         }
 
         [UponProcessEvent("ProcessDataChanged")]
-        public void ProcessDataChanged(AggregateEvent aggregate)
+        private void ProcessDataChanged(AggregateEvent aggregate)
         {
             Data = aggregate.Data.TransformDataFromString(s => JObject.FromObject(s));
         }
 
         [UponProcessEvent(nameof(ProcessInitalized))]
-        public void ProcessInitalized(AggregateEvent aggregate)
+        private void ProcessInitalized(AggregateEvent aggregate)
         {
             var evt = aggregate.Data.TransformDataFromString(s => JObject.Parse(s));
             _processId = (Guid)evt["Key"];
@@ -146,7 +146,7 @@ namespace lifebook.core.processmanager.Aggregates
         }
 
         [UponProcessEvent(nameof(ProcessStepInitalized))]
-        public void ProcessStepInitalized(AggregateEvent aggregate)
+        private void ProcessStepInitalized(AggregateEvent aggregate)
         {
             var evt = aggregate.Data.TransformDataFromString(s => JObject.Parse(s));
             _currentStep = ProcessStep.ProcessStepBuilder.UsingProcessStep(_steps.First(s => s.StepName == (string)evt["StepName"]));
@@ -157,7 +157,7 @@ namespace lifebook.core.processmanager.Aggregates
         }
 
         [UponProcessEvent(nameof(ProcessStepCompleted))]
-        public void ProcessStepCompleted(AggregateEvent aggregate)
+        private void ProcessStepCompleted(AggregateEvent aggregate)
         {
             var evt = aggregate.Data.TransformDataFromString(s => JObject.Parse(s));
             _currentStep = ProcessStep.ProcessStepBuilder.UsingProcessStep(_steps.First(s => s.StepName == (string)evt["StepName"]));
@@ -166,7 +166,7 @@ namespace lifebook.core.processmanager.Aggregates
         }
 
         [UponProcessEvent(nameof(ProcessStepFailed))]
-        public void ProcessStepFailed(AggregateEvent aggregate)
+        private void ProcessStepFailed(AggregateEvent aggregate)
         {
             var evt = aggregate.Data.TransformDataFromString(s => JObject.Parse(s));
             _currentStep = ProcessStep.ProcessStepBuilder.UsingProcessStep(_steps.First(s => s.StepName == (string)evt["StepName"]));
@@ -182,15 +182,17 @@ namespace lifebook.core.processmanager.Aggregates
                 {
                     if (eventNameToMethods.Count == 0)
                     {
-                        var mi = GetType().GetMethods(BindingFlags.NonPublic)
+                        var mi = GetType().GetMethods(BindingFlags.NonPublic | BindingFlags.Instance)
                                         .Where(m => m.GetCustomAttributes(typeof(UponProcessEvent), false).Count() > 0);
+                        var mm = GetType().GetMethods(BindingFlags.NonPublic | BindingFlags.Instance);
+                        var mi2 = mm.Where(m => m.GetCustomAttribute(typeof(UponProcessEvent)) != null);
 
-                        foreach (var m in mi)
+                        foreach (var m in mi2)
                         {
-                            eventNameToMethods = eventNameToMethods.MergeDictionaries(m.GetCustomAttributes(typeof(UponProcessEvent), false)
-                             .Select(a => (UponProcessEvent)a)
-                             .Select(a => a.EventName)
-                             .ToDictionary(value => value, key => m));
+                            foreach (UponProcessEvent item in m.GetCustomAttributes(typeof(UponProcessEvent), false))
+                            {
+                                eventNameToMethods.Add(item.EventName, m);
+                            }
                         }
                     }
                 }

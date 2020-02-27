@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Text;
 using lifebook.core.cqrses.Domains;
+using lifebook.core.eventstore.domain.models;
 using Newtonsoft.Json.Linq;
 
 namespace lifebook.core.processmanager.Aggregates
@@ -14,14 +16,26 @@ namespace lifebook.core.processmanager.Aggregates
 
         internal AggregateEvent Merge(AggregateEvent aggregateEvent)
         {
-            var deepCopy = JObject.FromObject(aggregateEvent).DeepClone().ToObject<AggregateEvent>();
-            deepCopy.Data = new eventstore.domain.models.Data(ObjectToByteArray(Data));
+            var deepCopy = JObject.FromObject(aggregateEvent).ToObject<AggregateEvent>();
+            deepCopy.Data = new Data(Encoding.UTF8.GetBytes(Data.ToString()));
             deepCopy.EventName = EventName;
-            deepCopy.EventVersion = EventVersion;
+            deepCopy.EventVersion = 0;
             return deepCopy;
         }
 
-        private static byte[] ObjectToByteArray(Object obj)
+        internal (AggregateEvent ae, byte[] data) CommitEvent(AggregateEvent aggregateEvent)
+        {
+
+            var deepCopy = JObject.FromObject(aggregateEvent).ToObject<AggregateEvent>();
+            var bytes = Encoding.UTF8.GetBytes(Data.ToString());
+            deepCopy.EventId = Guid.NewGuid();
+            deepCopy.Data = new Data(bytes);
+            deepCopy.EventName = EventName;
+            deepCopy.EventVersion = 0;
+            return (deepCopy, bytes);
+        }
+
+        private static byte[] ObjectToByteArray(object obj)
         {
             BinaryFormatter bf = new BinaryFormatter();
             using (var ms = new MemoryStream())

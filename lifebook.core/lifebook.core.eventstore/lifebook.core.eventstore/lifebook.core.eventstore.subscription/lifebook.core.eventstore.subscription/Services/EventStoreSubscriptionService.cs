@@ -100,7 +100,7 @@ namespace lifebook.core.eventstore.subscription.Services
 
         private void SubscriptionDropped(EventStoreCatchUpSubscription subscription, SubscriptionDropReason reason, Exception ex)
         {
-            _logger.Error(ex, $"Subscription dropped. Reason: {reason}");
+            _logger.Error(ex, $"Subscription dropped. Reason: @{subscription.StreamId}.{subscription.SubscriptionName}.{subscription} {reason}");
         }
     }
 }

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>lifebook.core.eventstore</id>
+    <version>5.0.2</version>
+    <title>lifebook</title>
+    <authors>lifebook</authors>
+    <owners>lifebook</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <projectUrl>https://github.com/mkcoder/lifebook</projectUrl>
+    <description>the library to connect to eventstore</description>
+    <copyright>2019</copyright>
+    <dependencies>
+      <group targetFramework=".NETCoreApp3.0">
+        <dependency id="lifebook.core.eventstore.core" version="5.0.2" exclude="Build,Analyzers" />
+        <dependency id="lifebook.core.eventstore.domain" version="5.0.2" exclude="Build,Analyzers" />
+        <dependency id="Castle.Windsor" version="5.0.1" exclude="Build,Analyzers" />
+        <dependency id="EventStore.ClientAPI.NetCore" version="4.1.0.23" exclude="Build,Analyzers" />
+        <dependency id="NeoSmart.AsyncLock" version="0.3.0.2" exclude="Build,Analyzers" />
+        <dependency id="Newtonsoft.Json" version="12.0.3" exclude="Build,Analyzers" />
+        <dependency id="lifebook.core.services" version="5.0.1" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

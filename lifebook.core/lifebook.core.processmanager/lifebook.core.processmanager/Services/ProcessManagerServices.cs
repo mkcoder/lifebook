@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using Castle.Windsor;
 using lifebook.core.eventstore.domain.api;
 using lifebook.core.eventstore.subscription.Interfaces;
@@ -28,6 +29,7 @@ namespace lifebook.core.processmanager.Services
         public string Instance { get; }
         public IMessageBroker Messagebus { get; }
         public MessageQueueInformation MessageQueueInformation { get; }
+        public SemaphoreSlim SemaphoreSlim = new SemaphoreSlim(1,1);
 
         public ProcessManagerServices(IWindsorContainer container, INetworkServiceLocator networkServiceLocator,
             IEventWriter eventWriter, IEventReader eventReader, IConfiguration configuration, ILogger logger,

@@ -24,14 +24,23 @@
     <Folder Include="Aggregates\" />
     <Folder Include="Attributes\" />
     <Folder Include="Resolver\" />
+    <Folder Include="ConfigurationBuilderProvider\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="lifebook.core.eventstore.domain" Version="5.0.0" />
-    <PackageReference Include="MediatR" Version="8.0.0" />
+    <PackageReference Include="lifebook.core.eventstore.domain" Version="5.0.3" />
+    <PackageReference Include="MediatR" Version="8.0.1" />
     <PackageReference Include="lifebook.core.subscription" Version="5.0.0" />
     <PackageReference Include="lifebook.core.services" Version="5.0.1" />
     <PackageReference Include="lifebook.core.cqrs.domain" Version="5.0.1" />
     <PackageReference Include="lifebook.core.messagebus" Version="1.0.0" />
-    <PackageReference Include="lifebook.core.eventstore" Version="5.0.0" />
+    <PackageReference Include="lifebook.core.eventstore" Version="5.0.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="lifebook.core.eventstore.core">
+      <HintPath>..\..\lifebook.core.eventstore\lifebook.core.eventstore\lifebook.core.eventstore\bin\Debug\netcoreapp3.0\lifebook.core.eventstore.core.dll</HintPath>
+    </Reference>
+    <Reference Include="lifebook.core.eventstore.subscription">
+      <HintPath>..\..\lifebook.core.eventstore\lifebook.core.eventstore\lifebook.core.eventstore.subscription\lifebook.core.eventstore.subscription\bin\Debug\netcoreapp3.0\lifebook.core.eventstore.subscription.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>
