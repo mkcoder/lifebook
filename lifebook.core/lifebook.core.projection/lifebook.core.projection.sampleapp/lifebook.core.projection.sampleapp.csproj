@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="lifebook.core.services" Version="4.0.1" />
-    <PackageReference Include="lifebook.core.projection" Version="2.0.0" />
+    <PackageReference Include="lifebook.core.services" Version="5.0.1" />
+    <PackageReference Include="lifebook.core.projection" Version="2.1.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\lifebook.core.projection\lifebook.core.projection.csproj" />

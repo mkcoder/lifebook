@@ -5,10 +5,10 @@ using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
 using lifebook.core.logging.interfaces;
-using lifebook.core.logging.ioc;
 using lifebook.core.projection.ConfigurationProvider;
 using lifebook.core.projection.Interfaces;
 using lifebook.core.projection.Services;
+using lifebook.core.services;
 using lifebook.core.services.configuration;
 using lifebook.core.services.extensions;
 
@@ -22,7 +22,7 @@ namespace lifebook.core.projection.Hosting
             {
                 var assembly = typeof(ProjectorHosting).Assembly.GetRootAssembly();
                 container.Install(
-                    FromAssembly.InThisApplication(typeof(BootLoader).Assembly),
+                    FromAssembly.InThisApplication(typeof(ServiceInstaller).Assembly),
                     FromAssembly.InThisApplication(assembly)
                 );
             }

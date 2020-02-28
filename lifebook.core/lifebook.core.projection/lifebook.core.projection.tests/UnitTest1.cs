@@ -3,13 +3,13 @@ using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
 using lifebook.core.cqrses.Domains;
-using lifebook.core.logging.ioc;
 using lifebook.core.projection.Attributes;
 using lifebook.core.projection.Domain;
 using lifebook.core.projection.Interfaces;
 using lifebook.core.projection.Ioc;
 using lifebook.core.projection.Services;
 using lifebook.core.projection.Services.StreamTracker;
+using lifebook.core.services;
 using lifebook.core.services.extensions;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
@@ -52,7 +52,7 @@ namespace lifebook.core.projection.tests
         {
             var assembly = GetType().Assembly.GetRootAssembly();
             container.Install(
-                FromAssembly.InThisApplication(typeof(BootLoader).Assembly),                
+                FromAssembly.InThisApplication(typeof(ServiceInstaller).Assembly),                
                 FromAssembly.InThisApplication(assembly)
             );
             var projector = new PersonProjector(container.Resolve<ProjectorServices>());
