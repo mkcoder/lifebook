@@ -18,6 +18,10 @@
         <dependency id="Consul" version="0.7.2.6" />
         <dependency id="Castle.Windsor.MsDependencyInjection" version="3.3.1" />
         <dependency id="Microsoft.AspNetCore.Mvc.NewtonsoftJson" version="3.0.0" />
+        <dependency id="Serilog" version="2.9.0" />
+        <dependency id="Serilog.Sinks.File" version="4.1.0" />
+        <dependency id="Serilog.Sinks.Console" version="3.1.1" />
+        <dependency id="Serilog.Sinks.ElasticSearch" version="8.0.1" />
       </group>
     </dependencies>
   </metadata>
