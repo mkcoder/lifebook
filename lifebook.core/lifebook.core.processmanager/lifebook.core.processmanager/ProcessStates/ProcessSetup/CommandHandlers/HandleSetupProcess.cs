@@ -41,7 +41,7 @@ namespace lifebook.core.processmanager.ProcessStates.ProcessSetup.CommandHandler
                     aggregate.Handle(events);
                     request.ProcessManager.ViewBag = aggregate.Data;
 
-                    if (aggregate.AmIFirstStep() || true)
+                    if (aggregate.AmIFirstStep())
                     {
                         aggregate.InitalizeProcess(a, request);
                     }
@@ -53,8 +53,8 @@ namespace lifebook.core.processmanager.ProcessStates.ProcessSetup.CommandHandler
                         {
                             aggregate.InitalizeProcessStep(action, a.Data.AggregateEvent);
                             await action.StepAction(a.Data.AggregateEvent);
-                            aggregate.CompleteProcessStep();
                             aggregate.ChangeProcessData(request.ProcessManager.ViewBag);
+                            aggregate.CompleteProcessStep();
                         }
                         catch (Exception ex)
                         {
@@ -68,26 +68,10 @@ namespace lifebook.core.processmanager.ProcessStates.ProcessSetup.CommandHandler
                     {
                         await request.ProcessManager.ProcessManagerServices.EventWriter.WriteEventAsync(category, item.ae, item.data, null);
                     }
-
-                    //try
-                    //{
-                    //    foreach (var item in aggregate.GetUncommitedEvents)
-                    //    {
-                    //        var commit = item.CommitEvent(a.Data.AggregateEvent);
-                    //        try
-                    //        {
-                    //            await request.ProcessManager.ProcessManagerServices.EventWriter.WriteEventAsync(category, commit.ae, commit.data, null);
-                    //        }
-                    //        catch (Exception ex)
-                    //        {
-                    //        }
-                    //    }
-
-                    //}
-                    //catch (Exception)
-                    //{
-                    //    throw;
-                    //}
+                }
+                catch (Exception ex)
+                {
+                    request.ProcessManager.ProcessManagerServices.Logger.Error(ex, $"Something went wrong {JObject.FromObject(a).ToString()}", a);
                 }
                 finally
                 {
@@ -101,7 +85,12 @@ namespace lifebook.core.processmanager.ProcessStates.ProcessSetup.CommandHandler
         {
             if (a.ProcessId == null)
             {
-                pid = a.EventId;
+                pid = a.EntityId;
+                a.ProcessId = pid;
+                if(a.ParentProcessId == null)
+                {
+                    a.ParentProcessId = pid;
+                }
             }
             else
             {

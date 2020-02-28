@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -72,6 +73,54 @@ namespace lifebook.core.processmanager.example
                         }
                         else
                         {
+                        }
+
+                        if (ViewBag == null)
+                        {
+                            Console.WriteLine("Viewbag is null");
+                        }
+                        else
+                        {
+                            ViewBag.HelloOtherProcess = "hello";
+                        }
+                    })
+                    .AndThen()
+                    .UponEvent(new EventSpecifier("TestPersonNameChanged", new StreamCategorySpecifier("test", "primary", "TestPerson")))
+                    .SetStepDescription("Change person name to bob")
+                    .TakeAction(async evt => {
+                        if (evt == null)
+                        {
+                            Console.WriteLine($"evt is null");
+                        }
+                        else
+                        {
+                        }
+
+                        if (ViewBag == null)
+                        {
+                            Console.WriteLine("Viewbag is null");
+                        }
+                        else
+                        {
+                            await WriteCustomEventAsync("CustomEvent", evt, new JObject()
+                            {
+                                ["MyName"] = "bob",
+                                ["ViewBag"] = ViewBag
+                            });
+                            ViewBag["Id"] = Guid.NewGuid();
+                        }
+                    })
+                    .AndThen()
+                    .UponEvent(new EventSpecifier("CustomEvent", new StreamCategorySpecifier(ThisService, ThisInstance, ThisCategory)))
+                    .SetStepDescription("Custom event happened")
+                    .TakeAction(async evt => {
+                        if (evt == null)
+                        {
+                            Console.WriteLine($"evt is null");
+                        }
+                        else
+                        {
+                            Debugger.Break();
                             Console.WriteLine("EVENT:");
                             Console.WriteLine(evt);
                         }
@@ -82,7 +131,9 @@ namespace lifebook.core.processmanager.example
                         }
                         else
                         {
+                            ViewBag.Id2 = Guid.NewGuid();
                             Console.WriteLine(ViewBag);
+                            Console.WriteLine(ViewBag["HelloOtherProcess"]);
                         }
                     })
                     .Configuration;

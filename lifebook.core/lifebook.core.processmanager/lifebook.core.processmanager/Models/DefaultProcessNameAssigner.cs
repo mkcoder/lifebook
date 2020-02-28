@@ -110,7 +110,7 @@ worry";
 
         public static string GetName()
         {
-            return string.Join(" ", random_words.Split("\n\r").OrderBy(_ => Guid.NewGuid()).Take(2));
+            return string.Join("-", random_words.Split("\n").OrderBy(_ => Guid.NewGuid()).Take(2));
         }
     }
 }
