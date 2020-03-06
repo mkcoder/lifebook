@@ -10,6 +10,7 @@ using lifebook.core.logging.interfaces;
 using lifebook.core.logging.services;
 using lifebook.core.services.extensions;
 using lifebook.core.services.LifebookContainer;
+using lifebook.core.services.Testing;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace lifebook.core.services.ServiceStartup
@@ -31,6 +32,10 @@ namespace lifebook.core.services.ServiceStartup
 			container.AddServices(services);
 			container.Install(FromAssembly.InThisApplication(GetType().Assembly.GetRootAssembly()));
 			serviceResolver?.ServiceResolver(container.Resolve<ILifebookContainer>());
+            if(Environment.GetEnvironmentVariable("STARTFROMINTEGRATIONSERVER") == "true")
+            {
+                IntegrationService.Instance(container.Resolve<ILifebookContainer>());
+            }
 			return container;
 		}
 

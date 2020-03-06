@@ -30,12 +30,17 @@ namespace lifebook.core.services.extensions
 			return  rootAssembly ?? assembly;
         }
 
+        internal static Assembly SetAssemblyRoot(Assembly assembly)
+        {
+            RootAssembly = assembly;
+            return RootAssembly;
+        }
 
         public static bool CanBeServiceName(string text, Assembly thisAssembly)
         {
             // check 1: make sure the text is not our assembly
             if (text == thisAssembly.FullName) return false;
-            return text.Contains("lifebook");
+            return text.Contains("lifebook") && !text.Contains("tests");
         }
     }
 }

@@ -6,6 +6,7 @@ using lifebook.core.services.discovery;
 using lifebook.core.services.interfaces;
 using lifebook.core.services.LifebookContainer;
 using lifebook.core.services.middleware;
+using lifebook.core.services.Testing;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -68,7 +69,7 @@ namespace lifebook.core.services.ServiceStartup
 			});
 
 			hostApplicationLifetime.ApplicationStarted.Register(() =>
-			{
+			{				
 				ServiceStarted(app, container);
 			});
 
@@ -85,6 +86,11 @@ namespace lifebook.core.services.ServiceStartup
 			{
 				endpoints.MapControllers();
 			});
+
+			if (Environment.GetEnvironmentVariable(IntegrationService.ENV) == "true")
+			{
+				IntegrationService.AppStarted();
+			}
 
 			AfterAppConfiguration(app, Configuration);
 		}

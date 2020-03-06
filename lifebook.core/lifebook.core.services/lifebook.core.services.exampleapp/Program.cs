@@ -5,9 +5,9 @@ using lifebook.core.services.ServiceStartup;
 
 namespace lifebook.core.services.exampleapp
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
 		{
 			Hosting.Start<BaseServiceStartup>(new ResolveAfterConfigurationSetup());
 		}

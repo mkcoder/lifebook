@@ -34,14 +34,14 @@ namespace lifebook.core.services.discovery
 
         public async Task<ServiceInfo> FindServiceByName(string serviceName)
         {
-            var response = await consul.KV.Get(serviceName);
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            var httpResponse = await consul.Catalog.Service(serviceName);            
+            if (httpResponse.StatusCode == System.Net.HttpStatusCode.OK)
             {
+                var response = httpResponse.Response[0];
                 var serviceResponse = new ServiceInfo();
-                var value = Encoding.UTF8.GetString(response.Response.Value);
-                serviceResponse.Address = value.Split(":")[0];
-                serviceResponse.Port = value.Split(":")[1];
-                serviceResponse.ServiceName = response.Response.Key;
+                serviceResponse.Address = response.ServiceAddress;
+                serviceResponse.Port = response.ServicePort + "";
+                serviceResponse.ServiceName = response.ServiceName;
                 return serviceResponse;
             }
             return ServiceInfo.Failed();

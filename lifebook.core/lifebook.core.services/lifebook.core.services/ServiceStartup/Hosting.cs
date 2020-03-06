@@ -2,10 +2,12 @@
 using System.Collections;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading.Tasks;
 using Castle.Windsor;
 using Castle.Windsor.MsDependencyInjection;
 using lifebook.core.services.discovery;
 using lifebook.core.services.LifebookContainer;
+using lifebook.core.services.Testing;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,7 +17,7 @@ namespace lifebook.core.services.ServiceStartup
 {
 	public static class Hosting
 	{
-		public static void Start<T>(IServiceResolver serviceResolver = null, Action action = null) where T : BaseServiceStartup
+		public static void Start<T>(IServiceResolver serviceResolver = null, Func<Task> action = null) where T : BaseServiceStartup
 		{
 			Host
 			.CreateDefaultBuilder()
@@ -30,13 +32,12 @@ namespace lifebook.core.services.ServiceStartup
 					{
 						var serviceRegister = opt.ApplicationServices.GetService<IServiceRegister>();
 						serviceRegister.Register(opt.IPEndPoint.Address.ToString(), opt.IPEndPoint.Port);
-					});
-				})
+					});                    
+					action?.Invoke();
+				})               
 				.UseStartup<T>()
 				.UseSetting(WebHostDefaults.ApplicationKey, extensions.AssemblyExtensions.GetRootAssembly(typeof(T).Assembly).GetName().Name);
-
-				action?.Invoke();
-			})
+			})            
 			.Build()
 			.Run();
 		}
