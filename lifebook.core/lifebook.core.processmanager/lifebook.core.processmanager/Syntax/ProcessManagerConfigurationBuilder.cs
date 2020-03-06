@@ -50,7 +50,6 @@ namespace lifebook.core.processmanager.Syntax
 
         public static ProcessManagerConfigurationBuilder Instance => new ProcessManagerConfigurationBuilder(new ProcessManagerConfiguration());
 
-
         public ProcessManagerConfigurationBuilder UponEvent(params EventSpecifier[] eventSpecifier)
         {
             _configuration.CurrentStep.EventSpecifier = eventSpecifier;

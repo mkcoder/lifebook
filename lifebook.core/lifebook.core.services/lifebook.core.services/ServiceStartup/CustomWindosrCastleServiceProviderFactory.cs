@@ -9,6 +9,7 @@ using Castle.Windsor.MsDependencyInjection;
 using lifebook.core.logging.interfaces;
 using lifebook.core.logging.services;
 using lifebook.core.services.extensions;
+using lifebook.core.services.LifebookContainer;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace lifebook.core.services.ServiceStartup
@@ -25,18 +26,13 @@ namespace lifebook.core.services.ServiceStartup
         public IWindsorContainer CreateBuilder(IServiceCollection services)
         {
             var container = new WindsorContainer();
-            services
-                .AddControllers()
-                .AddNewtonsoftJson();
-            services.AddAuthorization();
-            
-            container.Install(FromAssembly.InThisApplication(GetType().Assembly.GetRootAssembly()));
+			container.Register(Component.For<ILifebookContainer>().Instance((LifebookContainerToWindsorContainerProxy)container));
             container.Register(Component.For<IServiceProvider>().ImplementedBy<WindosrCastleServiceProvider>());
-            container.AddServices(services);
-
-            serviceResolver?.ServiceResolver(container, services);
-            return container;
-        }
+			container.AddServices(services);
+			container.Install(FromAssembly.InThisApplication(GetType().Assembly.GetRootAssembly()));
+			serviceResolver?.ServiceResolver(container.Resolve<ILifebookContainer>());
+			return container;
+		}
 
         public IServiceProvider CreateServiceProvider(IWindsorContainer builder)
         {

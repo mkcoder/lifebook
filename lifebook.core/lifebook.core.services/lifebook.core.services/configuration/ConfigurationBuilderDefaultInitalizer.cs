@@ -21,11 +21,10 @@ namespace lifebook.core.services.configuration
             _configuration = configuration;
         }
 
-        public void configure(IConfigurationBuilder arg)
+        public void Configure(IConfigurationBuilder arg)
         {
             foreach (var provider in _configuration)
             {
-
                 provider.Provide(arg);
             }
         }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace lifebook.core.services.interfaces
 {
     public interface IConfiguration
@@ -7,5 +9,6 @@ namespace lifebook.core.services.interfaces
         string GetValue(string key);
         T GetValue<T>(string key);
         T TryGetValueOrDefault<T>(string key, T defaultValue);
+		Dictionary<string, string> GetAll();
     }
 }

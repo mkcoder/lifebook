@@ -47,19 +47,13 @@ namespace lifebook.core.services.discovery
 
             var service = new AgentServiceRegistration()
             {
-                ID = $"{_configuration["ServiceName"].ToLower()}_{_configuration["ServiceInstance"].ToLower()}",
-                Name = $"{_configuration["ServiceName"].ToLower()}",
+                ID = $"{_configuration["ServiceInstance"].ToLower()}_{_configuration["ServiceName"].ToLower()}",
+                Name = $"{_configuration["ServiceInstance"].ToLower()}_{_configuration["ServiceName"].ToLower()}",
                 Address = ipAddress,
                 Port = port,
                 //Meta = $"{_configuration["Tags"] ?? "tag|empty"}".Split(",").Select(s => new { key = s.Split('|')[0], value = s.Split('|')[1] }).ToDictionary(kv => kv.key, kv => kv.value),
                 Checks = new AgentServiceCheck[] { httpCheck1, httpCheck2 }
             };
-
-
-            if (!_configuration.TryGetValueOrDefault<bool>("IsProduction", false))
-            {
-                //service.Checks = null;
-            }
 
             try
             {                
@@ -74,7 +68,7 @@ namespace lifebook.core.services.discovery
 
         public async Task Deregister()
         {
-            _networkServiceLocator.DeregisterService($"{_configuration["ServiceName"].ToLower()}_{_configuration["ServiceInstance"].ToLower()}").Wait();            
+            _networkServiceLocator.DeregisterService($"{_configuration["ServiceInstance"].ToLower()}_{_configuration["ServiceName"].ToLower()}").Wait();            
         }
     }
 }

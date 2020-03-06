@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29318.209
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lifebook.core.services", "lifebook.core.services.csproj", "{2E1F5D02-8432-4A92-87AA-92EA33D3EF3D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lifebook.core.services.exampleapp", "..\lifebook.core.services.exampleapp\lifebook.core.services.exampleapp.csproj", "{B46B7C4C-24E9-4451-AEF2-33C6189E7729}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2E1F5D02-8432-4A92-87AA-92EA33D3EF3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E1F5D02-8432-4A92-87AA-92EA33D3EF3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E1F5D02-8432-4A92-87AA-92EA33D3EF3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E1F5D02-8432-4A92-87AA-92EA33D3EF3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B46B7C4C-24E9-4451-AEF2-33C6189E7729}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B46B7C4C-24E9-4451-AEF2-33C6189E7729}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B46B7C4C-24E9-4451-AEF2-33C6189E7729}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B46B7C4C-24E9-4451-AEF2-33C6189E7729}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2D87B227-685E-4241-B658-8D9B25F28689}
+	EndGlobalSection
+EndGlobal

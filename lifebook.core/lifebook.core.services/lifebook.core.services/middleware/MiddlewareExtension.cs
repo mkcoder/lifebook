@@ -6,7 +6,7 @@ namespace lifebook.core.services.middleware
 {
     public static class MiddlewareExtension
     {
-        public static void RegisterService(this IApplicationBuilder application, IConfiguration configuration)
+        public static void AddHealthChecks(this IApplicationBuilder application, IConfiguration configuration)
         {
             application.Map("/consul/health", bld => {
                 bld.Run(async ctx =>
