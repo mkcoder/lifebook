@@ -4,7 +4,7 @@ using lifebook.core.services.ServiceStartup;
 
 namespace Schoolbook.Application
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {

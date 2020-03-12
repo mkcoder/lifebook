@@ -20,7 +20,7 @@ namespace lifebook.core.eventstore.tests.EventStoreClientTest
         [Test]
         public void Test_EventStoreClient_IsNotNull()
         {
-            Assert.IsInstanceOf<EventStoreClient>(eventStoreClient);
+            Assert.IsInstanceOf<FakeEventStoreClient>(eventStoreClient);
         }
 
         [Test]

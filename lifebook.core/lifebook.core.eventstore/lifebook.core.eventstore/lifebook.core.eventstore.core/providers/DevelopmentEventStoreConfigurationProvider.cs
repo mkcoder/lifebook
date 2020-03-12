@@ -12,7 +12,7 @@ namespace lifebook.core.eventstore.providers
             List<KeyValuePair<string, string>> defaultConfiguration = new List<KeyValuePair<string, string>>();
             defaultConfiguration.Add(new KeyValuePair<string, string>("EventStore.IpAddress", "127.0.0.1"));
             defaultConfiguration.Add(new KeyValuePair<string, string>("EventStore.Port", "1113"));
-            defaultConfiguration.Add(new KeyValuePair<string, string>("EventStore.UseFakeEventStore", "false"));
+            defaultConfiguration.Add(new KeyValuePair<string, string>("EventStore.UseFakeEventStore", "true"));
             defaultConfiguration.Add(new KeyValuePair<string, string>("EventStore.ReadPerCycle", "200"));
             cb.AddInMemoryCollection(defaultConfiguration);
         }

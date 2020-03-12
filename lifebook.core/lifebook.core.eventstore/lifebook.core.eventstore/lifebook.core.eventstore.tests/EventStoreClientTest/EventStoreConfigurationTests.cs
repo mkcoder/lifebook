@@ -18,7 +18,7 @@ namespace lifebook.core.eventstore.tests.EventStoreClientTest
         public void EventStoreConfiguration_Is_A_Singleton()
         {
             var esc2 = container.Resolve<EventStoreConfiguration>();
-            Assert.AreEqual(esc, esc2);
+            Assert.AreSame(esc, esc2);
         }
 
         [Test]

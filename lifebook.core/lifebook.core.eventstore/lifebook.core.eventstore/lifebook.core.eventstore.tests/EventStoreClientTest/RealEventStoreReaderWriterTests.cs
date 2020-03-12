@@ -25,6 +25,7 @@ namespace lifebook.core.eventstore.tests.EventStoreClientTest
 
         [Explicit]
         [Test]
+        [Order(1)]
         public async Task WriteIsWorking()
         {
             var personGuid = Guid.Parse("5b4a440e-db6d-40d4-8b9a-a0cc2cccd16d");
@@ -84,6 +85,7 @@ namespace lifebook.core.eventstore.tests.EventStoreClientTest
 
         [Explicit]
         [Test]
+        [Order(2)]
         public async Task Test2()
         {
             Guid productId = Guid.Parse("62e27ca5-6ad8-4832-99a2-5dbd849383fc"); // Guid.Parse("6022727c-7bfe-44f6-a722-48e1b98397df");
@@ -106,8 +108,10 @@ namespace lifebook.core.eventstore.tests.EventStoreClientTest
 
         [Test]
         [Explicit]
+        [Order(3)]       
         public async Task ReadIsWorking()
         {
+            await WriteIsWorking();
             var categpory = new StreamCategorySpecifier("test", "primary", "TestPerson");
             var events = await eventReader.ReadAllEventsFromStreamCategoryAsync(categpory);
             var ae = events.FirstOrDefault(f => f.EventName == "TestPersonCreated").AsAggregateEvent();
