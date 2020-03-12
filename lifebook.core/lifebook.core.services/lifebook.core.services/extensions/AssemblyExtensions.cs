@@ -30,7 +30,7 @@ namespace lifebook.core.services.extensions
 			return  rootAssembly ?? assembly;
         }
 
-        internal static Assembly SetAssemblyRoot(Assembly assembly)
+        public static Assembly SetAssemblyRoot(Assembly assembly)
         {
             RootAssembly = assembly;
             return RootAssembly;

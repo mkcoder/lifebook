@@ -1,7 +1,7 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Schoolbook.Application.Aggregate", "Schoolbook.Application.Aggregate\Schoolbook.Application.Aggregate.csproj", "{52B02300-6C0E-4502-B8F2-AAFC57972A3C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.Schoolbook.Application.Aggregate", "Schoolbook.Application.Aggregate\lifebook.Schoolbook.Application.Aggregate.csproj", "{52B02300-6C0E-4502-B8F2-AAFC57972A3C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Schoolbook.Aggregate.Tests", "Schoolbook.Aggregate.Tests\Schoolbook.Aggregate.Tests.csproj", "{32E53834-106B-4BFD-B338-471BE5D564CE}"
 EndProject

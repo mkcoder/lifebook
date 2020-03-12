@@ -113,3 +113,7 @@ services:
     entrypoint: /bin/registrator consul://consul:8500
     networks:
       - development
+
+networks:
+  development:
+    driver: bridge
