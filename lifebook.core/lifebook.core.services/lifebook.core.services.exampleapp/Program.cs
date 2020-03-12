@@ -7,7 +7,7 @@ namespace lifebook.core.services.exampleapp
 {
     public class Program
     {
-        public static void Main(string[] args)
+        static void Main(string[] args)
 		{
 			Hosting.Start<BaseServiceStartup>(new ResolveAfterConfigurationSetup());
 		}

@@ -77,13 +77,23 @@ namespace lifebook.core.projection.Services
                         _projectorServices.Logger.Information($"Handling Event: {subscriptionEvent.Event.EventName}-{subscriptionEvent.Event.EntityId}");
                         var entry = await services.ProjectionStore.GetAsync<T>(subscriptionEvent.Event.EntityId);
                         if (entry == default(T))
-                            Value = new T { Key = subscriptionEvent.Event.EntityId };
+                            Value = new T { Key = GetEntityId(subscriptionEvent.Event) };
                         else
                             Value =  entry;
-
-                        mi.Invoke(this, new object[] { subscriptionEvent.Event });
-                        services.ProjectionStore.Store(Value);
-                        services.StreamTracker.Update(streamId, subscriptionEvent.LastStreamEventNumberRead);
+                        if(Value.Status != ProjectionStatus.Halted)
+                        {
+                            try
+                            {
+                                mi.Invoke(this, new object[] { subscriptionEvent.Event });
+                            }
+                            catch (Exception ex)
+                            {
+                                services.Logger.Error(ex, $"Halting projection for @{Value}", Value);
+                                Value.Status = ProjectionStatus.Halted;
+                            }
+                            services.ProjectionStore.Store(Value);
+                            services.StreamTracker.Update(streamId, subscriptionEvent.LastStreamEventNumberRead);
+                        }
                     }
                 }
             }
@@ -91,6 +101,11 @@ namespace lifebook.core.projection.Services
             {
                 var exm = ex.Message;
             }
+        }
+
+        protected virtual Guid GetEntityId(AggregateEvent evt)
+        {
+            return evt.EntityId;
         }
     }
 }

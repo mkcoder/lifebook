@@ -2,6 +2,7 @@ using System.Reflection;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
+using Elasticsearch.Net.Specification.SecurityApi;
 using lifebook.core.cqrses.Domains;
 using lifebook.core.projection.Attributes;
 using lifebook.core.projection.Domain;
@@ -37,8 +38,12 @@ namespace lifebook.core.projection.tests
             var personCreated = aggregateEvent.Data.TransformDataFromString(str => JObject.Parse(str));
         }
 
-        public void Run()
+        public void Run(bool createContext = false, IWindsorContainer container = null)
         {
+            if(createContext)
+            {
+                base.Run(container);
+            }
             Start();
         }
     }
@@ -56,7 +61,7 @@ namespace lifebook.core.projection.tests
                 FromAssembly.InThisApplication(assembly)
             );
             var projector = new PersonProjector(container.Resolve<ProjectorServices>());
-            projector.Run();
+            projector.Run(true, container);
         }
 
         [Test]

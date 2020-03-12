@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using lifebook.core.services.discovery;
@@ -21,8 +22,8 @@ namespace lifebook.core.services.Testing
             Environment.SetEnvironmentVariable(IntegrationService.ENV, "true");
             Thread t = new Thread(_ =>
             {
-                AssemblyExtensions.SetAssemblyRoot(typeof(T).Assembly);
-                var m = typeof(T).GetMethod("Main");
+                extensions.AssemblyExtensions.SetAssemblyRoot(typeof(T).Assembly);
+                var m = typeof(T).GetMethod("Main") ?? typeof(T).GetMethod("Main", BindingFlags.NonPublic | BindingFlags.Static);
                 m.Invoke(null, new object[] { new string[] { } });
             });
             t.Start();

@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="lifebook.core.cqrs" Version="5.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Handlers\" />
+    <Folder Include="Handlers\Commands\" />
+    <Folder Include="Handlers\Events\" />
+    <Folder Include="Aggregates\" />
+  </ItemGroup>
+</Project>
