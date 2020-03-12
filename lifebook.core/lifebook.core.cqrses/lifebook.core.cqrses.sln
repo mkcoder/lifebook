@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.cqrses", "lifebook.core.cqrses\lifebook.core.cqrses.csproj", "{7DD69C7C-0308-48E1-BA46-7053ECBF7356}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.cqrs.tests", "lifebook.core.cqrs.tests\lifebook.core.cqrs.tests.csproj", "{FAFC7AB6-AE4D-48EB-A51E-50E04B83F726}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.cqrs.example", "lifebook.core.cqrs.tests\lifebook.core.cqrs.example.csproj", "{FAFC7AB6-AE4D-48EB-A51E-50E04B83F726}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.cqrses.domain", "lifebook.core.cqrses.domain\lifebook.core.cqrses.domain.csproj", "{8FE329AE-A6C7-447F-A699-BB9B40F368A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lifebook.core.cqrses.tests", "lifebook.core.cqrses.tests\lifebook.core.cqrses.tests.csproj", "{C9784563-3204-4B97-97B4-683BF062D0EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,5 +27,9 @@ Global
 		{8FE329AE-A6C7-447F-A699-BB9B40F368A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FE329AE-A6C7-447F-A699-BB9B40F368A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8FE329AE-A6C7-447F-A699-BB9B40F368A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9784563-3204-4B97-97B4-683BF062D0EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9784563-3204-4B97-97B4-683BF062D0EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9784563-3204-4B97-97B4-683BF062D0EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9784563-3204-4B97-97B4-683BF062D0EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

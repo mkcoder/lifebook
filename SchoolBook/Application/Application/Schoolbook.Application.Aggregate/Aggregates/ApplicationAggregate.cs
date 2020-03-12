@@ -2,7 +2,7 @@
 
 namespace Schoolbook.Application
 {
-    public class ApplicationAggregate : Aggregate
+    public class ApplicationAggregate : AggregateRoot
     {
         public ApplicationAggregate()
         {

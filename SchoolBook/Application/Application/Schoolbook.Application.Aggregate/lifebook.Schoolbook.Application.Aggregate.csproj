@@ -6,12 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="lifebook.core.cqrs" Version="5.0.0" />
+    <PackageReference Include="lifebook.core.cqrs" Version="5.1.1" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Handlers\" />
     <Folder Include="Handlers\Commands\" />
     <Folder Include="Handlers\Events\" />
     <Folder Include="Aggregates\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="HelloTest.cs" />
   </ItemGroup>
 </Project>

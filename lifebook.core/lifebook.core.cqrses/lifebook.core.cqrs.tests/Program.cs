@@ -3,15 +3,11 @@ using lifebook.core.services.ServiceStartup;
 
 namespace lifebook.core.cqrs.tests
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            Hosting.Start<Startup>(new CQRSServiceResolver());
+            Hosting.Start<CQRSStartup>(new CQRSServiceResolver());
         }
-    }
-
-    public class Startup : CQRSStartup
-    {
     }
 }

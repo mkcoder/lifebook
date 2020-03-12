@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <PackOnBuild>true</PackOnBuild>
     <PackageId>lifebook.core.cqrs</PackageId>
-    <PackageVersion>5.0.0</PackageVersion>
+    <PackageVersion>5.1.1</PackageVersion>
     <Authors>mkcoder</Authors>
     <Owners>mkcoder</Owners>
     <Description>adds cqrs support to any console application</Description>
@@ -18,14 +18,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" Version="3.0.0-preview4-19123-01">
-      <PrivateAssets Condition="'%(PackageReference.Version)' == ''">all</PrivateAssets>
-      <Publish Condition="'%(PackageReference.Version)' == ''">true</Publish>
-    </PackageReference>
-    <PackageReference Include="lifebook.core.eventstore" Version="5.0.0" />
-    <PackageReference Include="lifebook.core.eventstore.domain" Version="5.0.0" />
+    <PackageReference Include="lifebook.core.eventstore" Version="5.0.3" />
+    <PackageReference Include="lifebook.core.eventstore.domain" Version="5.0.3" />
     <PackageReference Include="Castle.Core" Version="4.4.0" />
-    <PackageReference Include="lifebook.core.services" Version="5.0.1" />
+    <PackageReference Include="lifebook.core.services" Version="6.2.2" />
     <PackageReference Include="Consul" Version="0.7.2.6" />
   </ItemGroup>
 

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Net;
 using System.Net.Sockets;
+using System.Reflection;
 using System.Threading.Tasks;
 using Castle.Windsor;
 using Castle.Windsor.MsDependencyInjection;
@@ -19,7 +20,10 @@ namespace lifebook.core.services.ServiceStartup
 	{
 		public static void Start<T>(IServiceResolver serviceResolver = null, Func<Task> action = null) where T : BaseServiceStartup
 		{
-			Host
+            // short circut 
+			extensions.AssemblyExtensions.SetAssemblyRoot(Assembly.GetCallingAssembly());
+
+            Host
 			.CreateDefaultBuilder()
 			.UseServiceProviderFactory(new CustomWindosrCastleServiceProviderFactory(serviceResolver))
 			.ConfigureWebHostDefaults(webBuilder =>
@@ -36,7 +40,7 @@ namespace lifebook.core.services.ServiceStartup
 					action?.Invoke();
 				})               
 				.UseStartup<T>()
-				.UseSetting(WebHostDefaults.ApplicationKey, extensions.AssemblyExtensions.GetRootAssembly(typeof(T).Assembly).GetName().Name);
+				.UseSetting(WebHostDefaults.ApplicationKey, extensions.AssemblyExtensions.GetRootAssembly(Assembly.GetEntryAssembly()).GetName().Name);
 			})            
 			.Build()
 			.Run();

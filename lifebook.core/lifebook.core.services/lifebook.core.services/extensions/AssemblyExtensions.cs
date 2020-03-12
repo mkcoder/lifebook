@@ -10,9 +10,9 @@ namespace lifebook.core.services.extensions
         private static Assembly RootAssembly = null;
         private static object _lock = new object();
 
-        public static Assembly GetRootAssembly(this Assembly assembly)
+        public static Assembly GetRootAssembly(this Assembly assembly, bool rebuild = false)
         {
-            if (RootAssembly != null) return RootAssembly;
+            if (RootAssembly != null && !rebuild) return RootAssembly;
             StackFrame[] frames = new StackTrace().GetFrames();            
 			var initialAssembly =
 				frames

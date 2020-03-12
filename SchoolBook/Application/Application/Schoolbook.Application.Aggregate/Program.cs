@@ -8,7 +8,7 @@ namespace Schoolbook.Application
     {
         static void Main(string[] args)
         {
-            Hosting.Start<CQRSStartup>();
+            Hosting.Start<CQRSStartup>(new CQRSServiceResolver());
         }
     }
 }

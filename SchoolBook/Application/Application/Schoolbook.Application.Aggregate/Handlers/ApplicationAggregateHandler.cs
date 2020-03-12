@@ -1,6 +1,7 @@
 ﻿using System;
 using lifebook.core.cqrses.Attributes;
 using lifebook.core.cqrses.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Schoolbook.Application
 {
@@ -8,8 +9,10 @@ namespace Schoolbook.Application
     [EventHandlers(typeof(ApplicationAggregate))]
     public class ApplicationAggregateHandler : AggregateRoot
     {
-        public ApplicationAggregateHandler()
+        [HttpGet("Hello")]
+        public string Hello()
         {
+            return "Hello";
         }
     }
 }
