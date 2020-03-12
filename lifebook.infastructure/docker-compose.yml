@@ -60,7 +60,6 @@ services:
       - '8600:8600'
       - '8600:8600/udp'
     command: "agent -server -bootstrap -ui -client=0.0.0.0 -bind='{{ GetInterfaceIP \"eth0\" }}'"
-    network_mode: host
     volumes:
       - ./consul/config:/consul/config
 
